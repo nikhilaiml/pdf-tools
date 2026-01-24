@@ -21,16 +21,18 @@ const RotatePdfPage = () => {
 
     const renderPreview = async () => {
       try {
-        // Dynamically import pdfjs to avoid SSR issues
+        setLoading(true);
+        // Dynamically import pdfjs
         const pdfjsLib = await import('pdfjs-dist');
-        pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+        // Use unpkg for more reliable version matching
+        pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.js`;
 
         const fileData = await file.arrayBuffer();
         const loadingTask = pdfjsLib.getDocument({ data: fileData });
         const pdf = await loadingTask.promise;
         const page = await pdf.getPage(1); // Render first page
 
-        const viewport = page.getViewport({ scale: 0.5 }); // Scale down for preview
+        const viewport = page.getViewport({ scale: 0.6 }); // Slightly larger scale for better visibility
         const canvas = canvasRef.current;
         const context = canvas?.getContext('2d');
 
@@ -44,8 +46,11 @@ const RotatePdfPage = () => {
           };
           await page.render(renderContext as any).promise;
         }
+        setLoading(false);
       } catch (error) {
         console.error('Error rendering preview:', error);
+        alert('Preview failed to load. Please try another file or proceed with download.');
+        setLoading(false);
       }
     };
 
@@ -111,8 +116,8 @@ const RotatePdfPage = () => {
                   key={deg}
                   onClick={() => setRotation(deg)}
                   className={`px-4 py-2 rounded-lg font-semibold transition-colors ${rotation === deg
-                      ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/50'
-                      : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                    ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/50'
+                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
                     }`}
                 >
                   {deg}°
@@ -138,7 +143,7 @@ const RotatePdfPage = () => {
             <div className="relative p-8 border-2 border-dashed border-gray-600 rounded bg-gray-900/50">
               {/* Canvas Container with Rotation */}
               <div style={{ transform: `rotate(${rotation}deg)`, transition: 'transform 0.3s ease-in-out' }}>
-                <canvas ref={canvasRef} className="max-w-full h-auto shadow-2xl" />
+                <canvas ref={canvasRef} className="max-w-full h-auto shadow-2xl bg-white" />
               </div>
             </div>
           ) : (
