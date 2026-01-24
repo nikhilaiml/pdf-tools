@@ -25,11 +25,22 @@ const ProtectPdfPage = () => {
             const pdfBytes = await file.arrayBuffer();
             const pdf = await PDFDocument.load(pdfBytes);
 
-            const newPdfBytes = await pdf.save({
+            // Encrypt the PDF
+            await (pdf as any).encrypt({
                 userPassword: password,
-                ownerPassword: password, // Setting both for robust protection
-                useObjectStreams: false,
+                ownerPassword: password,
+                permissions: {
+                    printing: 'highResolution',
+                    modifying: false,
+                    copying: false,
+                    annotating: false,
+                    fillingForms: false,
+                    contentAccessibility: false,
+                    documentAssembly: false,
+                },
             });
+
+            const newPdfBytes = await pdf.save();
 
             const blob = new Blob([newPdfBytes as any], { type: 'application/pdf' });
             const link = document.createElement('a');

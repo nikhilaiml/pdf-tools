@@ -29,7 +29,7 @@ const UnlockPdfPage = () => {
             // However, we can TRY to load it. If it fails, it usually means we need the password. 
             // Actually, pdf-lib docs say: "You can load encrypted PDFs if you have the password." -> PDFDocument.load(..., { password: ... })
 
-            const pdf = await PDFDocument.load(pdfBytes, { password, ignoreEncryption: false });
+            const pdf = await PDFDocument.load(pdfBytes, { ignoreEncryption: true });
 
             // Saving without password effectively removes it
             const newPdfBytes = await pdf.save();
