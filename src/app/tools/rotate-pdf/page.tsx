@@ -1,11 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { PDFDocument, RotationTypes } from 'pdf-lib';
+import { PDFDocument, degrees } from 'pdf-lib';
 
 const RotatePdfPage = () => {
   const [file, setFile] = useState<File | null>(null);
   const [rotation, setRotation] = useState<number>(90);
+  const [loading, setLoading] = useState(false);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -19,25 +20,29 @@ const RotatePdfPage = () => {
       return;
     }
 
+    setLoading(true);
     try {
       const pdfBytes = await file.arrayBuffer();
       const pdf = await PDFDocument.load(pdfBytes);
-      
+
       const pages = pdf.getPages();
       pages.forEach(page => {
-        page.setRotation(RotationTypes.Degrees + rotation);
+        page.setRotation(degrees(rotation));
       });
 
       const newPdfBytes = await pdf.save();
 
-      const blob = new Blob([newPdfBytes], { type: 'application/pdf' });
+      const blob = new Blob([newPdfBytes as any], { type: 'application/pdf' });
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
       link.download = 'rotated.pdf';
       link.click();
+      alert('PDF rotated successfully!');
     } catch (error) {
       console.error('Error rotating PDF:', error);
-      alert('An error occurred while rotating the PDF. Please try again.');
+      alert(`An error occurred: ${(error as Error).message}`);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -53,8 +58,8 @@ const RotatePdfPage = () => {
         />
       </div>
       <div className="flex justify-center space-x-4 mb-8">
-        <select 
-          value={rotation} 
+        <select
+          value={rotation}
           onChange={(e) => setRotation(parseInt(e.target.value))}
           className="bg-gray-700 text-white rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
@@ -65,9 +70,10 @@ const RotatePdfPage = () => {
       </div>
       <button
         onClick={handleRotate}
-        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg text-lg"
+        disabled={loading}
+        className={`bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg text-lg ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
       >
-        Rotate PDF
+        {loading ? 'Rotating...' : 'Rotate PDF'}
       </button>
     </div>
   );

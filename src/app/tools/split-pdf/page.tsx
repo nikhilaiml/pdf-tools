@@ -14,12 +14,15 @@ const SplitPdfPage = () => {
     }
   };
 
+  const [loading, setLoading] = useState(false);
+
   const handleSplit = async () => {
     if (!file || !startPage || !endPage) {
       alert('Please select a file and specify a page range.');
       return;
     }
 
+    setLoading(true);
     try {
       const pdfBytes = await file.arrayBuffer();
       const pdf = await PDFDocument.load(pdfBytes);
@@ -30,6 +33,7 @@ const SplitPdfPage = () => {
 
       if (isNaN(start) || isNaN(end) || start < 0 || end > pdf.getPageCount() || start >= end) {
         alert('Invalid page range.');
+        setLoading(false);
         return;
       }
 
@@ -39,14 +43,17 @@ const SplitPdfPage = () => {
 
       const newPdfBytes = await newPdf.save();
 
-      const blob = new Blob([newPdfBytes], { type: 'application/pdf' });
+      const blob = new Blob([newPdfBytes as any], { type: 'application/pdf' });
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
       link.download = 'split.pdf';
       link.click();
+      alert('PDF split successfully!');
     } catch (error) {
       console.error('Error splitting PDF:', error);
-      alert('An error occurred while splitting the PDF. Please try again.');
+      alert(`An error occurred: ${(error as Error).message}`);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -79,9 +86,10 @@ const SplitPdfPage = () => {
       </div>
       <button
         onClick={handleSplit}
-        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg text-lg"
+        disabled={loading}
+        className={`bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg text-lg ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
       >
-        Split PDF
+        {loading ? 'Splitting...' : 'Split PDF'}
       </button>
     </div>
   );

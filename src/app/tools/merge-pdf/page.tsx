@@ -12,12 +12,15 @@ const MergePdfPage = () => {
     }
   };
 
+  const [loading, setLoading] = useState(false);
+
   const handleMerge = async () => {
     if (files.length < 2) {
       alert('Please select at least two files to merge.');
       return;
     }
 
+    setLoading(true);
     try {
       const mergedPdf = await PDFDocument.create();
 
@@ -30,14 +33,17 @@ const MergePdfPage = () => {
 
       const mergedPdfBytes = await mergedPdf.save();
 
-      const blob = new Blob([mergedPdfBytes], { type: 'application/pdf' });
+      const blob = new Blob([mergedPdfBytes as any], { type: 'application/pdf' });
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
       link.download = 'merged.pdf';
       link.click();
+      alert('PDFs merged successfully!');
     } catch (error) {
       console.error('Error merging PDFs:', error);
-      alert('An error occurred while merging the PDFs. Please try again.');
+      alert(`An error occurred: ${(error as Error).message}`);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -55,9 +61,10 @@ const MergePdfPage = () => {
       </div>
       <button
         onClick={handleMerge}
-        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg text-lg"
+        disabled={loading}
+        className={`bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg text-lg ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
       >
-        Merge PDFs
+        {loading ? 'Merging...' : 'Merge PDFs'}
       </button>
       <div className="mt-8">
         {files.length > 0 && (

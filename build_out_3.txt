@@ -1,0 +1,29 @@
+
+> out@0.1.0 build
+> next build
+
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\dell\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\dell\Desktop\pdf-tools\package-lock.json
+
+▲ Next.js 16.1.4 (Turbopack)
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 20.4s
+  Running TypeScript ...
+Failed to compile.
+
+./src/app/tools/rotate-pdf/page.tsx:28:26
+Type error: Argument of type 'string' is not assignable to parameter of type 'Rotation'.
+
+[0m [90m 26 |[39m       [36mconst[39m pages [33m=[39m pdf[33m.[39mgetPages()[33m;[39m
+ [90m 27 |[39m       pages[33m.[39mforEach(page [33m=>[39m {
+[31m[1m>[22m[39m[90m 28 |[39m         page[33m.[39msetRotation([33mRotationTypes[39m[33m.[39m[33mDegrees[39m [33m+[39m rotation)[33m;[39m
+ [90m    |[39m                          [31m[1m^[22m[39m
+ [90m 29 |[39m       })[33m;[39m
+ [90m 30 |[39m
+ [90m 31 |[39m       [36mconst[39m newPdfBytes [33m=[39m [36mawait[39m pdf[33m.[39msave()[33m;[39m[0m
+Next.js build worker exited with code: 1 and signal: null

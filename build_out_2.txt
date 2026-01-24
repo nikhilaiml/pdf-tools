@@ -1,0 +1,33 @@
+
+> out@0.1.0 build
+> next build
+
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\dell\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\dell\Desktop\pdf-tools\package-lock.json
+
+▲ Next.js 16.1.4 (Turbopack)
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 7.0s
+  Running TypeScript ...
+Failed to compile.
+
+./src/app/tools/delete-pages/page.tsx:63:30
+Type error: Type 'Uint8Array<ArrayBufferLike>' is not assignable to type 'BlobPart'.
+  Type 'Uint8Array<ArrayBufferLike>' is not assignable to type 'ArrayBufferView<ArrayBuffer>'.
+    Types of property 'buffer' are incompatible.
+      Type 'ArrayBufferLike' is not assignable to type 'ArrayBuffer'.
+        Type 'SharedArrayBuffer' is missing the following properties from type 'ArrayBuffer': resizable, resize, detached, transfer, transferToFixedLength
+
+[0m [90m 61 |[39m
+ [90m 62 |[39m       [36mconst[39m newBytes [33m=[39m [36mawait[39m pdf[33m.[39msave()[33m;[39m
+[31m[1m>[22m[39m[90m 63 |[39m       [36mconst[39m blob [33m=[39m [36mnew[39m [33mBlob[39m([newBytes][33m,[39m { type[33m:[39m [32m'application/pdf'[39m })[33m;[39m
+ [90m    |[39m                              [31m[1m^[22m[39m
+ [90m 64 |[39m       [36mconst[39m url [33m=[39m [33mURL[39m[33m.[39mcreateObjectURL(blob)[33m;[39m
+ [90m 65 |[39m
+ [90m 66 |[39m       [36mconst[39m link [33m=[39m document[33m.[39mcreateElement([32m'a'[39m)[33m;[39m[0m
+Next.js build worker exited with code: 1 and signal: null

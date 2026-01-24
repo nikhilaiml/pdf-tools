@@ -60,7 +60,7 @@ export default function DeletePagesPage() {
       pages.forEach(index => pdf.removePage(index));
 
       const newBytes = await pdf.save();
-      const blob = new Blob([newBytes], { type: 'application/pdf' });
+      const blob = new Blob([newBytes as any], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
 
       const link = document.createElement('a');
