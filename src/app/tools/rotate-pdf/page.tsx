@@ -22,17 +22,19 @@ const RotatePdfPage = () => {
     const renderPreview = async () => {
       try {
         setLoading(true);
-        // Dynamically import pdfjs
+        // Import main library
         const pdfjsLib = await import('pdfjs-dist');
-        // Use unpkg for more reliable version matching
-        pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.js`;
+
+        // Explicitly set worker to a known stable version (matching installed version closely)
+        // Using version 5.4.530 which is standard for recent installs
+        pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@5.4.530/build/pdf.worker.min.mjs`;
 
         const fileData = await file.arrayBuffer();
         const loadingTask = pdfjsLib.getDocument({ data: fileData });
         const pdf = await loadingTask.promise;
         const page = await pdf.getPage(1); // Render first page
 
-        const viewport = page.getViewport({ scale: 0.6 }); // Slightly larger scale for better visibility
+        const viewport = page.getViewport({ scale: 0.6 });
         const canvas = canvasRef.current;
         const context = canvas?.getContext('2d');
 
@@ -48,8 +50,8 @@ const RotatePdfPage = () => {
         }
         setLoading(false);
       } catch (error) {
-        console.error('Error rendering preview:', error);
-        alert('Preview failed to load. Please try another file or proceed with download.');
+        console.error('Preview Error:', error);
+        // Don't alert immediately to avoid spam, just log and maybe show text
         setLoading(false);
       }
     };
