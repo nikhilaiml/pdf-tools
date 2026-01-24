@@ -1,17 +1,21 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { PDFDocument } from 'pdf-lib';
 
 const MergePdfPage = () => {
   const [files, setFiles] = useState<File[]>([]);
   const [loading, setLoading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setFiles((prev) => [...prev, ...Array.from(e.target.files || [])]);
-      // Reset input value to allow selecting the same file again if needed
-      e.target.value = '';
+    if (e.target.files && e.target.files.length > 0) {
+      const newFiles = Array.from(e.target.files);
+      setFiles((prev) => [...prev, ...newFiles]);
+    }
+    // Reset input via ref to ensure onChange triggers next time
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
     }
   };
 
@@ -53,25 +57,32 @@ const MergePdfPage = () => {
     }
   };
 
+  const triggerFileInput = () => {
+    fileInputRef.current?.click();
+  };
+
   return (
     <div className="text-center max-w-2xl mx-auto">
       <h1 className="text-4xl font-bold mb-8">Merge PDF</h1>
-      <div className="mb-8 p-6 bg-gray-800 rounded-lg border border-dashed border-gray-600">
+      <div
+        className="mb-8 p-6 bg-gray-800 rounded-lg border border-dashed border-gray-600 hover:border-gray-500 transition-colors cursor-pointer"
+        onClick={triggerFileInput}
+      >
         <input
           type="file"
           multiple
           accept=".pdf"
           onChange={handleFileChange}
-          id="file-upload"
+          ref={fileInputRef}
           className="hidden"
         />
-        <label
-          htmlFor="file-upload"
-          className="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg inline-block transition-colors"
-        >
-          {files.length > 0 ? 'Add More PDFs' : 'Select PDFs'}
-        </label>
-        <p className="text-gray-400 mt-2 text-sm">Select 2 or more PDF files</p>
+        <div className="text-center">
+          <span className="material-icons text-4xl text-gray-400 mb-2">upload_file</span>
+          <p className="font-bold text-lg text-blue-400">
+            {files.length > 0 ? 'Add More PDFs' : 'Click to Select PDFs'}
+          </p>
+          <p className="text-gray-400 mt-2 text-sm">Select multiple files to merge</p>
+        </div>
       </div>
 
       {files.length > 0 && (
@@ -80,10 +91,13 @@ const MergePdfPage = () => {
           <ul className="space-y-2">
             {files.map((file, index) => (
               <li key={index} className="flex justify-between items-center bg-gray-700 p-3 rounded">
-                <span className="truncate mr-4">{file.name}</span>
+                <span className="truncate mr-4 text-sm md:text-base">{file.name}</span>
                 <button
-                  onClick={() => removeFile(index)}
-                  className="text-red-400 hover:text-red-300 font-medium px-2"
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent triggering file input if inside clickable area
+                    removeFile(index);
+                  }}
+                  className="bg-red-500/20 hover:bg-red-500/40 text-red-300 hover:text-red-200 px-3 py-1 rounded text-sm transition-colors"
                   title="Remove file"
                 >
                   Remove
