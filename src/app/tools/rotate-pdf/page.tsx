@@ -1,15 +1,9 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import * as pdfjsLib from 'pdfjs-dist';
 import { PDFDocument, degrees } from 'pdf-lib';
 import { Loader2, FileText, RefreshCw } from 'lucide-react';
 import FileUploader from '../../components/FileUploader';
-
-// Initialize PDF.js worker
-if (typeof window !== 'undefined') {
-  pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
-}
 
 const RotatePdfPage = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -27,6 +21,10 @@ const RotatePdfPage = () => {
 
     const renderPreview = async () => {
       try {
+        // Dynamically import PDF.js
+        const pdfjsLib = await import('pdfjs-dist');
+        pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+
         const fileData = await file.arrayBuffer();
         const loadingTask = pdfjsLib.getDocument({ data: fileData });
         const pdf = await loadingTask.promise;

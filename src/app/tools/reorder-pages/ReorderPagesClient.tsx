@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { PDFDocument } from 'pdf-lib';
-import * as pdfjsLib from 'pdfjs-dist';
 import {
     DndContext,
     closestCenter,
@@ -25,10 +24,7 @@ import { CSS } from '@dnd-kit/utilities';
 import { Loader2, FileText, X, Check } from 'lucide-react';
 import FileUploader from '../../components/FileUploader';
 
-// Initialize PDF.js worker
-if (typeof window !== 'undefined') {
-    pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
-}
+
 
 interface PageItem {
     id: string;
@@ -120,6 +116,11 @@ const ReorderPagesClient = () => {
         setLoading(true);
         try {
             const arrayBuffer = await file.arrayBuffer();
+
+            // Dynamically import PDF.js
+            const pdfjsLib = await import('pdfjs-dist');
+            pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+
             const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
 
             const newItems: PageItem[] = [];

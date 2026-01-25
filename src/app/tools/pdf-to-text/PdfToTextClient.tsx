@@ -1,14 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import * as pdfjsLib from 'pdfjs-dist';
 import { Loader2, FileText, Copy, Download } from 'lucide-react';
 import FileUploader from '../../components/FileUploader';
-
-// Initialize PDF.js worker
-if (typeof window !== 'undefined') {
-    pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
-}
 
 const PdfToTextClient = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -22,6 +16,11 @@ const PdfToTextClient = () => {
         setProgress(0);
         try {
             const arrayBuffer = await file.arrayBuffer();
+
+            // Dynamically import PDF.js
+            const pdfjsLib = await import('pdfjs-dist');
+            pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+
             const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
 
             let fullText = '';
