@@ -1,15 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import * as pdfjsLib from 'pdfjs-dist';
 import * as XLSX from 'xlsx';
 import { Loader2, FileSpreadsheet, Download } from 'lucide-react';
 import FileUploader from '../../components/FileUploader';
 
-// Initialize PDF.js worker
-if (typeof window !== 'undefined') {
-    pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
-}
 
 const PdfToExcelPage = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -26,6 +21,10 @@ const PdfToExcelPage = () => {
 
         setLoading(true);
         try {
+            // Dynamically import PDF.js to avoid SSR issues with DOMMatrix
+            const pdfjsLib = await import('pdfjs-dist');
+            pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+
             const arrayBuffer = await file.arrayBuffer();
             const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
 

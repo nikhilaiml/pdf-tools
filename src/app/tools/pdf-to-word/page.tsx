@@ -1,15 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import * as pdfjsLib from 'pdfjs-dist';
 import { Loader2, FileText, Download } from 'lucide-react';
 import { Document as DocxDocument, Packer, Paragraph, TextRun } from 'docx';
 import FileUploader from '../../components/FileUploader';
-
-// Initialize PDF.js worker
-if (typeof window !== 'undefined') {
-    pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
-}
 
 const PdfToWordPage = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -19,13 +13,15 @@ const PdfToWordPage = () => {
         setFile(file);
     };
 
-
-
     const handleConvert = async () => {
         if (!file) return;
 
         setLoading(true);
         try {
+            // Dynamically import PDF.js
+            const pdfjsLib = await import('pdfjs-dist');
+            pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+
             const arrayBuffer = await file.arrayBuffer();
             const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
 

@@ -1,15 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import * as pdfjsLib from 'pdfjs-dist';
 import pptxgen from 'pptxgenjs';
 import { Loader2, FileText, Download, Presentation } from 'lucide-react';
 import FileUploader from '../../components/FileUploader';
-
-// Initialize PDF.js worker
-if (typeof window !== 'undefined') {
-    pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
-}
 
 const PdfToPptPage = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -27,6 +21,10 @@ const PdfToPptPage = () => {
         setLoading(true);
         setProgress(0);
         try {
+            // Dynamically import PDF.js
+            const pdfjsLib = await import('pdfjs-dist');
+            pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+
             const arrayBuffer = await file.arrayBuffer();
             const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
 
