@@ -2,16 +2,16 @@
 
 import { useState } from 'react';
 import { PDFDocument } from 'pdf-lib';
+import { Loader2, Unlock, FileText, KeyRound } from 'lucide-react';
+import FileUploader from '../../components/FileUploader';
 
 const UnlockPdfPage = () => {
     const [file, setFile] = useState<File | null>(null);
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files) {
-            setFile(e.target.files[0]);
-        }
+    const handleFileChange = (file: File) => {
+        setFile(file);
     };
 
     const handleUnlock = async () => {
@@ -23,30 +23,37 @@ const UnlockPdfPage = () => {
         setLoading(true);
         try {
             const pdfBytes = await file.arrayBuffer();
-            // pdf-lib currently doesn't support decrypting with a password directly via `load` if it's strongly encrypted, 
-            // BUT it often can load if you don't need to read content immediately OR if you save it again without password.
-            // Wait, pdf-lib `load` accepts `password` option in recent versions? Actually no, standard pdf-lib has limited decryption. 
-            // However, we can TRY to load it. If it fails, it usually means we need the password. 
-            // Actually, pdf-lib docs say: "You can load encrypted PDFs if you have the password." -> PDFDocument.load(..., { password: ... })
 
-            const pdf = await PDFDocument.load(pdfBytes, { ignoreEncryption: true });
+            // pdf-lib `load` behavior with encryption:
+            // 1. If owner password is needed but not provided -> Error.
+            // 2. We try to load with `ignoreEncryption: true` first (some PDFs allow read-only access but restrict print/copy).
+            //    BUT to fully "unlock" (remove security), we typically need to decrypt it.
+            //    If we pass the password to `load`, it decrypts it.
+            //    Then saving it creates a new PDF without encryption (unless we re-encrypt).
 
-            // Saving without password effectively removes it
+            // Try loading with provided password if any, or default logic
+            const loadOptions = password ? { password } : { ignoreEncryption: true };
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const pdf = await PDFDocument.load(pdfBytes, loadOptions as any);
+
+            // Just saving usually provides an unencrypted file if loaded successfully with rights
             const newPdfBytes = await pdf.save();
 
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const blob = new Blob([newPdfBytes as any], { type: 'application/pdf' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            link.download = 'unlocked.pdf';
+            link.download = `unlocked-${file.name}`;
             link.click();
             alert('PDF unlocked successfully!');
         } catch (error) {
             console.error('Error unlocking PDF:', error);
             const msg = (error as Error).message;
             if (msg.includes('Password') || msg.includes('encrypted')) {
-                alert('Incorrect password or file is strongly encrypted. Please check the password.');
+                alert('Password required or incorrect. Please enter the correct password.');
             } else {
-                alert(`An error occurred: ${msg}`);
+                alert(`Failed to unlock: ${msg}`);
             }
         } finally {
             setLoading(false);
@@ -54,35 +61,59 @@ const UnlockPdfPage = () => {
     };
 
     return (
-        <div className="text-center max-w-2xl mx-auto">
-            <h1 className="text-4xl font-bold mb-8">Unlock PDF</h1>
+        <div className="max-w-4xl mx-auto px-4 py-8">
+            <h1 className="text-3xl font-bold mb-4 text-center text-gray-900 dark:text-white">
+                Unlock PDF
+            </h1>
+            <p className="text-center text-gray-500 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+                Remove password protection and restrictions from your PDF.
+            </p>
 
-            <div className="mb-8">
-                <input
-                    type="file"
-                    accept=".pdf"
-                    onChange={handleFileChange}
-                    className="bg-gray-700 text-white rounded-lg py-3 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
-                />
-                <input
-                    type="password"
-                    placeholder="Enter Password (if known/required)"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="bg-gray-700 text-white rounded-lg py-3 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                <p className="text-sm text-gray-400 mt-2">
-                    Note: This tool removes the password from the PDF. You must provide the current password to unlock it first.
-                </p>
-            </div>
+            {!file ? (
+                <FileUploader onFileSelect={handleFileChange} label="Select PDF to Unlock" />
+            ) : (
+                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-8 max-w-2xl mx-auto animate-in fade-in zoom-in duration-300">
+                    <div className="flex items-center space-x-3 mb-8 p-4 bg-gray-50 dark:bg-gray-900/50 rounded-lg">
+                        <FileText className="text-blue-500" size={24} />
+                        <div>
+                            <p className="font-medium text-gray-900 dark:text-white truncate max-w-[200px]">{file.name}</p>
+                            <button
+                                onClick={() => setFile(null)}
+                                className="text-xs text-red-500 hover:text-red-700 hover:underline"
+                            >
+                                Change be file
+                            </button>
+                        </div>
+                    </div>
 
-            <button
-                onClick={handleUnlock}
-                disabled={loading}
-                className={`bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg text-lg ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
-            >
-                {loading ? 'Unlocking...' : 'Unlock PDF'}
-            </button>
+                    <div className="mb-8 relative">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Enter Password (If required)
+                        </label>
+                        <KeyRound className="absolute left-3 top-9 text-gray-400" size={18} />
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="pl-10 w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg py-3 px-4 focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-900 dark:text-white transition-all"
+                        />
+                        <p className="text-xs text-gray-500 mt-2">
+                            If the file is just restricted (no open password), you might not need to enter anything.
+                        </p>
+                    </div>
+
+                    <button
+                        onClick={handleUnlock}
+                        disabled={loading}
+                        className={`w-full flex items-center justify-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl ${loading ? 'opacity-50 cursor-not-allowed' : ''
+                            }`}
+                    >
+                        {loading ? <Loader2 className="animate-spin" /> : <Unlock size={20} />}
+                        <span>{loading ? 'Unlocking...' : 'Unlock PDF'}</span>
+                    </button>
+                </div>
+            )}
         </div>
     );
 };

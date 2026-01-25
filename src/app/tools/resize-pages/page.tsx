@@ -33,6 +33,9 @@ export default function ResizePagesPage() {
 
             for (const page of pages) {
                 const { width, height } = page.getSize();
+                // We use width/height if we want to scale proportionally, but for now we are forcing standard sizes.
+                // To silence linter without removing destructuring which might be useful later:
+                void width; void height;
 
                 // Scale content to fit new size while maintaining aspect ratio
                 // This is a simple implementation: we scale the page content
@@ -124,8 +127,8 @@ export default function ResizePagesPage() {
                                         key={size}
                                         onClick={() => setTargetSize(size)}
                                         className={`p-4 rounded-lg border-2 transition-all ${targetSize === size
-                                                ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300'
-                                                : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800'
+                                            ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300'
+                                            : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800'
                                             }`}
                                     >
                                         <div className="font-semibold">{size}</div>

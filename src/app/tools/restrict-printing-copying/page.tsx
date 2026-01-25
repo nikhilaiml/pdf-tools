@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { PDFDocument, StandardFonts } from 'pdf-lib';
+import { PDFDocument } from 'pdf-lib';
 import { Loader2, Shield, Lock, FileText } from 'lucide-react';
 import FileUploader from '../../components/FileUploader';
 

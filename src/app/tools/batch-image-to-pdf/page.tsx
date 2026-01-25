@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { PDFDocument } from 'pdf-lib';
-import { Loader2, Image as ImageIcon, FileText, Plus } from 'lucide-react';
+import { Loader2, FileText, Plus } from 'lucide-react';
 import { Upload } from 'lucide-react';
 
 export default function BatchImageToPdfPage() {

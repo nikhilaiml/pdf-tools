@@ -22,7 +22,8 @@ import {
     rectSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { Loader2, Upload, FileText, X } from 'lucide-react';
+import { Loader2, FileText, X, Check } from 'lucide-react';
+import FileUploader from '../../components/FileUploader';
 
 // Initialize PDF.js worker
 if (typeof window !== 'undefined') {
@@ -137,6 +138,7 @@ const ReorderPagesClient = () => {
                     await page.render({
                         canvasContext: context,
                         viewport: viewport,
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     } as any).promise;
 
                     newItems.push({
@@ -155,13 +157,10 @@ const ReorderPagesClient = () => {
         }
     };
 
-    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files[0]) {
-            const selectedFile = e.target.files[0];
-            setFile(selectedFile);
-            setItems([]); // Clear previous items
-            await generateThumbnails(selectedFile);
-        }
+    const handleFileChange = async (selectedFile: File) => {
+        setFile(selectedFile);
+        setItems([]); // Clear previous items
+        await generateThumbnails(selectedFile);
     };
 
     const handleDragStart = (event: DragStartEvent) => {
@@ -205,12 +204,12 @@ const ReorderPagesClient = () => {
 
             const newPdfBytes = await newPdf.save();
 
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const blob = new Blob([newPdfBytes as any], { type: 'application/pdf' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
             link.download = `reordered-${file.name}`;
             link.click();
-            // alert('Pages reordered successfully!'); // Optional: removed to be cleaner
         } catch (error) {
             console.error('Error reordering pages:', error);
             alert(`An error occurred: ${(error as Error).message}`);
@@ -226,105 +225,84 @@ const ReorderPagesClient = () => {
             <h1 className="text-3xl md:text-4xl font-bold mb-2 text-center text-gray-900 dark:text-white">
                 Reorder PDF Pages
             </h1>
-            <p className="text-center text-gray-500 dark:text-gray-400 mb-8">
+            <p className="text-center text-gray-500 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
                 Drag and drop thumbnails to rearrange pages. You can also delete pages.
             </p>
 
             {/* Upload Section */}
             {!file ? (
-                <div className="flex flex-col items-center justify-center p-12 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-                    <Upload className="w-16 h-16 text-gray-400 mb-4" />
-                    <p className="text-xl font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        Select PDF file to reorder
-                    </p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
-                        or drop file here
-                    </p>
-                    <input
-                        type="file"
-                        accept=".pdf"
-                        onChange={handleFileChange}
-                        className="hidden"
-                        id="pdf-upload"
-                    />
-                    <label
-                        htmlFor="pdf-upload"
-                        className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg cursor-pointer transition-colors shadow-lg hover:shadow-xl"
-                    >
-                        Select PDF file
-                    </label>
-                </div>
+                <FileUploader onFileSelect={handleFileChange} label="Select PDF to Reorder" />
             ) : (
                 <div className="animate-in fade-in zoom-in duration-300">
-                    <div className="flex justify-between items-center mb-6">
-                        <div className="flex items-center space-x-4">
-                            <div className="flex items-center space-x-2 text-gray-900 dark:text-white font-medium bg-gray-100 dark:bg-gray-800 py-2 px-4 rounded-lg">
-                                <FileText size={20} className="text-blue-500" />
-                                <span className="truncate max-w-[200px]">{file.name}</span>
-                            </div>
+                    <div className="flex justify-between items-center mb-6 px-4">
+                        <div className="flex items-center space-x-2 text-gray-900 dark:text-white font-medium bg-white dark:bg-gray-800 py-2 px-4 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
+                            <FileText size={20} className="text-blue-500" />
+                            <span className="truncate max-w-[200px] hidden sm:inline">{file.name}</span>
                             <button
                                 onClick={() => { setFile(null); setItems([]); }}
-                                className="text-sm text-red-500 hover:text-red-600 hover:underline"
+                                className="text-xs text-red-500 hover:text-red-600 hover:underline ml-2"
                             >
-                                Remove file
+                                Change
                             </button>
                         </div>
 
                         <button
                             onClick={handleReorder}
                             disabled={processing || items.length === 0}
-                            className={`flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-lg hover:shadow-xl ${processing ? 'opacity-70 cursor-wait' : ''
+                            className={`flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition-all shadow-md hover:shadow-lg ${processing ? 'opacity-70 cursor-wait' : ''
                                 }`}
                         >
-                            {processing ? <Loader2 className="animate-spin" /> : null}
-                            <span>{processing ? 'Processing...' : 'Reorder PDF'}</span>
+                            {processing ? <Loader2 className="animate-spin" size={20} /> : <Check size={20} />}
+                            <span>{processing ? 'Saving...' : 'Save Changes'}</span>
                         </button>
                     </div>
 
                     {loading ? (
-                        <div className="flex flex-col items-center justify-center py-20">
+                        <div className="flex flex-col items-center justify-center py-20 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
                             <Loader2 className="w-12 h-12 text-blue-500 animate-spin mb-4" />
-                            <p className="text-gray-500">Loading pages...</p>
+                            <p className="text-gray-500">Generating thumbnails...</p>
                         </div>
                     ) : (
-                        <DndContext
-                            sensors={sensors}
-                            collisionDetection={closestCenter}
-                            onDragStart={handleDragStart}
-                            onDragEnd={handleDragEnd}
-                        >
-                            <SortableContext items={items.map(i => i.id)} strategy={rectSortingStrategy}>
-                                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 p-4 bg-gray-50 dark:bg-gray-900/50 rounded-xl border border-gray-200 dark:border-gray-800 min-h-[400px]">
-                                    {items.map((item, index) => (
-                                        <SortablePage
-                                            key={item.id}
-                                            item={item}
-                                            index={index}
-                                            onRemove={handleRemovePage}
-                                        />
-                                    ))}
-                                </div>
-                            </SortableContext>
-                            <DragOverlay>
-                                {activeItem ? (
-                                    <div className="opacity-90 scale-105 transform cursor-grabbing">
-                                        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-2xl border-2 border-blue-500 overflow-hidden">
-                                            <div className="aspect-[1/1.4] relative bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
-                                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                                <img
-                                                    src={activeItem.thumbnail}
-                                                    alt="Moving page"
-                                                    className="w-full h-full object-contain"
-                                                />
-                                            </div>
-                                            <div className="p-2 text-center text-sm font-bold text-white bg-blue-500">
-                                                Page {items.findIndex(i => i.id === activeItem.id) + 1}
+                        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-6 min-h-[500px]">
+                            <DndContext
+                                sensors={sensors}
+                                collisionDetection={closestCenter}
+                                onDragStart={handleDragStart}
+                                onDragEnd={handleDragEnd}
+                            >
+                                <SortableContext items={items.map(i => i.id)} strategy={rectSortingStrategy}>
+                                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
+                                        {items.map((item, index) => (
+                                            <SortablePage
+                                                key={item.id}
+                                                item={item}
+                                                index={index}
+                                                onRemove={handleRemovePage}
+                                            />
+                                        ))}
+                                    </div>
+                                </SortableContext>
+                                <DragOverlay>
+                                    {activeItem ? (
+                                        <div className="opacity-90 scale-105 transform cursor-grabbing">
+                                            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-2xl border-2 border-blue-500 overflow-hidden">
+                                                <div className="aspect-[1/1.4] relative bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
+                                                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                                                    <img
+                                                        src={activeItem.thumbnail}
+                                                        alt="Moving page"
+                                                        className="w-full h-full object-contain"
+                                                    />
+                                                </div>
+                                                <div className="p-2 text-center text-sm font-bold text-white bg-blue-500">
+                                                    Page {items.findIndex(i => i.id === activeItem.id) + 1}
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                ) : null}
-                            </DragOverlay>
-                        </DndContext>
+                                    ) : null}
+                                </DragOverlay>
+                            </DndContext>
+                        </div>
                     )}
                 </div>
             )}

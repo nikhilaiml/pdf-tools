@@ -1,7 +1,15 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import * as pdfjsLib from 'pdfjs-dist';
 import { PDFDocument, degrees } from 'pdf-lib';
+import { Loader2, FileText, RefreshCw } from 'lucide-react';
+import FileUploader from '../../components/FileUploader';
+
+// Initialize PDF.js worker
+if (typeof window !== 'undefined') {
+  pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+}
 
 const RotatePdfPage = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -9,10 +17,8 @@ const RotatePdfPage = () => {
   const [loading, setLoading] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setFile(e.target.files[0]);
-    }
+  const handleFileChange = (file: File) => {
+    setFile(file);
   };
 
   // Render PDF Preview
@@ -21,20 +27,12 @@ const RotatePdfPage = () => {
 
     const renderPreview = async () => {
       try {
-        setLoading(true);
-        // Import main library
-        const pdfjsLib = await import('pdfjs-dist');
-
-        // Explicitly set worker to a known stable version (matching installed version closely)
-        // Using version 5.4.530 which is standard for recent installs
-        pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@5.4.530/build/pdf.worker.min.mjs`;
-
         const fileData = await file.arrayBuffer();
         const loadingTask = pdfjsLib.getDocument({ data: fileData });
         const pdf = await loadingTask.promise;
         const page = await pdf.getPage(1); // Render first page
 
-        const viewport = page.getViewport({ scale: 0.6 });
+        const viewport = page.getViewport({ scale: 0.8 });
         const canvas = canvasRef.current;
         const context = canvas?.getContext('2d');
 
@@ -46,13 +44,11 @@ const RotatePdfPage = () => {
             canvasContext: context,
             viewport: viewport,
           };
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           await page.render(renderContext as any).promise;
         }
-        setLoading(false);
       } catch (error) {
         console.error('Preview Error:', error);
-        // Don't alert immediately to avoid spam, just log and maybe show text
-        setLoading(false);
       }
     };
 
@@ -77,10 +73,11 @@ const RotatePdfPage = () => {
 
       const newPdfBytes = await pdf.save();
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const blob = new Blob([newPdfBytes as any], { type: 'application/pdf' });
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
-      link.download = 'rotated.pdf';
+      link.download = `rotated-${file.name}`;
       link.click();
       alert('PDF rotated successfully!');
     } catch (error) {
@@ -92,70 +89,73 @@ const RotatePdfPage = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4">
-      <h1 className="text-4xl font-bold mb-8 text-center">Rotate PDF</h1>
+    <div className="max-w-6xl mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-4 text-center text-gray-900 dark:text-white">
+        Rotate PDF
+      </h1>
+      <p className="text-center text-gray-500 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+        Permanently rotate all pages in your PDF document.
+      </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-        {/* Left Column: Controls */}
-        <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
-          <h2 className="text-2xl font-semibold mb-6 border-b border-gray-700 pb-2">Settings</h2>
-
-          <div className="mb-8">
-            <label className="block text-gray-300 mb-2">1. Select PDF File</label>
-            <input
-              type="file"
-              accept=".pdf"
-              onChange={handleFileChange}
-              className="bg-gray-700 text-white rounded-lg py-3 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          <div className="mb-8">
-            <label className="block text-gray-300 mb-2">2. Rotation Angle</label>
-            <div className="flex space-x-4">
-              {[90, 180, 270].map((deg) => (
+      {!file ? (
+        <FileUploader onFileSelect={handleFileChange} label="Select PDF to Rotate" />
+      ) : (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Controls */}
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-8 h-fit">
+            <div className="flex items-center space-x-3 mb-8 p-4 bg-gray-50 dark:bg-gray-900/50 rounded-lg">
+              <FileText className="text-blue-500" size={24} />
+              <div>
+                <p className="font-medium text-gray-900 dark:text-white truncate max-w-[200px]">{file.name}</p>
                 <button
-                  key={deg}
-                  onClick={() => setRotation(deg)}
-                  className={`px-4 py-2 rounded-lg font-semibold transition-colors ${rotation === deg
-                    ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/50'
-                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                    }`}
+                  onClick={() => setFile(null)}
+                  className="text-xs text-red-500 hover:text-red-700 hover:underline"
                 >
-                  {deg}°
+                  Change be file
                 </button>
-              ))}
-            </div>
-          </div>
-
-          <button
-            onClick={handleRotate}
-            disabled={loading}
-            className={`bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-lg text-lg w-full transition-colors ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
-          >
-            {loading ? 'Processing...' : 'Download Rotated PDF'}
-          </button>
-        </div>
-
-        {/* Right Column: Live Preview */}
-        <div className="bg-gray-800 p-6 rounded-lg shadow-lg flex flex-col items-center justify-center min-h-[400px]">
-          <h2 className="text-2xl font-semibold mb-6 border-b border-gray-700 pb-2 w-full">Live Preview</h2>
-
-          {file ? (
-            <div className="relative p-8 border-2 border-dashed border-gray-600 rounded bg-gray-900/50">
-              {/* Canvas Container with Rotation */}
-              <div style={{ transform: `rotate(${rotation}deg)`, transition: 'transform 0.3s ease-in-out' }}>
-                <canvas ref={canvasRef} className="max-w-full h-auto shadow-2xl bg-white" />
               </div>
             </div>
-          ) : (
-            <div className="text-gray-500 flex flex-col items-center">
-              <span className="material-icons text-6xl mb-2">preview</span>
-              <p>Select a file to see preview</p>
+
+            <div className="mb-8">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-4">Rotation Angle</label>
+              <div className="grid grid-cols-3 gap-4">
+                {[90, 180, 270].map((deg) => (
+                  <button
+                    key={deg}
+                    onClick={() => setRotation(deg)}
+                    className={`py-3 px-4 rounded-lg font-semibold transition-all border-2 ${rotation === deg
+                      ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 shadow-sm'
+                      : 'border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800'
+                      }`}
+                  >
+                    {deg}°
+                  </button>
+                ))}
+              </div>
             </div>
-          )}
+
+            <button
+              onClick={handleRotate}
+              disabled={loading}
+              className={`w-full flex items-center justify-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl ${loading ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
+            >
+              {loading ? <Loader2 className="animate-spin" /> : <RefreshCw size={20} />}
+              <span>{loading ? 'Processing...' : 'Rotate Application'}</span>
+            </button>
+          </div>
+
+          {/* Preview */}
+          <div className="bg-gray-100 dark:bg-gray-900 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700 p-8 flex items-center justify-center min-h-[500px] overflow-hidden">
+            <div
+              className="shadow-2xl transition-transform duration-500 ease-in-out bg-white"
+              style={{ transform: `rotate(${rotation}deg)` }}
+            >
+              <canvas ref={canvasRef} className="max-w-full h-auto" style={{ maxHeight: '600px' }} />
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

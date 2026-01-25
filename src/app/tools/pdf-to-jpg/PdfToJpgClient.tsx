@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import * as pdfjsLib from 'pdfjs-dist';
 import JSZip from 'jszip';
-import { Loader2, FileText, Download, Image as ImageIcon } from 'lucide-react';
+import { Loader2, FileText, Download } from 'lucide-react';
 import FileUploader from '../../components/FileUploader';
 
 // Initialize PDF.js worker
@@ -48,6 +48,7 @@ const PdfToJpgClient = () => {
                     await page.render({
                         canvasContext: context,
                         viewport: viewport,
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     } as any).promise;
 
                     const blob = await new Promise<Blob | null>(resolve =>
