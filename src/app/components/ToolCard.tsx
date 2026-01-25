@@ -6,7 +6,7 @@ interface ToolCardProps {
 }
 
 const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
-  const toolLink = `/tools/${tool.title.toLowerCase().replace(/ /g, '-')}`;
+  const toolLink = `/tools/${tool.title.toLowerCase().replace(/[ /]/g, '-')}`;
 
   return (
     <Link href={toolLink}>
