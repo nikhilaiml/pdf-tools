@@ -191,7 +191,7 @@ export default function RedactPdfPage() {
                 // PDF.js GetViewport uses the internal PDF size * scale.
                 // So if we divide by `scale`, we get back to PDF units.
 
-                rects.forEach(rect => {
+                rects.forEach((rect: RedactionRect) => {
                     // Coordinates conversion
                     // Canvas (0,0) is Top-Left. 
                     // PDF-lib (0,0) is Bottom-Left.
@@ -224,7 +224,8 @@ export default function RedactPdfPage() {
             });
 
             const pdfBytes = await pdfDoc.save();
-            const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const blob = new Blob([pdfBytes as any], { type: 'application/pdf' });
 
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
@@ -274,7 +275,7 @@ export default function RedactPdfPage() {
                                 </h4>
                                 <div className="space-y-2">
                                     {Object.entries(redactions).map(([page, rects]) => (
-                                        rects.map((rect, i) => (
+                                        rects.map((rect: RedactionRect, i: number) => (
                                             <div key={rect.id} className="flex items-center justify-between p-2 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 text-sm">
                                                 <span className="truncate text-gray-600 dark:text-gray-400">
                                                     Pg {page}, Box {i + 1}
