@@ -268,11 +268,7 @@ const FillSignClient = () => {
                                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
                                     <div className="relative w-full h-full pointer-events-auto">
                                         {texts.map(t => (
-                                            {
-                                                texts.map(t => (
-                                                    <DraggableText key={t.id} element={t} updatePos={() => { }} updateText={updateText} remove={removeText} />
-                                                ))
-                                            }
+                                            <DraggableText key={t.id} element={t} updatePos={() => { }} updateText={updateText} remove={removeText} />
                                         ))}
                                     </div>
                                 </div>
