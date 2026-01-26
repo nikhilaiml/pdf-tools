@@ -2,9 +2,6 @@ export interface Tool {
   title: string;
   description: string;
   icon: string;
-  title: string;
-  description: string;
-  icon: string;
   category: string;
   id: string; // Add explicit ID matching folder name
 }
