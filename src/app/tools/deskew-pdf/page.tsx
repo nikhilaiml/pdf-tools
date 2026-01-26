@@ -120,7 +120,8 @@ export default function DeskewPdfPage() {
             }
 
             const pdfBytes = await newPdf.save();
-            const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const blob = new Blob([pdfBytes as any], { type: 'application/pdf' });
 
             // Download
             const link = document.createElement('a');
