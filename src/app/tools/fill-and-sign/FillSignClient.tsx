@@ -22,14 +22,10 @@ interface SignatureElement {
     height: number;
 }
 
-const DraggableText = ({ element, updatePos, remove }: { element: TextElement, updatePos: (id: string, dx: number, dy: number) => void, remove: (id: string) => void }) => {
+const DraggableText = ({ element, updatePos, updateText, remove }: { element: TextElement, updatePos: (id: string, dx: number, dy: number) => void, updateText: (id: string, text: string) => void, remove: (id: string) => void }) => {
     const { attributes, listeners, setNodeRef, transform } = useDraggable({
         id: element.id,
     });
-
-    // We handle position update on DragEnd in the parent context, transform is for visual feedback during drag
-    // But since we want to place it precisely, we might better use a simpler approach without full dnd-kit for canvas overly if complexity is high.
-    // However, dnd-kit is great. Let's stick to absolute positioning.
 
     const style = transform ? {
         transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
@@ -39,14 +35,30 @@ const DraggableText = ({ element, updatePos, remove }: { element: TextElement, u
         <div
             ref={setNodeRef}
             style={{ ...style, left: element.x, top: element.y }}
-            className="absolute cursor-move group flex items-center bg-white/80 border border-blue-400 rounded px-2 py-1 shadow-sm"
+            className="absolute flex items-center group"
             {...listeners}
             {...attributes}
         >
-            <span className="font-sans text-gray-900" style={{ fontSize: element.fontSize }}>{element.text}</span>
+            <input
+                value={element.text}
+                onChange={(e) => updateText(element.id, e.target.value)}
+                className="bg-transparent border border-transparent hover:border-blue-400 focus:border-blue-500 rounded px-1 py-0.5 outline-none text-gray-900 font-sans cursor-move"
+                style={{ fontSize: element.fontSize, minWidth: '50px' }}
+                onPointerDown={(e) => e.stopPropagation()} // Allow input focus without triggering drag immediately if clicked
+            />
+            {/* Handle for explicit dragging if input blocks it, but simple setup often works with listeners on parent div. 
+                However, input consumes pointer events. We can put listeners on a handle or the div.
+                If listeners are on div, input click might still work if we don't prevent default.
+                Let's add a explicit drag handle for better UX. */}
+            <div
+                className="absolute -top-4 -left-4 p-1 cursor-move bg-white rounded-full shadow border border-gray-200 opacity-0 group-hover:opacity-100 transition-opacity"
+            >
+                <Grip size={12} className="text-gray-500" />
+            </div>
+
             <button
                 onPointerDown={(e) => { e.stopPropagation(); remove(element.id); }}
-                className="ml-2 text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"
+                className="absolute -top-4 -right-4 p-1 bg-white rounded-full shadow border border-gray-200 text-red-500 opacity-0 group-hover:opacity-100 transition-opacity z-10"
             >
                 <X size={12} />
             </button>
@@ -139,6 +151,10 @@ const FillSignClient = () => {
 
     const removeText = (id: string) => {
         setTexts(prev => prev.filter(t => t.id !== id));
+    };
+
+    const updateText = (id: string, text: string) => {
+        setTexts(prev => prev.map(t => t.id === id ? { ...t, text } : t));
     };
 
     const handleSave = async () => {
@@ -252,7 +268,11 @@ const FillSignClient = () => {
                                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
                                     <div className="relative w-full h-full pointer-events-auto">
                                         {texts.map(t => (
-                                            <DraggableText key={t.id} element={t} updatePos={() => { }} remove={removeText} />
+                                            {
+                                                texts.map(t => (
+                                                    <DraggableText key={t.id} element={t} updatePos={() => { }} updateText={updateText} remove={removeText} />
+                                                ))
+                                            }
                                         ))}
                                     </div>
                                 </div>
