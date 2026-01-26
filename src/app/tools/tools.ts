@@ -170,7 +170,7 @@ export const tools: Tool[] = [
   },
   {
     title: 'Restrict Printing/Copying',
-    id: 'restrict-pdf',
+    id: 'restrict-printing-copying',
     description: 'Set permissions on your PDF.',
     icon: 'block',
     category: 'security',
@@ -191,14 +191,14 @@ export const tools: Tool[] = [
   },
   {
     title: 'Repair Corrupted PDF',
-    id: 'repair-pdf',
+    id: 'repair-corrupted-pdf',
     description: 'Attempt to repair a corrupted PDF.',
     icon: 'build',
     category: 'utility',
   },
   {
     title: 'Optimize PDF Size',
-    id: 'optimize-pdf',
+    id: 'optimize-pdf-size',
     description: 'Further reduce the size of your PDF.',
     icon: 'speed',
     category: 'utility',
