@@ -16,18 +16,24 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ categories, onFilter })
   };
 
   return (
-    <div className="flex justify-center space-x-4 mb-8">
+    <div className="flex flex-wrap justify-center gap-3 mb-10">
       <button
         onClick={() => handleClick('all')}
-        className={`px-4 py-2 rounded-lg ${activeCategory === 'all' ? 'bg-blue-500 text-white' : 'bg-gray-700 text-gray-400'}`}
+        className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${activeCategory === 'all'
+            ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/25 ring-2 ring-white/10'
+            : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/5'
+          }`}
       >
-        All
+        All Tools
       </button>
       {categories.map((category) => (
         <button
           key={category}
           onClick={() => handleClick(category)}
-          className={`px-4 py-2 rounded-lg ${activeCategory === category ? 'bg-blue-500 text-white' : 'bg-gray-700 text-gray-400'}`}
+          className={`px-6 py-2 rounded-full text-sm font-medium capitalize transition-all ${activeCategory === category
+              ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/25 ring-2 ring-white/10'
+              : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/5'
+            }`}
         >
           {category}
         </button>

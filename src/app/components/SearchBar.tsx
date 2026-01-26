@@ -15,13 +15,16 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   };
 
   return (
-    <div className="mb-8">
+    <div className="mb-10 relative max-w-2xl mx-auto">
+      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+        <span className="material-icons text-gray-400">search</span>
+      </div>
       <input
         type="text"
-        placeholder="Search for a tool..."
+        placeholder="Search for a PDF tool..."
         value={query}
         onChange={handleChange}
-        className="w-full bg-gray-700 text-white rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full glass-panel text-white rounded-full py-4 pl-12 pr-6 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all shadow-lg text-lg placeholder-gray-500"
       />
     </div>
   );

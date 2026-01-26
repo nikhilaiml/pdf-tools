@@ -61,10 +61,11 @@ const FileUploader = ({
             className={`
         flex flex-col items-center justify-center p-12 
         border-2 border-dashed rounded-xl 
-        transition-colors cursor-pointer
+        transition-all duration-300 cursor-pointer
+        glass-panel
         ${isDragging
-                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
-                    : 'border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-800'
+                    ? 'border-blue-500 bg-blue-500/10 scale-[1.02] shadow-xl shadow-blue-500/10'
+                    : 'border-white/10 hover:border-blue-400/50 hover:bg-white/5'
                 }
       `}
             onDragOver={handleDragOver}

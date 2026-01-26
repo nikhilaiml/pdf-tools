@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white py-4 px-8 text-center">
-      <p>&copy; 2024 PDF Tools. All rights reserved.</p>
+    <footer className="border-t border-white/10 py-8 text-center text-gray-400 text-sm mt-12">
+      <p>&copy; {new Date().getFullYear()} PDF Tools. All rights reserved.</p>
     </footer>
   );
 };

@@ -17,11 +17,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <head>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
       </head>
-      <body className={`${inter.className} bg-gray-800 text-white flex flex-col min-h-screen`}>
+      <body className={`${inter.className} min-h-screen flex flex-col`}>
         <Header />
         <main className="flex-grow container mx-auto px-4 py-8">
           {children}
