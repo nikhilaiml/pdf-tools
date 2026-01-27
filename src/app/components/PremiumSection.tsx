@@ -1,175 +1,287 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { Check, Star, Zap, Shield, Sparkles } from 'lucide-react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+    FileText, Merge, Scissors, Minimize2, RotateCw,
+    Lock, Unlock, Image, Trash2, Move, FileOutput,
+    ArrowRight, Sparkles
+} from 'lucide-react';
+import Link from 'next/link';
 
-export default function PremiumSection() {
+const pdfTools = [
+    {
+        id: 'merge',
+        name: 'Merge PDF',
+        description: 'Combine multiple PDFs into one document',
+        icon: Merge,
+        color: 'from-blue-500 to-indigo-600',
+        href: '/tools/merge-pdf',
+        stats: '10M+ files merged'
+    },
+    {
+        id: 'split',
+        name: 'Split PDF',
+        description: 'Extract pages or split into multiple files',
+        icon: Scissors,
+        color: 'from-purple-500 to-pink-600',
+        href: '/tools/split-pdf',
+        stats: '8M+ files split'
+    },
+    {
+        id: 'compress',
+        name: 'Compress PDF',
+        description: 'Reduce file size while maintaining quality',
+        icon: Minimize2,
+        color: 'from-green-500 to-emerald-600',
+        href: '/tools/compress-pdf',
+        stats: '15M+ files compressed'
+    },
+    {
+        id: 'rotate',
+        name: 'Rotate PDF',
+        description: 'Rotate pages to any angle you need',
+        icon: RotateCw,
+        color: 'from-orange-500 to-red-600',
+        href: '/tools/rotate-pdf',
+        stats: '5M+ files rotated'
+    },
+    {
+        id: 'protect',
+        name: 'Protect PDF',
+        description: 'Add password protection to your PDFs',
+        icon: Lock,
+        color: 'from-red-500 to-rose-600',
+        href: '/tools/protect-pdf',
+        stats: '3M+ files protected'
+    },
+    {
+        id: 'unlock',
+        name: 'Unlock PDF',
+        description: 'Remove password from protected PDFs',
+        icon: Unlock,
+        color: 'from-teal-500 to-cyan-600',
+        href: '/tools/unlock-pdf',
+        stats: '2M+ files unlocked'
+    },
+    {
+        id: 'convert',
+        name: 'PDF to Image',
+        description: 'Convert PDF pages to JPG or PNG',
+        icon: Image,
+        color: 'from-yellow-500 to-orange-600',
+        href: '/tools/pdf-to-jpg',
+        stats: '12M+ conversions'
+    },
+    {
+        id: 'delete',
+        name: 'Delete Pages',
+        description: 'Remove unwanted pages from your PDF',
+        icon: Trash2,
+        color: 'from-pink-500 to-rose-600',
+        href: '/tools/delete-pages',
+        stats: '4M+ pages deleted'
+    },
+    {
+        id: 'reorder',
+        name: 'Reorder Pages',
+        description: 'Rearrange PDF pages in any order',
+        icon: Move,
+        color: 'from-indigo-500 to-violet-600',
+        href: '/tools/reorder-pages',
+        stats: '3M+ files reordered'
+    },
+    {
+        id: 'word',
+        name: 'PDF to Word',
+        description: 'Convert PDF to editable Word document',
+        icon: FileOutput,
+        color: 'from-blue-600 to-blue-800',
+        href: '/tools/pdf-to-word',
+        stats: '7M+ conversions'
+    }
+];
+
+export default function PdfAtGlance() {
+    const [hoveredTool, setHoveredTool] = useState<string | null>(null);
+    const [selectedCategory, setSelectedCategory] = useState('all');
+
+    const categories = [
+        { id: 'all', name: 'All Tools' },
+        { id: 'organize', name: 'Organize' },
+        { id: 'convert', name: 'Convert' },
+        { id: 'security', name: 'Security' }
+    ];
+
+    const filteredTools = selectedCategory === 'all'
+        ? pdfTools
+        : pdfTools.filter(tool => {
+            if (selectedCategory === 'organize') return ['merge', 'split', 'rotate', 'delete', 'reorder'].includes(tool.id);
+            if (selectedCategory === 'convert') return ['compress', 'convert', 'word'].includes(tool.id);
+            if (selectedCategory === 'security') return ['protect', 'unlock'].includes(tool.id);
+            return true;
+        });
+
     return (
         <section className="relative py-20 overflow-hidden">
-            {/* Premium Gradient Background */}
-            <div className="absolute inset-0 premium-gradient z-0"></div>
+            {/* Background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-indigo-50/30 to-purple-50/30 z-0"></div>
+            <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-indigo-200/30 to-purple-200/30 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-blue-200/30 to-indigo-200/30 rounded-full blur-3xl"></div>
 
             <div className="container mx-auto px-4 relative z-10">
-                <div className="max-w-6xl mx-auto">
-                    <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
-                        {/* Left Content */}
-                        <div className="lg:w-1/2">
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 backdrop-blur-sm border border-indigo-200 text-indigo-600 text-sm font-medium mb-6"
-                            >
-                                <Sparkles className="w-4 h-4" />
-                                Premium Features
-                            </motion.div>
+                {/* Header */}
+                <div className="text-center mb-12">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-indigo-200 text-indigo-600 text-sm font-medium mb-6 shadow-sm"
+                    >
+                        <Sparkles className="w-4 h-4" />
+                        Quick Access
+                    </motion.div>
 
-                            <motion.h2
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.1 }}
-                                className="text-3xl md:text-5xl font-bold text-slate-800 mb-6"
-                            >
-                                Get more with Premium
-                            </motion.h2>
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.1 }}
+                        className="text-3xl md:text-5xl font-bold text-slate-800 mb-4"
+                    >
+                        PDF Tools at a Glance
+                    </motion.h2>
 
-                            <motion.p
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.2 }}
-                                className="text-slate-600 text-lg mb-8 leading-relaxed"
-                            >
-                                Unlock unlimited access to all tools, higher file size limits, and priority support. Take your document management to the next level.
-                            </motion.p>
-
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.3 }}
-                                className="space-y-4 mb-8"
-                            >
-                                {[
-                                    'Edit the books and go a bit of work monthly.',
-                                    '400 PDFs, get to brand PDF for yearly use if you need more use',
-                                    'Convert for e-Signature is screen page.'
-                                ].map((feature, i) => (
-                                    <div key={i} className="flex items-start gap-3">
-                                        <div className="w-6 h-6 rounded-full bg-indigo-500 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                            <Check className="w-3.5 h-3.5 text-white" />
-                                        </div>
-                                        <span className="text-slate-700">{feature}</span>
-                                    </div>
-                                ))}
-                            </motion.div>
-
-                            <motion.button
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.4 }}
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                                className="px-8 py-4 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold shadow-xl shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-all"
-                            >
-                                Get Premium
-                            </motion.button>
-
-                            {/* App Store Buttons */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.5 }}
-                                className="flex gap-4 mt-8"
-                            >
-                                <button className="flex items-center gap-3 bg-slate-900 hover:bg-slate-800 text-white px-5 py-3 rounded-xl transition-colors">
-                                    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-                                    </svg>
-                                    <div className="text-left">
-                                        <div className="text-[10px] text-slate-400">Download on the</div>
-                                        <div className="text-sm font-semibold">App Store</div>
-                                    </div>
-                                </button>
-                                <button className="flex items-center gap-3 bg-slate-900 hover:bg-slate-800 text-white px-5 py-3 rounded-xl transition-colors">
-                                    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
-                                    </svg>
-                                    <div className="text-left">
-                                        <div className="text-[10px] text-slate-400">GET IT ON</div>
-                                        <div className="text-sm font-semibold">Google Play</div>
-                                    </div>
-                                </button>
-                            </motion.div>
-                        </div>
-
-                        {/* Right - Preview Image */}
-                        <motion.div
-                            initial={{ opacity: 0, x: 50 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.3 }}
-                            className="lg:w-1/2"
-                        >
-                            <div className="relative">
-                                {/* Floating decorative elements */}
-                                <div className="absolute -top-4 -right-4 w-20 h-20 bg-indigo-200/50 rounded-2xl -z-10"></div>
-                                <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-purple-200/50 rounded-full -z-10"></div>
-
-                                {/* Main Preview Card */}
-                                <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-slate-100">
-                                    {/* Mock Header */}
-                                    <div className="bg-slate-50 px-4 py-3 flex items-center gap-2 border-b border-slate-100">
-                                        <div className="flex gap-1.5">
-                                            <div className="w-3 h-3 rounded-full bg-red-400"></div>
-                                            <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-                                            <div className="w-3 h-3 rounded-full bg-green-400"></div>
-                                        </div>
-                                        <div className="flex-1 text-center text-xs text-slate-400">PDF Tools Premium</div>
-                                    </div>
-
-                                    {/* Content Preview */}
-                                    <div className="p-6">
-                                        <div className="flex items-center gap-4 mb-6">
-                                            <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center">
-                                                <Zap className="w-6 h-6 text-indigo-600" />
-                                            </div>
-                                            <div>
-                                                <div className="text-sm font-semibold text-slate-800">Premium Active</div>
-                                                <div className="text-xs text-green-500">✓ All features unlocked</div>
-                                            </div>
-                                        </div>
-
-                                        {/* Stats */}
-                                        <div className="grid grid-cols-2 gap-4 mb-6">
-                                            <div className="bg-slate-50 rounded-xl p-4">
-                                                <div className="text-2xl font-bold text-indigo-600">∞</div>
-                                                <div className="text-xs text-slate-500">PDFs Processed</div>
-                                            </div>
-                                            <div className="bg-slate-50 rounded-xl p-4">
-                                                <div className="text-2xl font-bold text-purple-600">500MB</div>
-                                                <div className="text-xs text-slate-500">Max File Size</div>
-                                            </div>
-                                        </div>
-
-                                        {/* Document Preview */}
-                                        <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-4 flex items-center gap-3">
-                                            <div className="w-10 h-12 bg-red-500 rounded flex items-center justify-center text-white text-xs font-bold">PDF</div>
-                                            <div className="flex-1">
-                                                <div className="text-sm font-medium text-slate-700">Agreement_Signed.pdf</div>
-                                                <div className="text-xs text-slate-400">Just processed • 2.4 MB</div>
-                                            </div>
-                                            <Check className="w-5 h-5 text-green-500" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </motion.div>
-                    </div>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2 }}
+                        className="text-slate-500 max-w-2xl mx-auto text-lg"
+                    >
+                        Everything you need to work with PDF documents. Fast, secure, and easy to use.
+                    </motion.p>
                 </div>
+
+                {/* Category Filter */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 }}
+                    className="flex flex-wrap justify-center gap-3 mb-12"
+                >
+                    {categories.map((category) => (
+                        <button
+                            key={category.id}
+                            onClick={() => setSelectedCategory(category.id)}
+                            className={`px-5 py-2.5 rounded-full font-medium text-sm transition-all ${selectedCategory === category.id
+                                    ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/25'
+                                    : 'bg-white text-slate-600 hover:bg-slate-50 border border-slate-200'
+                                }`}
+                        >
+                            {category.name}
+                        </button>
+                    ))}
+                </motion.div>
+
+                {/* Tools Grid */}
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                    <AnimatePresence mode="popLayout">
+                        {filteredTools.map((tool, index) => (
+                            <motion.div
+                                key={tool.id}
+                                layout
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.9 }}
+                                transition={{ delay: index * 0.05 }}
+                            >
+                                <Link href={tool.href}>
+                                    <div
+                                        className="group relative bg-white rounded-2xl p-5 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 cursor-pointer overflow-hidden h-full"
+                                        onMouseEnter={() => setHoveredTool(tool.id)}
+                                        onMouseLeave={() => setHoveredTool(null)}
+                                    >
+                                        {/* Hover Gradient Overlay */}
+                                        <div className={`absolute inset-0 bg-gradient-to-br ${tool.color} opacity-0 group-hover:opacity-5 transition-opacity`}></div>
+
+                                        {/* Icon */}
+                                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${tool.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                                            <tool.icon className="w-6 h-6 text-white" />
+                                        </div>
+
+                                        {/* Content */}
+                                        <h3 className="font-bold text-slate-800 mb-1 group-hover:text-indigo-600 transition-colors">
+                                            {tool.name}
+                                        </h3>
+                                        <p className="text-slate-500 text-xs leading-relaxed mb-3">
+                                            {tool.description}
+                                        </p>
+
+                                        {/* Stats Badge */}
+                                        <div className="flex items-center justify-between">
+                                            <span className="text-xs text-slate-400">{tool.stats}</span>
+                                            <ArrowRight className="w-4 h-4 text-indigo-500 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                                        </div>
+
+                                        {/* Active Indicator */}
+                                        <AnimatePresence>
+                                            {hoveredTool === tool.id && (
+                                                <motion.div
+                                                    initial={{ width: 0 }}
+                                                    animate={{ width: '100%' }}
+                                                    exit={{ width: 0 }}
+                                                    className={`absolute bottom-0 left-0 h-1 bg-gradient-to-r ${tool.color}`}
+                                                />
+                                            )}
+                                        </AnimatePresence>
+                                    </div>
+                                </Link>
+                            </motion.div>
+                        ))}
+                    </AnimatePresence>
+                </div>
+
+                {/* View All CTA */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.5 }}
+                    className="text-center mt-12"
+                >
+                    <Link href="/#tools">
+                        <button className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold shadow-xl shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-105 transition-all">
+                            <FileText className="w-5 h-5" />
+                            View All 40+ Tools
+                            <ArrowRight className="w-5 h-5" />
+                        </button>
+                    </Link>
+                </motion.div>
+
+                {/* Trust Stats */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.6 }}
+                    className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-slate-100 shadow-sm"
+                >
+                    {[
+                        { value: '10M+', label: 'Happy Users' },
+                        { value: '50M+', label: 'PDFs Processed' },
+                        { value: '100%', label: 'Free to Use' },
+                        { value: '256-bit', label: 'SSL Encryption' }
+                    ].map((stat, idx) => (
+                        <div key={idx} className="text-center">
+                            <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                                {stat.value}
+                            </div>
+                            <div className="text-slate-500 text-sm mt-1">{stat.label}</div>
+                        </div>
+                    ))}
+                </motion.div>
             </div>
         </section>
     );
