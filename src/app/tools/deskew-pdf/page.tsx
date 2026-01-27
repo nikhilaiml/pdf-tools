@@ -69,7 +69,7 @@ export default function DeskewPdfPage() {
         if (file) {
             renderPreview(file);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+         
     }, [file]);
 
     const handleDeskew = async () => {

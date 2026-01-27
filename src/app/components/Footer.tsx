@@ -1,89 +1,92 @@
 'use client';
 
-import { FileText, Facebook, Twitter, Instagram, Linkedin, Github } from 'lucide-react';
+import { FileText, Twitter, Facebook, Linkedin, Github, Instagram, Star } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-900 border-t border-white/10 pt-20 pb-10">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+    <footer className="relative overflow-hidden">
+      {/* Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-100 to-indigo-100/50 z-0"></div>
+
+      <div className="container mx-auto px-4 relative z-10 pt-16 pb-8">
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
           {/* Brand */}
-          <div>
-            <Link href="/" className="flex items-center gap-2 mb-6">
-              <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
+          <div className="col-span-2 lg:col-span-1">
+            <Link href="/" className="flex items-center gap-2 mb-4">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center">
                 <FileText className="text-white w-5 h-5" />
               </div>
-              <span className="text-xl font-bold text-white">PDF Tools</span>
+              <span className="text-lg font-bold text-slate-800">PDF Tools</span>
             </Link>
-            <p className="text-slate-400 mb-8 leading-relaxed">
-              The most comprehensive online PDF capabilities. Secure, fast, and easy to use. Trusted by millions of users worldwide.
+            <p className="text-slate-500 text-sm mb-4 leading-relaxed">
+              i-pdf software trusted by 10 million+ and secure.
             </p>
-            <div className="flex gap-4">
-              {/* App Store Buttons Placeholder */}
-              <button className="bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg px-4 py-2 flex items-center gap-3 transition-colors">
-                <div className="bg-white rounded-full p-0.5 w-6 h-6 flex items-center justify-center">
-                  <span className="text-black font-bold text-xs">A</span>
-                </div>
-                <div className="text-left">
-                  <div className="text-[10px] text-slate-400">Download on the</div>
-                  <div className="text-sm font-semibold text-white">App Store</div>
-                </div>
-              </button>
-              <button className="bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg px-4 py-2 flex items-center gap-3 transition-colors">
-                <div className="bg-white rounded-full p-0.5 w-6 h-6 flex items-center justify-center">
-                  <span className="text-black font-bold text-xs">P</span>
-                </div>
-                <div className="text-left">
-                  <div className="text-[10px] text-slate-400">GET IT ON</div>
-                  <div className="text-sm font-semibold text-white">Google Play</div>
-                </div>
-              </button>
-            </div>
           </div>
 
-          {/* Links */}
+          {/* Links Column 1 */}
           <div>
-            <h4 className="text-white font-semibold mb-6">Solutions</h4>
-            <ul className="space-y-4">
-              <li><Link href="#" className="text-slate-400 hover:text-blue-400 transition-colors">Business</Link></li>
-              <li><Link href="#" className="text-slate-400 hover:text-blue-400 transition-colors">Education</Link></li>
-              <li><Link href="#" className="text-slate-400 hover:text-blue-400 transition-colors">Developers</Link></li>
-              <li><Link href="#" className="text-slate-400 hover:text-blue-400 transition-colors">Integrations</Link></li>
+            <h4 className="text-slate-800 font-semibold mb-4 text-sm">About Us</h4>
+            <ul className="space-y-3">
+              <li><Link href="/about" className="text-slate-500 hover:text-indigo-600 transition-colors text-sm">About</Link></li>
+              <li><Link href="/pricing" className="text-slate-500 hover:text-indigo-600 transition-colors text-sm">Pricing</Link></li>
+              <li><Link href="/contact" className="text-slate-500 hover:text-indigo-600 transition-colors text-sm">Contact</Link></li>
             </ul>
           </div>
 
+          {/* Links Column 2 */}
           <div>
-            <h4 className="text-white font-semibold mb-6">Company</h4>
-            <ul className="space-y-4">
-              <li><Link href="#" className="text-slate-400 hover:text-blue-400 transition-colors">About Us</Link></li>
-              <li><Link href="#" className="text-slate-400 hover:text-blue-400 transition-colors">Pricing</Link></li>
-              <li><Link href="#" className="text-slate-400 hover:text-blue-400 transition-colors">Security</Link></li>
-              <li><Link href="#" className="text-slate-400 hover:text-blue-400 transition-colors">Help Center</Link></li>
+            <h4 className="text-slate-800 font-semibold mb-4 text-sm">Terms of use</h4>
+            <ul className="space-y-3">
+              <li><Link href="/privacy" className="text-slate-500 hover:text-indigo-600 transition-colors text-sm">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="text-slate-500 hover:text-indigo-600 transition-colors text-sm">Terms of Service</Link></li>
+              <li><Link href="/legal" className="text-slate-500 hover:text-indigo-600 transition-colors text-sm">Legal</Link></li>
             </ul>
           </div>
 
+          {/* Links Column 3 */}
           <div>
-            <h4 className="text-white font-semibold mb-6">Legal</h4>
-            <ul className="space-y-4">
-              <li><Link href="#" className="text-slate-400 hover:text-blue-400 transition-colors">Privacy Policy</Link></li>
-              <li><Link href="#" className="text-slate-400 hover:text-blue-400 transition-colors">Terms of Service</Link></li>
-              <li><Link href="#" className="text-slate-400 hover:text-blue-400 transition-colors">Cookie Policy</Link></li>
-              <li><Link href="#" className="text-slate-400 hover:text-blue-400 transition-colors">GDPR</Link></li>
+            <h4 className="text-slate-800 font-semibold mb-4 text-sm">Privacy Settings</h4>
+            <ul className="space-y-3">
+              <li><Link href="/cookies" className="text-slate-500 hover:text-indigo-600 transition-colors text-sm">Cookie Policy</Link></li>
+              <li><Link href="/gdpr" className="text-slate-500 hover:text-indigo-600 transition-colors text-sm">GDPR</Link></li>
+              <li><Link href="/security" className="text-slate-500 hover:text-indigo-600 transition-colors text-sm">Security</Link></li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-slate-500 text-sm">
-            © {new Date().getFullYear()} PDF Tools. All rights reserved.
-          </p>
-          <div className="flex items-center gap-6">
-            <Link href="#" className="text-slate-500 hover:text-white transition-colors"><Twitter className="w-5 h-5" /></Link>
-            <Link href="#" className="text-slate-500 hover:text-white transition-colors"><Facebook className="w-5 h-5" /></Link>
-            <Link href="#" className="text-slate-500 hover:text-white transition-colors"><Instagram className="w-5 h-5" /></Link>
-            <Link href="#" className="text-slate-500 hover:text-white transition-colors"><Linkedin className="w-5 h-5" /></Link>
-            <Link href="#" className="text-slate-500 hover:text-white transition-colors"><Github className="w-5 h-5" /></Link>
+        {/* Divider */}
+        <div className="border-t border-slate-200 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-slate-400 text-sm">
+              © {new Date().getFullYear()} PDF Tools. All rights reserved.
+            </p>
+            <div className="flex items-center gap-4">
+              <Link href="#" className="text-slate-400 hover:text-indigo-600 transition-colors">
+                <Twitter className="w-5 h-5" />
+              </Link>
+              <Link href="#" className="text-slate-400 hover:text-indigo-600 transition-colors">
+                <Facebook className="w-5 h-5" />
+              </Link>
+              <Link href="#" className="text-slate-400 hover:text-indigo-600 transition-colors">
+                <Instagram className="w-5 h-5" />
+              </Link>
+              <Link href="#" className="text-slate-400 hover:text-indigo-600 transition-colors">
+                <Linkedin className="w-5 h-5" />
+              </Link>
+              <Link href="#" className="text-slate-400 hover:text-indigo-600 transition-colors">
+                <Github className="w-5 h-5" />
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Star Logo at Bottom */}
+        <div className="flex justify-center mt-12">
+          <div className="relative">
+            <Star className="w-12 h-12 text-indigo-300 fill-indigo-200" />
+            <div className="absolute inset-0 bg-indigo-400/20 blur-xl rounded-full"></div>
           </div>
         </div>
       </div>
