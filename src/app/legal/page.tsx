@@ -2,6 +2,8 @@
 
 import { Scale, FileText, Shield, Globe } from 'lucide-react';
 import Link from 'next/link';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 export default function LegalPage() {
     const legalDocs = [
@@ -40,67 +42,65 @@ export default function LegalPage() {
     ];
 
     return (
-        <div className="min-h-screen bg-gray-50">
-            {/* Hero Section */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-700 pt-24 pb-20">
-                <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                        Legal Information
-                    </h1>
-                    <p className="text-lg text-purple-100 max-w-2xl mx-auto">
-                        Important legal documents and policies for PDF Tools.
-                    </p>
+        <>
+            <Navbar />
+            <div className="min-h-screen bg-gray-50">
+                {/* Hero Section */}
+                <div className="relative overflow-hidden bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-700 pt-24 pb-20">
+                    <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+                        <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+                            Legal Information
+                        </h1>
+                        <p className="text-lg text-purple-100 max-w-2xl mx-auto">
+                            Important legal documents and policies for PDF Tools.
+                        </p>
+                    </div>
                 </div>
-            </div>
 
-            {/* Content */}
-            <div className="max-w-4xl mx-auto px-4 py-16">
-                {/* Legal Documents Grid */}
-                <div className="grid md:grid-cols-2 gap-6 mb-12">
-                    {legalDocs.map((doc) => (
-                        <Link key={doc.title} href={doc.href}>
-                            <div className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow cursor-pointer h-full">
-                                <div className={`w-12 h-12 ${doc.color} rounded-xl flex items-center justify-center mb-4`}>
-                                    <doc.icon className={`w-6 h-6 ${doc.iconColor}`} />
+                {/* Content */}
+                <div className="max-w-4xl mx-auto px-4 py-16">
+                    {/* Legal Documents Grid */}
+                    <div className="grid md:grid-cols-2 gap-6 mb-12">
+                        {legalDocs.map((doc) => (
+                            <Link key={doc.title} href={doc.href}>
+                                <div className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow cursor-pointer h-full">
+                                    <div className={`w-12 h-12 ${doc.color} rounded-xl flex items-center justify-center mb-4`}>
+                                        <doc.icon className={`w-6 h-6 ${doc.iconColor}`} />
+                                    </div>
+                                    <h3 className="font-bold text-gray-900 mb-2">{doc.title}</h3>
+                                    <p className="text-gray-500 text-sm">{doc.description}</p>
+                                    <span className="inline-block mt-4 text-purple-600 text-sm font-medium">Read More →</span>
                                 </div>
-                                <h3 className="font-bold text-gray-900 mb-2">{doc.title}</h3>
-                                <p className="text-gray-500 text-sm">{doc.description}</p>
-                                <span className="inline-block mt-4 text-purple-600 text-sm font-medium">Read More →</span>
+                            </Link>
+                        ))}
+                    </div>
+
+                    {/* Company Info */}
+                    <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12">
+                        <h2 className="text-2xl font-bold text-gray-900 mb-6">Company Information</h2>
+
+                        <div className="space-y-6 text-gray-600">
+                            <div>
+                                <h3 className="font-semibold text-gray-900 mb-2">Registered Business</h3>
+                                <p>PDF Tools Inc.</p>
+                                <p>123 PDF Street, Tech City, TC 12345</p>
+                                <p>United States</p>
                             </div>
-                        </Link>
-                    ))}
-                </div>
 
-                {/* Company Info */}
-                <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">Company Information</h2>
+                            <div>
+                                <h3 className="font-semibold text-gray-900 mb-2">Contact</h3>
+                                <p>Email: <a href="mailto:legal@pdftools.com" className="text-purple-600 hover:underline">legal@pdftools.com</a></p>
+                            </div>
 
-                    <div className="space-y-6 text-gray-600">
-                        <div>
-                            <h3 className="font-semibold text-gray-900 mb-2">Registered Business</h3>
-                            <p>PDF Tools Inc.</p>
-                            <p>123 PDF Street, Tech City, TC 12345</p>
-                            <p>United States</p>
-                        </div>
-
-                        <div>
-                            <h3 className="font-semibold text-gray-900 mb-2">Contact</h3>
-                            <p>Email: <a href="mailto:legal@pdftools.com" className="text-purple-600 hover:underline">legal@pdftools.com</a></p>
-                        </div>
-
-                        <div>
-                            <h3 className="font-semibold text-gray-900 mb-2">Copyright Notice</h3>
-                            <p>© {new Date().getFullYear()} PDF Tools. All rights reserved.</p>
-                            <p className="mt-2">All trademarks, service marks, and trade names are the property of their respective owners.</p>
-                        </div>
-
-                        <div>
-                            <h3 className="font-semibold text-gray-900 mb-2">Licensing</h3>
-                            <p>PDF Tools uses open-source libraries under their respective licenses. For a complete list of open-source components and their licenses, please contact us.</p>
+                            <div>
+                                <h3 className="font-semibold text-gray-900 mb-2">Copyright Notice</h3>
+                                <p>© {new Date().getFullYear()} PDF Tools. All rights reserved.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <Footer />
+        </>
     );
 }
