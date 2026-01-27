@@ -195,12 +195,12 @@ const ToolPageLayout: React.FC<ToolPageLayoutProps> = ({
                                 className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow"
                             >
                                 <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-3 sm:mb-4 ${index === 0 ? 'bg-orange-100' :
-                                        index === 1 ? 'bg-blue-100' :
-                                            'bg-green-100'
+                                    index === 1 ? 'bg-blue-100' :
+                                        'bg-green-100'
                                     }`}>
                                     <span className={`text-lg sm:text-xl font-bold ${index === 0 ? 'text-orange-500' :
-                                            index === 1 ? 'text-blue-500' :
-                                                'text-green-500'
+                                        index === 1 ? 'text-blue-500' :
+                                            'text-green-500'
                                         }`}>
                                         {index + 1}
                                     </span>
@@ -234,10 +234,10 @@ const ToolPageLayout: React.FC<ToolPageLayoutProps> = ({
             <div className="py-12 sm:py-16 bg-white px-4">
                 <div className="max-w-5xl mx-auto">
                     <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-900 mb-2 sm:mb-3">
-                        Trusted by Professionals Worldwide
+                        PDF Tools at a Glance
                     </h2>
                     <p className="text-sm sm:text-base text-gray-500 text-center mb-8 sm:mb-12">
-                        See what our users are saying about our PDF tools.
+                        Everything you need to work with PDF documents efficiently.
                     </p>
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
@@ -268,8 +268,8 @@ const ToolPageLayout: React.FC<ToolPageLayoutProps> = ({
                             >
                                 <div className="flex items-center gap-3 mb-3 sm:mb-4">
                                     <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-base ${index === 0 ? 'bg-gradient-to-br from-pink-400 to-rose-500' :
-                                            index === 1 ? 'bg-gradient-to-br from-blue-400 to-indigo-500' :
-                                                'bg-gradient-to-br from-green-400 to-emerald-500'
+                                        index === 1 ? 'bg-gradient-to-br from-blue-400 to-indigo-500' :
+                                            'bg-gradient-to-br from-green-400 to-emerald-500'
                                         }`}>
                                         {testimonial.name.charAt(0)}
                                     </div>
