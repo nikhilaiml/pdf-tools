@@ -2,32 +2,48 @@
 
 import { Info, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import ToolPageLayout from '../../components/ToolPageLayout';
 
 export default function PdfAnalyticsPage() {
-    return (
-        <div className="max-w-4xl mx-auto px-4 py-8 text-center">
-            <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">
-                PDF Analytics
-            </h1>
-            <p className="text-gray-500 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
-                Analyze document properties.
-            </p>
+    const steps = [
+        {
+            title: "Redirecting",
+            description: "This tool has been merged with View Metadata for better analysis."
+        },
+        {
+            title: "Full Details",
+            description: "View Metadata shows complete document properties and statistics."
+        },
+        {
+            title: "One Click",
+            description: "Click below to access the metadata viewer."
+        }
+    ];
 
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-8 max-w-xl mx-auto">
+    return (
+        <ToolPageLayout
+            title="PDF Analytics"
+            subtitle="Analyze document properties and statistics."
+            steps={steps}
+            showCta={false}
+        >
+            <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-gray-100 p-6 sm:p-8 max-w-xl mx-auto text-center">
                 <div className="mb-6">
-                    <Info className="w-16 h-16 text-purple-500 mx-auto mb-4" />
-                    <p className="text-lg text-gray-700 dark:text-gray-300">
-                        For detailed document information, please use our <strong>View Metadata</strong> tool.
+                    <div className="inline-flex p-4 bg-purple-100 rounded-2xl mb-4">
+                        <Info className="w-12 h-12 sm:w-16 sm:h-16 text-purple-500" />
+                    </div>
+                    <p className="text-gray-600">
+                        For detailed document information, please use our <strong className="text-purple-600">View Metadata</strong> tool.
                     </p>
                 </div>
 
                 <Link href="/tools/view-metadata">
-                    <button className="w-full flex items-center justify-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl">
-                        <span>Go to View Metadata</span>
+                    <button className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-violet-500 to-purple-600 text-white font-bold py-3 sm:py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-[1.02]">
+                        <span className="text-sm sm:text-base">Go to View Metadata</span>
                         <ArrowRight size={20} />
                     </button>
                 </Link>
             </div>
-        </div>
+        </ToolPageLayout>
     );
 }

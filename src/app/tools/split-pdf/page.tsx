@@ -2,17 +2,30 @@
 
 import { useState } from 'react';
 import { PDFDocument } from 'pdf-lib';
-import { Loader2, Scissors, FileText } from 'lucide-react';
-import FileUploader from '../../components/FileUploader';
+import { Loader2, FileText, Cloud } from 'lucide-react';
+import ToolPageLayout from '../../components/ToolPageLayout';
 
 const SplitPdfPage = () => {
   const [file, setFile] = useState<File | null>(null);
   const [startPage, setStartPage] = useState('');
   const [endPage, setEndPage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
 
-  const handleFileChange = (file: File) => {
-    setFile(file);
+  const handleFileSelect = (selectedFile: File) => {
+    if (selectedFile.type === 'application/pdf' || selectedFile.name.toLowerCase().endsWith('.pdf')) {
+      setFile(selectedFile);
+    } else {
+      alert('Please select a valid PDF file.');
+    }
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      handleFileSelect(e.dataTransfer.files[0]);
+    }
   };
 
   const handleSplit = async () => {
@@ -58,73 +71,125 @@ const SplitPdfPage = () => {
     }
   };
 
-  return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-4 text-center text-gray-900 dark:text-white">
-        Split PDF
-      </h1>
-      <p className="text-center text-gray-500 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
-        Extract specific pages from your PDF document.
-      </p>
+  const steps = [
+    {
+      title: "Step 1: Upload PDF",
+      description: "Select or drag and drop your PDF file that you want to split into separate pages."
+    },
+    {
+      title: "Step 2: Select Range",
+      description: "Enter the start and end page numbers to extract the specific pages you need."
+    },
+    {
+      title: "Step 3: Download",
+      description: "Get your extracted pages as a new PDF file instantly. Quick and easy!"
+    }
+  ];
 
+  return (
+    <ToolPageLayout
+      title="Split Your PDF"
+      subtitle="Extract specific pages from your PDF document easily."
+      steps={steps}
+      ctaText="Split PDF"
+      onAction={handleSplit}
+      loading={loading}
+      disabled={!file || !startPage || !endPage}
+      showCta={!!file}
+    >
       {!file ? (
-        <FileUploader onFileSelect={handleFileChange} label="Select PDF to Split" />
-      ) : (
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-8 max-w-2xl mx-auto animate-in fade-in zoom-in duration-300">
-          <div className="flex items-center space-x-3 mb-8 p-4 bg-gray-50 dark:bg-gray-900/50 rounded-lg">
-            <FileText className="text-blue-500" size={24} />
-            <div>
-              <p className="font-medium text-gray-900 dark:text-white truncate max-w-[200px]">{file.name}</p>
-              <button
-                onClick={() => setFile(null)}
-                className="text-xs text-red-500 hover:text-red-700 hover:underline"
-              >
-                Change be file
-              </button>
+        <div
+          className={`
+            bg-white rounded-2xl sm:rounded-3xl shadow-xl border-2 border-dashed p-6 sm:p-12
+            transition-all duration-300 cursor-pointer
+            ${isDragging
+              ? 'border-purple-500 bg-purple-50 scale-[1.02]'
+              : 'border-orange-200 hover:border-purple-400 hover:shadow-2xl'
+            }
+          `}
+          onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
+          onDragLeave={(e) => { e.preventDefault(); setIsDragging(false); }}
+          onDrop={handleDrop}
+          onClick={() => document.getElementById('file-input')?.click()}
+        >
+          <div className="flex justify-center mb-4 sm:mb-6">
+            <div className={`p-4 sm:p-6 rounded-2xl sm:rounded-3xl transition-colors ${isDragging ? 'bg-purple-100' : 'bg-orange-50'}`}>
+              <Cloud className={`w-12 h-12 sm:w-16 sm:h-16 ${isDragging ? 'text-purple-500' : 'text-orange-400'}`} strokeWidth={1.5} />
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-6 mb-8">
+          <p className={`text-xl sm:text-2xl font-bold text-center mb-2 ${isDragging ? 'text-purple-700' : 'text-gray-800'}`}>
+            Drag & Drop PDF Here
+          </p>
+          <p className="text-sm sm:text-base text-gray-500 text-center">or click to browse</p>
+
+          <input
+            id="file-input"
+            type="file"
+            accept=".pdf"
+            onChange={(e) => e.target.files?.[0] && handleFileSelect(e.target.files[0])}
+            className="hidden"
+          />
+        </div>
+      ) : (
+        <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-gray-100 p-6 sm:p-8">
+          <div className="flex items-center space-x-3 sm:space-x-4 mb-6 p-3 sm:p-4 bg-gray-50 rounded-xl">
+            <div className="p-2 sm:p-3 bg-purple-100 rounded-lg">
+              <FileText className="text-purple-500 w-5 h-5 sm:w-6 sm:h-6" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="font-medium text-gray-900 truncate text-sm sm:text-base">{file.name}</p>
+              <p className="text-xs sm:text-sm text-gray-500">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+            </div>
+            <button
+              onClick={() => setFile(null)}
+              className="text-xs sm:text-sm text-red-500 hover:text-red-700 font-medium"
+            >
+              Remove
+            </button>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4 mb-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Start Page</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Start Page</label>
               <input
                 type="number"
                 min="1"
                 placeholder="e.g. 1"
                 value={startPage}
                 onChange={(e) => setStartPage(e.target.value)}
-                className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg py-3 px-4 focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-900 dark:text-white"
+                className="w-full bg-gray-50 border border-gray-200 rounded-xl py-3 px-4 focus:ring-2 focus:ring-purple-500 focus:border-transparent focus:outline-none text-gray-900 text-sm sm:text-base"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">End Page</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">End Page</label>
               <input
                 type="number"
                 min="1"
                 placeholder="e.g. 5"
                 value={endPage}
                 onChange={(e) => setEndPage(e.target.value)}
-                className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg py-3 px-4 focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-900 dark:text-white"
+                className="w-full bg-gray-50 border border-gray-200 rounded-xl py-3 px-4 focus:ring-2 focus:ring-purple-500 focus:border-transparent focus:outline-none text-gray-900 text-sm sm:text-base"
               />
             </div>
           </div>
 
           <button
             onClick={handleSplit}
-            disabled={loading}
-            className={`w-full flex items-center justify-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl ${loading ? 'opacity-50 cursor-not-allowed' : ''
+            disabled={loading || !startPage || !endPage}
+            className={`w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-violet-500 to-purple-600 text-white font-bold py-3 sm:py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl ${loading || !startPage || !endPage ? 'opacity-50 cursor-not-allowed' : 'hover:scale-[1.02]'
               }`}
           >
-            {loading ? <Loader2 className="animate-spin" /> : <Scissors size={20} />}
-            <span>{loading ? 'Splitting PDF...' : 'Split PDF'}</span>
+            {loading ? <Loader2 className="animate-spin" size={20} /> : null}
+            <span className="text-sm sm:text-base">{loading ? 'Splitting...' : 'Split PDF Now'}</span>
           </button>
 
           <p className="text-xs text-center text-gray-500 mt-4">
-            Note: The extracted pages will be saved as a new PDF file.
+            The extracted pages will be saved as a new PDF file.
           </p>
         </div>
       )}
-    </div>
+    </ToolPageLayout>
   );
 };
 

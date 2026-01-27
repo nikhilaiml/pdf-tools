@@ -2,11 +2,13 @@
 
 import { useState, useRef } from 'react';
 import { PDFDocument } from 'pdf-lib';
-import { Loader2, Merge, FileText, X } from 'lucide-react';
+import { Loader2, FileText, X, Cloud } from 'lucide-react';
+import ToolPageLayout from '../../components/ToolPageLayout';
 
 const MergePdfPage = () => {
   const [files, setFiles] = useState<File[]>([]);
   const [loading, setLoading] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,6 +23,7 @@ const MergePdfPage = () => {
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
+    setIsDragging(false);
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
       const newFiles = Array.from(e.dataTransfer.files).filter(f => f.type === 'application/pdf');
       setFiles(prev => [...prev, ...newFiles]);
@@ -64,30 +67,58 @@ const MergePdfPage = () => {
     }
   };
 
-  return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-4 text-center text-gray-900 dark:text-white">
-        Merge PDF Files
-      </h1>
-      <p className="text-center text-gray-500 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
-        Combine multiple PDFs into a single unified document.
-      </p>
+  const steps = [
+    {
+      title: "Step 1: Select Files",
+      description: "Simply browse or drag and drop your PDF files to start merging. Multiple files at once are supported."
+    },
+    {
+      title: "Step 2: Arrange Pages",
+      description: "Our system will process the PDFs instantly in the correct order and let you preview the merging process."
+    },
+    {
+      title: "Step 3: Merge & Download",
+      description: "Ready to download? Just tap the Merge button to get your professional output file instantly."
+    }
+  ];
 
+  return (
+    <ToolPageLayout
+      title="Unlock Your PDF Potential"
+      subtitle="Merge PDFs - Combine Multiple Files into One Unified Document."
+      steps={steps}
+      ctaText="Merge PDFs"
+      onAction={handleMerge}
+      loading={loading}
+      disabled={files.length < 2}
+      showCta={files.length >= 2}
+    >
+      {/* Upload Area */}
       <div
-        className="flex flex-col items-center justify-center p-12 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors cursor-pointer mb-8"
-        onDragOver={(e) => e.preventDefault()}
+        className={`
+          bg-white rounded-2xl sm:rounded-3xl shadow-xl border-2 border-dashed p-6 sm:p-12
+          transition-all duration-300 cursor-pointer
+          ${isDragging
+            ? 'border-purple-500 bg-purple-50 scale-[1.02]'
+            : 'border-orange-200 hover:border-purple-400 hover:shadow-2xl'
+          }
+        `}
+        onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
+        onDragLeave={(e) => { e.preventDefault(); setIsDragging(false); }}
         onDrop={handleDrop}
         onClick={() => fileInputRef.current?.click()}
       >
-        <div className="bg-blue-100 dark:bg-blue-900/30 p-4 rounded-full mb-4">
-          <Merge className="w-10 h-10 text-blue-600 dark:text-blue-400" />
+        <div className="flex justify-center mb-4 sm:mb-6">
+          <div className={`p-4 sm:p-6 rounded-2xl sm:rounded-3xl transition-colors ${isDragging ? 'bg-purple-100' : 'bg-orange-50'}`}>
+            <Cloud className={`w-12 h-12 sm:w-16 sm:h-16 ${isDragging ? 'text-purple-500' : 'text-orange-400'}`} strokeWidth={1.5} />
+          </div>
         </div>
-        <p className="text-xl font-medium text-gray-700 dark:text-gray-300 mb-2">
+
+        <p className={`text-xl sm:text-2xl font-bold text-center mb-2 ${isDragging ? 'text-purple-700' : 'text-gray-800'}`}>
           {files.length > 0 ? 'Add More PDFs' : 'Drag & Drop PDFs Here'}
         </p>
-        <p className="text-sm text-gray-500 dark:text-gray-400">
-          or click to browse
-        </p>
+        <p className="text-sm sm:text-base text-gray-500 text-center">or click to browse</p>
+
         <input
           type="file"
           multiple
@@ -98,50 +129,52 @@ const MergePdfPage = () => {
         />
       </div>
 
+      {/* File List */}
       {files.length > 0 && (
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 animate-in fade-in zoom-in duration-300">
+        <div className="mt-6 bg-white rounded-xl shadow-lg border border-gray-100 p-4 sm:p-6">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="font-semibold text-gray-900 dark:text-white">Files to Merge ({files.length})</h3>
+            <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Files to Merge ({files.length})</h3>
             <button
-              onClick={() => setFiles([])}
-              className="text-sm text-red-500 hover:text-red-700 hover:underline"
+              onClick={(e) => { e.stopPropagation(); setFiles([]); }}
+              className="text-xs sm:text-sm text-red-500 hover:text-red-700 hover:underline"
             >
               Clear All
             </button>
           </div>
 
-          <ul className="space-y-3 mb-8">
+          <ul className="space-y-2 sm:space-y-3">
             {files.map((file, index) => (
-              <li key={index} className="flex justify-between items-center bg-gray-50 dark:bg-gray-900/50 p-3 rounded-lg border border-gray-200 dark:border-gray-700">
-                <div className="flex items-center space-x-3 overflow-hidden">
-                  <span className="flex-shrink-0 w-6 h-6 bg-blue-100 dark:bg-blue-900/50 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold">
+              <li key={index} className="flex justify-between items-center bg-gray-50 p-2 sm:p-3 rounded-lg border border-gray-200">
+                <div className="flex items-center space-x-2 sm:space-x-3 overflow-hidden">
+                  <span className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-xs font-bold">
                     {index + 1}
                   </span>
-                  <FileText className="flex-shrink-0 text-gray-400" size={20} />
-                  <span className="truncate text-sm text-gray-700 dark:text-gray-300">{file.name}</span>
+                  <FileText className="flex-shrink-0 text-gray-400" size={18} />
+                  <span className="truncate text-xs sm:text-sm text-gray-700">{file.name}</span>
                 </div>
                 <button
                   onClick={(e) => { e.stopPropagation(); removeFile(index); }}
-                  className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-md transition-colors"
+                  className="p-1 sm:p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-md transition-colors"
                 >
-                  <X size={18} />
+                  <X size={16} />
                 </button>
               </li>
             ))}
           </ul>
 
+          {/* Merge Button inside file list when there are files */}
           <button
-            onClick={handleMerge}
+            onClick={(e) => { e.stopPropagation(); handleMerge(); }}
             disabled={loading || files.length < 2}
-            className={`w-full flex items-center justify-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl ${loading || files.length < 2 ? 'opacity-50 cursor-not-allowed' : ''
+            className={`w-full mt-6 flex items-center justify-center space-x-2 bg-gradient-to-r from-violet-500 to-purple-600 text-white font-bold py-3 sm:py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl ${loading || files.length < 2 ? 'opacity-50 cursor-not-allowed' : 'hover:scale-[1.02]'
               }`}
           >
-            {loading ? <Loader2 className="animate-spin" /> : <Merge size={20} />}
-            <span>{loading ? 'Merging...' : 'Merge PDFs Now'}</span>
+            {loading ? <Loader2 className="animate-spin" size={20} /> : null}
+            <span className="text-sm sm:text-base">{loading ? 'Merging...' : 'Merge PDFs Now'}</span>
           </button>
         </div>
       )}
-    </div>
+    </ToolPageLayout>
   );
 };
 

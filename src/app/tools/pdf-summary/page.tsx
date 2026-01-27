@@ -1,29 +1,44 @@
 'use client';
 
-import { FileText } from 'lucide-react';
+import { FileText, Sparkles } from 'lucide-react';
+import ToolPageLayout from '../../components/ToolPageLayout';
 
 export default function PdfSummaryPage() {
-    return (
-        <div className="max-w-4xl mx-auto px-4 py-8 text-center">
-            <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">
-                PDF Summary
-            </h1>
-            <p className="text-gray-500 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
-                Get a quick summary of your PDF content.
-            </p>
+    const steps = [
+        {
+            title: "Coming Soon",
+            description: "We're building an AI-powered summarization engine."
+        },
+        {
+            title: "Quick Digests",
+            description: "Get key points from long documents in seconds."
+        },
+        {
+            title: "Smart Analysis",
+            description: "Understand document content without reading everything."
+        }
+    ];
 
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-12 max-w-xl mx-auto">
-                <FileText className="w-20 h-20 text-green-500 mx-auto mb-6" />
-                <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Coming Soon</h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-8">
+    return (
+        <ToolPageLayout
+            title="PDF Summary"
+            subtitle="Get a quick summary of your PDF content."
+            steps={steps}
+            showCta={false}
+        >
+            <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-gray-100 p-8 sm:p-12 max-w-xl mx-auto text-center">
+                <div className="inline-flex p-4 bg-green-100 rounded-2xl mb-6">
+                    <FileText className="w-12 h-12 sm:w-16 sm:h-16 text-green-500" />
+                </div>
+                <h3 className="text-2xl font-bold mb-4 text-gray-900">Coming Soon</h3>
+                <p className="text-gray-600 mb-6">
                     AI-powered summarization to help you digest long documents in seconds.
                 </p>
-                <div className="flex justify-center space-x-2">
-                    <span className="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 py-1 px-3 rounded-full text-xs font-semibold uppercase tracking-wide">
-                        In Development
-                    </span>
+                <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-violet-100 to-purple-100 text-purple-700 py-2 px-4 rounded-full text-sm font-semibold">
+                    <Sparkles size={16} />
+                    <span>In Development</span>
                 </div>
             </div>
-        </div>
+        </ToolPageLayout>
     );
 }

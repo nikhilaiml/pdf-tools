@@ -4,20 +4,21 @@ import { useState, useRef } from 'react';
 import * as XLSX from 'xlsx';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-import { Loader2, FileSpreadsheet, Download } from 'lucide-react';
-import FileUploader from '../../components/FileUploader';
+import { Loader2, FileSpreadsheet, Download, Cloud } from 'lucide-react';
+import ToolPageLayout from '../../components/ToolPageLayout';
 
 const ExcelToPdfPage = () => {
     const [file, setFile] = useState<File | null>(null);
     const [htmlContent, setHtmlContent] = useState('');
     const [loading, setLoading] = useState(false);
+    const [isDragging, setIsDragging] = useState(false);
     const previewRef = useRef<HTMLDivElement>(null);
 
-    const handleFileChange = async (file: File) => {
-        setFile(file);
+    const handleFileSelect = async (selectedFile: File) => {
+        setFile(selectedFile);
         setLoading(true);
         try {
-            const arrayBuffer = await file.arrayBuffer();
+            const arrayBuffer = await selectedFile.arrayBuffer();
             const workbook = XLSX.read(arrayBuffer);
             const sheetName = workbook.SheetNames[0];
             const worksheet = workbook.Sheets[sheetName];
@@ -28,6 +29,14 @@ const ExcelToPdfPage = () => {
             alert('Failed to read Excel file.');
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleDrop = (e: React.DragEvent) => {
+        e.preventDefault();
+        setIsDragging(false);
+        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+            handleFileSelect(e.dataTransfer.files[0]);
         }
     };
 
@@ -48,7 +57,7 @@ const ExcelToPdfPage = () => {
             });
 
             pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
-            pdf.save(`${file?.name.replace('.xlsx', '').replace('.xls', '') || 'converted'}.pdf`);
+            pdf.save(`${file?.name.replace('.xlsx', '').replace('.xls', '').replace('.csv', '') || 'converted'}.pdf`);
             alert('PDF created successfully!');
         } catch (error) {
             console.error('Error creating PDF:', error);
@@ -58,55 +67,103 @@ const ExcelToPdfPage = () => {
         }
     };
 
+    const steps = [
+        {
+            title: "Step 1: Upload Excel",
+            description: "Select or drag your Excel file (.xlsx, .xls, .csv)."
+        },
+        {
+            title: "Step 2: Preview",
+            description: "Review how your spreadsheet will look in PDF format."
+        },
+        {
+            title: "Step 3: Download",
+            description: "Get your Excel data converted to a professional PDF."
+        }
+    ];
+
     return (
-        <div className="max-w-4xl mx-auto px-4 py-8">
-            <h1 className="text-3xl font-bold mb-4 text-center text-gray-900 dark:text-white">
-                Excel to PDF
-            </h1>
-            <p className="text-center text-gray-500 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
-                Convert Excel spreadsheets (.xlsx, .xls) to PDF.
-            </p>
-
+        <ToolPageLayout
+            title="Excel to PDF"
+            subtitle="Convert Excel spreadsheets (.xlsx, .xls, .csv) to PDF."
+            steps={steps}
+            ctaText="Download PDF"
+            onAction={handleConvert}
+            loading={loading}
+            disabled={!htmlContent}
+            showCta={!!htmlContent}
+        >
             {!file ? (
-                <FileUploader onFileSelect={handleFileChange} accept=".xlsx,.xls,.csv" label="Select Excel File" />
-            ) : (
-                <div className="grid grid-cols-1 gap-8">
-                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-6">
-                        <div className="flex justify-between items-center mb-4">
-                            <div className="flex items-center space-x-3">
-                                <FileSpreadsheet className="text-green-500" size={24} />
-                                <span className="font-medium text-gray-900 dark:text-white truncate max-w-[200px]">{file.name}</span>
-                                <button
-                                    onClick={() => { setFile(null); setHtmlContent(''); }}
-                                    className="text-xs text-red-500 hover:text-red-700 hover:underline"
-                                >
-                                    Change File
-                                </button>
-                            </div>
-
-                            <button
-                                onClick={handleConvert}
-                                disabled={loading || !htmlContent}
-                                className={`flex items-center space-x-2 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition-all ${loading ? 'opacity-50 cursor-not-allowed' : ''
-                                    }`}
-                            >
-                                {loading ? <Loader2 className="animate-spin" size={16} /> : <Download size={16} />}
-                                <span>Download PDF</span>
-                            </button>
-                        </div>
-
-                        <div className="bg-gray-100 dark:bg-gray-900 p-4 rounded-lg overflow-auto max-h-[500px] border border-gray-200 dark:border-gray-700">
-                            <div
-                                ref={previewRef}
-                                className="bg-white text-black p-4 shadow-sm min-h-[400px] w-fit"
-                                // Dangerous HTML is from locally parsed file, relatively safe client-side context
-                                dangerouslySetInnerHTML={{ __html: htmlContent }}
-                            />
+                <div
+                    className={`
+                        bg-white rounded-2xl sm:rounded-3xl shadow-xl border-2 border-dashed p-6 sm:p-12
+                        transition-all duration-300 cursor-pointer
+                        ${isDragging
+                            ? 'border-purple-500 bg-purple-50 scale-[1.02]'
+                            : 'border-orange-200 hover:border-purple-400 hover:shadow-2xl'
+                        }
+                    `}
+                    onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
+                    onDragLeave={(e) => { e.preventDefault(); setIsDragging(false); }}
+                    onDrop={handleDrop}
+                    onClick={() => document.getElementById('file-input')?.click()}
+                >
+                    <div className="flex justify-center mb-4 sm:mb-6">
+                        <div className={`p-4 sm:p-6 rounded-2xl sm:rounded-3xl transition-colors ${isDragging ? 'bg-purple-100' : 'bg-green-50'}`}>
+                            <Cloud className={`w-12 h-12 sm:w-16 sm:h-16 ${isDragging ? 'text-purple-500' : 'text-green-400'}`} strokeWidth={1.5} />
                         </div>
                     </div>
+
+                    <p className={`text-xl sm:text-2xl font-bold text-center mb-2 ${isDragging ? 'text-purple-700' : 'text-gray-800'}`}>
+                        Drag & Drop Excel File Here
+                    </p>
+                    <p className="text-sm sm:text-base text-gray-500 text-center">or click to browse (.xlsx, .xls, .csv)</p>
+
+                    <input
+                        id="file-input"
+                        type="file"
+                        accept=".xlsx,.xls,.csv"
+                        onChange={(e) => e.target.files?.[0] && handleFileSelect(e.target.files[0])}
+                        className="hidden"
+                    />
+                </div>
+            ) : (
+                <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-gray-100 p-4 sm:p-6">
+                    <div className="flex items-center justify-between mb-4 p-3 sm:p-4 bg-gray-50 rounded-xl">
+                        <div className="flex items-center space-x-3">
+                            <div className="p-2 bg-green-100 rounded-lg">
+                                <FileSpreadsheet className="text-green-500 w-5 h-5 sm:w-6 sm:h-6" />
+                            </div>
+                            <span className="font-medium text-gray-900 truncate max-w-[150px] sm:max-w-[200px] text-sm sm:text-base">{file.name}</span>
+                        </div>
+                        <button
+                            onClick={() => { setFile(null); setHtmlContent(''); }}
+                            className="text-xs sm:text-sm text-red-500 hover:text-red-700 font-medium"
+                        >
+                            Change
+                        </button>
+                    </div>
+
+                    <div className="bg-gray-50 p-4 rounded-xl overflow-auto max-h-[400px] border border-gray-200 mb-4">
+                        <div
+                            ref={previewRef}
+                            className="bg-white text-black p-4 shadow-sm min-h-[300px] w-fit"
+                            dangerouslySetInnerHTML={{ __html: htmlContent }}
+                        />
+                    </div>
+
+                    <button
+                        onClick={handleConvert}
+                        disabled={loading || !htmlContent}
+                        className={`w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-violet-500 to-purple-600 text-white font-bold py-3 sm:py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:scale-[1.02]'
+                            }`}
+                    >
+                        {loading ? <Loader2 className="animate-spin" size={20} /> : <Download size={20} />}
+                        <span className="text-sm sm:text-base">{loading ? 'Converting...' : 'Download PDF'}</span>
+                    </button>
                 </div>
             )}
-        </div>
+        </ToolPageLayout>
     );
 };
 

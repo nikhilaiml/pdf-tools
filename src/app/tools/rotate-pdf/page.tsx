@@ -2,17 +2,30 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { PDFDocument, degrees } from 'pdf-lib';
-import { Loader2, FileText, RefreshCw } from 'lucide-react';
-import FileUploader from '../../components/FileUploader';
+import { Loader2, FileText, Cloud, RotateCw } from 'lucide-react';
+import ToolPageLayout from '../../components/ToolPageLayout';
 
 const RotatePdfPage = () => {
   const [file, setFile] = useState<File | null>(null);
   const [rotation, setRotation] = useState<number>(90);
   const [loading, setLoading] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const handleFileChange = (file: File) => {
-    setFile(file);
+  const handleFileSelect = (selectedFile: File) => {
+    if (selectedFile.type === 'application/pdf' || selectedFile.name.toLowerCase().endsWith('.pdf')) {
+      setFile(selectedFile);
+    } else {
+      alert('Please select a valid PDF file.');
+    }
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      handleFileSelect(e.dataTransfer.files[0]);
+    }
   };
 
   // Render PDF Preview
@@ -21,16 +34,15 @@ const RotatePdfPage = () => {
 
     const renderPreview = async () => {
       try {
-        // Dynamically import PDF.js
         const pdfjsLib = await import('pdfjs-dist');
         pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
 
         const fileData = await file.arrayBuffer();
         const loadingTask = pdfjsLib.getDocument({ data: fileData });
         const pdf = await loadingTask.promise;
-        const page = await pdf.getPage(1); // Render first page
+        const page = await pdf.getPage(1);
 
-        const viewport = page.getViewport({ scale: 0.8 });
+        const viewport = page.getViewport({ scale: 0.6 });
         const canvas = canvasRef.current;
         const context = canvas?.getContext('2d');
 
@@ -86,75 +98,126 @@ const RotatePdfPage = () => {
     }
   };
 
+  const steps = [
+    {
+      title: "Step 1: Upload PDF",
+      description: "Select or drag and drop your PDF file that you want to rotate."
+    },
+    {
+      title: "Step 2: Choose Angle",
+      description: "Select the rotation angle - 90°, 180°, or 270° to rotate all pages."
+    },
+    {
+      title: "Step 3: Download",
+      description: "Get your rotated PDF instantly. All pages will be rotated permanently."
+    }
+  ];
+
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-4 text-center text-gray-900 dark:text-white">
-        Rotate PDF
-      </h1>
-      <p className="text-center text-gray-500 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
-        Permanently rotate all pages in your PDF document.
-      </p>
-
+    <ToolPageLayout
+      title="Rotate Your PDF"
+      subtitle="Permanently rotate all pages in your PDF document."
+      steps={steps}
+      ctaText="Rotate PDF"
+      onAction={handleRotate}
+      loading={loading}
+      disabled={!file}
+      showCta={!!file}
+    >
       {!file ? (
-        <FileUploader onFileSelect={handleFileChange} label="Select PDF to Rotate" />
+        <div
+          className={`
+            bg-white rounded-2xl sm:rounded-3xl shadow-xl border-2 border-dashed p-6 sm:p-12
+            transition-all duration-300 cursor-pointer
+            ${isDragging
+              ? 'border-purple-500 bg-purple-50 scale-[1.02]'
+              : 'border-orange-200 hover:border-purple-400 hover:shadow-2xl'
+            }
+          `}
+          onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
+          onDragLeave={(e) => { e.preventDefault(); setIsDragging(false); }}
+          onDrop={handleDrop}
+          onClick={() => document.getElementById('file-input')?.click()}
+        >
+          <div className="flex justify-center mb-4 sm:mb-6">
+            <div className={`p-4 sm:p-6 rounded-2xl sm:rounded-3xl transition-colors ${isDragging ? 'bg-purple-100' : 'bg-orange-50'}`}>
+              <Cloud className={`w-12 h-12 sm:w-16 sm:h-16 ${isDragging ? 'text-purple-500' : 'text-orange-400'}`} strokeWidth={1.5} />
+            </div>
+          </div>
+
+          <p className={`text-xl sm:text-2xl font-bold text-center mb-2 ${isDragging ? 'text-purple-700' : 'text-gray-800'}`}>
+            Drag & Drop PDF Here
+          </p>
+          <p className="text-sm sm:text-base text-gray-500 text-center">or click to browse</p>
+
+          <input
+            id="file-input"
+            type="file"
+            accept=".pdf"
+            onChange={(e) => e.target.files?.[0] && handleFileSelect(e.target.files[0])}
+            className="hidden"
+          />
+        </div>
       ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Controls */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-8 h-fit">
-            <div className="flex items-center space-x-3 mb-8 p-4 bg-gray-50 dark:bg-gray-900/50 rounded-lg">
-              <FileText className="text-blue-500" size={24} />
-              <div>
-                <p className="font-medium text-gray-900 dark:text-white truncate max-w-[200px]">{file.name}</p>
-                <button
-                  onClick={() => setFile(null)}
-                  className="text-xs text-red-500 hover:text-red-700 hover:underline"
-                >
-                  Change be file
-                </button>
-              </div>
+        <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-gray-100 p-6 sm:p-8">
+          <div className="flex items-center space-x-3 sm:space-x-4 mb-6 p-3 sm:p-4 bg-gray-50 rounded-xl">
+            <div className="p-2 sm:p-3 bg-purple-100 rounded-lg">
+              <FileText className="text-purple-500 w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-
-            <div className="mb-8">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-4">Rotation Angle</label>
-              <div className="grid grid-cols-3 gap-4">
-                {[90, 180, 270].map((deg) => (
-                  <button
-                    key={deg}
-                    onClick={() => setRotation(deg)}
-                    className={`py-3 px-4 rounded-lg font-semibold transition-all border-2 ${rotation === deg
-                      ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 shadow-sm'
-                      : 'border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800'
-                      }`}
-                  >
-                    {deg}°
-                  </button>
-                ))}
-              </div>
+            <div className="flex-1 min-w-0">
+              <p className="font-medium text-gray-900 truncate text-sm sm:text-base">{file.name}</p>
+              <p className="text-xs sm:text-sm text-gray-500">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
             </div>
-
             <button
-              onClick={handleRotate}
-              disabled={loading}
-              className={`w-full flex items-center justify-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl ${loading ? 'opacity-50 cursor-not-allowed' : ''
-                }`}
+              onClick={() => setFile(null)}
+              className="text-xs sm:text-sm text-red-500 hover:text-red-700 font-medium"
             >
-              {loading ? <Loader2 className="animate-spin" /> : <RefreshCw size={20} />}
-              <span>{loading ? 'Processing...' : 'Rotate Application'}</span>
+              Remove
             </button>
           </div>
 
           {/* Preview */}
-          <div className="bg-gray-100 dark:bg-gray-900 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700 p-8 flex items-center justify-center min-h-[500px] overflow-hidden">
+          <div className="mb-6 bg-gray-100 rounded-xl p-4 flex items-center justify-center min-h-[200px] overflow-hidden">
             <div
-              className="shadow-2xl transition-transform duration-500 ease-in-out bg-white"
+              className="shadow-lg transition-transform duration-500 ease-in-out bg-white"
               style={{ transform: `rotate(${rotation}deg)` }}
             >
-              <canvas ref={canvasRef} className="max-w-full h-auto" style={{ maxHeight: '600px' }} />
+              <canvas ref={canvasRef} className="max-w-full h-auto" style={{ maxHeight: '250px' }} />
             </div>
           </div>
+
+          {/* Rotation Options */}
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-700 mb-3">Rotation Angle</label>
+            <div className="grid grid-cols-3 gap-3">
+              {[90, 180, 270].map((deg) => (
+                <button
+                  key={deg}
+                  onClick={() => setRotation(deg)}
+                  className={`py-3 px-4 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 ${rotation === deg
+                      ? 'bg-gradient-to-r from-violet-500 to-purple-600 text-white shadow-lg'
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    }`}
+                >
+                  <RotateCw size={16} />
+                  {deg}°
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <button
+            onClick={handleRotate}
+            disabled={loading}
+            className={`w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-violet-500 to-purple-600 text-white font-bold py-3 sm:py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:scale-[1.02]'
+              }`}
+          >
+            {loading ? <Loader2 className="animate-spin" size={20} /> : null}
+            <span className="text-sm sm:text-base">{loading ? 'Rotating...' : 'Rotate PDF Now'}</span>
+          </button>
         </div>
       )}
-    </div>
+    </ToolPageLayout>
   );
 };
 

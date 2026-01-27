@@ -2,20 +2,33 @@
 
 import { useState } from 'react';
 import { PDFDocument } from 'pdf-lib';
-import { Loader2, Trash2, FileText } from 'lucide-react';
-import FileUploader from '../../components/FileUploader';
+import { Loader2, Trash2, FileText, Cloud } from 'lucide-react';
+import ToolPageLayout from '../../components/ToolPageLayout';
 
 export default function DeletePagesPage() {
   const [file, setFile] = useState<File | null>(null);
   const [pagesToDelete, setPagesToDelete] = useState('');
   const [loading, setLoading] = useState(false);
   const [pageCount, setPageCount] = useState<number | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
 
-  const handleFileChange = async (file: File) => {
-    setFile(file);
-    const bytes = await file.arrayBuffer();
-    const pdf = await PDFDocument.load(bytes);
-    setPageCount(pdf.getPageCount());
+  const handleFileSelect = async (selectedFile: File) => {
+    if (selectedFile.type === 'application/pdf' || selectedFile.name.toLowerCase().endsWith('.pdf')) {
+      setFile(selectedFile);
+      const bytes = await selectedFile.arrayBuffer();
+      const pdf = await PDFDocument.load(bytes);
+      setPageCount(pdf.getPageCount());
+    } else {
+      alert('Please select a valid PDF file.');
+    }
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      handleFileSelect(e.dataTransfer.files[0]);
+    }
   };
 
   const parsePages = (input: string, maxPages: number) => {
@@ -71,39 +84,89 @@ export default function DeletePagesPage() {
     }
   };
 
-  return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-4 text-center text-gray-900 dark:text-white">
-        Delete PDF Pages
-      </h1>
-      <p className="text-center text-gray-500 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
-        Remove unwanted pages from your document.
-      </p>
+  const steps = [
+    {
+      title: "Step 1: Upload PDF",
+      description: "Select or drag and drop your PDF file that you want to remove pages from."
+    },
+    {
+      title: "Step 2: Select Pages",
+      description: "Enter the page numbers to delete. Use commas or ranges (e.g., 1, 3-5, 10)."
+    },
+    {
+      title: "Step 3: Download",
+      description: "Get your PDF with the unwanted pages removed instantly."
+    }
+  ];
 
+  return (
+    <ToolPageLayout
+      title="Delete PDF Pages"
+      subtitle="Remove unwanted pages from your document."
+      steps={steps}
+      ctaText="Delete Pages"
+      onAction={handleDelete}
+      loading={loading}
+      disabled={!file || !pagesToDelete}
+      showCta={!!file}
+    >
       {!file ? (
-        <FileUploader onFileSelect={handleFileChange} label="Select PDF" />
-      ) : (
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-8 max-w-2xl mx-auto animate-in fade-in zoom-in duration-300">
-          <div className="flex items-center space-x-3 mb-8 p-4 bg-gray-50 dark:bg-gray-900/50 rounded-lg">
-            <FileText className="text-blue-500" size={24} />
-            <div className="flex-1">
-              <div className="flex justify-between items-center">
-                <p className="font-medium text-gray-900 dark:text-white truncate max-w-[200px]">{file.name}</p>
-                <span className="text-sm text-gray-500 bg-white dark:bg-gray-800 px-2 py-1 rounded border border-gray-200 dark:border-gray-700">
-                  {pageCount} Pages
-                </span>
-              </div>
-              <button
-                onClick={() => { setFile(null); setPageCount(null); }}
-                className="text-xs text-red-500 hover:text-red-700 hover:underline mt-1"
-              >
-                Change be file
-              </button>
+        <div
+          className={`
+            bg-white rounded-2xl sm:rounded-3xl shadow-xl border-2 border-dashed p-6 sm:p-12
+            transition-all duration-300 cursor-pointer
+            ${isDragging
+              ? 'border-purple-500 bg-purple-50 scale-[1.02]'
+              : 'border-orange-200 hover:border-purple-400 hover:shadow-2xl'
+            }
+          `}
+          onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
+          onDragLeave={(e) => { e.preventDefault(); setIsDragging(false); }}
+          onDrop={handleDrop}
+          onClick={() => document.getElementById('file-input')?.click()}
+        >
+          <div className="flex justify-center mb-4 sm:mb-6">
+            <div className={`p-4 sm:p-6 rounded-2xl sm:rounded-3xl transition-colors ${isDragging ? 'bg-purple-100' : 'bg-orange-50'}`}>
+              <Cloud className={`w-12 h-12 sm:w-16 sm:h-16 ${isDragging ? 'text-purple-500' : 'text-orange-400'}`} strokeWidth={1.5} />
             </div>
           </div>
 
-          <div className="mb-8">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <p className={`text-xl sm:text-2xl font-bold text-center mb-2 ${isDragging ? 'text-purple-700' : 'text-gray-800'}`}>
+            Drag & Drop PDF Here
+          </p>
+          <p className="text-sm sm:text-base text-gray-500 text-center">or click to browse</p>
+
+          <input
+            id="file-input"
+            type="file"
+            accept=".pdf"
+            onChange={(e) => e.target.files?.[0] && handleFileSelect(e.target.files[0])}
+            className="hidden"
+          />
+        </div>
+      ) : (
+        <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-gray-100 p-6 sm:p-8">
+          <div className="flex items-center justify-between mb-6 p-3 sm:p-4 bg-gray-50 rounded-xl">
+            <div className="flex items-center space-x-3">
+              <div className="p-2 sm:p-3 bg-purple-100 rounded-lg">
+                <FileText className="text-purple-500 w-5 h-5 sm:w-6 sm:h-6" />
+              </div>
+              <div>
+                <p className="font-medium text-gray-900 truncate max-w-[150px] sm:max-w-[200px] text-sm sm:text-base">{file.name}</p>
+                <p className="text-xs sm:text-sm text-gray-500">{pageCount} pages</p>
+              </div>
+            </div>
+            <button
+              onClick={() => { setFile(null); setPageCount(null); }}
+              className="text-xs sm:text-sm text-red-500 hover:text-red-700 font-medium"
+            >
+              Remove
+            </button>
+          </div>
+
+          {/* Pages Input */}
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
               Pages to Delete
               <span className="text-gray-400 font-normal ml-2">(e.g. 1, 3-5, 10)</span>
             </label>
@@ -112,21 +175,21 @@ export default function DeletePagesPage() {
               placeholder="e.g. 2, 4-6"
               value={pagesToDelete}
               onChange={e => setPagesToDelete(e.target.value)}
-              className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg py-3 px-4 focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-900 dark:text-white"
+              className="w-full bg-gray-50 border border-gray-200 rounded-xl py-3 px-4 focus:ring-2 focus:ring-purple-500 focus:border-transparent focus:outline-none text-gray-900"
             />
           </div>
 
           <button
             onClick={handleDelete}
             disabled={loading || !pagesToDelete}
-            className={`w-full flex items-center justify-center space-x-2 bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl ${loading || !pagesToDelete ? 'opacity-50 cursor-not-allowed' : ''
+            className={`w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-red-500 to-rose-600 text-white font-bold py-3 sm:py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl ${loading || !pagesToDelete ? 'opacity-50 cursor-not-allowed' : 'hover:scale-[1.02]'
               }`}
           >
-            {loading ? <Loader2 className="animate-spin" /> : <Trash2 size={20} />}
-            <span>{loading ? 'Deleting...' : 'Delete Pages'}</span>
+            {loading ? <Loader2 className="animate-spin" size={20} /> : <Trash2 size={20} />}
+            <span className="text-sm sm:text-base">{loading ? 'Deleting...' : 'Delete Pages'}</span>
           </button>
         </div>
       )}
-    </div>
+    </ToolPageLayout>
   );
 }

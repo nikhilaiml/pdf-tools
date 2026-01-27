@@ -1,38 +1,14 @@
 'use client';
 
-// Reuse the logic from BatchImageToPdf but update title/description
-
-export default function ScanToPdfPage() {
-    return (
-        <div className="relative">
-            {/* We can reuse the component or composition, but for simplicity we'll render it directly 
-                 and override the title via props if we refactored it to be a component. 
-                 Since I didn't export it as a reusable component with props yet, 
-                 I will copy the logic for now to allow specific customization later 
-                 OR better yet, I will refactor BatchImageToPdf to accept props 
-                 to avoid code duplication. For now, let's copy to ensure independence.
-             */}
-
-            {/* Actually, let's use the exact same component but wrapped to keep it simple 
-                 if the user just wants the functionality.
-                 But user might be confused if title "Batch Image to PDF" appears.
-                 I should probably refactor BatchImageToPdf to be a reusable component.
-                 
-                 Let's do a Copy-Paste with modified title for speed and clarity, 
-                 as requested to "fully prepare" them. 
-             */}
-            <ScanToPDFImplementation />
-        </div>
-    );
-}
-
 import { useState } from 'react';
 import { PDFDocument } from 'pdf-lib';
-import { Loader2, FileText, Plus, Image as ImageIcon } from 'lucide-react';
+import { Loader2, FileText, Plus, Cloud, ScanLine } from 'lucide-react';
+import ToolPageLayout from '../../components/ToolPageLayout';
 
-function ScanToPDFImplementation() {
+export default function ScanToPdfPage() {
     const [files, setFiles] = useState<File[]>([]);
     const [isProcessing, setIsProcessing] = useState(false);
+    const [isDragging, setIsDragging] = useState(false);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
@@ -42,6 +18,7 @@ function ScanToPDFImplementation() {
 
     const handleDrop = (e: React.DragEvent) => {
         e.preventDefault();
+        setIsDragging(false);
         if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
             const newFiles = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
             setFiles(prev => [...prev, ...newFiles]);
@@ -81,7 +58,8 @@ function ScanToPDFImplementation() {
             }
 
             const pdfBytes = await pdfDoc.save();
-            const blob = new Blob([pdfBytes as any], { type: 'application/pdf' }); // eslint-disable-line @typescript-eslint/no-explicit-any
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const blob = new Blob([pdfBytes as any], { type: 'application/pdf' });
 
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
@@ -95,27 +73,61 @@ function ScanToPDFImplementation() {
         }
     };
 
-    return (
-        <div className="max-w-4xl mx-auto px-4 py-8">
-            <h1 className="text-3xl font-bold mb-4 text-center text-gray-900 dark:text-white">
-                Scan to PDF
-            </h1>
-            <p className="text-center text-gray-500 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
-                Convert scanned images into a professional PDF document.
-            </p>
+    const steps = [
+        {
+            title: "Step 1: Add Scans",
+            description: "Upload scanned images from your phone, scanner, or camera."
+        },
+        {
+            title: "Step 2: Organize",
+            description: "Each scan becomes a page in your PDF document."
+        },
+        {
+            title: "Step 3: Download",
+            description: "Get your professional PDF document ready to share."
+        }
+    ];
 
+    return (
+        <ToolPageLayout
+            title="Scan to PDF"
+            subtitle="Convert scanned images into a professional PDF document."
+            steps={steps}
+            ctaText="Create PDF"
+            onAction={handleConvert}
+            loading={isProcessing}
+            disabled={files.length === 0}
+            showCta={files.length > 0}
+        >
             <div
-                className="flex flex-col items-center justify-center p-12 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors cursor-pointer mb-8"
-                onDragOver={(e) => e.preventDefault()}
+                className={`
+                    bg-white rounded-2xl sm:rounded-3xl shadow-xl border-2 border-dashed p-6 sm:p-12
+                    transition-all duration-300 cursor-pointer
+                    ${isDragging
+                        ? 'border-purple-500 bg-purple-50 scale-[1.02]'
+                        : 'border-orange-200 hover:border-purple-400 hover:shadow-2xl'
+                    }
+                `}
+                onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
+                onDragLeave={(e) => { e.preventDefault(); setIsDragging(false); }}
                 onDrop={handleDrop}
                 onClick={() => document.getElementById('scan-upload')?.click()}
             >
-                <div className="bg-blue-100 dark:bg-blue-900/30 p-4 rounded-full mb-4">
-                    <ImageIcon className="w-10 h-10 text-blue-600 dark:text-blue-400" />
+                <div className="flex justify-center mb-4 sm:mb-6">
+                    <div className={`p-4 sm:p-6 rounded-2xl sm:rounded-3xl transition-colors ${isDragging ? 'bg-purple-100' : 'bg-orange-50'}`}>
+                        {files.length > 0 ? (
+                            <ScanLine className={`w-12 h-12 sm:w-16 sm:h-16 ${isDragging ? 'text-purple-500' : 'text-orange-400'}`} strokeWidth={1.5} />
+                        ) : (
+                            <Cloud className={`w-12 h-12 sm:w-16 sm:h-16 ${isDragging ? 'text-purple-500' : 'text-orange-400'}`} strokeWidth={1.5} />
+                        )}
+                    </div>
                 </div>
-                <p className="text-xl font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Click or Drop Scanned Images
+
+                <p className={`text-xl sm:text-2xl font-bold text-center mb-2 ${isDragging ? 'text-purple-700' : 'text-gray-800'}`}>
+                    {files.length > 0 ? `${files.length} Scan(s) Selected` : 'Drag & Drop Scanned Images'}
                 </p>
+                <p className="text-sm sm:text-base text-gray-500 text-center">or click to browse (JPG, PNG)</p>
+
                 <input
                     type="file"
                     multiple
@@ -127,11 +139,11 @@ function ScanToPDFImplementation() {
             </div>
 
             {files.length > 0 && (
-                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-6">
-                    <h3 className="font-semibold mb-4 text-gray-900 dark:text-white">Selected Scans ({files.length})</h3>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-6">
+                <div className="mt-6 bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-gray-100 p-4 sm:p-6">
+                    <h3 className="font-semibold mb-4 text-gray-900">Selected Scans ({files.length})</h3>
+                    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3 mb-6">
                         {files.map((file, index) => (
-                            <div key={index} className="relative group aspect-[1/1.4] bg-gray-100 dark:bg-gray-900 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+                            <div key={index} className="relative group aspect-[1/1.4] bg-gray-100 rounded-xl overflow-hidden border border-gray-200">
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
                                     src={URL.createObjectURL(file)}
@@ -151,14 +163,14 @@ function ScanToPDFImplementation() {
                     <button
                         onClick={handleConvert}
                         disabled={isProcessing}
-                        className={`w-full flex items-center justify-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl ${isProcessing ? 'opacity-50 cursor-not-allowed' : ''
+                        className={`w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-violet-500 to-purple-600 text-white font-bold py-3 sm:py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl ${isProcessing ? 'opacity-50 cursor-not-allowed' : 'hover:scale-[1.02]'
                             }`}
                     >
-                        {isProcessing ? <Loader2 className="animate-spin" /> : <FileText size={20} />}
-                        <span>{isProcessing ? 'Merging to PDF...' : 'Create PDF'}</span>
+                        {isProcessing ? <Loader2 className="animate-spin" size={20} /> : <FileText size={20} />}
+                        <span className="text-sm sm:text-base">{isProcessing ? 'Merging to PDF...' : 'Create PDF'}</span>
                     </button>
                 </div>
             )}
-        </div>
+        </ToolPageLayout>
     );
 }

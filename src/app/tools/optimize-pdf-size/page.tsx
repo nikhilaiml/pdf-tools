@@ -2,32 +2,48 @@
 
 import { Monitor, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import ToolPageLayout from '../../components/ToolPageLayout';
 
 export default function OptimizePdfSizePage() {
-    return (
-        <div className="max-w-4xl mx-auto px-4 py-8 text-center">
-            <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">
-                Optimize PDF Size
-            </h1>
-            <p className="text-gray-500 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
-                Reduce file size for web or email.
-            </p>
+    const steps = [
+        {
+            title: "Redirecting",
+            description: "This tool has been merged with our Compress PDF tool for better results."
+        },
+        {
+            title: "Same Quality",
+            description: "The Compress PDF tool offers the same optimization with more options."
+        },
+        {
+            title: "One Click",
+            description: "Click below to access the consolidated compression tool."
+        }
+    ];
 
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-8 max-w-xl mx-auto">
+    return (
+        <ToolPageLayout
+            title="Optimize PDF Size"
+            subtitle="Reduce file size for web or email."
+            steps={steps}
+            showCta={false}
+        >
+            <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-gray-100 p-8 sm:p-12 max-w-xl mx-auto text-center">
                 <div className="mb-6">
-                    <Monitor className="w-16 h-16 text-blue-500 mx-auto mb-4" />
-                    <p className="text-lg text-gray-700 dark:text-gray-300">
-                        We have consolidated optimization into our <strong>Compress</strong> tool.
+                    <div className="inline-flex p-4 bg-purple-100 rounded-2xl mb-4">
+                        <Monitor className="w-12 h-12 sm:w-16 sm:h-16 text-purple-500" />
+                    </div>
+                    <p className="text-lg text-gray-700">
+                        We have consolidated optimization into our <strong className="text-purple-600">Compress PDF</strong> tool for better results.
                     </p>
                 </div>
 
                 <Link href="/tools/compress-pdf">
-                    <button className="w-full flex items-center justify-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl">
-                        <span>Go to Compress PDF</span>
+                    <button className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-violet-500 to-purple-600 text-white font-bold py-3 sm:py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-[1.02]">
+                        <span className="text-sm sm:text-base">Go to Compress PDF</span>
                         <ArrowRight size={20} />
                     </button>
                 </Link>
             </div>
-        </div>
+        </ToolPageLayout>
     );
 }

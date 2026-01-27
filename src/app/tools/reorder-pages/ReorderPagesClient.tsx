@@ -21,18 +21,15 @@ import {
     rectSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { Loader2, FileText, X, Check } from 'lucide-react';
-import FileUploader from '../../components/FileUploader';
-
-
+import { Loader2, FileText, X, Check, Cloud } from 'lucide-react';
+import ToolPageLayout from '../../components/ToolPageLayout';
 
 interface PageItem {
     id: string;
-    originalIndex: number; // 0-based index from original PDF
+    originalIndex: number;
     thumbnail: string;
 }
 
-// Sortable Item Component
 const SortablePage = ({
     item,
     index,
@@ -63,10 +60,9 @@ const SortablePage = ({
             style={style}
             {...attributes}
             {...listeners}
-            className="relative group bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden cursor-grab active:cursor-grabbing hover:shadow-md transition-shadow"
+            className="relative group bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden cursor-grab active:cursor-grabbing hover:shadow-lg transition-all"
         >
-            <div className="aspect-[1/1.4] relative bg-gray-100 dark:bg-gray-900 flex items-center justify-center overflow-hidden">
-                {/* Page Thumbnail */}
+            <div className="aspect-[1/1.4] relative bg-gray-50 flex items-center justify-center overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                     src={item.thumbnail}
@@ -74,14 +70,13 @@ const SortablePage = ({
                     className="w-full h-full object-contain pointer-events-none"
                 />
 
-                {/* Remove Button (visible on hover) */}
                 {onRemove && (
                     <button
                         onClick={(e) => {
-                            e.stopPropagation(); // Prevent drag start
+                            e.stopPropagation();
                             onRemove(item.id);
                         }}
-                        className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600 focus:outline-none"
+                        className="absolute top-2 right-2 p-1.5 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600 focus:outline-none shadow-lg"
                         title="Remove Page"
                         onPointerDown={(e) => e.stopPropagation()}
                     >
@@ -90,8 +85,7 @@ const SortablePage = ({
                 )}
             </div>
 
-            {/* Page Number Footer */}
-            <div className="p-2 text-center text-sm font-medium text-gray-700 dark:text-gray-300 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+            <div className="p-2 text-center text-sm font-medium text-gray-700 border-t border-gray-200 bg-gray-50">
                 Page {index + 1}
             </div>
         </div>
@@ -104,6 +98,7 @@ const ReorderPagesClient = () => {
     const [loading, setLoading] = useState(false);
     const [processing, setProcessing] = useState(false);
     const [activeId, setActiveId] = useState<string | null>(null);
+    const [isDragging, setIsDragging] = useState(false);
 
     const sensors = useSensors(
         useSensor(PointerSensor),
@@ -116,20 +111,15 @@ const ReorderPagesClient = () => {
         setLoading(true);
         try {
             const arrayBuffer = await file.arrayBuffer();
-
-            // Dynamically import PDF.js
             const pdfjsLib = await import('pdfjs-dist');
             pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
-
             const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
-
             const newItems: PageItem[] = [];
-            const scale = 0.5; // Scale for thumbnail (adjust for quality/performance)
+            const scale = 0.5;
 
             for (let i = 1; i <= pdf.numPages; i++) {
                 const page = await pdf.getPage(i);
                 const viewport = page.getViewport({ scale });
-
                 const canvas = document.createElement('canvas');
                 const context = canvas.getContext('2d');
                 canvas.height = viewport.height;
@@ -158,10 +148,22 @@ const ReorderPagesClient = () => {
         }
     };
 
-    const handleFileChange = async (selectedFile: File) => {
-        setFile(selectedFile);
-        setItems([]); // Clear previous items
-        await generateThumbnails(selectedFile);
+    const handleFileSelect = async (selectedFile: File) => {
+        if (selectedFile.type === 'application/pdf' || selectedFile.name.toLowerCase().endsWith('.pdf')) {
+            setFile(selectedFile);
+            setItems([]);
+            await generateThumbnails(selectedFile);
+        } else {
+            alert('Please select a valid PDF file.');
+        }
+    };
+
+    const handleDrop = (e: React.DragEvent) => {
+        e.preventDefault();
+        setIsDragging(false);
+        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+            handleFileSelect(e.dataTransfer.files[0]);
+        }
     };
 
     const handleDragStart = (event: DragStartEvent) => {
@@ -170,7 +172,6 @@ const ReorderPagesClient = () => {
 
     const handleDragEnd = (event: DragEndEvent) => {
         const { active, over } = event;
-
         if (over && active.id !== over.id) {
             setItems((items) => {
                 const oldIndex = items.findIndex((item) => item.id === active.id);
@@ -196,13 +197,9 @@ const ReorderPagesClient = () => {
             const pdfBytes = await file.arrayBuffer();
             const pdf = await PDFDocument.load(pdfBytes);
             const newPdf = await PDFDocument.create();
-
-            // Get indices from current item order
             const indices = items.map(item => item.originalIndex);
-
             const copiedPages = await newPdf.copyPages(pdf, indices);
             copiedPages.forEach(page => newPdf.addPage(page));
-
             const newPdfBytes = await newPdf.save();
 
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -221,50 +218,90 @@ const ReorderPagesClient = () => {
 
     const activeItem = activeId ? items.find((item) => item.id === activeId) : null;
 
+    const steps = [
+        {
+            title: "Step 1: Upload PDF",
+            description: "Select or drag and drop your PDF file to rearrange pages."
+        },
+        {
+            title: "Step 2: Drag & Drop",
+            description: "Drag page thumbnails to rearrange them. Click X to remove pages."
+        },
+        {
+            title: "Step 3: Save",
+            description: "Download your reorganized PDF with the new page order."
+        }
+    ];
+
     return (
-        <div className="max-w-6xl mx-auto px-4 py-8">
-            <h1 className="text-3xl md:text-4xl font-bold mb-2 text-center text-gray-900 dark:text-white">
-                Reorder PDF Pages
-            </h1>
-            <p className="text-center text-gray-500 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
-                Drag and drop thumbnails to rearrange pages. You can also delete pages.
-            </p>
-
-            {/* Upload Section */}
+        <ToolPageLayout
+            title="Reorder PDF Pages"
+            subtitle="Drag and drop thumbnails to rearrange pages. You can also delete pages."
+            steps={steps}
+            ctaText="Save Changes"
+            onAction={handleReorder}
+            loading={processing}
+            disabled={items.length === 0}
+            showCta={items.length > 0}
+        >
             {!file ? (
-                <FileUploader onFileSelect={handleFileChange} label="Select PDF to Reorder" />
-            ) : (
-                <div className="animate-in fade-in zoom-in duration-300">
-                    <div className="flex justify-between items-center mb-6 px-4">
-                        <div className="flex items-center space-x-2 text-gray-900 dark:text-white font-medium bg-white dark:bg-gray-800 py-2 px-4 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
-                            <FileText size={20} className="text-blue-500" />
-                            <span className="truncate max-w-[200px] hidden sm:inline">{file.name}</span>
-                            <button
-                                onClick={() => { setFile(null); setItems([]); }}
-                                className="text-xs text-red-500 hover:text-red-600 hover:underline ml-2"
-                            >
-                                Change
-                            </button>
+                <div
+                    className={`
+                        bg-white rounded-2xl sm:rounded-3xl shadow-xl border-2 border-dashed p-6 sm:p-12
+                        transition-all duration-300 cursor-pointer
+                        ${isDragging
+                            ? 'border-purple-500 bg-purple-50 scale-[1.02]'
+                            : 'border-orange-200 hover:border-purple-400 hover:shadow-2xl'
+                        }
+                    `}
+                    onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
+                    onDragLeave={(e) => { e.preventDefault(); setIsDragging(false); }}
+                    onDrop={handleDrop}
+                    onClick={() => document.getElementById('file-input')?.click()}
+                >
+                    <div className="flex justify-center mb-4 sm:mb-6">
+                        <div className={`p-4 sm:p-6 rounded-2xl sm:rounded-3xl transition-colors ${isDragging ? 'bg-purple-100' : 'bg-orange-50'}`}>
+                            <Cloud className={`w-12 h-12 sm:w-16 sm:h-16 ${isDragging ? 'text-purple-500' : 'text-orange-400'}`} strokeWidth={1.5} />
                         </div>
+                    </div>
 
+                    <p className={`text-xl sm:text-2xl font-bold text-center mb-2 ${isDragging ? 'text-purple-700' : 'text-gray-800'}`}>
+                        Drag & Drop PDF Here
+                    </p>
+                    <p className="text-sm sm:text-base text-gray-500 text-center">or click to browse</p>
+
+                    <input
+                        id="file-input"
+                        type="file"
+                        accept=".pdf"
+                        onChange={(e) => e.target.files?.[0] && handleFileSelect(e.target.files[0])}
+                        className="hidden"
+                    />
+                </div>
+            ) : (
+                <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-gray-100 p-4 sm:p-6">
+                    <div className="flex items-center justify-between mb-6 p-3 sm:p-4 bg-gray-50 rounded-xl">
+                        <div className="flex items-center space-x-3">
+                            <div className="p-2 bg-purple-100 rounded-lg">
+                                <FileText className="text-purple-500 w-5 h-5" />
+                            </div>
+                            <span className="font-medium text-gray-900 truncate max-w-[150px] sm:max-w-[200px] text-sm sm:text-base">{file.name}</span>
+                        </div>
                         <button
-                            onClick={handleReorder}
-                            disabled={processing || items.length === 0}
-                            className={`flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition-all shadow-md hover:shadow-lg ${processing ? 'opacity-70 cursor-wait' : ''
-                                }`}
+                            onClick={() => { setFile(null); setItems([]); }}
+                            className="text-xs sm:text-sm text-red-500 hover:text-red-700 font-medium"
                         >
-                            {processing ? <Loader2 className="animate-spin" size={20} /> : <Check size={20} />}
-                            <span>{processing ? 'Saving...' : 'Save Changes'}</span>
+                            Change
                         </button>
                     </div>
 
                     {loading ? (
-                        <div className="flex flex-col items-center justify-center py-20 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
-                            <Loader2 className="w-12 h-12 text-blue-500 animate-spin mb-4" />
+                        <div className="flex flex-col items-center justify-center py-16">
+                            <Loader2 className="w-12 h-12 text-purple-500 animate-spin mb-4" />
                             <p className="text-gray-500">Generating thumbnails...</p>
                         </div>
                     ) : (
-                        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-6 min-h-[500px]">
+                        <div className="min-h-[400px]">
                             <DndContext
                                 sensors={sensors}
                                 collisionDetection={closestCenter}
@@ -272,7 +309,7 @@ const ReorderPagesClient = () => {
                                 onDragEnd={handleDragEnd}
                             >
                                 <SortableContext items={items.map(i => i.id)} strategy={rectSortingStrategy}>
-                                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
+                                    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4">
                                         {items.map((item, index) => (
                                             <SortablePage
                                                 key={item.id}
@@ -286,8 +323,8 @@ const ReorderPagesClient = () => {
                                 <DragOverlay>
                                     {activeItem ? (
                                         <div className="opacity-90 scale-105 transform cursor-grabbing">
-                                            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-2xl border-2 border-blue-500 overflow-hidden">
-                                                <div className="aspect-[1/1.4] relative bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
+                                            <div className="bg-white rounded-xl shadow-2xl border-2 border-purple-500 overflow-hidden">
+                                                <div className="aspect-[1/1.4] relative bg-gray-50 flex items-center justify-center">
                                                     {/* eslint-disable-next-line @next/next/no-img-element */}
                                                     <img
                                                         src={activeItem.thumbnail}
@@ -295,7 +332,7 @@ const ReorderPagesClient = () => {
                                                         className="w-full h-full object-contain"
                                                     />
                                                 </div>
-                                                <div className="p-2 text-center text-sm font-bold text-white bg-blue-500">
+                                                <div className="p-2 text-center text-sm font-bold text-white bg-gradient-to-r from-violet-500 to-purple-600">
                                                     Page {items.findIndex(i => i.id === activeItem.id) + 1}
                                                 </div>
                                             </div>
@@ -303,11 +340,21 @@ const ReorderPagesClient = () => {
                                     ) : null}
                                 </DragOverlay>
                             </DndContext>
+
+                            <button
+                                onClick={handleReorder}
+                                disabled={processing || items.length === 0}
+                                className={`w-full mt-6 flex items-center justify-center space-x-2 bg-gradient-to-r from-violet-500 to-purple-600 text-white font-bold py-3 sm:py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl ${processing || items.length === 0 ? 'opacity-50 cursor-not-allowed' : 'hover:scale-[1.02]'
+                                    }`}
+                            >
+                                {processing ? <Loader2 className="animate-spin" size={20} /> : <Check size={20} />}
+                                <span className="text-sm sm:text-base">{processing ? 'Saving...' : 'Save Changes'}</span>
+                            </button>
                         </div>
                     )}
                 </div>
             )}
-        </div>
+        </ToolPageLayout>
     );
 };
 
