@@ -57,7 +57,7 @@ const getIcon = (id: string) => {
         case 'rotate-pdf': return RotateCw;
         case 'delete-pages': return Trash2;
         case 'reorder-pages': return ListOrdered;
-        case 'pdf-to-jpg':
+        case 'pdf-to-jpg': return FileImage;
         case 'jpg-to-pdf': return Image;
         case 'pdf-to-word':
         case 'word-to-pdf': return FileText;
