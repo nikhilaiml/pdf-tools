@@ -70,7 +70,7 @@ const Navbar = () => {
                         <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-transform duration-300">
                             <FileText className="text-white w-6 h-6" />
                         </div>
-                        <span className="text-xl font-bold text-slate-800">
+                        <span className={`text-xl font-bold transition-colors duration-300 ${scrolled ? 'text-slate-800' : 'text-white'}`}>
                             PDF Tools
                         </span>
                     </Link>
@@ -79,19 +79,19 @@ const Navbar = () => {
                     <div className="hidden md:flex items-center gap-6">
                         <Link
                             href="/tools/merge-pdf"
-                            className="text-sm font-semibold text-slate-700 hover:text-indigo-600 transition-colors uppercase tracking-wide"
+                            className={`text-sm font-semibold transition-colors uppercase tracking-wide ${scrolled ? 'text-slate-700 hover:text-indigo-600' : 'text-white/90 hover:text-white'}`}
                         >
                             Merge PDF
                         </Link>
                         <Link
                             href="/tools/split-pdf"
-                            className="text-sm font-semibold text-slate-700 hover:text-indigo-600 transition-colors uppercase tracking-wide"
+                            className={`text-sm font-semibold transition-colors uppercase tracking-wide ${scrolled ? 'text-slate-700 hover:text-indigo-600' : 'text-white/90 hover:text-white'}`}
                         >
                             Split PDF
                         </Link>
                         <Link
                             href="/tools/compress-pdf"
-                            className="text-sm font-semibold text-slate-700 hover:text-indigo-600 transition-colors uppercase tracking-wide"
+                            className={`text-sm font-semibold transition-colors uppercase tracking-wide ${scrolled ? 'text-slate-700 hover:text-indigo-600' : 'text-white/90 hover:text-white'}`}
                         >
                             Compress PDF
                         </Link>
@@ -100,7 +100,7 @@ const Navbar = () => {
                         <div className="relative" ref={convertRef}>
                             <button
                                 onClick={() => { setConvertDropdown(!convertDropdown); setAllToolsDropdown(false); }}
-                                className="flex items-center gap-1 text-sm font-semibold text-slate-700 hover:text-indigo-600 transition-colors uppercase tracking-wide"
+                                className={`flex items-center gap-1 text-sm font-semibold transition-colors uppercase tracking-wide ${scrolled ? 'text-slate-700 hover:text-indigo-600' : 'text-white/90 hover:text-white'}`}
                             >
                                 Convert PDF
                                 <ChevronDown className={`w-4 h-4 transition-transform ${convertDropdown ? 'rotate-180' : ''}`} />
@@ -132,7 +132,7 @@ const Navbar = () => {
                         <div className="relative" ref={allToolsRef}>
                             <button
                                 onClick={() => { setAllToolsDropdown(!allToolsDropdown); setConvertDropdown(false); }}
-                                className="flex items-center gap-1 text-sm font-semibold text-slate-700 hover:text-indigo-600 transition-colors uppercase tracking-wide"
+                                className={`flex items-center gap-1 text-sm font-semibold transition-colors uppercase tracking-wide ${scrolled ? 'text-slate-700 hover:text-indigo-600' : 'text-white/90 hover:text-white'}`}
                             >
                                 All PDF Tools
                                 <ChevronDown className={`w-4 h-4 transition-transform ${allToolsDropdown ? 'rotate-180' : ''}`} />
@@ -174,7 +174,7 @@ const Navbar = () => {
 
                     {/* Mobile Menu Button */}
                     <button
-                        className="md:hidden text-slate-600 hover:text-slate-900"
+                        className={`md:hidden transition-colors duration-300 ${scrolled ? 'text-slate-600 hover:text-slate-900' : 'text-white hover:text-white/80'}`}
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                     >
                         {mobileMenuOpen ? <X /> : <Menu />}
