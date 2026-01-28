@@ -67,9 +67,11 @@ const Navbar = () => {
                 <div className="flex justify-between items-center">
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-2 group">
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-transform duration-300">
-                            <FileText className="text-white w-6 h-6" />
-                        </div>
+                        <img
+                            src="/logo.png"
+                            alt="PDF Tools Logo"
+                            className="w-10 h-10 object-contain group-hover:scale-105 transition-transform duration-300"
+                        />
                         <span className={`text-xl font-bold transition-colors duration-300 ${scrolled ? 'text-slate-800' : 'text-white'}`}>
                             PDF Tools
                         </span>

@@ -1,6 +1,6 @@
 'use client';
 
-import { FileText, Twitter, Facebook, Linkedin, Github, Instagram, Star } from 'lucide-react';
+import { Twitter, Facebook, Linkedin, Github, Instagram, Star } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Footer() {
@@ -15,9 +15,11 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 lg:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center">
-                <FileText className="text-white w-5 h-5" />
-              </div>
+              <img
+                src="/logo.png"
+                alt="PDF Tools Logo"
+                className="w-8 h-8 object-contain"
+              />
               <span className="text-lg font-bold text-slate-800">PDF Tools</span>
             </Link>
             <p className="text-slate-500 text-sm mb-4 leading-relaxed">
