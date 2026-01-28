@@ -2,6 +2,7 @@
 
 import { Twitter, Facebook, Linkedin, Github, Instagram, Star } from 'lucide-react';
 import Link from 'next/link';
+import Logo from './Logo';
 
 export default function Footer() {
   return (
@@ -15,11 +16,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 lg:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <img
-                src="/logo.png"
-                alt="PDF Tools Logo"
-                className="w-8 h-8 object-contain"
-              />
+              <Logo className="w-8 h-8" />
               <span className="text-lg font-bold text-slate-800">PDF Tools</span>
             </Link>
             <p className="text-slate-500 text-sm mb-4 leading-relaxed">

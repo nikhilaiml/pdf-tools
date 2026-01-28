@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, FileText, ChevronDown } from 'lucide-react';
+import Logo from './Logo';
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
@@ -67,11 +68,9 @@ const Navbar = () => {
                 <div className="flex justify-between items-center">
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-2 group">
-                        <img
-                            src="/logo.png"
-                            alt="PDF Tools Logo"
-                            className="w-10 h-10 object-contain group-hover:scale-105 transition-transform duration-300"
-                        />
+                        <div className="group-hover:scale-105 transition-transform duration-300 filter drop-shadow-md">
+                            <Logo className="w-10 h-10" />
+                        </div>
                         <span className={`text-xl font-bold transition-colors duration-300 ${scrolled ? 'text-slate-800' : 'text-white'}`}>
                             PDF Tools
                         </span>
