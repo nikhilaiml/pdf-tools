@@ -2,8 +2,8 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { PDFDocument, degrees } from 'pdf-lib';
-import { Loader2, Crop, FileText, Undo } from 'lucide-react';
-import FileUploader from '../../components/FileUploader';
+import { Loader2, FileText, Undo, Cloud, Download } from 'lucide-react';
+import ToolPageLayout from '../../components/ToolPageLayout';
 
 // Constants for rotation limits
 const MIN_ROTATION = -20;
@@ -14,16 +14,29 @@ export default function DeskewPdfPage() {
     const [rotationAngle, setRotationAngle] = useState(0);
     const [isProcessing, setIsProcessing] = useState(false);
     const [isRendering, setIsRendering] = useState(false);
+    const [isDragging, setIsDragging] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     // Canvas ref for preview
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     const handleFileSelect = async (selectedFile: File) => {
-        setFile(selectedFile);
-        setRotationAngle(0);
-        setErrorMessage(null);
-        await renderPreview(selectedFile);
+        if (selectedFile.type === 'application/pdf' || selectedFile.name.toLowerCase().endsWith('.pdf')) {
+            setFile(selectedFile);
+            setRotationAngle(0);
+            setErrorMessage(null);
+            await renderPreview(selectedFile);
+        } else {
+            alert('Please select a valid PDF file.');
+        }
+    };
+
+    const handleDrop = (e: React.DragEvent) => {
+        e.preventDefault();
+        setIsDragging(false);
+        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+            handleFileSelect(e.dataTransfer.files[0]);
+        }
     };
 
     const renderPreview = async (fileToRender: File) => {
@@ -32,13 +45,11 @@ export default function DeskewPdfPage() {
         try {
             const arrayBuffer = await fileToRender.arrayBuffer();
 
-            // Dynamically import PDF.js
             const pdfjsLib = await import('pdfjs-dist');
-            // Align with PdfToJpgClient implementation
             pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
 
             const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
-            const page = await pdf.getPage(1); // Preview first page
+            const page = await pdf.getPage(1);
 
             const viewport = page.getViewport({ scale: 1.5, rotation: 0 });
 
@@ -64,13 +75,11 @@ export default function DeskewPdfPage() {
         }
     };
 
-    // Re-render only if file changes. Rotation logic will be visual CSS for instant feedback
     useEffect(() => {
         if (file) {
             renderPreview(file);
         }
-         
-    }, [file]);
+    }, [file]); // Re-render when file changes
 
     const handleDeskew = async () => {
         if (!file) return;
@@ -81,10 +90,8 @@ export default function DeskewPdfPage() {
             const arrayBuffer = await file.arrayBuffer();
             const originalPdf = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
 
-            // Create a new PDF
             const newPdf = await PDFDocument.create();
 
-            // Iterate over all pages
             const pages = originalPdf.getPages();
             const embeddedPages = await newPdf.embedPages(pages);
 
@@ -93,20 +100,15 @@ export default function DeskewPdfPage() {
                 const embeddedPage = embeddedPages[i];
                 const { width, height } = originalPage.getSize();
 
-                // Add page with original dimensions
                 const newPage = newPdf.addPage([width, height]);
 
-                // Calculate center
                 const cx = width / 2;
                 const cy = height / 2;
 
-                // For small angles (manual deskew), we rotate around the center.
                 const rad = (rotationAngle * Math.PI) / 180;
                 const cos = Math.cos(rad);
                 const sin = Math.sin(rad);
 
-                // Calculate the position of the bottom-left corner of the image
-                // such that its center aligns with (cx, cy) after rotation.
                 const x = cx - (width / 2 * cos - height / 2 * sin);
                 const y = cy - (width / 2 * sin + height / 2 * cos);
 
@@ -123,7 +125,6 @@ export default function DeskewPdfPage() {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const blob = new Blob([pdfBytes as any], { type: 'application/pdf' });
 
-            // Download
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
             link.download = `deskewed-${file.name}`;
@@ -137,94 +138,148 @@ export default function DeskewPdfPage() {
         }
     };
 
-    return (
-        <div className="max-w-6xl mx-auto px-4 py-8">
-            <h1 className="text-3xl font-bold mb-4 text-center text-gray-900 dark:text-white">
-                Deskew PDF (Straighten)
-            </h1>
-            <p className="text-center text-gray-500 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
-                Manually adjust the angle of your PDF pages to straighten crooked scans.
-            </p>
+    const steps = [
+        {
+            title: "Step 1: Upload PDF",
+            description: "Select or drag and drop your scanned PDF that needs straightening."
+        },
+        {
+            title: "Step 2: Adjust Angle",
+            description: "Use the slider to manually rotate and align the crooked pages."
+        },
+        {
+            title: "Step 3: Download",
+            description: "Get your straightened PDF with the rotation applied to all pages."
+        }
+    ];
 
+    return (
+        <ToolPageLayout
+            title="Deskew PDF"
+            subtitle="Straighten crooked scanned pages by adjusting the rotation angle."
+            steps={steps}
+            ctaText="Save & Download"
+            onAction={handleDeskew}
+            loading={isProcessing}
+            disabled={!file}
+            showCta={!!file}
+        >
             {errorMessage && (
-                <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 max-w-2xl mx-auto">
+                <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm">
                     <p className="font-bold">Error</p>
                     <p>{errorMessage}</p>
                 </div>
             )}
 
             {!file ? (
-                <FileUploader onFileSelect={handleFileSelect} label="Select PDF to Deskew" />
+                <div
+                    className={`
+                        bg-white rounded-2xl sm:rounded-3xl shadow-xl border-2 border-dashed p-6 sm:p-12
+                        transition-all duration-300 cursor-pointer
+                        ${isDragging
+                            ? 'border-purple-500 bg-purple-50 scale-[1.02]'
+                            : 'border-orange-200 hover:border-purple-400 hover:shadow-2xl'
+                        }
+                    `}
+                    onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
+                    onDragLeave={(e) => { e.preventDefault(); setIsDragging(false); }}
+                    onDrop={handleDrop}
+                    onClick={() => document.getElementById('file-input')?.click()}
+                >
+                    <div className="flex justify-center mb-4 sm:mb-6">
+                        <div className={`p-4 sm:p-6 rounded-2xl sm:rounded-3xl transition-colors ${isDragging ? 'bg-purple-100' : 'bg-orange-50'}`}>
+                            <Cloud className={`w-12 h-12 sm:w-16 sm:h-16 ${isDragging ? 'text-purple-500' : 'text-orange-400'}`} strokeWidth={1.5} />
+                        </div>
+                    </div>
+
+                    <p className={`text-xl sm:text-2xl font-bold text-center mb-2 ${isDragging ? 'text-purple-700' : 'text-gray-800'}`}>
+                        Drag & Drop Scanned PDF Here
+                    </p>
+                    <p className="text-sm sm:text-base text-gray-500 text-center">or click to browse</p>
+
+                    <input
+                        id="file-input"
+                        type="file"
+                        accept=".pdf"
+                        onChange={(e) => e.target.files?.[0] && handleFileSelect(e.target.files[0])}
+                        className="hidden"
+                    />
+                </div>
             ) : (
-                <div className="animate-in fade-in zoom-in duration-300">
-                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
-
-                        {/* Toolbar */}
-                        <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex flex-wrap items-center justify-between gap-4">
-                            <div className="flex items-center space-x-3">
-                                <FileText className="text-blue-500" />
-                                <span className="font-medium text-gray-900 dark:text-white truncate max-w-[150px]">{file.name}</span>
-                                <button onClick={() => setFile(null)} className="text-sm text-red-500 hover:underline">Change</button>
+                <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+                    {/* Toolbar */}
+                    <div className="p-4 border-b border-gray-100 flex flex-wrap items-center justify-between gap-4 bg-gray-50">
+                        <div className="flex items-center space-x-3">
+                            <div className="p-2 bg-purple-100 rounded-lg">
+                                <FileText className="text-purple-500 w-5 h-5" />
                             </div>
+                            <span className="font-medium text-gray-900 truncate max-w-[120px] text-sm">{file.name}</span>
+                            <button onClick={() => setFile(null)} className="text-xs text-red-500 hover:text-red-700">Change</button>
+                        </div>
 
-                            <div className="flex items-center space-x-4 flex-1 justify-center max-w-md">
-                                <span className="text-sm text-gray-500 font-medium whitespace-nowrap">Tilt: {rotationAngle}°</span>
-                                <input
-                                    type="range"
-                                    min={MIN_ROTATION}
-                                    max={MAX_ROTATION}
-                                    step="0.5"
-                                    value={rotationAngle}
-                                    onChange={(e) => setRotationAngle(parseFloat(e.target.value))}
-                                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
-                                />
-                                <button
-                                    onClick={() => setRotationAngle(0)}
-                                    title="Reset Angle"
-                                    className="p-2 text-gray-500 hover:text-blue-500 transition-colors"
-                                >
-                                    <Undo size={18} />
-                                </button>
-                            </div>
-
+                        <div className="flex items-center space-x-3 flex-1 justify-center max-w-xs">
+                            <span className="text-sm text-gray-600 font-medium whitespace-nowrap">Tilt: {rotationAngle}°</span>
+                            <input
+                                type="range"
+                                min={MIN_ROTATION}
+                                max={MAX_ROTATION}
+                                step="0.5"
+                                value={rotationAngle}
+                                onChange={(e) => setRotationAngle(parseFloat(e.target.value))}
+                                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-purple-600"
+                            />
                             <button
-                                onClick={handleDeskew}
-                                disabled={isProcessing}
-                                className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors disabled:opacity-50"
+                                onClick={() => setRotationAngle(0)}
+                                title="Reset Angle"
+                                className="p-2 text-gray-500 hover:text-purple-600 transition-colors"
                             >
-                                {isProcessing ? <Loader2 className="animate-spin" size={18} /> : <Crop size={18} />}
-                                <span>Save & Download</span>
+                                <Undo size={18} />
                             </button>
                         </div>
+                    </div>
 
-                        {/* Preview Area */}
-                        <div className="p-8 bg-gray-100 dark:bg-gray-900 overflow-auto flex justify-center min-h-[500px] relative">
-                            {isRendering && (
-                                <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-100/80 dark:bg-gray-900/80">
-                                    <Loader2 className="w-12 h-12 text-blue-500 animate-spin" />
-                                </div>
-                            )}
-
-                            <div className="relative shadow-2xl transition-transform duration-200 ease-out origin-center"
-                                style={{ transform: `rotate(${rotationAngle}deg)` }}>
-                                <canvas ref={canvasRef} className="max-w-full h-auto rounded-sm bg-white" />
-
-                                {/* Grid Overlay for alignment reference */}
-                                <div className="absolute inset-0 pointer-events-none opacity-30 border border-blue-500"
-                                    style={{
-                                        backgroundImage: 'linear-gradient(to right, #3b82f6 1px, transparent 1px), linear-gradient(to bottom, #3b82f6 1px, transparent 1px)',
-                                        backgroundSize: '40px 40px'
-                                    }}>
-                                </div>
+                    {/* Preview Area */}
+                    <div className="p-6 bg-gray-100 overflow-auto flex justify-center min-h-[350px] relative">
+                        {isRendering && (
+                            <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-100/80">
+                                <Loader2 className="w-10 h-10 text-purple-500 animate-spin" />
                             </div>
-                        </div>
+                        )}
 
-                        <div className="p-4 bg-gray-50 dark:bg-gray-800 text-center text-sm text-gray-500">
-                            Previewing Page 1. The straightening will be applied to all pages.
+                        <div
+                            className="relative shadow-2xl transition-transform duration-200 ease-out origin-center"
+                            style={{ transform: `rotate(${rotationAngle}deg)` }}
+                        >
+                            <canvas ref={canvasRef} className="max-w-full h-auto rounded bg-white" />
+
+                            {/* Grid Overlay */}
+                            <div
+                                className="absolute inset-0 pointer-events-none opacity-20 border border-purple-500"
+                                style={{
+                                    backgroundImage: 'linear-gradient(to right, #8b5cf6 1px, transparent 1px), linear-gradient(to bottom, #8b5cf6 1px, transparent 1px)',
+                                    backgroundSize: '40px 40px'
+                                }}
+                            />
                         </div>
+                    </div>
+
+                    {/* Footer */}
+                    <div className="p-4 bg-gray-50 border-t border-gray-100">
+                        <button
+                            onClick={handleDeskew}
+                            disabled={isProcessing}
+                            className={`w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-violet-500 to-purple-600 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl ${isProcessing ? 'opacity-50 cursor-not-allowed' : 'hover:scale-[1.02]'
+                                }`}
+                        >
+                            {isProcessing ? <Loader2 className="animate-spin" size={20} /> : <Download size={20} />}
+                            <span className="text-sm">{isProcessing ? 'Processing...' : 'Save & Download'}</span>
+                        </button>
+                        <p className="text-xs text-center text-gray-500 mt-3">
+                            Previewing Page 1. The rotation will be applied to all pages.
+                        </p>
                     </div>
                 </div>
             )}
-        </div>
+        </ToolPageLayout>
     );
 }
