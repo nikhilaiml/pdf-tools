@@ -16,6 +16,8 @@ import {
     Search,
     ArrowRight
 } from 'lucide-react';
+import Navbar from './Navbar';
+import Footer from './Footer';
 
 interface Step {
     title: string;
@@ -139,6 +141,7 @@ const ToolPageLayout: React.FC<ToolPageLayoutProps> = ({
 
     return (
         <div className="min-h-screen bg-gray-50">
+            <Navbar />
             {/* Hero Section with Gradient */}
             <div className="relative overflow-hidden bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-700 pt-8 pb-20 sm:pt-12 sm:pb-28">
                 {/* Decorative Floating Icons */}
@@ -326,6 +329,7 @@ const ToolPageLayout: React.FC<ToolPageLayoutProps> = ({
           animation: float 3s ease-in-out infinite;
         }
       `}</style>
+            <Footer />
         </div>
     );
 };
