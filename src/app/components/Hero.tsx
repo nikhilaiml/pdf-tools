@@ -3,8 +3,29 @@
 import { motion } from 'framer-motion';
 import { Search, ArrowRight, FileText, Image as ImageIcon, Layers, Scissors, Merge, Lock, RotateCw, Minimize2 } from 'lucide-react';
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
 
-export default function Hero() {
+interface HeroProps {
+    onSearch?: (query: string) => void;
+    initialSearchValue?: string;
+}
+
+export default function Hero({ onSearch, initialSearchValue = '' }: HeroProps) {
+    const [searchValue, setSearchValue] = useState(initialSearchValue);
+
+    // Sync local state if prop changes (e.g. from URL)
+    useEffect(() => {
+        setSearchValue(initialSearchValue);
+    }, [initialSearchValue]);
+
+    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const query = e.target.value;
+        setSearchValue(query);
+        if (onSearch) {
+            onSearch(query);
+        }
+    };
+
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -152,6 +173,8 @@ export default function Hero() {
                                 <input
                                     type="text"
                                     placeholder="Search for a PDF tool..."
+                                    value={searchValue}
+                                    onChange={handleSearchChange}
                                     className="w-full bg-transparent border-none outline-none text-slate-800 px-4 py-3 text-base placeholder:text-slate-400"
                                 />
                                 <button className="search-gradient hover:opacity-90 text-white rounded-full px-6 py-3 font-medium transition-all hover:scale-105 shadow-lg flex items-center gap-2">

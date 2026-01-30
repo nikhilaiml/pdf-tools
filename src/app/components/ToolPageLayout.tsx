@@ -1,6 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import {
     FileText,
     Lock,
@@ -10,7 +12,9 @@ import {
     Printer,
     Share2,
     FolderOpen,
-    Star
+    Star,
+    Search,
+    ArrowRight
 } from 'lucide-react';
 
 interface Step {
@@ -22,6 +26,7 @@ interface Feature {
     icon: React.ReactNode;
     title: string;
     description: string;
+    href: string;
 }
 
 interface Testimonial {
@@ -66,22 +71,26 @@ const defaultFeatures: Feature[] = [
     {
         icon: <FolderOpen className="w-6 h-6 text-blue-500" />,
         title: "Organize Documents",
-        description: "Organize Documents. Use categories, groups, and labels to organize and access."
+        description: "Organize Documents. Use categories, groups, and labels to organize and access.",
+        href: "/tools/reorder-pages"
     },
     {
         icon: <Share2 className="w-6 h-6 text-green-500" />,
         title: "Share Easily",
-        description: "Share easily with others via email or URL for a fast and secure."
+        description: "Share easily with others via email or URL for a fast and secure.",
+        href: "/tools/share-pdf"
     },
     {
         icon: <Printer className="w-6 h-6 text-orange-500" />,
         title: "Print Ready",
-        description: "Print ready with the correct PDFs for your specific print needs."
+        description: "Print ready with the correct PDFs for your specific print needs.",
+        href: "/tools/pdf-to-jpg"
     },
     {
         icon: <Shield className="w-6 h-6 text-purple-500" />,
         title: "Reduce Clutter",
-        description: "Perfect for those who reduce clutter in their work or home files."
+        description: "Perfect for those who reduce clutter in their work or home files.",
+        href: "/tools/compress-pdf"
     }
 ];
 
@@ -118,6 +127,16 @@ const ToolPageLayout: React.FC<ToolPageLayoutProps> = ({
     showCta = true,
     children
 }) => {
+    const router = useRouter();
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const handleSearch = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (searchQuery.trim()) {
+            router.push(`/?search=${encodeURIComponent(searchQuery)}`);
+        }
+    };
+
     return (
         <div className="min-h-screen bg-gray-50">
             {/* Hero Section with Gradient */}
@@ -164,17 +183,18 @@ const ToolPageLayout: React.FC<ToolPageLayoutProps> = ({
                     </p>
 
                     {/* Search Bar Decoration */}
-                    <div className="max-w-md mx-auto flex items-center gap-2 bg-white/90 backdrop-blur-sm rounded-full px-3 py-2 sm:px-4 sm:py-2.5 shadow-lg">
+                    <form onSubmit={handleSearch} className="max-w-md mx-auto flex items-center gap-2 bg-white/90 backdrop-blur-sm rounded-full px-3 py-2 sm:px-4 sm:py-2.5 shadow-lg">
                         <input
                             type="text"
-                            placeholder="Search your text here"
+                            placeholder="Search for PDF tools..."
                             className="flex-1 bg-transparent outline-none text-gray-700 placeholder-gray-400 text-sm sm:text-base"
-                            disabled
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
                         />
-                        <button className="bg-gradient-to-r from-violet-500 to-purple-600 text-white px-4 py-1.5 sm:px-6 sm:py-2 rounded-full text-sm font-medium hover:opacity-90 transition-opacity">
+                        <button type="submit" className="bg-gradient-to-r from-violet-500 to-purple-600 text-white px-4 py-1.5 sm:px-6 sm:py-2 rounded-full text-sm font-medium hover:opacity-90 transition-opacity">
                             Search
                         </button>
-                    </div>
+                    </form>
                 </div>
             </div>
 
@@ -207,9 +227,6 @@ const ToolPageLayout: React.FC<ToolPageLayoutProps> = ({
                                 </div>
                                 <h3 className="font-bold text-gray-900 mb-2 text-sm sm:text-base">{step.title}</h3>
                                 <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">{step.description}</p>
-                                <a href="#" className="inline-flex items-center text-xs sm:text-sm text-purple-600 hover:text-purple-700 mt-3 sm:mt-4 font-medium">
-                                    Learn More →
-                                </a>
                             </div>
                         ))}
                     </div>
@@ -242,16 +259,18 @@ const ToolPageLayout: React.FC<ToolPageLayoutProps> = ({
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
                         {defaultFeatures.map((feature, index) => (
-                            <div key={index} className="bg-gray-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center hover:bg-gray-100 transition-colors">
-                                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-xl flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-sm">
-                                    {feature.icon}
+                            <Link href={feature.href} key={index} className="block group">
+                                <div className="bg-gray-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center hover:bg-gray-100 transition-colors h-full">
+                                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-xl flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-sm group-hover:scale-110 transition-transform">
+                                        {feature.icon}
+                                    </div>
+                                    <h3 className="font-semibold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">{feature.title}</h3>
+                                    <p className="text-xs text-gray-500 leading-relaxed line-clamp-3 mb-2">{feature.description}</p>
+                                    <div className="inline-flex items-center text-xs text-purple-600 hover:text-purple-700 mt-auto font-medium">
+                                        Learn More <ArrowRight className="w-3 h-3 ml-1" />
+                                    </div>
                                 </div>
-                                <h3 className="font-semibold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">{feature.title}</h3>
-                                <p className="text-xs text-gray-500 leading-relaxed line-clamp-3">{feature.description}</p>
-                                <a href="#" className="inline-flex items-center text-xs text-purple-600 hover:text-purple-700 mt-2 sm:mt-3 font-medium">
-                                    Learn More →
-                                </a>
-                            </div>
+                            </Link>
                         ))}
                     </div>
                 </div>

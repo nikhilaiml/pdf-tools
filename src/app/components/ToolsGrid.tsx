@@ -92,13 +92,28 @@ const getIcon = (id: string) => {
     }
 };
 
-export default function ToolsGrid() {
+interface ToolsGridProps {
+    searchQuery?: string;
+}
+
+export default function ToolsGrid({ searchQuery = '' }: ToolsGridProps) {
     const [activeCategory, setActiveCategory] = useState('All');
 
     const categories = ['All', 'Popular', 'Convert', 'Edit', 'Security', 'AI'];
 
     // Filter logic
     const filteredTools = tools.filter(tool => {
+        // Search filter
+        if (searchQuery) {
+            const query = searchQuery.toLowerCase();
+            const matchesSearch =
+                tool.title.toLowerCase().includes(query) ||
+                tool.description.toLowerCase().includes(query) ||
+                tool.id.toLowerCase().includes(query);
+
+            if (!matchesSearch) return false;
+        }
+
         if (activeCategory === 'All') return true;
         if (activeCategory === 'Convert') return tool.category === 'convert';
         if (activeCategory === 'Edit') return tool.category === 'edit';
