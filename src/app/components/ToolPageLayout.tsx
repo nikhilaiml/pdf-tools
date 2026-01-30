@@ -280,18 +280,28 @@ const ToolPageLayout: React.FC<ToolPageLayoutProps> = ({
             </div>
 
             {/* Testimonials Section */}
-            <div className="py-12 sm:py-16 bg-gray-50 px-4">
-                <div className="max-w-5xl mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-                        {defaultTestimonials.map((testimonial, index) => (
+            <div className="py-12 sm:py-16 bg-gray-50 overflow-hidden">
+                <div className="max-w-7xl mx-auto px-4 relative">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-900 mb-8 sm:mb-12">
+                        Trusted by Happy Users
+                    </h2>
+
+                    {/* Gradient Masks */}
+                    <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none"></div>
+                    <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none"></div>
+
+                    {/* Infinite Scroll Track */}
+                    {/* Tripled data for seamless loop */}
+                    <div className="flex gap-6 animate-scroll hover:pause w-max">
+                        {[...defaultTestimonials, ...defaultTestimonials, ...defaultTestimonials, ...defaultTestimonials].map((testimonial, index) => (
                             <div
                                 key={index}
-                                className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-100"
+                                className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-100 flex-shrink-0 w-[280px] sm:w-[350px] transition-transform hover:scale-[1.02]"
                             >
                                 <div className="flex items-center gap-3 mb-3 sm:mb-4">
-                                    <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-base ${index === 0 ? 'bg-gradient-to-br from-pink-400 to-rose-500' :
-                                        index === 1 ? 'bg-gradient-to-br from-blue-400 to-indigo-500' :
-                                            'bg-gradient-to-br from-green-400 to-emerald-500'
+                                    <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-base ${index % 3 === 0 ? 'bg-gradient-to-br from-pink-400 to-rose-500' :
+                                            index % 3 === 1 ? 'bg-gradient-to-br from-blue-400 to-indigo-500' :
+                                                'bg-gradient-to-br from-green-400 to-emerald-500'
                                         }`}>
                                         {testimonial.name.charAt(0)}
                                     </div>
@@ -300,7 +310,7 @@ const ToolPageLayout: React.FC<ToolPageLayoutProps> = ({
                                         <p className="text-xs sm:text-sm text-gray-500">{testimonial.role}</p>
                                     </div>
                                 </div>
-                                <p className="text-xs sm:text-sm text-gray-600 italic mb-3 sm:mb-4 leading-relaxed">"{testimonial.quote}"</p>
+                                <p className="text-xs sm:text-sm text-gray-600 italic mb-3 sm:mb-4 leading-relaxed line-clamp-4">"{testimonial.quote}"</p>
                                 <div className="flex gap-0.5 sm:gap-1">
                                     {[...Array(testimonial.rating)].map((_, i) => (
                                         <Star key={i} className="w-3 h-3 sm:w-4 sm:h-4 fill-yellow-400 text-yellow-400" />
@@ -308,13 +318,6 @@ const ToolPageLayout: React.FC<ToolPageLayoutProps> = ({
                                 </div>
                             </div>
                         ))}
-                    </div>
-
-                    {/* Pagination Dots */}
-                    <div className="flex justify-center gap-2 mt-6 sm:mt-8">
-                        <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-purple-600"></div>
-                        <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-gray-300"></div>
-                        <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-gray-300"></div>
                     </div>
                 </div>
             </div>
@@ -327,6 +330,17 @@ const ToolPageLayout: React.FC<ToolPageLayoutProps> = ({
         }
         .animate-float {
           animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-25%); } /* Move 1/4th because we quadrupled the list */
+        }
+        .animate-scroll {
+            animation: scroll 40s linear infinite;
+        }
+        .hover\:pause:hover {
+            animation-play-state: paused;
         }
       `}</style>
             <Footer />
