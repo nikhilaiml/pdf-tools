@@ -1,158 +1,44 @@
-'use client';
+import type { Metadata } from 'next';
+import CompressPdfClient from './CompressPdfClient';
+import SEOContent from '../../components/SEOContent';
 
-import { useState } from 'react';
-import { PDFDocument } from 'pdf-lib';
-import { Loader2, FileText, Cloud } from 'lucide-react';
-import ToolPageLayout from '../../components/ToolPageLayout';
-
-const CompressPdfPage = () => {
-  const [file, setFile] = useState<File | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
-
-  const handleFileSelect = (selectedFile: File) => {
-    if (selectedFile.type === 'application/pdf' || selectedFile.name.toLowerCase().endsWith('.pdf')) {
-      setFile(selectedFile);
-    } else {
-      alert('Please select a valid PDF file.');
-    }
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
-    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      handleFileSelect(e.dataTransfer.files[0]);
-    }
-  };
-
-  const handleCompress = async () => {
-    if (!file) {
-      alert('Please select a file to compress.');
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const pdfBytes = await file.arrayBuffer();
-      const pdf = await PDFDocument.load(pdfBytes);
-
-      const newPdfBytes = await pdf.save({
-        useObjectStreams: true,
-        addDefaultPage: false,
-        objectsPerTick: 50,
-      });
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const blob = new Blob([newPdfBytes as any], { type: 'application/pdf' });
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = `compressed-${file.name}`;
-      link.click();
-      alert('PDF compressed successfully!');
-    } catch (error) {
-      console.error('Error compressing PDF:', error);
-      alert(`An error occurred: ${(error as Error).message}`);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const steps = [
-    {
-      title: "Step 1: Upload PDF",
-      description: "Select or drag and drop your PDF file that you want to compress. We support all PDF formats."
+export const metadata: Metadata = {
+    title: 'Compress PDF – Reduce PDF File Size Online',
+    description: 'Compress PDF files to reduce file size while maintaining quality. Best free online PDF compressor for easier sharing and storage.',
+    alternates: {
+        canonical: 'https://usepdf.in/tools/compress-pdf',
     },
-    {
-      title: "Step 2: Optimize",
-      description: "Our system automatically optimizes your PDF by removing redundant data and compressing internal structures."
-    },
-    {
-      title: "Step 3: Download",
-      description: "Get your compressed PDF instantly. The file size will be reduced while maintaining quality."
+    openGraph: {
+        title: 'Compress PDF – Reduce PDF File Size Online',
+        description: 'Optimize your PDF files for web and email. Reduce size significantly without losing quality.',
+        url: 'https://usepdf.in/tools/compress-pdf',
     }
-  ];
-
-  return (
-    <ToolPageLayout
-      title="Compress Your PDF"
-      subtitle="Reduce PDF file size efficiently while maintaining document quality."
-      steps={steps}
-      ctaText="Compress PDF"
-      onAction={handleCompress}
-      loading={loading}
-      disabled={!file}
-      showCta={!!file}
-    >
-      {!file ? (
-        <div
-          className={`
-            bg-white rounded-2xl sm:rounded-3xl shadow-xl border-2 border-dashed p-6 sm:p-12
-            transition-all duration-300 cursor-pointer
-            ${isDragging
-              ? 'border-purple-500 bg-purple-50 scale-[1.02]'
-              : 'border-orange-200 hover:border-purple-400 hover:shadow-2xl'
-            }
-          `}
-          onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
-          onDragLeave={(e) => { e.preventDefault(); setIsDragging(false); }}
-          onDrop={handleDrop}
-          onClick={() => document.getElementById('file-input')?.click()}
-        >
-          <div className="flex justify-center mb-4 sm:mb-6">
-            <div className={`p-4 sm:p-6 rounded-2xl sm:rounded-3xl transition-colors ${isDragging ? 'bg-purple-100' : 'bg-orange-50'}`}>
-              <Cloud className={`w-12 h-12 sm:w-16 sm:h-16 ${isDragging ? 'text-purple-500' : 'text-orange-400'}`} strokeWidth={1.5} />
-            </div>
-          </div>
-
-          <p className={`text-xl sm:text-2xl font-bold text-center mb-2 ${isDragging ? 'text-purple-700' : 'text-gray-800'}`}>
-            Drag & Drop PDF Here
-          </p>
-          <p className="text-sm sm:text-base text-gray-500 text-center">or click to browse</p>
-
-          <input
-            id="file-input"
-            type="file"
-            accept=".pdf"
-            onChange={(e) => e.target.files?.[0] && handleFileSelect(e.target.files[0])}
-            className="hidden"
-          />
-        </div>
-      ) : (
-        <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-gray-100 p-6 sm:p-8">
-          <div className="flex items-center space-x-3 sm:space-x-4 mb-6 p-3 sm:p-4 bg-gray-50 rounded-xl">
-            <div className="p-2 sm:p-3 bg-purple-100 rounded-lg">
-              <FileText className="text-purple-500 w-5 h-5 sm:w-6 sm:h-6" />
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="font-medium text-gray-900 truncate text-sm sm:text-base">{file.name}</p>
-              <p className="text-xs sm:text-sm text-gray-500">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
-            </div>
-            <button
-              onClick={() => setFile(null)}
-              className="text-xs sm:text-sm text-red-500 hover:text-red-700 font-medium"
-            >
-              Remove
-            </button>
-          </div>
-
-          <button
-            onClick={handleCompress}
-            disabled={loading}
-            className={`w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-violet-500 to-purple-600 text-white font-bold py-3 sm:py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:scale-[1.02]'
-              }`}
-          >
-            {loading ? <Loader2 className="animate-spin" size={20} /> : null}
-            <span className="text-sm sm:text-base">{loading ? 'Compressing...' : 'Compress PDF Now'}</span>
-          </button>
-
-          <p className="text-xs text-center text-gray-500 mt-4">
-            Removes redundant data and optimizes internal structure.
-          </p>
-        </div>
-      )}
-    </ToolPageLayout>
-  );
 };
 
-export default CompressPdfPage;
+export default function CompressPdfPage() {
+    return (
+        <>
+            <CompressPdfClient />
+            <SEOContent
+                title="Compress PDF - Optimize Document Size"
+                description="Make your PDF files lighter and easier to share with UsePDF's Compress PDF tool. We optimize the internal structure of your document to reduce file size significantly while preserving visual quality."
+                howTo={[
+                    { step: 1, text: "Select or drag your PDF file into the upload box." },
+                    { step: 2, text: "Our tool automatically analyzes and compresses the file." },
+                    { step: 3, text: "Download your smaller, optimized PDF file immediately." }
+                ]}
+                features={[
+                    { title: "Smart Compression", description: "We use advanced algorithms to remove redundant data while keeping text and images sharp." },
+                    { title: "Email Friendly", description: "Shrink large PDFs to fit within email attachment size limits easily." },
+                    { title: "Web Optimization", description: "Compressed PDFs load faster on websites, improving user experience and SEO." },
+                    { title: "Visual Quality", description: "We balance size reduction with visual fidelity to ensure your documents still look great." }
+                ]}
+                faq={[
+                    { question: "How much will my file size reduce?", answer: "The reduction depends on the file content. Text-heavy files compress less than image-heavy files, which can often be reduced by up to 50-80%." },
+                    { question: "Is it safe?", answer: "Yes, your files are encrypted during transfer and deleted from our servers automatically after processing." },
+                    { question: "Can I compress password-protected PDFs?", answer: "You will need to unlock the PDF first using our Unlock PDF tool before compressing it." }
+                ]}
+            />
+        </>
+    );
+}

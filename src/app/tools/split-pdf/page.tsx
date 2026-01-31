@@ -1,196 +1,44 @@
-'use client';
+import type { Metadata } from 'next';
+import SplitPdfClient from './SplitPdfClient';
+import SEOContent from '../../components/SEOContent';
 
-import { useState } from 'react';
-import { PDFDocument } from 'pdf-lib';
-import { Loader2, FileText, Cloud } from 'lucide-react';
-import ToolPageLayout from '../../components/ToolPageLayout';
-
-const SplitPdfPage = () => {
-  const [file, setFile] = useState<File | null>(null);
-  const [startPage, setStartPage] = useState('');
-  const [endPage, setEndPage] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
-
-  const handleFileSelect = (selectedFile: File) => {
-    if (selectedFile.type === 'application/pdf' || selectedFile.name.toLowerCase().endsWith('.pdf')) {
-      setFile(selectedFile);
-    } else {
-      alert('Please select a valid PDF file.');
-    }
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
-    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      handleFileSelect(e.dataTransfer.files[0]);
-    }
-  };
-
-  const handleSplit = async () => {
-    if (!file || !startPage || !endPage) {
-      alert('Please select a file and specify a valid page range.');
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const pdfBytes = await file.arrayBuffer();
-      const pdf = await PDFDocument.load(pdfBytes);
-      const newPdf = await PDFDocument.create();
-
-      const start = parseInt(startPage, 10) - 1;
-      const end = parseInt(endPage, 10);
-      const totalPages = pdf.getPageCount();
-
-      if (isNaN(start) || isNaN(end) || start < 0 || end > totalPages || start >= end) {
-        alert(`Invalid range. The document has ${totalPages} pages. Please check your inputs.`);
-        setLoading(false);
-        return;
-      }
-
-      const pageIndices = Array.from({ length: end - start }, (_, i) => start + i);
-      const copiedPages = await newPdf.copyPages(pdf, pageIndices);
-      copiedPages.forEach((page) => newPdf.addPage(page));
-
-      const newPdfBytes = await newPdf.save();
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const blob = new Blob([newPdfBytes as any], { type: 'application/pdf' });
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = `split-${start + 1}-${end}-${file.name}`;
-      link.click();
-      alert('PDF split successfully!');
-    } catch (error) {
-      console.error('Error splitting PDF:', error);
-      alert(`An error occurred: ${(error as Error).message}`);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const steps = [
-    {
-      title: "Step 1: Upload PDF",
-      description: "Select or drag and drop your PDF file that you want to split into separate pages."
+export const metadata: Metadata = {
+    title: 'Split PDF – Extract Pages from PDF Online',
+    description: 'Split PDF files and extract pages accurately. UsePDF provides a free online tool to separate PDF pages instantly without quality loss.',
+    alternates: {
+        canonical: 'https://usepdf.in/tools/split-pdf',
     },
-    {
-      title: "Step 2: Select Range",
-      description: "Enter the start and end page numbers to extract the specific pages you need."
-    },
-    {
-      title: "Step 3: Download",
-      description: "Get your extracted pages as a new PDF file instantly. Quick and easy!"
+    openGraph: {
+        title: 'Split PDF – Extract Pages from PDF Online',
+        description: 'Extract pages from your PDF documents easily with UsePDF. Free, fast, and secure.',
+        url: 'https://usepdf.in/tools/split-pdf',
     }
-  ];
-
-  return (
-    <ToolPageLayout
-      title="Split Your PDF"
-      subtitle="Extract specific pages from your PDF document easily."
-      steps={steps}
-      ctaText="Split PDF"
-      onAction={handleSplit}
-      loading={loading}
-      disabled={!file || !startPage || !endPage}
-      showCta={!!file}
-    >
-      {!file ? (
-        <div
-          className={`
-            bg-white rounded-2xl sm:rounded-3xl shadow-xl border-2 border-dashed p-6 sm:p-12
-            transition-all duration-300 cursor-pointer
-            ${isDragging
-              ? 'border-purple-500 bg-purple-50 scale-[1.02]'
-              : 'border-orange-200 hover:border-purple-400 hover:shadow-2xl'
-            }
-          `}
-          onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
-          onDragLeave={(e) => { e.preventDefault(); setIsDragging(false); }}
-          onDrop={handleDrop}
-          onClick={() => document.getElementById('file-input')?.click()}
-        >
-          <div className="flex justify-center mb-4 sm:mb-6">
-            <div className={`p-4 sm:p-6 rounded-2xl sm:rounded-3xl transition-colors ${isDragging ? 'bg-purple-100' : 'bg-orange-50'}`}>
-              <Cloud className={`w-12 h-12 sm:w-16 sm:h-16 ${isDragging ? 'text-purple-500' : 'text-orange-400'}`} strokeWidth={1.5} />
-            </div>
-          </div>
-
-          <p className={`text-xl sm:text-2xl font-bold text-center mb-2 ${isDragging ? 'text-purple-700' : 'text-gray-800'}`}>
-            Drag & Drop PDF Here
-          </p>
-          <p className="text-sm sm:text-base text-gray-500 text-center">or click to browse</p>
-
-          <input
-            id="file-input"
-            type="file"
-            accept=".pdf"
-            onChange={(e) => e.target.files?.[0] && handleFileSelect(e.target.files[0])}
-            className="hidden"
-          />
-        </div>
-      ) : (
-        <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-gray-100 p-6 sm:p-8">
-          <div className="flex items-center space-x-3 sm:space-x-4 mb-6 p-3 sm:p-4 bg-gray-50 rounded-xl">
-            <div className="p-2 sm:p-3 bg-purple-100 rounded-lg">
-              <FileText className="text-purple-500 w-5 h-5 sm:w-6 sm:h-6" />
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="font-medium text-gray-900 truncate text-sm sm:text-base">{file.name}</p>
-              <p className="text-xs sm:text-sm text-gray-500">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
-            </div>
-            <button
-              onClick={() => setFile(null)}
-              className="text-xs sm:text-sm text-red-500 hover:text-red-700 font-medium"
-            >
-              Remove
-            </button>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4 mb-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Start Page</label>
-              <input
-                type="number"
-                min="1"
-                placeholder="e.g. 1"
-                value={startPage}
-                onChange={(e) => setStartPage(e.target.value)}
-                className="w-full bg-gray-50 border border-gray-200 rounded-xl py-3 px-4 focus:ring-2 focus:ring-purple-500 focus:border-transparent focus:outline-none text-gray-900 text-sm sm:text-base"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">End Page</label>
-              <input
-                type="number"
-                min="1"
-                placeholder="e.g. 5"
-                value={endPage}
-                onChange={(e) => setEndPage(e.target.value)}
-                className="w-full bg-gray-50 border border-gray-200 rounded-xl py-3 px-4 focus:ring-2 focus:ring-purple-500 focus:border-transparent focus:outline-none text-gray-900 text-sm sm:text-base"
-              />
-            </div>
-          </div>
-
-          <button
-            onClick={handleSplit}
-            disabled={loading || !startPage || !endPage}
-            className={`w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-violet-500 to-purple-600 text-white font-bold py-3 sm:py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl ${loading || !startPage || !endPage ? 'opacity-50 cursor-not-allowed' : 'hover:scale-[1.02]'
-              }`}
-          >
-            {loading ? <Loader2 className="animate-spin" size={20} /> : null}
-            <span className="text-sm sm:text-base">{loading ? 'Splitting...' : 'Split PDF Now'}</span>
-          </button>
-
-          <p className="text-xs text-center text-gray-500 mt-4">
-            The extracted pages will be saved as a new PDF file.
-          </p>
-        </div>
-      )}
-    </ToolPageLayout>
-  );
 };
 
-export default SplitPdfPage;
+export default function SplitPdfPage() {
+    return (
+        <>
+            <SplitPdfClient />
+            <SEOContent
+                title="Split PDF Online – Extract Pages Instantly"
+                description="Need to extract specific pages from a large PDF document? UsePDF's Split PDF tool allows you to separate PDF pages quickly and easily. Customize your page ranges and download exactly what you need."
+                howTo={[
+                    { step: 1, text: "Upload the PDF file you want to split." },
+                    { step: 2, text: "Enter the start and end page numbers for the range you want to extract." },
+                    { step: 3, text: "Click 'Split PDF Now' to process and download your new file." }
+                ]}
+                features={[
+                    { title: "Precise Extraction", description: "Select exact page ranges to extract. Control exactly what goes into your new PDF." },
+                    { title: "Fast Processing", description: "Our separation engine works instantly, even on large documents." },
+                    { title: "No Watermarks", description: "Your output files are clean and professional, with no watermarks added." },
+                    { title: "Secure Handling", description: "Your files are processed securely and deleted automatically." }
+                ]}
+                faq={[
+                    { question: "Can I extract a single page?", answer: "Yes, simply set the 'Start Page' and 'End Page' to the same number (e.g., Start: 5, End: 5) to extract just that one page." },
+                    { question: "Will the quality decrease?", answer: "No, splitting a PDF preserves the original quality of the pages. Text and images remain sharp." },
+                    { question: "Is this tool free?", answer: "Yes, UsePDF provides this Split PDF tool completely free of charge." }
+                ]}
+            />
+        </>
+    );
+}

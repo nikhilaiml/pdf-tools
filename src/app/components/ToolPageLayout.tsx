@@ -48,6 +48,7 @@ interface ToolPageLayoutProps {
     disabled?: boolean;
     showCta?: boolean;
     children: React.ReactNode;
+    seoContent?: React.ReactNode;
 }
 
 // Floating icons for decoration
@@ -127,7 +128,8 @@ const ToolPageLayout: React.FC<ToolPageLayoutProps> = ({
     loading = false,
     disabled = false,
     showCta = true,
-    children
+    children,
+    seoContent
 }) => {
     const router = useRouter();
     const [searchQuery, setSearchQuery] = useState('');
@@ -300,8 +302,8 @@ const ToolPageLayout: React.FC<ToolPageLayoutProps> = ({
                             >
                                 <div className="flex items-center gap-3 mb-3 sm:mb-4">
                                     <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-base ${index % 3 === 0 ? 'bg-gradient-to-br from-pink-400 to-rose-500' :
-                                            index % 3 === 1 ? 'bg-gradient-to-br from-blue-400 to-indigo-500' :
-                                                'bg-gradient-to-br from-green-400 to-emerald-500'
+                                        index % 3 === 1 ? 'bg-gradient-to-br from-blue-400 to-indigo-500' :
+                                            'bg-gradient-to-br from-green-400 to-emerald-500'
                                         }`}>
                                         {testimonial.name.charAt(0)}
                                     </div>
@@ -321,6 +323,15 @@ const ToolPageLayout: React.FC<ToolPageLayoutProps> = ({
                     </div>
                 </div>
             </div>
+
+            {/* SEO Content Section */}
+            {seoContent && (
+                <div className="py-12 bg-white border-t border-gray-100">
+                    <div className="max-w-5xl mx-auto px-4">
+                        {seoContent}
+                    </div>
+                </div>
+            )}
 
             {/* Animation Styles */}
             <style jsx>{`
