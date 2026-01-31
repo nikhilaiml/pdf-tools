@@ -23,9 +23,9 @@ export async function convertUrlToPdf(url: string) {
                 args: chromium.args,
                 defaultViewport: chromium.defaultViewport,
                 executablePath: await chromium.executablePath(),
-                headless: chromium.headless,
+                headless: chromium.headless as any,
                 ignoreHTTPSErrors: true,
-            });
+            } as any);
         } else {
             console.log("Running in Local mode");
             // Local Development - Dynamic import to avoid build-time hard dependency if unused
