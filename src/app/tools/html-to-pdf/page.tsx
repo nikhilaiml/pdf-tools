@@ -1,113 +1,44 @@
-'use client';
+import type { Metadata } from 'next';
+import HtmlToPdfClient from './HtmlToPdfClient';
+import SEOContent from '../../components/SEOContent';
 
-import { useState, useRef } from 'react';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
-import { Loader2, FileCode, Download, Eye } from 'lucide-react';
-import ToolPageLayout from '../../components/ToolPageLayout';
-
-const HtmlToPdfPage = () => {
-    const [htmlCode, setHtmlCode] = useState('<h1>Hello World</h1>\n<p>This is a sample HTML content.</p>');
-    const [loading, setLoading] = useState(false);
-    const previewRef = useRef<HTMLDivElement>(null);
-
-    const handleConvert = async () => {
-        if (!previewRef.current) return;
-
-        setLoading(true);
-        try {
-            const canvas = await html2canvas(previewRef.current, {
-                scale: 2
-            });
-            const imgData = canvas.toDataURL('image/png');
-
-            const pdf = new jsPDF({
-                orientation: 'portrait',
-                unit: 'px',
-                format: [canvas.width, canvas.height]
-            });
-
-            pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
-            pdf.save('html-converted.pdf');
-        } catch (error) {
-            console.error('Error creating PDF:', error);
-            alert('Failed to generate PDF.');
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const steps = [
-        {
-            title: "Step 1: Enter HTML",
-            description: "Paste or type your HTML code in the editor on the left."
-        },
-        {
-            title: "Step 2: Preview",
-            description: "See how your HTML will look in the preview panel on the right."
-        },
-        {
-            title: "Step 3: Download",
-            description: "Click the download button to convert and save as PDF."
-        }
-    ];
-
-    return (
-        <ToolPageLayout
-            title="HTML to PDF"
-            subtitle="Convert raw HTML code into a PDF document instantly."
-            steps={steps}
-            ctaText="Download PDF"
-            onAction={handleConvert}
-            loading={loading}
-            disabled={!htmlCode.trim()}
-            showCta={false}
-        >
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Input Section */}
-                <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-4 sm:p-6 flex flex-col h-[500px]">
-                    <h3 className="flex items-center space-x-2 font-bold text-gray-900 mb-4">
-                        <FileCode size={20} className="text-purple-500" />
-                        <span>HTML Input</span>
-                    </h3>
-                    <textarea
-                        value={htmlCode}
-                        onChange={(e) => setHtmlCode(e.target.value)}
-                        className="flex-1 w-full bg-gray-50 border border-gray-200 rounded-xl p-4 font-mono text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent focus:outline-none resize-none"
-                        placeholder="Paste your HTML here..."
-                    />
-                </div>
-
-                {/* Preview Section */}
-                <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-4 sm:p-6 flex flex-col h-[500px]">
-                    <div className="flex justify-between items-center mb-4">
-                        <h3 className="flex items-center space-x-2 font-bold text-gray-900">
-                            <Eye size={20} className="text-purple-500" />
-                            <span>Preview</span>
-                        </h3>
-                        <button
-                            onClick={handleConvert}
-                            disabled={loading}
-                            className={`flex items-center space-x-2 bg-gradient-to-r from-violet-500 to-purple-600 text-white font-bold py-2 px-4 rounded-lg transition-all shadow-lg hover:shadow-xl ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105'
-                                }`}
-                        >
-                            {loading ? <Loader2 className="animate-spin" size={16} /> : <Download size={16} />}
-                            <span className="text-sm">Download PDF</span>
-                        </button>
-                    </div>
-
-                    <div className="flex-1 w-full bg-white rounded-xl border border-gray-200 overflow-auto p-4">
-                        <div
-                            ref={previewRef}
-                            className="bg-white text-black min-h-full prose max-w-none"
-                            style={{ minWidth: '100%' }}
-                            dangerouslySetInnerHTML={{ __html: htmlCode }}
-                        />
-                    </div>
-                </div>
-            </div>
-        </ToolPageLayout>
-    );
+export const metadata: Metadata = {
+    title: 'HTML to PDF Converter – Convert Webpages or Code',
+    description: 'Convert HTML code or Website URLs to PDF files online for free. Capture full webpages instantly with UsePDF.',
+    alternates: {
+        canonical: 'https://usepdf.in/tools/html-to-pdf',
+    },
+    openGraph: {
+        title: 'HTML to PDF Converter – Convert Webpages or Code',
+        description: 'Turn websites or HTML snippets into PDF documents. Accurate rendering and free download.',
+        url: 'https://usepdf.in/tools/html-to-pdf',
+    }
 };
 
-export default HtmlToPdfPage;
+export default function HtmlToPdfPage() {
+    return (
+        <>
+            <HtmlToPdfClient />
+            <SEOContent
+                title="HTML & URL to PDF Converter"
+                description="Need to save a website as a PDF? UsePDF offers a dual-mode converter: simply paste Raw HTML code or enter a live URL. Our advanced engine captures the webpage exactly as it looks and converts it into a high-quality PDF document."
+                howTo={[
+                    { step: 1, text: "Choose your mode: 'Raw HTML' or 'From URL'." },
+                    { step: 2, text: "Paste your code or enter the website address (e.g., https://google.com)." },
+                    { step: 3, text: "Click 'Download PDF' to capture and save the document." }
+                ]}
+                features={[
+                    { title: "Dual Capture Mode", description: "Convert both static HTML snippets or dynamic live websites." },
+                    { title: "High Fidelity", description: "Our URL converter uses a real browser engine to ensure the PDF looks exactly like the website." },
+                    { title: "Fast Processing", description: "Get your PDF in seconds, no matter how complex the page is." },
+                    { title: "Dev Friendly", description: "Perfect for developers needing to generate reports or documentations from HTML." }
+                ]}
+                faq={[
+                    { question: "Does styling (CSS) work?", answer: "Yes! If you provide a URL, we capture all styles. For raw HTML, inline styles work best." },
+                    { question: "Can I convert pages behind a login?", answer: "No, our server cannot access private pages that require a login. Only public URLs work." },
+                    { question: "Is it free?", answer: "Yes, you can convert unlimited pages for free." }
+                ]}
+            />
+        </>
+    );
+}
