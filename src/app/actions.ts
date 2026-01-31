@@ -1,6 +1,8 @@
 'use server'
 
-import puppeteer from 'puppeteer';
+// NOTE: We use dynamic imports for ALL puppeteer related packages to ensure
+// compatibility across Vercel (serverless) and Local environments.
+// Do NOT add top-level imports for puppeteer, puppeteer-core, or @sparticuz/chromium.
 
 export async function convertUrlToPdf(url: string) {
     let browser;
@@ -8,10 +10,32 @@ export async function convertUrlToPdf(url: string) {
         // Validate URL
         new URL(url); // Will throw if invalid
 
-        browser = await puppeteer.launch({
-            headless: true,
-            args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        });
+        // Vercel / Production Check
+        if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_VERSION) {
+            console.log("Running in Vercel/Production mode");
+            // @ts-ignore
+            const chromium = await import('@sparticuz/chromium').then(mod => mod.default);
+            // @ts-ignore
+            const puppeteerCore = await import('puppeteer-core').then(mod => mod.default);
+
+            // @ts-ignore
+            browser = await puppeteerCore.launch({
+                args: chromium.args,
+                defaultViewport: chromium.defaultViewport,
+                executablePath: await chromium.executablePath(),
+                headless: chromium.headless,
+                ignoreHTTPSErrors: true,
+            });
+        } else {
+            console.log("Running in Local mode");
+            // Local Development - Dynamic import to avoid build-time hard dependency if unused
+            // @ts-ignore
+            const puppeteer = await import('puppeteer').then(mod => mod.default);
+            browser = await puppeteer.launch({
+                headless: true, // Use boolean for standard puppeteer
+                args: ['--no-sandbox', '--disable-setuid-sandbox'],
+            });
+        }
 
         const page = await browser.newPage();
 
