@@ -10,6 +10,11 @@ const SIZES = {
     'Letter': PageSizes.Letter,
     'A3': PageSizes.A3,
     'Legal': [612, 1008] as [number, number],
+    'A5': PageSizes.A5,
+    'B4': PageSizes.B4,
+    'B5': PageSizes.B5,
+    'Executive': PageSizes.Executive,
+    'Tabloid': PageSizes.Tabloid,
 };
 
 export default function ResizePagesPage() {
@@ -163,14 +168,14 @@ export default function ResizePagesPage() {
                     {/* Size Options */}
                     <div className="mb-6">
                         <label className="block text-sm font-medium text-gray-700 mb-3">Target Page Size</label>
-                        <div className="grid grid-cols-2 gap-3">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                             {(Object.keys(SIZES) as Array<keyof typeof SIZES>).map((size) => (
                                 <button
                                     key={size}
                                     onClick={() => setTargetSize(size)}
                                     className={`p-3 rounded-xl transition-all ${targetSize === size
-                                            ? 'bg-gradient-to-r from-violet-500 to-purple-600 text-white shadow-lg'
-                                            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                        ? 'bg-gradient-to-r from-violet-500 to-purple-600 text-white shadow-lg'
+                                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                                         }`}
                                 >
                                     <div className="font-semibold text-sm">{size}</div>
@@ -179,6 +184,11 @@ export default function ResizePagesPage() {
                                         {size === 'Letter' && '216 × 279 mm'}
                                         {size === 'A3' && '297 × 420 mm'}
                                         {size === 'Legal' && '216 × 356 mm'}
+                                        {size === 'A5' && '148 × 210 mm'}
+                                        {size === 'B4' && '250 × 353 mm'}
+                                        {size === 'B5' && '176 × 250 mm'}
+                                        {size === 'Executive' && '184 × 267 mm'}
+                                        {size === 'Tabloid' && '279 × 432 mm'}
                                     </div>
                                 </button>
                             ))}
