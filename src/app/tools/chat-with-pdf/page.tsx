@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Send, Bot, User, Loader2, FileText, RefreshCw, AlertCircle } from 'lucide-react';
-import FileUploader from '../../components/FileUploader';
+import { Send, Bot, User, Loader2, FileText, RefreshCw, AlertCircle, Cloud } from 'lucide-react';
+import ToolPageLayout from '../../components/ToolPageLayout';
 
 interface TextChunk {
     id: number;
@@ -24,6 +24,7 @@ export default function ChatWithPdfPage() {
     const [messages, setMessages] = useState<Message[]>([]);
     const [input, setInput] = useState('');
     const [error, setError] = useState<string | null>(null);
+    const [isDragging, setIsDragging] = useState(false);
 
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -36,11 +37,23 @@ export default function ChatWithPdfPage() {
     }, [messages]);
 
     const handleFileSelect = async (selectedFile: File) => {
-        setFile(selectedFile);
-        setError(null);
-        setMessages([]);
-        setChunks([]);
-        await processPdf(selectedFile);
+        if (selectedFile.type === 'application/pdf' || selectedFile.name.toLowerCase().endsWith('.pdf')) {
+            setFile(selectedFile);
+            setError(null);
+            setMessages([]);
+            setChunks([]);
+            await processPdf(selectedFile);
+        } else {
+            alert('Please select a valid PDF file.');
+        }
+    };
+
+    const handleDrop = (e: React.DragEvent) => {
+        e.preventDefault();
+        setIsDragging(false);
+        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+            handleFileSelect(e.dataTransfer.files[0]);
+        }
     };
 
     const processPdf = async (fileToProcess: File) => {
@@ -173,33 +186,77 @@ export default function ChatWithPdfPage() {
         }, 500);
     };
 
-    return (
-        <div className="max-w-4xl mx-auto px-4 py-8 h-[calc(100vh-100px)] flex flex-col">
-            <h1 className="text-3xl font-bold mb-4 text-center text-gray-900 dark:text-white">
-                Chat with PDF (Offline)
-            </h1>
+    const steps = [
+        {
+            title: "Step 1: Upload PDF",
+            description: "Upload the PDF document you want to chat with."
+        },
+        {
+            title: "Step 2: Ask Questions",
+            description: "Type your questions about the document in the chat."
+        },
+        {
+            title: "Step 3: Get Answers",
+            description: "Get instant answers based on the content of your PDF."
+        }
+    ];
 
+    return (
+        <ToolPageLayout
+            title="Chat with PDF"
+            subtitle="Interact with your documents using AI. Ask questions and extract information instantly."
+            steps={steps}
+            showCta={false}
+        >
             {!file ? (
-                <div className="flex-1 flex flex-col items-center">
-                    <p className="text-center text-gray-500 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
-                        Ask questions about your PDF. Processing happens entirely in your browser.
-                        <br /><span className="text-xs text-blue-500 font-medium">No API Key Required • 100% Private</span>
+                <div
+                    className={`
+                        bg-white rounded-2xl sm:rounded-3xl shadow-xl border-2 border-dashed p-6 sm:p-12
+                        transition-all duration-300 cursor-pointer
+                        ${isDragging
+                            ? 'border-purple-500 bg-purple-50 scale-[1.02]'
+                            : 'border-orange-200 hover:border-purple-400 hover:shadow-2xl'
+                        }
+                    `}
+                    onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
+                    onDragLeave={(e) => { e.preventDefault(); setIsDragging(false); }}
+                    onDrop={handleDrop}
+                    onClick={() => document.getElementById('file-input')?.click()}
+                >
+                    <div className="flex justify-center mb-4 sm:mb-6">
+                        <div className={`p-4 sm:p-6 rounded-2xl sm:rounded-3xl transition-colors ${isDragging ? 'bg-purple-100' : 'bg-orange-50'}`}>
+                            <Cloud className={`w-12 h-12 sm:w-16 sm:h-16 ${isDragging ? 'text-purple-500' : 'text-orange-400'}`} strokeWidth={1.5} />
+                        </div>
+                    </div>
+
+                    <p className={`text-xl sm:text-2xl font-bold text-center mb-2 ${isDragging ? 'text-purple-700' : 'text-gray-800'}`}>
+                        Drag & Drop PDF Here
                     </p>
-                    <FileUploader onFileSelect={handleFileSelect} label="Select PDF to Chat With" />
+                    <p className="text-sm sm:text-base text-gray-500 text-center">or click to browse</p>
+
+                    <input
+                        id="file-input"
+                        type="file"
+                        accept=".pdf"
+                        onChange={(e) => e.target.files?.[0] && handleFileSelect(e.target.files[0])}
+                        className="hidden"
+                    />
                     {error && (
-                        <div className="mt-6 p-4 bg-red-50 text-red-600 rounded-lg flex items-center">
+                        <div className="mt-6 p-4 bg-red-50 text-red-600 rounded-lg flex items-center justify-center">
                             <AlertCircle className="mr-2" size={20} />
                             {error}
                         </div>
                     )}
                 </div>
             ) : (
-                <div className="flex-1 flex flex-col bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden animate-in fade-in duration-300">
+                <div className="flex flex-col bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-gray-100 overflow-hidden h-[600px]">
                     {/* Header */}
-                    <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 flex justify-between items-center">
+                    <div className="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
                         <div className="flex items-center space-x-2">
-                            <FileText className="text-blue-500" size={20} />
-                            <span className="font-semibold text-gray-800 dark:text-white truncate max-w-[200px]">{file.name}</span>
+                            <div className="p-2 bg-blue-100 rounded-lg">
+                                <FileText className="text-blue-500" size={20} />
+                            </div>
+                            <span className="font-semibold text-gray-800 truncate max-w-[200px]">{file.name}</span>
                         </div>
                         <button
                             onClick={() => setFile(null)}
@@ -210,7 +267,7 @@ export default function ChatWithPdfPage() {
                     </div>
 
                     {/* Chat Area */}
-                    <div className="flex-1 overflow-y-auto p-4 space-y-6 bg-gray-100 dark:bg-gray-950/50">
+                    <div className="flex-1 overflow-y-auto p-4 space-y-6 bg-gray-50/50">
                         {isProcessing && (
                             <div className="flex flex-col items-center justify-center py-10 opacity-70">
                                 <Loader2 className="w-8 h-8 text-blue-500 animate-spin mb-2" />
@@ -223,7 +280,7 @@ export default function ChatWithPdfPage() {
                                 <div className={`max-w-[85%] md:max-w-[75%] rounded-2xl p-4 shadow-sm
                                     ${msg.role === 'user'
                                         ? 'bg-blue-600 text-white rounded-br-none'
-                                        : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-bl-none'
+                                        : 'bg-white border border-gray-200 rounded-bl-none'
                                     }
                                 `}>
                                     <div className="flex items-center space-x-2 mb-1 opacity-80 text-xs">
@@ -231,7 +288,7 @@ export default function ChatWithPdfPage() {
                                         <span className="uppercase font-bold tracking-wider">{msg.role === 'user' ? 'You' : 'PDF Bot'}</span>
                                     </div>
 
-                                    <div className="mb-2 leading-relaxed whitespace-pre-wrap">
+                                    <div className="mb-2 leading-relaxed whitespace-pre-wrap text-sm sm:text-base">
                                         {msg.content}
                                     </div>
 
@@ -239,8 +296,8 @@ export default function ChatWithPdfPage() {
                                     {msg.sources && msg.sources.length > 0 && (
                                         <div className="space-y-2 mt-4 pt-3 border-t border-gray-200/20">
                                             {msg.sources.map(source => (
-                                                <div key={source.id} className="bg-gray-50 dark:bg-gray-900/50 p-3 rounded text-sm text-gray-600 dark:text-gray-300 border-l-4 border-blue-400">
-                                                    <p className="italic mb-1">"{source.text}..."</p>
+                                                <div key={source.id} className="bg-gray-50/50 p-3 rounded text-sm border-l-4 border-blue-400">
+                                                    <p className="italic mb-1 text-gray-600">"{source.text}..."</p>
                                                     <span className="text-xs font-bold text-gray-400">Page {source.page}</span>
                                                 </div>
                                             ))}
@@ -253,7 +310,7 @@ export default function ChatWithPdfPage() {
                     </div>
 
                     {/* Input Area */}
-                    <form onSubmit={handleSend} className="p-4 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+                    <form onSubmit={handleSend} className="p-4 bg-white border-t border-gray-100">
                         <div className="flex items-center space-x-2">
                             <input
                                 type="text"
@@ -261,12 +318,12 @@ export default function ChatWithPdfPage() {
                                 onChange={(e) => setInput(e.target.value)}
                                 placeholder={isProcessing ? "Processing..." : "Ask a question..."}
                                 disabled={isProcessing}
-                                className="flex-1 bg-gray-100 dark:bg-gray-900 border-0 rounded-full px-5 py-3 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:text-white"
+                                className="flex-1 bg-gray-100 border-0 rounded-xl px-5 py-3 focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-800"
                             />
                             <button
                                 type="submit"
                                 disabled={!input.trim() || isProcessing}
-                                className="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
                             >
                                 <Send size={20} />
                             </button>
@@ -274,6 +331,6 @@ export default function ChatWithPdfPage() {
                     </form>
                 </div>
             )}
-        </div>
+        </ToolPageLayout>
     );
 }

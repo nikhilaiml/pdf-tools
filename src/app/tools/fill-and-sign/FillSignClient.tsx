@@ -1,9 +1,10 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Loader2, Upload, Type, Pen, Trash2, Save, X, Grip } from 'lucide-react';
+import { Loader2, Type, Save, X, Grip, Cloud } from 'lucide-react';
 import { PDFDocument, rgb } from 'pdf-lib';
-import { DndContext, useDraggable, useDroppable, DragEndEvent } from '@dnd-kit/core';
+import { DndContext, useDraggable, DragEndEvent } from '@dnd-kit/core';
+import ToolPageLayout from '../../components/ToolPageLayout';
 
 interface TextElement {
     id: string;
@@ -11,15 +12,6 @@ interface TextElement {
     x: number;
     y: number;
     fontSize: number;
-}
-
-interface SignatureElement {
-    id: string;
-    image: string; // Base64 data URL
-    x: number;
-    y: number;
-    width: number;
-    height: number;
 }
 
 const DraggableText = ({ element, updatePos, updateText, remove }: { element: TextElement, updatePos: (id: string, dx: number, dy: number) => void, updateText: (id: string, text: string) => void, remove: (id: string) => void }) => {
@@ -72,6 +64,7 @@ const FillSignClient = () => {
     const [pageNum, setPageNum] = useState(1);
     const [scale, setScale] = useState(1.5);
     const [loading, setLoading] = useState(false);
+    const [isDragging, setIsDragging] = useState(false);
 
     const [texts, setTexts] = useState<TextElement[]>([]);
 
@@ -204,30 +197,74 @@ const FillSignClient = () => {
         }
     };
 
+    const handleDrop = (e: React.DragEvent) => {
+        e.preventDefault();
+        setIsDragging(false);
+        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+            setFile(e.dataTransfer.files[0]);
+        }
+    };
+
+    const steps = [
+        {
+            title: "Step 1: Upload PDF",
+            description: "Upload the PDF you want to fill, sign, or annotate."
+        },
+        {
+            title: "Step 2: Add Content",
+            description: "Insert text fields, add your signature, or checkmarks anywhere on the page."
+        },
+        {
+            title: "Step 3: Download",
+            description: "Save your document with all the filled data permanently."
+        }
+    ];
+
     return (
-        <div className="flex flex-col h-screen max-h-[calc(100vh-100px)]">
+        <ToolPageLayout
+            title="Fill & Sign PDF"
+            subtitle="Securely fill out PDF forms and sign documents online for free."
+            steps={steps}
+            showCta={false}
+        >
             {!file ? (
-                <div className="flex-1 flex flex-col items-center justify-center p-8">
-                    <div
-                        onClick={() => document.getElementById('fill-upload')?.click()}
-                        className="bg-gray-50 dark:bg-gray-800 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-xl p-12 text-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                    >
-                        <Upload className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Upload PDF to Fill & Sign</h3>
-                        <p className="text-gray-500">Click to browse your files</p>
-                        <input
-                            id="fill-upload"
-                            type="file"
-                            accept=".pdf"
-                            className="hidden"
-                            onChange={(e) => e.target.files?.[0] && setFile(e.target.files[0])}
-                        />
+                <div
+                    className={`
+                        bg-white rounded-2xl sm:rounded-3xl shadow-xl border-2 border-dashed p-6 sm:p-12
+                        transition-all duration-300 cursor-pointer
+                        ${isDragging
+                            ? 'border-purple-500 bg-purple-50 scale-[1.02]'
+                            : 'border-orange-200 hover:border-purple-400 hover:shadow-2xl'
+                        }
+                    `}
+                    onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
+                    onDragLeave={(e) => { e.preventDefault(); setIsDragging(false); }}
+                    onDrop={handleDrop}
+                    onClick={() => document.getElementById('fill-upload')?.click()}
+                >
+                    <div className="flex justify-center mb-4 sm:mb-6">
+                        <div className={`p-4 sm:p-6 rounded-2xl sm:rounded-3xl transition-colors ${isDragging ? 'bg-purple-100' : 'bg-orange-50'}`}>
+                            <Cloud className={`w-12 h-12 sm:w-16 sm:h-16 ${isDragging ? 'text-purple-500' : 'text-orange-400'}`} strokeWidth={1.5} />
+                        </div>
                     </div>
+
+                    <p className={`text-xl sm:text-2xl font-bold text-center mb-2 ${isDragging ? 'text-purple-700' : 'text-gray-800'}`}>
+                        Drag & Drop PDF Here
+                    </p>
+                    <p className="text-sm sm:text-base text-gray-500 text-center">or click to browse</p>
+
+                    <input
+                        id="fill-upload"
+                        type="file"
+                        accept=".pdf"
+                        className="hidden"
+                        onChange={(e) => e.target.files?.[0] && setFile(e.target.files[0])}
+                    />
                 </div>
             ) : (
-                <>
+                <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
                     {/* Toolbar */}
-                    <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-4 flex items-center justify-between gap-4">
+                    <div className="bg-gray-50 border-b border-gray-100 p-4 flex items-center justify-between gap-4">
                         <div className="flex items-center gap-2">
                             <button
                                 onClick={addText}
@@ -248,7 +285,7 @@ const FillSignClient = () => {
                             <button
                                 onClick={handleSave}
                                 disabled={loading}
-                                className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium shadow-sm transition-colors"
+                                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-violet-500 to-purple-600 text-white rounded-lg font-medium shadow-sm transition-all hover:shadow-md"
                             >
                                 {loading ? <Loader2 className="animate-spin" size={18} /> : <Save size={18} />}
                                 Save PDF
@@ -261,9 +298,9 @@ const FillSignClient = () => {
 
                     {/* Canvas Area */}
                     <DndContext onDragEnd={handleDragEnd}>
-                        <div className="flex-1 bg-gray-100 dark:bg-gray-900 overflow-auto flex justify-center p-8 relative" ref={containerRef}>
-                            <div className="relative shadow-xl">
-                                <canvas ref={canvasRef} className="bg-white" />
+                        <div className="bg-gray-100 overflow-auto flex justify-center p-8 relative min-h-[500px]" ref={containerRef}>
+                            <div className="relative shadow-2xl border border-gray-200">
+                                <canvas ref={canvasRef} className="bg-white block" />
                                 {/* Overlay Layer for Elements */}
                                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
                                     <div className="relative w-full h-full pointer-events-auto">
@@ -275,9 +312,9 @@ const FillSignClient = () => {
                             </div>
                         </div>
                     </DndContext>
-                </>
+                </div>
             )}
-        </div>
+        </ToolPageLayout>
     );
 };
 

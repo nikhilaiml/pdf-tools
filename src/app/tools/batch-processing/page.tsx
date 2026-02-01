@@ -1,18 +1,32 @@
 'use client';
 
 import BatchProcessor from './BatchProcessor';
+import ToolPageLayout from '../../components/ToolPageLayout';
 
 export default function BatchProcessingPage() {
-    return (
-        <div className="max-w-4xl mx-auto px-4 py-8 text-center">
-            <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">
-                Batch Processing
-            </h1>
-            <p className="text-gray-500 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
-                Process multiple files efficiently.
-            </p>
+    const steps = [
+        {
+            title: "Step 1: Upload Files",
+            description: "Select multiple PDF or image files to process at once."
+        },
+        {
+            title: "Step 2: Choose Action",
+            description: "Select an action like Compress, Flatten, or Convert to PDF."
+        },
+        {
+            title: "Step 3: Process & Download",
+            description: "Run the batch process and download the results as a ZIP."
+        }
+    ];
 
+    return (
+        <ToolPageLayout
+            title="Batch Processing"
+            subtitle="Process multiple files efficiently. Compress, flatten, or convert files in bulk."
+            steps={steps}
+            showCta={false}
+        >
             <BatchProcessor />
-        </div>
+        </ToolPageLayout>
     );
 }

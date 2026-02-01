@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Loader2, FileText, Play, Pause, Square, RotateCcw } from 'lucide-react';
-import FileUploader from '../../components/FileUploader';
+import { Loader2, FileText, Play, Pause, Square, Cloud } from 'lucide-react';
+import ToolPageLayout from '../../components/ToolPageLayout';
 
 // We need to properly type the window.speechSynthesis API
 interface SpeechState {
@@ -24,6 +24,7 @@ const PdfToAudioClient = () => {
     const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
     const [selectedVoice, setSelectedVoice] = useState<string>('');
     const [rate, setRate] = useState(1);
+    const [isDragging, setIsDragging] = useState(false);
 
     // Use a ref to keep track of the utterance so we can control it
     const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
@@ -123,24 +124,77 @@ const PdfToAudioClient = () => {
         setSpeechState(prev => ({ ...prev, isPlaying: false, isPaused: false, progress: 0 }));
     };
 
-    return (
-        <div className="max-w-4xl mx-auto px-4 py-8">
-            <h1 className="text-3xl font-bold mb-4 text-center text-gray-900 dark:text-white">
-                PDF to Audio
-            </h1>
-            <p className="text-center text-gray-500 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
-                Convert your PDF documents into spoken audio instantly.
-            </p>
+    const handleDrop = (e: React.DragEvent) => {
+        e.preventDefault();
+        setIsDragging(false);
+        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+            handleFileSelect(e.dataTransfer.files[0]);
+        }
+    };
 
+    const steps = [
+        {
+            title: "Step 1: Upload PDF",
+            description: "Upload the PDF document you want to listen to."
+        },
+        {
+            title: "Step 2: Configure Voice",
+            description: "Select your preferred voice and playback speed."
+        },
+        {
+            title: "Step 3: Listen",
+            description: "Play, pause, and control the audio playback of your document."
+        }
+    ];
+
+    return (
+        <ToolPageLayout
+            title="PDF to Audio"
+            subtitle="Convert your PDF documents into spoken audio instantly."
+            steps={steps}
+            showCta={false}
+        >
             {!file ? (
-                <FileUploader onFileSelect={handleFileSelect} label="Select PDF to Listen" accept=".pdf" />
+                <div
+                    className={`
+                        bg-white rounded-2xl sm:rounded-3xl shadow-xl border-2 border-dashed p-6 sm:p-12
+                        transition-all duration-300 cursor-pointer
+                        ${isDragging
+                            ? 'border-purple-500 bg-purple-50 scale-[1.02]'
+                            : 'border-orange-200 hover:border-purple-400 hover:shadow-2xl'
+                        }
+                    `}
+                    onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
+                    onDragLeave={(e) => { e.preventDefault(); setIsDragging(false); }}
+                    onDrop={handleDrop}
+                    onClick={() => document.getElementById('audio-upload')?.click()}
+                >
+                    <div className="flex justify-center mb-4 sm:mb-6">
+                        <div className={`p-4 sm:p-6 rounded-2xl sm:rounded-3xl transition-colors ${isDragging ? 'bg-purple-100' : 'bg-orange-50'}`}>
+                            <Cloud className={`w-12 h-12 sm:w-16 sm:h-16 ${isDragging ? 'text-purple-500' : 'text-orange-400'}`} strokeWidth={1.5} />
+                        </div>
+                    </div>
+
+                    <p className={`text-xl sm:text-2xl font-bold text-center mb-2 ${isDragging ? 'text-purple-700' : 'text-gray-800'}`}>
+                        Drag & Drop PDF Here
+                    </p>
+                    <p className="text-sm sm:text-base text-gray-500 text-center">or click to browse</p>
+
+                    <input
+                        id="audio-upload"
+                        type="file"
+                        accept=".pdf"
+                        className="hidden"
+                        onChange={(e) => e.target.files?.[0] && handleFileSelect(e.target.files[0])}
+                    />
+                </div>
             ) : (
-                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-8 max-w-2xl mx-auto animate-in fade-in zoom-in duration-300">
-                    <div className="flex items-center justify-between mb-8 p-4 bg-gray-50 dark:bg-gray-900/50 rounded-lg">
+                <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 max-w-2xl mx-auto animate-in fade-in zoom-in duration-300">
+                    <div className="flex items-center justify-between mb-8 p-4 bg-gray-50 rounded-lg">
                         <div className="flex items-center space-x-3">
                             <FileText className="text-pink-500" size={24} />
                             <div>
-                                <p className="font-medium text-gray-900 dark:text-white truncate max-w-[200px]">{file.name}</p>
+                                <p className="font-medium text-gray-900 truncate max-w-[200px]">{file.name}</p>
                             </div>
                         </div>
                         <button
@@ -157,7 +211,7 @@ const PdfToAudioClient = () => {
                     {loading ? (
                         <div className="text-center py-12">
                             <Loader2 className="w-10 h-10 text-pink-500 animate-spin mx-auto mb-4" />
-                            <p className="text-gray-600 dark:text-gray-300">Extracting text from PDF...</p>
+                            <p className="text-gray-600">Extracting text from PDF...</p>
                         </div>
                     ) : (
                         <div className="space-y-6">
@@ -175,7 +229,7 @@ const PdfToAudioClient = () => {
                                     ) : (
                                         <button
                                             onClick={handlePause}
-                                            className="w-16 h-16 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white flex items-center justify-center shadow-lg transform transition-all"
+                                            className="w-16 h-16 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-900 flex items-center justify-center shadow-lg transform transition-all"
                                         >
                                             <Pause fill="currentColor" size={32} />
                                         </button>
@@ -184,7 +238,7 @@ const PdfToAudioClient = () => {
                                     <button
                                         onClick={handleStop}
                                         disabled={!speechState.isPlaying && speechState.progress === 0}
-                                        className="w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-800 hover:text-red-600 text-gray-500 flex items-center justify-center border border-gray-200 dark:border-gray-700"
+                                        className="w-16 h-16 rounded-full bg-gray-100 hover:text-red-600 text-gray-500 flex items-center justify-center border border-gray-200"
                                     >
                                         <Square fill="currentColor" size={24} />
                                     </button>
@@ -196,7 +250,7 @@ const PdfToAudioClient = () => {
                                         <span>Progress</span>
                                         <span>{Math.round(speechState.progress)}%</span>
                                     </div>
-                                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                    <div className="w-full bg-gray-200 rounded-full h-2">
                                         <div
                                             className="bg-pink-500 h-2 rounded-full transition-all duration-300"
                                             style={{ width: `${speechState.progress}%` }}
@@ -206,13 +260,13 @@ const PdfToAudioClient = () => {
                             </div>
 
                             {/* Settings */}
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-gray-100 dark:border-gray-700">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-gray-100">
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Voice</label>
+                                    <label className="block text-xs font-medium text-gray-700 mb-1">Voice</label>
                                     <select
                                         value={selectedVoice}
                                         onChange={(e) => setSelectedVoice(e.target.value)}
-                                        className="w-full text-sm bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 outline-none focus:ring-1 focus:ring-pink-500"
+                                        className="w-full text-sm bg-gray-50 border border-gray-300 rounded-md px-3 py-2 outline-none focus:ring-1 focus:ring-pink-500"
                                     >
                                         {voices.map(voice => (
                                             <option key={voice.name} value={voice.name}>
@@ -222,7 +276,7 @@ const PdfToAudioClient = () => {
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Speed: {rate}x</label>
+                                    <label className="block text-xs font-medium text-gray-700 mb-1">Speed: {rate}x</label>
                                     <input
                                         type="range"
                                         min="0.5"
@@ -231,15 +285,8 @@ const PdfToAudioClient = () => {
                                         value={rate}
                                         onChange={(e) => {
                                             setRate(parseFloat(e.target.value));
-                                            // Real-time rate update if supported, typically requires restart for SpeechSynthesisUtterance
-                                            if (speechState.isPlaying && !speechState.isPaused) {
-                                                // We can cancel and restart from current position if needed, 
-                                                // but for simplicity we'll just update state for next play
-                                                // or strictly speaking, some browsers allow dynamic updates.
-                                                // We'll leave it as setting for next utterance or playing.
-                                            }
                                         }}
-                                        className="w-full"
+                                        className="w-full accent-pink-500"
                                     />
                                 </div>
                             </div>
@@ -247,7 +294,7 @@ const PdfToAudioClient = () => {
                     )}
                 </div>
             )}
-        </div>
+        </ToolPageLayout>
     );
 };
 

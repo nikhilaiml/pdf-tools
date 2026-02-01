@@ -1,18 +1,32 @@
 'use client';
 
 import WorkflowBuilder from './WorkflowBuilder';
+import ToolPageLayout from '../../components/ToolPageLayout';
 
 export default function MultiStepWorkflowPresetsPage() {
-    return (
-        <div className="max-w-4xl mx-auto px-4 py-8 text-center">
-            <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">
-                Multi-step Workflow
-            </h1>
-            <p className="text-gray-500 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
-                Chain multiple tools together into a single action.
-            </p>
+    const steps = [
+        {
+            title: "Step 1: Select Base File",
+            description: "Choose the initial PDF file to start the workflow."
+        },
+        {
+            title: "Step 2: Build Workflow",
+            description: "Add steps like Compress, Flatten, or Watermark to the chain."
+        },
+        {
+            title: "Step 3: Run & Download",
+            description: "Execute the workflow chain and download the final result."
+        }
+    ];
 
+    return (
+        <ToolPageLayout
+            title="Multi-step Workflow"
+            subtitle="Chain multiple tools together into a single automated workflow."
+            steps={steps}
+            showCta={false}
+        >
             <WorkflowBuilder />
-        </div>
+        </ToolPageLayout>
     );
 }

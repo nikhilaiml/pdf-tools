@@ -1,8 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { Loader2, FileText, ArrowRightLeft, Upload, X } from 'lucide-react';
+import { Loader2, FileText, ArrowRightLeft, Upload, X, Cloud } from 'lucide-react';
 import { PDFDocument } from 'pdf-lib';
+import ToolPageLayout from '../../components/ToolPageLayout';
 
 interface DiffLine {
     value: string;
@@ -86,101 +87,126 @@ const ComparePdfsClient = () => {
 
     const FileUploadBox = ({ label, file, setFile }: { label: string, file: File | null, setFile: (f: File | null) => void }) => (
         <div
-            className={`border-2 border-dashed rounded-xl p-6 text-center transition-colors
-                ${file ? 'border-green-500 bg-green-50 dark:bg-green-900/20' : 'border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800'}
+            className={`
+                bg-white rounded-xl shadow-md border-2 border-dashed p-6 sm:p-8
+                transition-all duration-300 cursor-pointer
+                ${file
+                    ? 'border-green-500 bg-green-50'
+                    : 'border-gray-200 hover:border-purple-400 hover:shadow-lg'
+                }
             `}
+            onClick={() => document.getElementById(`upload-${label}`)?.click()}
         >
             {file ? (
                 <div className="flex flex-col items-center">
-                    <FileText className="w-10 h-10 text-green-500 mb-2" />
-                    <p className="font-medium text-gray-900 dark:text-white truncate max-w-[200px] mb-2">{file.name}</p>
+                    <div className="p-4 bg-green-100 rounded-full mb-3">
+                        <FileText className="w-8 h-8 text-green-600" />
+                    </div>
+                    <p className="font-bold text-gray-800 truncate max-w-[200px] mb-1">{file.name}</p>
+                    <p className="text-xs text-gray-500 mb-3">{(file.size / 1024).toFixed(1)} KB</p>
                     <button
-                        onClick={() => setFile(null)}
-                        className="text-xs text-red-500 hover:text-red-700"
+                        onClick={(e) => { e.stopPropagation(); setFile(null); }}
+                        className="text-xs text-red-500 hover:text-red-700 font-medium hover:underline"
                     >
-                        Remove
+                        Remove File
                     </button>
                 </div>
             ) : (
-                <div onClick={() => document.getElementById(`upload-${label}`)?.click()} className="cursor-pointer">
-                    <Upload className="w-10 h-10 text-gray-400 mx-auto mb-2" />
-                    <p className="font-medium text-gray-700 dark:text-gray-300 mb-1">{label}</p>
+                <div className="flex flex-col items-center">
+                    <Cloud className="w-10 h-10 text-gray-400 mb-3" />
+                    <p className="font-medium text-gray-700 mb-1">{label}</p>
                     <p className="text-xs text-gray-500">Click to upload PDF</p>
-                    <input
-                        type="file"
-                        id={`upload-${label}`}
-                        accept=".pdf"
-                        className="hidden"
-                        onChange={(e) => e.target.files?.[0] && setFile(e.target.files[0])}
-                    />
                 </div>
             )}
+            <input
+                type="file"
+                id={`upload-${label}`}
+                accept=".pdf"
+                className="hidden"
+                onChange={(e) => e.target.files?.[0] && setFile(e.target.files[0])}
+            />
         </div>
     );
 
-    return (
-        <div className="max-w-6xl mx-auto px-4 py-8">
-            <h1 className="text-3xl font-bold mb-4 text-center text-gray-900 dark:text-white">
-                Compare PDFs
-            </h1>
-            <p className="text-center text-gray-500 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
-                Compare text content between two PDF documents.
-            </p>
+    const steps = [
+        {
+            title: "Step 1: Upload Documents",
+            description: "Upload the original PDF and the modified PDF you want to compare."
+        },
+        {
+            title: "Step 2: Analysis",
+            description: "Our tool extracts text and analyzes the differences line by line."
+        },
+        {
+            title: "Step 3: View Results",
+            description: "See a detailed comparison highlighting added and removed text."
+        }
+    ];
 
+    return (
+        <ToolPageLayout
+            title="Compare PDFs"
+            subtitle="Analyze and compare text differences between two PDF versions."
+            steps={steps}
+            ctaText="Compare Documents"
+            onAction={handleCompare}
+            loading={loading}
+            disabled={!fileA || !fileB}
+            showCta={!!fileA && !!fileB && !diffResult}
+        >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                 <FileUploadBox label="Original Document (A)" file={fileA} setFile={setFileA} />
                 <FileUploadBox label="Modified Document (B)" file={fileB} setFile={setFileB} />
             </div>
 
-            <div className="flex justify-center mb-8">
-                <button
-                    onClick={handleCompare}
-                    disabled={!fileA || !fileB || loading}
-                    className={`
-                        flex items-center gap-2 px-8 py-3 rounded-full font-bold text-white shadow-lg transition-all
-                        ${!fileA || !fileB || loading
-                            ? 'bg-gray-400 cursor-not-allowed'
-                            : 'bg-indigo-600 hover:bg-indigo-700 hover:scale-105'}
-                    `}
-                >
-                    {loading ? <Loader2 className="animate-spin" /> : <ArrowRightLeft className="w-5 h-5" />}
-                    <span>{loading ? 'Comparing...' : 'Compare Documents'}</span>
-                </button>
-            </div>
-
             {diffResult && (
-                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden animate-in fade-in slide-in-from-bottom-4">
-                    <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50 flex justify-between items-center">
-                        <h3 className="font-bold text-gray-900 dark:text-white">Comparison Result (Text Mode)</h3>
-                        <div className="flex gap-4 text-sm">
-                            <span className="flex items-center gap-1"><div className="w-3 h-3 bg-red-100 dark:bg-red-900/30 border border-red-200 rounded"></div> Removed from A</span>
-                            <span className="flex items-center gap-1"><div className="w-3 h-3 bg-green-100 dark:bg-green-900/30 border border-green-200 rounded"></div> Added to B</span>
+                <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden animate-in fade-in slide-in-from-bottom-4">
+                    <div className="p-4 border-b border-gray-100 bg-gray-50 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <h3 className="font-bold text-gray-800">Comparison Result</h3>
+                        <div className="flex gap-4 text-xs font-medium">
+                            <span className="flex items-center gap-1.5"><div className="w-3 h-3 bg-red-100 border border-red-200 rounded"></div> Removed from A</span>
+                            <span className="flex items-center gap-1.5"><div className="w-3 h-3 bg-green-100 border border-green-200 rounded"></div> Added to B</span>
                         </div>
                     </div>
 
-                    <div className="p-6 font-mono text-sm overflow-x-auto max-h-[600px] overflow-y-auto">
+                    <div className="p-6 font-mono text-sm overflow-x-auto max-h-[600px] overflow-y-auto bg-white">
                         {diffResult.length === 0 ? (
-                            <p className="text-center text-gray-500">Documents are identical.</p>
+                            <div className="text-center py-12">
+                                <div className="p-4 bg-green-50 text-green-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                    <FileText size={32} />
+                                </div>
+                                <p className="text-gray-600 font-medium">Documents are identical.</p>
+                            </div>
                         ) : (
                             diffResult.map((line, idx) => (
                                 <div key={idx} className={`
-                                    px-2 py-1 border-b border-gray-100 dark:border-gray-700/50 whitespace-pre-wrap
+                                    px-3 py-1.5 border-b border-gray-50 whitespace-pre-wrap flex
                                     ${line.added
-                                        ? 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300'
+                                        ? 'bg-green-50 text-green-700'
                                         : line.removed
-                                            ? 'bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300'
-                                            : 'text-gray-600 dark:text-gray-400'}
+                                            ? 'bg-red-50 text-red-700'
+                                            : 'text-gray-600 hover:bg-gray-50'}
                                 `}>
-                                    <span className="mr-4 text-gray-400 select-none w-8 inline-block text-right">{idx + 1}</span>
-                                    {line.added ? '+ ' : line.removed ? '- ' : '  '}
-                                    {line.value}
+                                    <span className="mr-4 text-gray-300 select-none w-8 text-right flex-shrink-0 text-xs py-0.5">{idx + 1}</span>
+                                    <span className="flex-1">
+                                        {line.added ? '+ ' : line.removed ? '- ' : '  '}
+                                        {line.value}
+                                    </span>
                                 </div>
                             ))
                         )}
                     </div>
+                    <div className="p-4 bg-gray-50 border-t border-gray-100 text-center">
+                        <button
+                            onClick={() => { setFileA(null); setFileB(null); setDiffResult(null); }}
+                            className="text-sm text-blue-600 hover:text-blue-700 font-medium hover:underline"
+                        >
+                            Start New Comparison
+                        </button>
+                    </div>
                 </div>
             )}
-        </div>
+        </ToolPageLayout>
     );
 };
 

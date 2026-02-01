@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Loader2, Upload, PenTool, Eraser, Trash2, Download, Save, Undo, X } from 'lucide-react';
+import { Loader2, Upload, PenTool, Eraser, Trash2, Download, Save, Undo, X, Cloud } from 'lucide-react';
 import { PDFDocument } from 'pdf-lib';
+import ToolPageLayout from '../../components/ToolPageLayout';
 
 const AnnotatePdfClient = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -10,6 +11,7 @@ const AnnotatePdfClient = () => {
     const [pageNum, setPageNum] = useState(1);
     const [scale, setScale] = useState(1.5);
     const [loading, setLoading] = useState(false);
+    const [isDragging, setIsDragging] = useState(false);
 
     // Tools: 'pen', 'eraser'
     const [activeTool, setActiveTool] = useState<'pen' | 'eraser'>('pen');
@@ -174,47 +176,91 @@ const AnnotatePdfClient = () => {
         }
     };
 
+    const handleDrop = (e: React.DragEvent) => {
+        e.preventDefault();
+        setIsDragging(false);
+        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+            setFile(e.dataTransfer.files[0]);
+        }
+    };
+
+    const steps = [
+        {
+            title: "Step 1: Upload PDF",
+            description: "Upload the PDF document you want to draw on."
+        },
+        {
+            title: "Step 2: Draw & Annotate",
+            description: "Use the pen tool to draw, highlight, or mark up your document."
+        },
+        {
+            title: "Step 3: Save PDF",
+            description: "Save your annotated PDF with drawings embedded."
+        }
+    ];
+
     return (
-        <div className="flex flex-col h-screen max-h-[calc(100vh-100px)]">
+        <ToolPageLayout
+            title="Annotate PDF"
+            subtitle="Draw, highlight, and mark up your PDF documents online."
+            steps={steps}
+            showCta={false}
+        >
             {!file ? (
-                <div className="flex-1 flex flex-col items-center justify-center p-8">
-                    <div
-                        onClick={() => document.getElementById('annotate-upload')?.click()}
-                        className="bg-gray-50 dark:bg-gray-800 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-xl p-12 text-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                    >
-                        <Upload className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Upload PDF to Annotate</h3>
-                        <p className="text-gray-500">Click to browse your files</p>
-                        <input
-                            id="annotate-upload"
-                            type="file"
-                            accept=".pdf"
-                            className="hidden"
-                            onChange={(e) => e.target.files?.[0] && setFile(e.target.files[0])}
-                        />
+                <div
+                    className={`
+                        bg-white rounded-2xl sm:rounded-3xl shadow-xl border-2 border-dashed p-6 sm:p-12
+                        transition-all duration-300 cursor-pointer
+                        ${isDragging
+                            ? 'border-purple-500 bg-purple-50 scale-[1.02]'
+                            : 'border-orange-200 hover:border-purple-400 hover:shadow-2xl'
+                        }
+                    `}
+                    onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
+                    onDragLeave={(e) => { e.preventDefault(); setIsDragging(false); }}
+                    onDrop={handleDrop}
+                    onClick={() => document.getElementById('annotate-upload')?.click()}
+                >
+                    <div className="flex justify-center mb-4 sm:mb-6">
+                        <div className={`p-4 sm:p-6 rounded-2xl sm:rounded-3xl transition-colors ${isDragging ? 'bg-purple-100' : 'bg-orange-50'}`}>
+                            <Cloud className={`w-12 h-12 sm:w-16 sm:h-16 ${isDragging ? 'text-purple-500' : 'text-orange-400'}`} strokeWidth={1.5} />
+                        </div>
                     </div>
+
+                    <p className={`text-xl sm:text-2xl font-bold text-center mb-2 ${isDragging ? 'text-purple-700' : 'text-gray-800'}`}>
+                        Drag & Drop PDF Here
+                    </p>
+                    <p className="text-sm sm:text-base text-gray-500 text-center">or click to browse</p>
+
+                    <input
+                        id="annotate-upload"
+                        type="file"
+                        accept=".pdf"
+                        className="hidden"
+                        onChange={(e) => e.target.files?.[0] && setFile(e.target.files[0])}
+                    />
                 </div>
             ) : (
-                <>
+                <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
                     {/* Toolbar */}
-                    <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-4 flex items-center justify-between gap-4 overflow-x-auto">
+                    <div className="bg-gray-50 border-b border-gray-100 p-4 flex items-center justify-between gap-4 overflow-x-auto">
                         <div className="flex items-center gap-2">
                             <button
                                 onClick={() => setActiveTool('pen')}
-                                className={`p-2 rounded-lg ${activeTool === 'pen' ? 'bg-orange-100 text-orange-600' : 'hover:bg-gray-100 dark:hover:bg-gray-700'}`}
+                                className={`p-2 rounded-lg ${activeTool === 'pen' ? 'bg-orange-100 text-orange-600' : 'hover:bg-gray-100'}`}
                                 title="Pen"
                             >
                                 <PenTool size={20} />
                             </button>
                             <button
                                 onClick={() => setActiveTool('eraser')}
-                                className={`p-2 rounded-lg ${activeTool === 'eraser' ? 'bg-orange-100 text-orange-600' : 'hover:bg-gray-100 dark:hover:bg-gray-700'}`}
+                                className={`p-2 rounded-lg ${activeTool === 'eraser' ? 'bg-orange-100 text-orange-600' : 'hover:bg-gray-100'}`}
                                 title="Eraser"
                             >
                                 <Eraser size={20} />
                             </button>
 
-                            <div className="h-6 w-px bg-gray-300 dark:bg-gray-600 mx-2" />
+                            <div className="h-6 w-px bg-gray-300 mx-2" />
 
                             <input
                                 type="color"
@@ -227,7 +273,7 @@ const AnnotatePdfClient = () => {
                             <select
                                 value={lineWidth}
                                 onChange={(e) => setLineWidth(Number(e.target.value))}
-                                className="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg px-2 py-1 text-sm outline-none"
+                                className="bg-white border border-gray-300 rounded-lg px-2 py-1 text-sm outline-none"
                             >
                                 <option value="1">Thin</option>
                                 <option value="2">Normal</option>
@@ -242,14 +288,14 @@ const AnnotatePdfClient = () => {
                                 <button
                                     onClick={() => setPageNum(p => Math.max(1, p - 1))}
                                     disabled={pageNum <= 1}
-                                    className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded hover:bg-gray-200 disabled:opacity-50"
+                                    className="px-3 py-1 bg-white border border-gray-200 rounded hover:bg-gray-50 disabled:opacity-50"
                                 >
                                     Prev
                                 </button>
                                 <button
                                     onClick={() => setPageNum(p => Math.min(pdfDoc?.numPages || 1, p + 1))}
                                     disabled={pageNum >= (pdfDoc?.numPages || 1)}
-                                    className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded hover:bg-gray-200 disabled:opacity-50"
+                                    className="px-3 py-1 bg-white border border-gray-200 rounded hover:bg-gray-50 disabled:opacity-50"
                                 >
                                     Next
                                 </button>
@@ -259,7 +305,7 @@ const AnnotatePdfClient = () => {
                         <div className="flex items-center gap-2">
                             <button
                                 onClick={clearCanvas}
-                                className="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg"
+                                className="p-2 text-red-500 hover:bg-red-50 rounded-lg"
                                 title="Clear Drawing"
                             >
                                 <Trash2 size={20} />
@@ -267,26 +313,26 @@ const AnnotatePdfClient = () => {
                             <button
                                 onClick={handleSave}
                                 disabled={loading}
-                                className="flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-medium shadow-sm transition-colors"
+                                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-violet-500 to-purple-600 text-white rounded-lg font-medium shadow-sm transition-all hover:shadow-md"
                             >
                                 {loading ? <Loader2 className="animate-spin" size={18} /> : <Save size={18} />}
                                 Save Page
                             </button>
                             <button onClick={() => setFile(null)} className="p-2 text-gray-500 hover:text-red-500">
-                                <X className="w-6 h-6" /> {/* Explicit X import if not already active, otherwise just a cross icon */}
+                                <X className="w-6 h-6" />
                             </button>
                         </div>
                     </div>
 
                     {/* Editor Area */}
-                    <div className="flex-1 bg-gray-100 dark:bg-gray-900 overflow-auto flex justify-center p-8 relative" ref={containerRef}>
+                    <div className="bg-gray-100 overflow-auto flex justify-center p-8 relative min-h-[500px]" ref={containerRef}>
                         {loading && (
-                            <div className="absolute inset-0 flex items-center justify-center bg-white/50 z-10">
-                                <Loader2 className="animate-spin w-12 h-12 text-orange-500" />
+                            <div className="absolute inset-0 flex items-center justify-center bg-white/50 z-10 backdrop-blur-sm">
+                                <Loader2 className="animate-spin w-12 h-12 text-purple-600" />
                             </div>
                         )}
-                        <div className="relative shadow-xl">
-                            <canvas ref={canvasRef} className="bg-white" />
+                        <div className="relative shadow-2xl border border-gray-200">
+                            <canvas ref={canvasRef} className="bg-white block" />
                             <canvas
                                 ref={drawingCanvasRef}
                                 className="absolute top-0 left-0 cursor-crosshair touch-none"
@@ -297,9 +343,9 @@ const AnnotatePdfClient = () => {
                             />
                         </div>
                     </div>
-                </>
+                </div>
             )}
-        </div>
+        </ToolPageLayout>
     );
 };
 
