@@ -1,6 +1,6 @@
 'use client';
 
-import { Twitter, Facebook, Linkedin, Github, Instagram, Star } from 'lucide-react';
+import { Star } from 'lucide-react';
 import Link from 'next/link';
 import Logo from './Logo';
 
@@ -60,23 +60,7 @@ export default function Footer() {
             <p className="text-slate-400 text-sm">
               © {new Date().getFullYear()} PDF Tools. All rights reserved.
             </p>
-            <div className="flex items-center gap-4">
-              <Link href="#" className="text-slate-400 hover:text-indigo-600 transition-colors">
-                <Twitter className="w-5 h-5" />
-              </Link>
-              <Link href="#" className="text-slate-400 hover:text-indigo-600 transition-colors">
-                <Facebook className="w-5 h-5" />
-              </Link>
-              <Link href="#" className="text-slate-400 hover:text-indigo-600 transition-colors">
-                <Instagram className="w-5 h-5" />
-              </Link>
-              <Link href="#" className="text-slate-400 hover:text-indigo-600 transition-colors">
-                <Linkedin className="w-5 h-5" />
-              </Link>
-              <Link href="#" className="text-slate-400 hover:text-indigo-600 transition-colors">
-                <Github className="w-5 h-5" />
-              </Link>
-            </div>
+
           </div>
         </div>
 
