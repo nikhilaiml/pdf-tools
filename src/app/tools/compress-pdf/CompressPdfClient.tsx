@@ -5,7 +5,7 @@ import { PDFDocument } from 'pdf-lib';
 import { Loader2, FileText, Cloud } from 'lucide-react';
 import ToolPageLayout from '../../components/ToolPageLayout';
 
-const CompressPdfPage = () => {
+const CompressPdfPage = ({ seoContent }: { seoContent?: React.ReactNode }) => {
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
@@ -60,29 +60,30 @@ const CompressPdfPage = () => {
 
   const steps = [
     {
-      title: "Step 1: Upload PDF",
-      description: "Select or drag and drop your PDF file that you want to compress. We support all PDF formats."
+      title: "1. Upload PDF",
+      description: "Upload the PDF file you want to compress by clicking select or dragging it here."
     },
     {
-      title: "Step 2: Optimize",
-      description: "Our system automatically optimizes your PDF by removing redundant data and compressing internal structures."
+      title: "2. Compress",
+      description: "Click the Compress button to automatically optimize your file and reduce its size."
     },
     {
-      title: "Step 3: Download",
-      description: "Get your compressed PDF instantly. The file size will be reduced while maintaining quality."
+      title: "3. Download",
+      description: "Save your optimized, smaller PDF file instantly without losing quality."
     }
   ];
 
   return (
     <ToolPageLayout
-      title="Compress Your PDF"
-      subtitle="Reduce PDF file size efficiently while maintaining document quality."
+      title="Compress PDF Online – Reduce PDF Size Free"
+      subtitle="Compress PDF files online to reduce file size. Quality is preserved as much as possible. Tool is free, browser-based, and no signup required."
       steps={steps}
       ctaText="Compress PDF"
       onAction={handleCompress}
       loading={loading}
       disabled={!file}
       showCta={!!file}
+      seoContent={seoContent}
     >
       {!file ? (
         <div
