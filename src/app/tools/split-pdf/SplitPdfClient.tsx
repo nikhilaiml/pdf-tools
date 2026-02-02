@@ -5,7 +5,7 @@ import { PDFDocument } from 'pdf-lib';
 import { Loader2, FileText, Cloud } from 'lucide-react';
 import ToolPageLayout from '../../components/ToolPageLayout';
 
-const SplitPdfPage = () => {
+const SplitPdfPage = ({ seoContent }: { seoContent?: React.ReactNode }) => {
   const [file, setFile] = useState<File | null>(null);
   const [startPage, setStartPage] = useState('');
   const [endPage, setEndPage] = useState('');
@@ -73,29 +73,30 @@ const SplitPdfPage = () => {
 
   const steps = [
     {
-      title: "Step 1: Upload PDF",
-      description: "Select or drag and drop your PDF file that you want to split into separate pages."
+      title: "1. Upload File",
+      description: "Upload the PDF file you want to split by clicking or dragging it into the box."
     },
     {
-      title: "Step 2: Select Range",
-      description: "Enter the start and end page numbers to extract the specific pages you need."
+      title: "2. Choose Pages",
+      description: "Enter the specific page numbers or page range you want to extract from the document."
     },
     {
-      title: "Step 3: Download",
-      description: "Get your extracted pages as a new PDF file instantly. Quick and easy!"
+      title: "3. Split & Download",
+      description: "Click the Split button to process the file and download your new PDF document instantly."
     }
   ];
 
   return (
     <ToolPageLayout
-      title="Split Your PDF"
-      subtitle="Extract specific pages from your PDF document easily."
+      title="Split PDF Online – Free & Secure PDF Splitter"
+      subtitle="Split PDF files into separate pages or parts easily. Our tool is free, secure, and works directly in your browser without any signup."
       steps={steps}
       ctaText="Split PDF"
       onAction={handleSplit}
       loading={loading}
       disabled={!file || !startPage || !endPage}
       showCta={!!file}
+      seoContent={seoContent}
     >
       {!file ? (
         <div
