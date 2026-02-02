@@ -5,7 +5,7 @@ import { PDFDocument } from 'pdf-lib';
 import { Loader2, FileText, X, Cloud } from 'lucide-react';
 import ToolPageLayout from '../../components/ToolPageLayout';
 
-const MergePdfPage = () => {
+const MergePdfPage = ({ seoContent }: { seoContent?: React.ReactNode }) => {
   const [files, setFiles] = useState<File[]>([]);
   const [loading, setLoading] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
@@ -69,29 +69,30 @@ const MergePdfPage = () => {
 
   const steps = [
     {
-      title: "Step 1: Select Files",
-      description: "Simply browse or drag and drop your PDF files to start merging. Multiple files at once are supported."
+      title: "1. Upload PDF Files",
+      description: "Click 'Select Files' or drag and drop one or more PDF files you want to merge."
     },
     {
-      title: "Step 2: Arrange Pages",
-      description: "Our system will process the PDFs instantly in the correct order and let you preview the merging process."
+      title: "2. Arrange Order",
+      description: "Drag and drop the file thumbnails to arrange them in the desired order for your final document."
     },
     {
-      title: "Step 3: Merge & Download",
-      description: "Ready to download? Just tap the Merge button to get your professional output file instantly."
+      title: "3. Merge & Download",
+      description: "Click the 'Merge PDFs Now' button to combine them and download your single merged PDF file."
     }
   ];
 
   return (
     <ToolPageLayout
-      title="Unlock Your PDF Potential"
-      subtitle="Merge PDFs - Combine Multiple Files into One Unified Document."
+      title="Merge PDF Online – Free & Secure PDF Merger"
+      subtitle="Combine multiple PDF files into one single document using our free online tool. No signup required, and your files are processed securely in your browser."
       steps={steps}
       ctaText="Merge PDFs"
       onAction={handleMerge}
       loading={loading}
       disabled={files.length < 2}
       showCta={files.length >= 2}
+      seoContent={seoContent}
     >
       {/* Upload Area */}
       <div

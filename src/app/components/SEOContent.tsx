@@ -21,18 +21,31 @@ interface SEOContentProps {
 }
 
 const SEOContent: React.FC<SEOContentProps> = ({ title, description, howTo, features, faq }) => {
-    const jsonLd = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": faq.map(item => ({
-            "@type": "Question",
-            "name": item.question,
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": item.answer
-            }
-        }))
-    };
+    const jsonLd = [
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faq.map(item => ({
+                "@type": "Question",
+                "name": item.question,
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": item.answer
+                }
+            }))
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            "name": title,
+            "step": howTo.map(item => ({
+                "@type": "HowToStep",
+                "position": item.step,
+                "name": `Step ${item.step}`,
+                "text": item.text
+            }))
+        }
+    ];
 
     return (
         <div className="w-full max-w-5xl mx-auto px-4 mt-8 mb-12 space-y-12">

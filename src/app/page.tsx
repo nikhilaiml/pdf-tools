@@ -6,6 +6,7 @@ import ToolsGrid from './components/ToolsGrid';
 import Features from './components/Features';
 import PremiumSection from './components/PremiumSection';
 import Footer from './components/Footer';
+import FAQSection from './components/FAQSection';
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 
@@ -43,6 +44,7 @@ function HomeContent() {
         <Hero onSearch={handleSearch} initialSearchValue={searchQuery} />
         <ToolsGrid searchQuery={searchQuery} />
         <Features />
+        <FAQSection />
         <PremiumSection />
       </main>
 
