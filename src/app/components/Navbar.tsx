@@ -97,12 +97,7 @@ const Navbar = () => {
                             Compress PDF
                         </Link>
 
-                        <Link
-                            href="/blog"
-                            className={`text-sm font-semibold transition-colors uppercase tracking-wide ${scrolled ? 'text-slate-700 hover:text-indigo-600' : 'text-white/90 hover:text-white'}`}
-                        >
-                            Blog
-                        </Link>
+
 
                         {/* Convert PDF Dropdown */}
                         <div className="relative" ref={convertRef}>
@@ -222,13 +217,6 @@ const Navbar = () => {
                                 Compress PDF
                             </Link>
 
-                            <Link
-                                href="/blog"
-                                className="block text-base font-semibold text-slate-700 hover:text-indigo-600 py-2 uppercase tracking-wide"
-                                onClick={() => setMobileMenuOpen(false)}
-                            >
-                                Blog
-                            </Link>
 
                             {/* Mobile Convert Section */}
                             <div className="py-2">

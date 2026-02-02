@@ -1,7 +1,6 @@
 import { MetadataRoute } from 'next';
 import fs from 'fs';
 import path from 'path';
-import { blogPosts } from '../lib/blog-data';
 
 const baseUrl = 'https://usepdf.in';
 
@@ -32,13 +31,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ];
     }
 
-    const blogRoutes = blogPosts.map(post => `/blog/${post.slug}`);
-
     const routes = [
         '',
-        '/blog',
-        ...tools.map(tool => `/tools/${tool}`),
-        ...blogRoutes
+        ...tools.map(tool => `/tools/${tool}`)
     ];
 
     return routes.map((route) => ({
