@@ -159,7 +159,7 @@ export default function PdfAtGlance() {
                         transition={{ delay: 0.2 }}
                         className="text-slate-500 max-w-2xl mx-auto text-lg"
                     >
-                        Everything you need to work with PDF documents. Fast, secure, and easy to use.
+                        Merge PDF, Split PDF, Compress PDF, Rotate PDF, Protect PDF, and Unlock PDF. We provide a comprehensive suite of tools for all your document needs.
                     </motion.p>
                 </div>
 
@@ -176,8 +176,8 @@ export default function PdfAtGlance() {
                             key={category.id}
                             onClick={() => setSelectedCategory(category.id)}
                             className={`px-5 py-2.5 rounded-full font-medium text-sm transition-all ${selectedCategory === category.id
-                                    ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/25'
-                                    : 'bg-white text-slate-600 hover:bg-slate-50 border border-slate-200'
+                                ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/25'
+                                : 'bg-white text-slate-600 hover:bg-slate-50 border border-slate-200'
                                 }`}
                         >
                             {category.name}

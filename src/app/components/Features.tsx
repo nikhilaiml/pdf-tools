@@ -75,7 +75,7 @@ export default function Features() {
                             transition={{ delay: 0.1 }}
                             className="text-slate-500 max-w-2xl mx-auto text-lg"
                         >
-                            Experience the best PDF tools on any device. Simple, fast, and secure.
+                            UsePDF simplifies document management. All tools are browser-based, accessible on desktop, mobile, and tablet. Looking for a way to work smarter? No downloads or account required.
                         </motion.p>
                     </div>
 

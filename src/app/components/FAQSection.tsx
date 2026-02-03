@@ -7,23 +7,23 @@ import { Plus, Minus, HelpCircle } from 'lucide-react';
 const homeFaqs = [
     {
         question: "Is UsePDF completely free?",
-        answer: "Yes! UsePDF is 100% free to use. There are no hidden fees, subscriptions, or paywalls for our standard tools."
+        answer: "Yes! UsePDF is a completely free online PDF tools website. You can merge, split, compress, and convert files without any cost. There are no hidden fees, subscriptions, or paywalls."
     },
     {
         question: "Do I need to install any software?",
-        answer: "No, UsePDF works entirely in your web browser. You can access it from any device (Windows, Mac, Linux, Mobile) without installing anything."
+        answer: "No, UsePDF works entirely in your web browser. There is no software installation required. You can access all tools from any device (Windows, Mac, Linux, iPhone, Android)."
     },
     {
         question: "Is it safe to upload my files?",
-        answer: "Absolutely. We prioritize your privacy. All file transfers are encrypted using SSL. Your files are automatically deleted from our servers after 1 hour."
+        answer: "Absolutely. We prioritize your privacy and security. All file transfers are encrypted using SSL, and your files are automatically deleted from our servers after 1 hour."
     },
     {
         question: "Are there any file size limits?",
-        answer: "We support large files, but for optimal performance, we recommend keeping individual file sizes reasonable. Specific tools may have generous caps to ensure server stability."
+        answer: "We support large files, but for optimal performance, we recommend keeping individual file sizes reasonable. Our tools are designed to handle most standard PDF tasks efficiently."
     },
     {
         question: "Can I use UsePDF on my phone?",
-        answer: "Yes, our website is fully responsive and works great on smartphones and tablets."
+        answer: "Yes, our website is fully responsive and works perfectly on all devices, including mobile phones and tablets. Manage your documents on the go."
     }
 ];
 

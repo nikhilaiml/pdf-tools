@@ -20,7 +20,7 @@ export default function Footer() {
               <span className="text-lg font-bold text-slate-800">PDF Tools</span>
             </Link>
             <p className="text-slate-500 text-sm mb-4 leading-relaxed">
-              i-pdf software trusted by 10 million+ and secure.
+              UsePDF is a trusted free online PDF tools website. Designed to simplify document workflows with fast processing, secure handling, and user-friendly design.
             </p>
           </div>
 

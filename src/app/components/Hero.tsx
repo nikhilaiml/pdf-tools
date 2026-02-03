@@ -158,13 +158,13 @@ export default function Hero({ onSearch, initialSearchValue = '' }: HeroProps) {
                             variants={itemVariants}
                             className="text-lg md:text-xl text-indigo-100/90 mb-10 max-w-2xl leading-relaxed"
                         >
-                            Easy-to-use online PDF tools. Merge, split, password, and rotate. Edit, compress images and images.
+                            UsePDF is a free online PDF tools platform. Merge, split, compress, convert, edit, and protect PDF files directly in your browser without software installation.
                         </motion.p>
 
                         {/* Search Bar with Gold Gradient */}
                         <motion.div
                             variants={itemVariants}
-                            className="w-full max-w-2xl relative group mb-10"
+                            className="w-full max-w-2xl relative group mb-6"
                         >
                             <div className="relative flex items-center bg-white rounded-full p-1.5 shadow-2xl shadow-black/20">
                                 <div className="pl-5 text-slate-400">
@@ -183,6 +183,14 @@ export default function Hero({ onSearch, initialSearchValue = '' }: HeroProps) {
                                 </button>
                             </div>
                         </motion.div>
+
+                        {/* Search Bar Support Text */}
+                        <motion.p
+                            variants={itemVariants}
+                            className="text-sm text-indigo-100/80 mb-10 max-w-xl mx-auto leading-relaxed"
+                        >
+                            Users can manage all PDF tasks in one place. Our tools are fast, secure, and easy to use. Suitable for students, professionals, and businesses.
+                        </motion.p>
 
                         {/* Category Chips */}
                         <motion.div
