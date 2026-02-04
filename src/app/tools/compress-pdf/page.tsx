@@ -2,18 +2,18 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import CompressPdfClient from './CompressPdfClient';
-import { HelpCircle, Merge, Shield, Zap, Globe, Smartphone, ArrowRight } from 'lucide-react';
+import { HelpCircle, Merge, Shield, Zap, Globe, Smartphone, ArrowRight, CheckCircle } from 'lucide-react';
 
 export const metadata: Metadata = {
-    title: 'Compress PDF – Reduce PDF Size | UsePDF',
-    description: 'Compress PDF files online for free. Reduce PDF size securely without losing quality. Trusted by users for fast, secure compression. Try UsePDF now!',
-    keywords: ['compress pdf', 'reduce pdf size', 'online pdf compressor', 'free pdf tool', 'optimize pdf', 'shrink pdf'],
+    title: 'Compress PDF Online Free – Reduce PDF File Size | UsePDF',
+    description: 'Compress PDF online free. Reduce PDF size to 100KB or 1MB securely without losing quality. Fast, secure, and no registration required.',
+    keywords: ['compress pdf online', 'reduce pdf size', 'compress pdf to 100kb', 'compress pdf to 1mb', 'free pdf tools'],
     alternates: {
         canonical: 'https://usepdf.in/tools/compress-pdf',
     },
     openGraph: {
-        title: 'Compress PDF – Reduce PDF Size | UsePDF',
-        description: 'Compress PDF files online for free. Reduce PDF size securely without losing quality. Trusted by users for fast, secure compression. Try UsePDF now!',
+        title: 'Compress PDF Online Free – Reduce PDF File Size | UsePDF',
+        description: 'Compress PDF online free. Reduce PDF size to 100KB or 1MB securely without losing quality. Fast, secure, and no registration required.',
         url: 'https://usepdf.in/tools/compress-pdf',
         type: 'website',
     }
@@ -40,34 +40,34 @@ export default function CompressPdfPage() {
                 "mainEntity": [
                     {
                         "@type": "Question",
-                        "name": "What is this PDF tool?",
+                        "name": "Can I compress PDF without losing quality?",
                         "acceptedAnswer": {
                             "@type": "Answer",
-                            "text": "The Compress PDF tool is a free online utility designed to reduce the file size of your PDF documents while maintaining high capabilities. It optimizes text and images to create lighter files suitable for email and web sharing."
+                            "text": "Yes, our advanced compression algorithm reduces file size by optimizing fonts and images while maintaining excellent visual quality."
                         }
                     },
                     {
                         "@type": "Question",
-                        "name": "Is this tool free to use?",
+                        "name": "Is it free to compress PDF online?",
                         "acceptedAnswer": {
                             "@type": "Answer",
-                            "text": "Yes, our Compress PDF tool is completely free. You can compress as many files as you need without any hidden fees, subscriptions, or credit card requirements."
+                            "text": "Yes, UsePDF is completely free. You can compress as many files as you like without any cost or registration."
                         }
                     },
                     {
                         "@type": "Question",
-                        "name": "Is it safe and secure?",
+                        "name": "Can I compress PDF to 1MB or 100KB?",
                         "acceptedAnswer": {
                             "@type": "Answer",
-                            "text": "Absolutely. We prioritize your privacy and security. All files uploaded for compression are processed using secure encryption and are permanently deleted from our servers after one hour."
+                            "text": "Our tool automatically optimizes your PDF to the smallest possible size, often reducing files to under 1MB or 100KB depending on the original content."
                         }
                     },
                     {
                         "@type": "Question",
-                        "name": "How do I use this tool online?",
+                        "name": "Is my PDF file secure?",
                         "acceptedAnswer": {
                             "@type": "Answer",
-                            "text": "Simply upload your PDF file to the tool, wait for the automatic compression process to finish, and then download your optimized file instantly. It performs all operations directly in your browser."
+                            "text": "Absolutely. All uploaded files are encrypted and automatically deleted from our servers permanently after one hour."
                         }
                     }
                 ]
@@ -84,34 +84,71 @@ export default function CompressPdfPage() {
 
             {/* Intro Section */}
             <section className="text-center max-w-4xl mx-auto">
-                <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Compress PDF Online – Reduce PDF Size Free</h1>
+                <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Compress PDF Online – Reduce PDF File Size Free</h1>
                 <p className="text-slate-600 text-lg leading-relaxed">
-                    Reduce the size of your PDF documents instantly with our free online <strong>Compress PDF</strong> tool. We optimize your files for easier sharing and storage without compromising quality, ensuring your data stays safe. Whether you are managing business reports or personal documents, our tool effectively minimizes file size while keeping visual fidelity intact.
+                    Easily <strong>compress PDF online</strong> with UsePDF. Our tool helps you <strong>reduce PDF file size</strong> without losing quality. It is fast, free, and requires no registration. Whether you need to optimize documents for email attachments, job applications, or online forms, our secure compressor is the perfect solution.
                 </p>
             </section>
 
-            {/* What is this tool */}
+            {/* Compress PDF Online for Free */}
             <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
-                <h2 className="text-3xl font-bold text-slate-900 mb-6">What is this Compress PDF Tool?</h2>
+                <h2 className="text-3xl font-bold text-slate-900 mb-6">Compress PDF File Online for Free</h2>
                 <div className="prose prose-slate max-w-none text-slate-600">
                     <p className="mb-4">
-                        The Compress PDF tool by UsePDF is a sophisticated online solution engineered to help users manage large document files. High-resolution images and complex formatting can often bloat PDF files, making them difficult to email or upload to web portals with strict size limits. Our tool addresses this problem by intelligently rewriting the file structure and compressing images within the document.
+                        UsePDF offers a robust solution to compress standard PDF documents directly in your browser. By removing unnecessary meta-data and optimizing embedded images, we significantly reduce the overall file footprint.
                     </p>
                     <p>
-                        Unlike basic compression methods that might blur your text or pixelate images, our technology strikes a perfect balance between size reduction and quality retention. It is an essential utility for students submitting assignments, professionals sending contracts, or anyone looking to save storage space on their devices. With support for batch processing and instant feedback, handling large PDFs has never been simpler.
+                        Security is our top priority. We use SSL encryption for file transfers, and our system ensures your privacy by automatically deleting all uploaded files from our servers after one hour. You can use our services with complete peace of mind.
                     </p>
                 </div>
             </section>
 
-            {/* Why Use Section */}
+            {/* Compress PDF to Specific Size */}
+            <section className="bg-slate-50 rounded-2xl p-8 border border-slate-100">
+                <h2 className="text-3xl font-bold text-slate-900 mb-6">Compress PDF to Specific Size</h2>
+                <div className="prose prose-slate max-w-none text-slate-600">
+                    <p className="mb-4">
+                        Do you have strict file size limits for uploading documents? Our tool is engineered to handle these requirements efficiently. Whether you need to <strong>compress PDF to 100kb</strong>, <strong>compress PDF to 200kb</strong>, or even <strong>compress PDF to 300kb</strong>, our smart optimization engine works to get your file within these limits whenever technically possible.
+                    </p>
+                    <p>
+                        For larger documents, such as legal contracts or high-quality brochures, we can easily <strong>compress PDF to 1mb</strong> or less. This makes our tool ideal for government forms, university applications, and portal uploads where file size restrictions are common.
+                    </p>
+                </div>
+            </section>
+
+            {/* How to Section */}
+            <section className="bg-white rounded-2xl p-8 md:p-12 border border-slate-100 shadow-sm">
+                <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">How to Compress PDF Online</h2>
+                <div className="grid md:grid-cols-3 gap-6 mb-8 text-center">
+                    <div className="flex flex-col items-center">
+                        <div className="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center font-bold text-xl mb-4">1</div>
+                        <h3 className="font-bold text-slate-800 mb-2">Upload PDF</h3>
+                        <p className="text-slate-600 text-sm">Select your file from your computer or mobile device.</p>
+                    </div>
+                    <div className="flex flex-col items-center">
+                        <div className="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center font-bold text-xl mb-4">2</div>
+                        <h3 className="font-bold text-slate-800 mb-2">Automatic Compression</h3>
+                        <p className="text-slate-600 text-sm">Our tool scans and reduces the file size instantly.</p>
+                    </div>
+                    <div className="flex flex-col items-center">
+                        <div className="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center font-bold text-xl mb-4">3</div>
+                        <h3 className="font-bold text-slate-800 mb-2">Download Compressed PDF</h3>
+                        <p className="text-slate-600 text-sm">Save your optimized file immediately to your device.</p>
+                    </div>
+                </div>
+            </section>
+
+            {/* Why Choose UsePDF */}
             <section>
-                <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">Why Should Users Use This Tool?</h2>
+                <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">Why Choose UsePDF?</h2>
                 <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-10">
                     {[
-                        { icon: Zap, text: "Instant size reduction with smart optimization" },
-                        { icon: Shield, text: "Enterprise-grade security and privacy" },
-                        { icon: Globe, text: "Works on any browser (Chrome, Safari, Edge)" },
-                        { icon: Smartphone, text: "Mobile-friendly for on-the-go compression" }
+                        { icon: Zap, text: "Fast: Instant processing speed." },
+                        { icon: CheckCircle, text: "Free: No hidden costs or subscriptions." },
+                        { icon: Shield, text: "Secure: Files deleted after 1 hour." },
+                        { icon: Globe, text: "No Watermark: Professional quality results." },
+                        { icon: Smartphone, text: "Compatible: Works on all phones and computers." }
+
                     ].map((feature, i) => (
                         <div key={i} className="flex items-center gap-4 bg-white p-5 rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
                             <div className="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600">
@@ -120,43 +157,6 @@ export default function CompressPdfPage() {
                             <span className="text-slate-700 font-medium">{feature.text}</span>
                         </div>
                     ))}
-                </div>
-                <div className="prose prose-slate max-w-4xl mx-auto text-slate-600">
-                    <p>
-                        Choosing UsePDF represents a choice for speed, reliability, and security. We understand that your documents often contain sensitive information. That is why our platform operates with strict data retention policies, automatically purging your files after processing. Furthermore, our tool is completely platform-independent. Whether you are using Windows, macOS, Linux, Android, or iOS, you get the same consistent, high-speed performance.
-                    </p>
-                    <p className="mt-4">
-                        We also believe in accessibility. There is no software to install, no rigorous registration process, and absolutely no cost. You get premium-level compression algorithms completely for free. This eliminates the need for expensive desktop software like Adobe Acrobat for simple compression tasks, saving you both time and money.
-                    </p>
-                </div>
-            </section>
-
-            {/* How to Section */}
-            <section className="bg-slate-50 rounded-2xl p-8 md:p-12">
-                <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">How to Use This Tool Online</h2>
-                <div className="grid md:grid-cols-4 gap-6 mb-8">
-                    {[
-                        { step: "1", title: "Select File", desc: "Choose the Compress PDF tool from home." },
-                        { step: "2", title: "Upload PDF", desc: "Drag and drop your document." },
-                        { step: "3", title: "Compress", desc: "Wait for automatic optimization." },
-                        { step: "4", title: "Download", desc: "Save the smaller PDF file." }
-                    ].map((item, i) => (
-                        <div key={i} className="flex flex-col items-center text-center bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-                            <div className="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center font-bold text-xl mb-4">
-                                {item.step}
-                            </div>
-                            <h3 className="font-bold text-slate-800 mb-2">{item.title}</h3>
-                            <p className="text-slate-600 text-sm">{item.desc}</p>
-                        </div>
-                    ))}
-                </div>
-                <div className="prose prose-slate max-w-3xl mx-auto text-center text-slate-600">
-                    <p>
-                        Using our tool is incredibly straightforward. First, navigate to the <Link href="/" className="text-indigo-600 hover:text-indigo-700 font-semibold hover:underline">homepage</Link> and select the compression tool. Once there, you can drag and drop your file directly into the browser window or use the file selector. Our system immediately begins analyzing the file structure.
-                    </p>
-                    <p className="mt-4">
-                        Within seconds, the tool identifies redundant data streams and compresses embedded images. The result is displayed with the new file size and compression percentage. Click the download button to save your new file. You can also proceed to <Link href="/tools/text-to-pdf" className="text-indigo-600 hover:text-indigo-700 font-semibold hover:underline">create new PDFs</Link> or use other tools immediately.
-                    </p>
                 </div>
             </section>
 
@@ -168,10 +168,10 @@ export default function CompressPdfPage() {
                 </h2>
                 <div className="space-y-4">
                     {[
-                        { q: "What is this PDF tool?", a: "The Compress PDF tool is a free online utility designed to reduce the file size of your PDF documents while maintaining high capabilities. It optimizes text and images to create lighter files suitable for email and web sharing." },
-                        { q: "Is this tool free to use?", a: "Yes, our Compress PDF tool is completely free. You can compress as many files as you need without any hidden fees, subscriptions, or credit card requirements." },
-                        { q: "Is it safe and secure?", a: "Absolutely. We prioritize your privacy and security. All files uploaded for compression are processed using secure encryption and are permanently deleted from our servers after one hour." },
-                        { q: "How do I use this tool online?", a: "Simply upload your PDF file to the tool, wait for the automatic compression process to finish, and then download your optimized file instantly. It performs all operations directly in your browser." }
+                        { q: "Can I compress PDF without losing quality?", a: "Yes, our advanced compression algorithm reduces file size by optimizing fonts and images while maintaining excellent visual quality." },
+                        { q: "Is it free to compress PDF online?", a: "Yes, UsePDF is completely free. You can compress as many files as you like without any cost or registration." },
+                        { q: "Can I compress PDF to 1MB or 100KB?", a: "Our tool automatically optimizes your PDF to the smallest possible size, often reducing files to under 1MB or 100KB depending on the original content." },
+                        { q: "Is my PDF file secure?", a: "Absolutely. All uploaded files are encrypted and automatically deleted from our servers permanently after one hour." }
                     ].map((faq, i) => (
                         <div key={i} className="bg-slate-50/50 rounded-xl p-6">
                             <h3 className="text-lg font-bold text-slate-900 mb-3">{faq.q}</h3>
@@ -191,7 +191,7 @@ export default function CompressPdfPage() {
                                 <Merge className="w-6 h-6 text-red-500" />
                             </div>
                             <h3 className="font-bold text-slate-900 mb-2">Merge PDF</h3>
-                            <p className="text-slate-500 text-sm mb-4">Combine multiple PDFs into one document.</p>
+                            <p className="text-slate-500 text-sm mb-4">Combine multiple PDFs into one.</p>
                             <span className="text-indigo-600 font-medium text-sm inline-flex items-center">
                                 Try Now <ArrowRight className="w-4 h-4 ml-1" />
                             </span>
@@ -203,7 +203,7 @@ export default function CompressPdfPage() {
                                 <Shield className="w-6 h-6 text-slate-600" />
                             </div>
                             <h3 className="font-bold text-slate-900 mb-2">Protect PDF</h3>
-                            <p className="text-slate-500 text-sm mb-4">Secure your PDF file with a password.</p>
+                            <p className="text-slate-500 text-sm mb-4">Secure your PDF with a password.</p>
                             <span className="text-indigo-600 font-medium text-sm inline-flex items-center">
                                 Try Now <ArrowRight className="w-4 h-4 ml-1" />
                             </span>
@@ -215,7 +215,7 @@ export default function CompressPdfPage() {
                                 <Globe className="w-6 h-6 text-blue-500" />
                             </div>
                             <h3 className="font-bold text-slate-900 mb-2">All PDF Tools</h3>
-                            <p className="text-slate-500 text-sm mb-4">Explore our full suite of free tools.</p>
+                            <p className="text-slate-500 text-sm mb-4">Explore our full suite tools.</p>
                             <span className="text-indigo-600 font-medium text-sm inline-flex items-center">
                                 View Home <ArrowRight className="w-4 h-4 ml-1" />
                             </span>
