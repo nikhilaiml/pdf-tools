@@ -154,7 +154,7 @@ export default function ToolsGrid({ searchQuery = '' }: ToolsGridProps) {
                 </div>
 
                 {/* Tools Grid - 6 columns on large screens */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 sm:gap-4">
                     {filteredTools.map((tool, index) => {
                         const Icon = getIcon(tool.id);
                         const colors = getToolColor(tool.category, tool.id);
@@ -164,7 +164,7 @@ export default function ToolsGrid({ searchQuery = '' }: ToolsGridProps) {
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: index * 0.02 }}
-                                    className={`tool-card bg-white border border-slate-100 p-4 rounded-xl h-full flex flex-col group cursor-pointer ${colors.hover}`}
+                                    className={`tool-card bg-white border border-slate-100 p-3 sm:p-4 rounded-xl h-full flex flex-col group cursor-pointer ${colors.hover}`}
                                 >
                                     {/* Icon */}
                                     <div className={`w-12 h-12 rounded-xl ${colors.bg} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300`}>

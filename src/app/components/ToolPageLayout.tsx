@@ -262,7 +262,7 @@ const ToolPageLayout: React.FC<ToolPageLayoutProps> = ({
                         Everything you need to work with PDF documents efficiently.
                     </p>
 
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
                         {defaultFeatures.map((feature, index) => (
                             <Link href={feature.href} key={index} className="block group">
                                 <div className="bg-gray-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center hover:bg-gray-100 transition-colors h-full">

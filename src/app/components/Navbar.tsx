@@ -192,7 +192,7 @@ const Navbar = () => {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden bg-white/95 backdrop-blur-xl border-b border-slate-100 overflow-hidden"
+                        className="md:hidden bg-white/95 backdrop-blur-xl border-b border-slate-100 overflow-hidden max-h-[85vh] overflow-y-auto"
                     >
                         <div className="px-4 py-6 space-y-4">
                             <Link
