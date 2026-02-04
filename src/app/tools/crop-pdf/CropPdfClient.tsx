@@ -142,7 +142,7 @@ const CropPdfClient = () => {
             // (Relaxed clamping for smoother ux, strict for setCropBox)
 
             setCropBox(prev => {
-                let { x: px, y: py, width: pw, height: ph } = prev;
+                const { x: px, y: py, width: pw, height: ph } = prev;
 
                 // Movement Delta (approximate, since we use raw position for resizing)
                 // Better approach: Calculate new position based on mode
