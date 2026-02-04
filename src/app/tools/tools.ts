@@ -239,6 +239,13 @@ export const tools: Tool[] = [
     category: 'advanced',
   },
   {
+    title: 'Image to PDF',
+    id: 'image-to-pdf',
+    description: 'Convert images (JPG, PNG) to PDF.',
+    icon: 'image',
+    category: 'convert',
+  },
+  {
     title: 'Batch Image to PDF',
     id: 'batch-image-to-pdf',
     description: 'Convert multiple images to a single PDF.',

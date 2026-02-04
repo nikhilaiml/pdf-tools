@@ -2,14 +2,14 @@
 
 import { useState } from 'react';
 import { PDFDocument } from 'pdf-lib';
-import { Loader2, Image as ImageIcon, FileText, Plus, Cloud } from 'lucide-react';
+import { Loader2, FileText, Plus, Cloud, Image as ImageIcon } from 'lucide-react';
 import ToolPageLayout from '../../components/ToolPageLayout';
 
-interface JpgToPdfClientProps {
+interface ImageToPdfClientProps {
     seoContent?: React.ReactNode;
 }
 
-export default function JpgToPdfClient({ seoContent }: JpgToPdfClientProps) {
+export default function ImageToPdfClient({ seoContent }: ImageToPdfClientProps) {
     const [files, setFiles] = useState<File[]>([]);
     const [isProcessing, setIsProcessing] = useState(false);
     const [isDragging, setIsDragging] = useState(false);
@@ -44,7 +44,7 @@ export default function JpgToPdfClient({ seoContent }: JpgToPdfClientProps) {
                 const arrayBuffer = await file.arrayBuffer();
                 let image;
 
-                if (file.type === 'image/jpeg' || file.type === 'image/jpg') {
+                if (file.type === 'image/jpeg') {
                     image = await pdfDoc.embedJpg(arrayBuffer);
                 } else if (file.type === 'image/png') {
                     image = await pdfDoc.embedPng(arrayBuffer);
@@ -67,11 +67,11 @@ export default function JpgToPdfClient({ seoContent }: JpgToPdfClientProps) {
 
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            link.download = `jpgs-to-pdf.pdf`;
+            link.download = `image-to-pdf.pdf`;
             link.click();
         } catch (error) {
             console.error('Error creating PDF:', error);
-            alert('Failed to create PDF. Ensure files are valid JPG/PNG.');
+            alert('Failed to create PDF. Ensure all files are valid images (JPG/PNG).');
         } finally {
             setIsProcessing(false);
         }
@@ -80,22 +80,22 @@ export default function JpgToPdfClient({ seoContent }: JpgToPdfClientProps) {
     const steps = [
         {
             title: "Step 1: Add Images",
-            description: "Select or drag and drop your JPG/PNG images that you want to combine into a PDF."
+            description: "Select or drag multiple images (JPG, PNG) to combine into one PDF."
         },
         {
             title: "Step 2: Arrange",
-            description: "Each image becomes a page in your PDF, maintaining original dimensions."
+            description: "Each image becomes a page in your PDF, preserving original quality."
         },
         {
             title: "Step 3: Download",
-            description: "Get your PDF with all images combined into one document."
+            description: "Get your combined PDF document in seconds."
         }
     ];
 
     return (
         <ToolPageLayout
-            title="JPG to PDF Converter"
-            subtitle="Convert your JPG images into a single PDF document."
+            title="Image to PDF Online – Convert JPG & PNG to PDF Free"
+            subtitle="Convert images to PDF online for free. Supports JPG, PNG formats. No signup or installation required. Fast and secure conversion."
             steps={steps}
             ctaText="Convert to PDF"
             onAction={handleConvert}
@@ -116,7 +116,7 @@ export default function JpgToPdfClient({ seoContent }: JpgToPdfClientProps) {
                 onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
                 onDragLeave={(e) => { e.preventDefault(); setIsDragging(false); }}
                 onDrop={handleDrop}
-                onClick={() => document.getElementById('jpg-upload')?.click()}
+                onClick={() => document.getElementById('multi-file-upload')?.click()}
             >
                 <div className="flex justify-center mb-4 sm:mb-6">
                     <div className={`p-4 sm:p-6 rounded-2xl sm:rounded-3xl transition-colors ${isDragging ? 'bg-purple-100' : 'bg-orange-50'}`}>
@@ -136,10 +136,10 @@ export default function JpgToPdfClient({ seoContent }: JpgToPdfClientProps) {
                 <input
                     type="file"
                     multiple
-                    accept="image/jpeg, image/jpg, image/png"
+                    accept="image/png, image/jpeg"
                     onChange={handleFileChange}
                     className="hidden"
-                    id="jpg-upload"
+                    id="multi-file-upload"
                 />
             </div>
 
@@ -163,6 +163,12 @@ export default function JpgToPdfClient({ seoContent }: JpgToPdfClientProps) {
                                 </button>
                             </div>
                         ))}
+                        <div
+                            onClick={(e) => { e.stopPropagation(); document.getElementById('multi-file-upload')?.click(); }}
+                            className="flex items-center justify-center aspect-square border-2 border-dashed border-gray-300 rounded-xl hover:bg-gray-50 cursor-pointer"
+                        >
+                            <Plus className="text-gray-400" size={28} />
+                        </div>
                     </div>
 
                     <button
@@ -172,7 +178,7 @@ export default function JpgToPdfClient({ seoContent }: JpgToPdfClientProps) {
                             }`}
                     >
                         {isProcessing ? <Loader2 className="animate-spin" size={20} /> : <FileText size={20} />}
-                        <span className="text-sm sm:text-base">{isProcessing ? 'Converting...' : 'Convert to PDF'}</span>
+                        <span className="text-sm sm:text-base">{isProcessing ? 'Creating PDF...' : 'Convert to PDF'}</span>
                     </button>
                 </div>
             )}
