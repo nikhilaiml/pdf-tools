@@ -7,11 +7,11 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   metadataBase: new URL('https://usepdf.in'),
   title: {
-    default: "UsePDF – Free Online PDF Tools",
+    default: "Online PDF Tools – Compress, Merge, Convert PDFs Free",
     template: "%s | UsePDF",
   },
-  description: "UsePDF offers free online PDF tools to merge, split, compress, and convert PDF files. Fast, secure, and easy to use.",
-  keywords: ["pdf tools", "merge pdf", "split pdf", "compress pdf", "convert pdf", "pdf to word", "free pdf tools"],
+  description: "UsePDF is a free online PDF tools website to compress, merge, convert, protect and manage PDF files. No signup or software installation required. Fast, secure and works on mobile, tablet and desktop.",
+  keywords: ["online PDF tools", "free PDF tools", "pdf converter online", "compress pdf online", "merge pdf online"],
   authors: [{ name: "UsePDF" }],
   creator: "UsePDF",
   publisher: "UsePDF",
@@ -30,12 +30,12 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://usepdf.in',
-    title: 'UsePDF – Free Online PDF Tools',
-    description: 'Every tool you need to use PDFs, at your fingertips. All are 100% FREE and easy to use! Merge, split, compress, convert, rotate, unlock and more with just a few clicks.',
+    title: 'Online PDF Tools – Compress, Merge, Convert PDFs Free',
+    description: 'UsePDF is a free online PDF tools website to compress, merge, convert, protect and manage PDF files. No signup or software installation required.',
     siteName: 'UsePDF',
     images: [
       {
-        url: '/og-image.jpg', // Assuming you will add one or I should reference a generic one
+        url: '/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'UsePDF - Free Online PDF Tools',
@@ -44,9 +44,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'UsePDF – Free Online PDF Tools',
-    description: 'Every tool you need to use PDFs, at your fingertips. All are 100% FREE and easy to use!',
-    creator: '@UsePDF', // Placeholder, can be updated
+    title: 'Online PDF Tools – Compress, Merge, Convert PDFs Free',
+    description: 'UsePDF is a free online PDF tools website to compress, merge, convert, protect and manage PDF files. No signup or software installation required.',
+    creator: '@UsePDF',
     images: ['/og-image.jpg'],
   },
   alternates: {

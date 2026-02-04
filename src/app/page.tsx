@@ -4,52 +4,19 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import ToolsGrid from './components/ToolsGrid';
 import Features from './components/Features';
-import PremiumSection from './components/PremiumSection';
-import Footer from './components/Footer';
-import FAQSection from './components/FAQSection';
-import { useState, useEffect, Suspense } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import HomeSEOText from './components/HomeSEOText';
+// ... imports
 
-function HomeContent() {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const initialSearch = searchParams.get('search') || '';
-  const [searchQuery, setSearchQuery] = useState(initialSearch);
-
-  // Sync state with URL
-  useEffect(() => {
-    const currentSearch = searchParams.get('search') || '';
-    if (currentSearch !== searchQuery) {
-      setSearchQuery(currentSearch);
-    }
-  }, [searchParams]);
-
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
-    // Update URL without full reload
-    const params = new URLSearchParams(window.location.search);
-    if (query) {
-      params.set('search', query);
-    } else {
-      params.delete('search');
-    }
-    router.replace(`/?${params.toString()}`, { scroll: false });
-  };
-
-  return (
-    <div className="bg-[#faf8f5] min-h-screen text-slate-800 font-sans selection:bg-indigo-500/30">
-      <Navbar />
-
-      <main className="relative">
+// ... inside HomeContent ...
         <Hero onSearch={handleSearch} initialSearchValue={searchQuery} />
         <ToolsGrid searchQuery={searchQuery} />
         <Features />
+        <HomeSEOText />
         <FAQSection />
-        <PremiumSection />
-      </main>
+{/* <PremiumSection /> Removed to focus on 100% Free messaging */ }
 
-      <Footer />
-    </div>
+<Footer />
+    </div >
   );
 }
 

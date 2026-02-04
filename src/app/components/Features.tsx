@@ -66,17 +66,23 @@ export default function Features() {
                             viewport={{ once: true }}
                             className="text-3xl md:text-5xl font-bold text-slate-800 mb-4"
                         >
-                            Work Smarter
+                            Why Choose UsePDF?
                         </motion.h2>
-                        <motion.p
+                        <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.1 }}
-                            className="text-slate-500 max-w-2xl mx-auto text-lg"
+                            className="text-slate-500 max-w-2xl mx-auto text-lg text-left"
                         >
-                            UsePDF simplifies document management. All tools are browser-based, accessible on desktop, mobile, and tablet. Looking for a way to work smarter? No downloads or account required.
-                        </motion.p>
+                            <ul className="list-disc space-y-2 pl-5 inline-block text-left">
+                                <li><strong>100% Free PDF Tools:</strong> Enjoy full access to all features without any hidden costs or subscriptions.</li>
+                                <li><strong>Secure & Private:</strong> Your privacy is our priority; all files are automatically deleted from our servers after one hour.</li>
+                                <li><strong>Fast processing speed:</strong> Advanced algorithms ensure your documents are processed and ready in seconds.</li>
+                                <li><strong>No installation or signup required:</strong> Start working immediately without accounts or software downloads.</li>
+                                <li><strong>Works on all devices and browsers:</strong> Access our tools from Chrome, Safari, Edge, or Firefox on any device.</li>
+                            </ul>
+                        </motion.div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

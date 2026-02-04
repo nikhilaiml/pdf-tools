@@ -6,24 +6,20 @@ import { Plus, Minus, HelpCircle } from 'lucide-react';
 
 const homeFaqs = [
     {
-        question: "Is UsePDF completely free?",
-        answer: "Yes! UsePDF is a completely free online PDF tools website. You can merge, split, compress, and convert files without any cost. There are no hidden fees, subscriptions, or paywalls."
+        question: "Is UsePDF free to use?",
+        answer: "Yes, UsePDF is completely free to use. You can access all our tools for converting, merging, and compressing PDFs without any charges, subscriptions, or limits."
     },
     {
-        question: "Do I need to install any software?",
-        answer: "No, UsePDF works entirely in your web browser. There is no software installation required. You can access all tools from any device (Windows, Mac, Linux, iPhone, Android)."
+        question: "Are my PDF files safe?",
+        answer: "Absolutely. We prioritize your privacy and security. All files transferred to our servers are encrypted, and they are automatically and permanently deleted after one hour to ensure your data remains private."
     },
     {
-        question: "Is it safe to upload my files?",
-        answer: "Absolutely. We prioritize your privacy and security. All file transfers are encrypted using SSL, and your files are automatically deleted from our servers after 1 hour."
+        question: "Can I use UsePDF on mobile devices?",
+        answer: "Yes, our platform is fully responsive and optimized for mobile use. You can access all our tools seamlessly on your smartphone or tablet, whether you are using iOS or Android."
     },
     {
-        question: "Are there any file size limits?",
-        answer: "We support large files, but for optimal performance, we recommend keeping individual file sizes reasonable. Our tools are designed to handle most standard PDF tasks efficiently."
-    },
-    {
-        question: "Can I use UsePDF on my phone?",
-        answer: "Yes, our website is fully responsive and works perfectly on all devices, including mobile phones and tablets. Manage your documents on the go."
+        question: "Do I need to install any software to use UsePDF?",
+        answer: "No, you do not need to install any software or plugins. UsePDF is entirely cloud-based, meaning all you need is a web browser and an internet connection to handle your PDF documents."
     }
 ];
 

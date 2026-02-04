@@ -129,7 +129,7 @@ export default function ToolsGrid({ searchQuery = '' }: ToolsGridProps) {
                 <div className="flex flex-col items-center mb-12">
                     <div className="text-center mb-10 max-w-3xl mx-auto">
                         <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">
-                            All-in-One Free Online PDF Tools
+                            Popular PDF Tools Online
                         </h2>
                         <p className="text-slate-600 text-lg leading-relaxed">
                             UsePDF offers a complete collection of free online PDF tools. Covers merging, compressing, converting, editing, and securing PDFs with a focus on speed, privacy, and simplicity.
