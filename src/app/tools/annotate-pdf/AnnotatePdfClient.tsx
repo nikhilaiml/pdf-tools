@@ -5,7 +5,14 @@ import { Loader2, Upload, PenTool, Eraser, Trash2, Download, Save, Undo, X, Clou
 import { PDFDocument } from 'pdf-lib';
 import ToolPageLayout from '../../components/ToolPageLayout';
 
-const AnnotatePdfClient = () => {
+interface AnnotatePdfClientProps {
+    seoContent?: React.ReactNode;
+    title?: string;
+    subtitle?: string;
+    steps?: { title: string; description: string }[];
+}
+
+const AnnotatePdfClient = ({ seoContent, title, subtitle, steps }: AnnotatePdfClientProps) => {
     const [file, setFile] = useState<File | null>(null);
     const [pdfDoc, setPdfDoc] = useState<any>(null);
     const [pageNum, setPageNum] = useState(1);
@@ -184,7 +191,7 @@ const AnnotatePdfClient = () => {
         }
     };
 
-    const steps = [
+    const defaultSteps = [
         {
             title: "Step 1: Upload PDF",
             description: "Upload the PDF document you want to draw on."
@@ -201,10 +208,11 @@ const AnnotatePdfClient = () => {
 
     return (
         <ToolPageLayout
-            title="Annotate PDF"
-            subtitle="Draw, highlight, and mark up your PDF documents online."
-            steps={steps}
+            title={title || "Annotate PDF"}
+            subtitle={subtitle || "Draw, highlight, and mark up your PDF documents online."}
+            steps={steps || defaultSteps}
             showCta={false}
+            seoContent={seoContent}
         >
             {!file ? (
                 <div
