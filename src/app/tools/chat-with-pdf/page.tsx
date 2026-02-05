@@ -1,10 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
 import type { Metadata } from 'next';
-import dynamic from 'next/dynamic';
+
 import Link from 'next/link';
 import { Check, Shield, Zap, Smartphone, FileText, Layout, HelpCircle, Bot, Brain } from 'lucide-react';
 
-const ChatWithPdfClient = dynamic(() => import('./ChatWithPdfClient'), { ssr: false });
+import ChatWithPdfWrapper from './ChatWithPdfWrapper';
 
 export const metadata: Metadata = {
     title: 'Chat with PDF Online – Ask Questions from PDF Using AI',
@@ -226,7 +226,7 @@ export default function ChatWithPdfPage() {
     const introText = "Unlock the knowledge within your documents with UsePDF's intelligent chat tool. Our platform allows you to chat with pdf ai capabilities, enabling you to ask questions, request summaries, and get instant answers from any PDF file. Whether you're a student needing to understand a textbook or a professional reviewing a contract, our ai chat with pdf feature makes reading faster and more interactive. It's fully online, completely free, and requires no software installation. Experience the future of document interaction and save hours of reading time today.";
 
     return (
-        <ChatWithPdfClient
+        <ChatWithPdfWrapper
             seoContent={seoContent}
             title="Chat with PDF Online – Ask Questions from PDF Using AI"
             subtitle={introText}

@@ -1,10 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
 import type { Metadata } from 'next';
-import dynamic from 'next/dynamic';
+
 import Link from 'next/link';
 import { Check, Shield, Zap, Globe, Smartphone, PenTool, HelpCircle, Layers } from 'lucide-react';
 
-const AnnotatePdfClient = dynamic(() => import('./AnnotatePdfClient'), { ssr: false });
+import AnnotatePdfWrapper from './AnnotatePdfWrapper';
 
 export const metadata: Metadata = {
     title: 'Highlight PDF Online – Annotate PDF Free',
@@ -210,7 +210,7 @@ export default function AnnotatePdfPage() {
     const introText = "Enhance your reading and review process with UsePDF's free online highlighter. Our intuitive tool allows you to easily highlight text in PDF documents, making it perfect for studying, contract review, or collaborative feedback. Beyond simple highlighting, you can annotate pdf files by drawing, adding personalized notes, or marking specific sections directly in your browser. We offer a fast, secure, and completely free solution that requires no software installation or registration. Experience the convenience of a powerful pdf highlight tool that works seamlessly on any device, preserving the original layout and quality of your important documents.";
 
     return (
-        <AnnotatePdfClient
+        <AnnotatePdfWrapper
             seoContent={seoContent}
             title="Highlight PDF Online – Annotate PDF Free"
             subtitle={introText}
