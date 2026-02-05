@@ -66,7 +66,7 @@ export default function Features() {
                             viewport={{ once: true }}
                             className="text-3xl md:text-5xl font-bold text-slate-800 mb-4"
                         >
-                            Why Choose UsePDF?
+                            Why Use Our Online PDF Tools
                         </motion.h2>
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -76,12 +76,11 @@ export default function Features() {
                             className="text-slate-500 max-w-2xl mx-auto text-lg text-left"
                         >
                             <ul className="list-disc space-y-2 pl-5 inline-block text-left">
-                                <li><strong>Free PDF tools online:</strong> Access all tools without any cost.</li>
-                                <li><strong>No watermark:</strong> Clean documents with no branding added.</li>
-                                <li><strong>No login required:</strong> Start using tools instantly without signup.</li>
-                                <li><strong>Fast and easy to use:</strong> Process files in seconds with a simple interface.</li>
-                                <li><strong>Works on all devices:</strong> Compatible with mobile, tablet, and desktop.</li>
-                                <li><strong>Secure & privacy-focused:</strong> Files are auto-deleted for your safety.</li>
+                                <li><strong>Free to use:</strong> Enjoy 100% free access to all our PDF tools.</li>
+                                <li><strong>No registration required:</strong> Start converting and editing immediately without signing up.</li>
+                                <li><strong>Secure & privacy-friendly:</strong> Your files are processed securely and deleted automatically.</li>
+                                <li><strong>Works on all devices:</strong> Fully compatible with mobile, tablet, and desktop browsers.</li>
+                                <li><strong>Fast processing:</strong> Get your results in seconds with our optimized processing engine.</li>
                             </ul>
                         </motion.div>
                     </div>

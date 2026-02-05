@@ -5,7 +5,14 @@ import { Loader2, FileText, Download, Cloud } from 'lucide-react';
 import { Document as DocxDocument, Packer, Paragraph, TextRun } from 'docx';
 import ToolPageLayout from '../../components/ToolPageLayout';
 
-const PdfToWordPage = () => {
+interface PdfToWordClientProps {
+    seoContent?: React.ReactNode;
+    title?: string;
+    subtitle?: string;
+    steps?: { title: string; description: string }[];
+}
+
+const PdfToWordPage = ({ seoContent, title, subtitle, steps }: PdfToWordClientProps) => {
     const [file, setFile] = useState<File | null>(null);
     const [loading, setLoading] = useState(false);
     const [isDragging, setIsDragging] = useState(false);
@@ -111,7 +118,7 @@ const PdfToWordPage = () => {
         }
     };
 
-    const steps = [
+    const defaultSteps = [
         {
             title: "Step 1: Upload PDF",
             description: "Select or drag and drop your PDF file that you want to convert to Word format."
@@ -128,14 +135,15 @@ const PdfToWordPage = () => {
 
     return (
         <ToolPageLayout
-            title="PDF to Word Converter"
-            subtitle="Convert PDF contents to an editable Word document (.docx)."
-            steps={steps}
+            title={title || "PDF to Word Converter"}
+            subtitle={subtitle || "Convert PDF contents to an editable Word document (.docx)."}
+            steps={steps || defaultSteps}
             ctaText="Convert to Word"
             onAction={handleConvert}
             loading={loading}
             disabled={!file}
             showCta={!!file}
+            seoContent={seoContent}
         >
             {!file ? (
                 <div

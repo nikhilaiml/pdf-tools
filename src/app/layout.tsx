@@ -7,11 +7,22 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   metadataBase: new URL('https://usepdf.in'),
   title: {
-    default: "Online PDF Tools – Compress, Merge, Convert PDFs Free",
+    default: "Online PDF Tools – Edit, Convert, Merge & Compress PDFs Free",
     template: "%s | UsePDF",
   },
-  description: "UsePDF is a free online PDF tools website to compress, merge, convert, protect and manage PDF files. No signup or software installation required. Fast, secure and works on mobile, tablet and desktop.",
-  keywords: ["online PDF tools", "free PDF tools", "pdf converter online", "compress pdf online", "merge pdf online"],
+  description: "UsePDF provides free online PDF tools to edit, convert, merge, compress, and manage PDF files. No signup required. Secure, fast, and works on all devices.",
+  keywords: [
+    "online pdf tools",
+    "online pdf editor",
+    "free pdf tools",
+    "pdf combine files",
+    "pdf joiner",
+    "online pdf merger",
+    "jpg to pdf converter",
+    "picture to pdf converter online",
+    "free pdf viewer",
+    "convert pdf to image"
+  ],
   authors: [{ name: "UsePDF" }],
   creator: "UsePDF",
   publisher: "UsePDF",

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import JSZip from 'jszip';
-import { Loader2, FileText, Download, Cloud, Image } from 'lucide-react';
+import { Loader2, FileText, Download, Cloud } from 'lucide-react';
 import ToolPageLayout from '../../components/ToolPageLayout';
 
 interface ConvertedImage {
@@ -11,7 +11,15 @@ interface ConvertedImage {
     page: number;
 }
 
-const PdfToJpgClient = () => {
+interface PdfToJpgClientProps {
+    seoContent?: React.ReactNode;
+    title?: string;
+    subtitle?: string;
+    steps?: { title: string; description: string }[];
+}
+
+const PdfToJpgClient = (props: PdfToJpgClientProps) => {
+    const { seoContent, title, subtitle } = props;
     const [file, setFile] = useState<File | null>(null);
     const [images, setImages] = useState<ConvertedImage[]>([]);
     const [loading, setLoading] = useState(false);
@@ -132,14 +140,15 @@ const PdfToJpgClient = () => {
 
     return (
         <ToolPageLayout
-            title="PDF to JPG Converter"
-            subtitle="Convert PDF pages to high-quality JPG images. Download single pages or all at once."
-            steps={steps}
+            title={title || "PDF to JPG Converter"}
+            subtitle={subtitle || "Convert PDF pages to high-quality JPG images. Download single pages or all at once."}
+            steps={props.steps || steps}
             ctaText="Download All (ZIP)"
             onAction={handleDownloadAll}
             loading={false}
             disabled={images.length === 0}
             showCta={images.length > 0}
+            seoContent={seoContent}
         >
             {!file ? (
                 <div

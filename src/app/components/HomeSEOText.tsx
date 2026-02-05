@@ -1,55 +1,66 @@
 'use client';
 
-import { motion } from 'framer-motion';
-
 export default function HomeSEOText() {
     return (
         <section className="py-16 bg-white border-t border-slate-100">
             <div className="container mx-auto px-4 max-w-4xl">
-                {/* How It Works Section */}
+
+                {/* Popular Online PDF Tools Section */}
                 <div className="mb-16">
-                    <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">How It Works</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                        {[
-                            { step: 1, title: "Upload File", desc: "Upload your file." },
-                            { step: 2, title: "Choose Tool", desc: "Choose a PDF tool." },
-                            { step: 3, title: "Process Online", desc: "Process file online." },
-                            { step: 4, title: "Download", desc: "Download result instantly." }
-                        ].map((item, index) => (
-                            <div key={index} className="bg-slate-50 p-6 rounded-xl border border-slate-100 text-center">
-                                <span className="inline-block w-10 h-10 bg-indigo-100 text-indigo-600 rounded-full font-bold text-lg leading-10 mb-3">
-                                    {item.step}
-                                </span>
-                                <h3 className="font-bold text-slate-800 mb-2">{item.title}</h3>
-                                <p className="text-sm text-slate-600">{item.desc}</p>
-                            </div>
-                        ))}
+                    <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">Popular Online PDF Tools</h2>
+                    <div className="grid md:grid-cols-2 gap-8">
+                        <div className="bg-slate-50 p-6 rounded-xl border border-slate-100">
+                            <h3 className="text-xl font-bold text-slate-800 mb-3">PDF Combine Files</h3>
+                            <p className="text-slate-600 leading-relaxed">
+                                Combine multiple PDF files into a single document instantly. Our tool preserves the quality of your pages while merging them securely in the correct order.
+                            </p>
+                        </div>
+                        <div className="bg-slate-50 p-6 rounded-xl border border-slate-100">
+                            <h3 className="text-xl font-bold text-slate-800 mb-3">Online PDF Editor</h3>
+                            <p className="text-slate-600 leading-relaxed">
+                                Edit your PDF files directly in your browser. Add text, images, or annotations to your documents without needing complex software or installations.
+                            </p>
+                        </div>
+                        <div className="bg-slate-50 p-6 rounded-xl border border-slate-100">
+                            <h3 className="text-xl font-bold text-slate-800 mb-3">PDF Joiner</h3>
+                            <p className="text-slate-600 leading-relaxed">
+                                Join separate PDF documents together into one organized file. Perfect for bringing reports, invoices, and other documents into a unified format.
+                            </p>
+                        </div>
+                        <div className="bg-slate-50 p-6 rounded-xl border border-slate-100">
+                            <h3 className="text-xl font-bold text-slate-800 mb-3">Online PDF Merger</h3>
+                            <p className="text-slate-600 leading-relaxed">
+                                Merge PDF files quickly and securely online. Select your files, arrange them as needed, and download your merged document in seconds.
+                            </p>
+                        </div>
                     </div>
                 </div>
 
-                {/* Popular PDF Tools Section */}
-                <div className="mb-16 text-center">
-                    <h2 className="text-3xl font-bold text-slate-900 mb-6">Popular PDF Tools</h2>
-                    <div className="flex flex-wrap justify-center gap-4">
-                        <a href="/tools/pdf-to-jpg" className="text-indigo-600 font-medium hover:underline">PDF to JPG</a>
-                        <span className="text-slate-300">|</span>
-                        <a href="/tools/jpg-to-pdf" className="text-indigo-600 font-medium hover:underline">JPG to PDF</a>
-                        <span className="text-slate-300">|</span>
-                        <a href="/tools/image-to-pdf" className="text-indigo-600 font-medium hover:underline">Image to PDF</a>
-                        <span className="text-slate-300">|</span>
-                        <a href="/tools/compress-pdf" className="text-indigo-600 font-medium hover:underline">Compress PDF</a>
-                        <span className="text-slate-300">|</span>
-                        <a href="/tools/merge-pdf" className="text-indigo-600 font-medium hover:underline">Merge PDF</a>
+                {/* Convert Files Easily Section */}
+                <div className="mb-16">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">Convert Files Easily</h2>
+                    <div className="grid md:grid-cols-3 gap-6">
+                        <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                            <h3 className="text-lg font-bold text-slate-800 mb-3">JPG to PDF Converter</h3>
+                            <p className="text-slate-600 text-sm leading-relaxed">
+                                Convert your JPG images into high-quality PDF documents. Our converter handles file sizing and orientation to produce a professional PDF from your photos.
+                            </p>
+                        </div>
+                        <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                            <h3 className="text-lg font-bold text-slate-800 mb-3">Picture to PDF Converter</h3>
+                            <p className="text-slate-600 text-sm leading-relaxed">
+                                Turn any picture into a PDF file instantly. Whether it's a PNG, BMP, or TIFF, our tool converts your images while maintaining visual clarity.
+                            </p>
+                        </div>
+                        <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                            <h3 className="text-lg font-bold text-slate-800 mb-3">Convert PDF to Image</h3>
+                            <p className="text-slate-600 text-sm leading-relaxed">
+                                Extract pages from your PDF and save them as high-resolution images. Convert typically into JPG or PNG formats for easy sharing and viewing.
+                            </p>
+                        </div>
                     </div>
                 </div>
 
-                {/* Free Online PDF Tools Paragraph */}
-                <div className="prose prose-lg mx-auto text-slate-600 text-center">
-                    <h2 className="text-3xl font-bold text-slate-900 mb-6">Free PDF Tools Online</h2>
-                    <p className="leading-relaxed">
-                        We provide a comprehensive suite of <strong>free PDF tools online</strong>. Our platform allows you to easily manage your documents without any hassle. Whether you need to <strong>compress PDF</strong> files for smaller size, <strong>merge PDF</strong> documents into one, or convert images using our <strong>PDF to JPG</strong> and <strong>JPG to PDF</strong> tools, we have you covered. All our tools are secure, fast, and work directly in your browser with no signup required. UsePDF is your one-stop solution for all PDF tasks.
-                    </p>
-                </div>
             </div>
         </section>
     );

@@ -30,6 +30,12 @@ interface PageItem {
     thumbnail: string;
 }
 
+interface RearrangePdfClientProps {
+    seoContent?: React.ReactNode;
+    title?: string;
+    subtitle?: string;
+}
+
 const SortablePage = ({
     item,
     index,
@@ -92,7 +98,7 @@ const SortablePage = ({
     );
 };
 
-const ReorderPagesClient = () => {
+const RearrangePdfClient = ({ seoContent, title, subtitle }: RearrangePdfClientProps) => {
     const [file, setFile] = useState<File | null>(null);
     const [items, setItems] = useState<PageItem[]>([]);
     const [loading, setLoading] = useState(false);
@@ -235,14 +241,15 @@ const ReorderPagesClient = () => {
 
     return (
         <ToolPageLayout
-            title="Reorder PDF Pages"
-            subtitle="Drag and drop thumbnails to rearrange pages. You can also delete pages."
+            title={title || "Reorder PDF Pages"}
+            subtitle={subtitle || "Drag and drop thumbnails to rearrange pages. You can also delete pages."}
             steps={steps}
             ctaText="Save Changes"
             onAction={handleReorder}
             loading={processing}
             disabled={items.length === 0}
             showCta={items.length > 0}
+            seoContent={seoContent}
         >
             {!file ? (
                 <div
@@ -358,4 +365,4 @@ const ReorderPagesClient = () => {
     );
 };
 
-export default ReorderPagesClient;
+export default RearrangePdfClient;

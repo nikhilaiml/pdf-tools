@@ -150,7 +150,7 @@ export default function Hero({ onSearch, initialSearchValue = '' }: HeroProps) {
                             variants={itemVariants}
                             className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.1]"
                         >
-                            Free PDF Tools Online
+                            Online PDF Tools – Edit, Convert, Merge & Compress PDFs Free
                         </motion.h1>
 
                         {/* Subheading */}
@@ -158,7 +158,7 @@ export default function Hero({ onSearch, initialSearchValue = '' }: HeroProps) {
                             variants={itemVariants}
                             className="text-base sm:text-lg md:text-xl text-indigo-100/90 mb-10 max-w-3xl leading-relaxed"
                         >
-                            Users can use free PDF tools online. Convert, compress, and merge PDF files easily. No signup or watermark. Fast, secure, and browser-based tools.
+                            Welcome to UsePDF, your ultimate solution for managing PDF documents efficiently and securely. We offer a comprehensive suite of completely free online PDF tools designed to help you merge, convert, edit, and compress PDF files with incredible ease. Whether you need to combine multiple documents into one, convert a JPG image to PDF format, or reduce a file's size for effortless sharing, our platform handles it all instantly. Experience the power of professional-grade PDF editing without the need to install any software or create an account. Simply upload your files, and let our fast, secure, and user-friendly tools process them in seconds. Our browser-based solution ensures your documents remain private while delivering high-quality results on any device, anywhere.
                         </motion.p>
 
                         {/* Search Bar with Gold Gradient */}

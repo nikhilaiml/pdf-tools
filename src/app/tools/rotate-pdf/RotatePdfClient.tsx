@@ -2,10 +2,16 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { PDFDocument, degrees } from 'pdf-lib';
-import { Loader2, FileText, Cloud, RotateCw, Undo2, LayoutTemplate, Smartphone, RefreshCw, MousePointerClick } from 'lucide-react';
+import { Loader2, Cloud, RotateCw, LayoutTemplate, Smartphone, MousePointerClick, RefreshCw } from 'lucide-react';
 import ToolPageLayout from '../../components/ToolPageLayout';
 
-const RotatePdfClient = () => {
+interface RotatePdfClientProps {
+  seoContent?: React.ReactNode;
+  title?: string;
+  subtitle?: string;
+}
+
+const RotatePdfClient = ({ seoContent, title, subtitle }: RotatePdfClientProps) => {
   const [file, setFile] = useState<File | null>(null);
   const [rotation, setRotation] = useState<number>(0);
   const [loading, setLoading] = useState(false);
@@ -81,17 +87,7 @@ const RotatePdfClient = () => {
 
       const pages = pdf.getPages();
       pages.forEach(page => {
-        // Get existing rotation or default to 0
         const currentRotation = page.getRotation().angle;
-        // setRotation sets ABSOLUTE rotation.
-        // If we want to ADD to it, we'd do current + rotation.
-        // But the UI implies "Set to this angle" or "Rotate by this much"?
-        // Standard "Rotate" tools usually mean "Rotate relative to current view" OR "Set absolute orientation".
-        // Given presets like "Portrait", "Landscape", we usually mean "Set to absolute".
-        // BUT, if the user drags the knob, they expect it to spin.
-
-        // Let's assume the UI state 'rotation' is the ADDED rotation to the original file.
-        // So Absolute Page Rotation = Original Page Rotation + UI Rotation.
         page.setRotation(degrees(currentRotation + rotation));
       });
 
@@ -132,15 +128,9 @@ const RotatePdfClient = () => {
       const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
       let degree = angle * (180 / Math.PI);
 
-      // Adjust standard angle (0 is right, we want 0 is up usually, or matches CSS rotate)
-      // CSS rotate: 0 is Up/Right depending on axis. 
-      // Let's make 90 degrees = Right (standard).
-      // atan2 returns -180 to 180.
-
-      // Normalize to 0-360
       if (degree < 0) degree += 360;
 
-      // Snap to 90s for easier usage
+      // Snap to 90s
       if (degree > 85 && degree < 95) degree = 90;
       if (degree > 175 && degree < 185) degree = 180;
       if (degree > 265 && degree < 275) degree = 270;
@@ -173,14 +163,15 @@ const RotatePdfClient = () => {
 
   return (
     <ToolPageLayout
-      title="Rotate PDF Pages"
-      subtitle="Permanently rotate your PDF documents. Set orientation for all pages instantly."
+      title={title || "Rotate PDF Pages"}
+      subtitle={subtitle || "Permanently rotate your PDF documents. Set orientation for all pages instantly."}
       steps={steps}
       ctaText="Rotate PDF"
       onAction={handleRotate}
       loading={loading}
       disabled={!file}
       showCta={false} // We have a custom CTA in the layout
+      seoContent={seoContent}
     >
       {!file ? (
         <div
