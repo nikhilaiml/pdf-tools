@@ -1,180 +1,116 @@
-'use client';
-
-import { useState } from 'react';
-import * as XLSX from 'xlsx';
-import { Loader2, FileSpreadsheet, Download, Cloud } from 'lucide-react';
+import type { Metadata } from 'next';
+import Link from 'next/link';
 import ToolPageLayout from '../../components/ToolPageLayout';
+import PdfToExcelClient from './PdfToExcelClient';
 
+export const metadata: Metadata = {
+    title: 'PDF to Excel Converter – Convert PDF to Excel Online Free | UsePDF',
+    description: 'Convert PDF to Excel online for free. Accurate tables, editable spreadsheets, secure processing, and no email required.',
+};
 
-const PdfToExcelPage = () => {
-    const [file, setFile] = useState<File | null>(null);
-    const [loading, setLoading] = useState(false);
-    const [isDragging, setIsDragging] = useState(false);
-
-    const handleFileSelect = (selectedFile: File) => {
-        if (selectedFile.type === 'application/pdf' || selectedFile.name.toLowerCase().endsWith('.pdf')) {
-            setFile(selectedFile);
-        } else {
-            alert('Please select a valid PDF file.');
-        }
-    };
-
-    const handleDrop = (e: React.DragEvent) => {
-        e.preventDefault();
-        setIsDragging(false);
-        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-            handleFileSelect(e.dataTransfer.files[0]);
-        }
-    };
-
-    const handleConvert = async () => {
-        if (!file) return;
-
-        setLoading(true);
-        try {
-            const pdfjsLib = await import('pdfjs-dist');
-            pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
-
-            const arrayBuffer = await file.arrayBuffer();
-            const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
-
-            const wb = XLSX.utils.book_new();
-
-            for (let i = 1; i <= pdf.numPages; i++) {
-                const page = await pdf.getPage(i);
-                const textContent = await page.getTextContent();
-                const items = textContent.items as any[];
-
-                // Group by Y
-                const rows: { [y: number]: any[] } = {};
-                items.forEach(item => {
-                    const y = Math.round(item.transform[5]);
-                    if (!rows[y]) rows[y] = [];
-                    rows[y].push(item);
-                });
-
-                // Sort Y descending
-                const sortedY = Object.keys(rows).map(Number).sort((a, b) => b - a);
-
-                // Build row data
-                const sheetData: string[][] = [];
-
-                sortedY.forEach(y => {
-                    const rowItems = rows[y];
-                    rowItems.sort((a, b) => a.transform[4] - b.transform[4]); // Sort X ascending
-                    const rowText = rowItems.map(item => item.str);
-                    sheetData.push(rowText);
-                });
-
-                const ws = XLSX.utils.aoa_to_sheet(sheetData);
-                XLSX.utils.book_append_sheet(wb, ws, `Page ${i}`);
-            }
-
-            XLSX.writeFile(wb, `${file.name.replace('.pdf', '')}.xlsx`);
-
-            alert('File converted successfully!');
-        } catch (error) {
-            console.error('Error converting to Excel:', error);
-            alert('Failed to convert PDF.');
-        } finally {
-            setLoading(false);
-        }
-    };
-
+export default function PdfToExcelPage() {
     const steps = [
         {
-            title: "Step 1: Upload PDF",
-            description: "Select or drag your PDF file containing tables or data."
+            title: "Upload PDF",
+            description: "Upload the PDF document you want to convert."
         },
         {
-            title: "Step 2: Extract",
-            description: "We'll analyze the layout and extract text into cells."
+            title: "Convert",
+            description: "Our tool extracts tables and text into Excel format."
         },
         {
-            title: "Step 3: Download",
-            description: "Get your Excel (.xlsx) file with extracted data."
+            title: "Download",
+            description: "Download your editable Excel spreadsheet instantly."
         }
     ];
 
+    const seoContent = (
+        <div className="prose prose-lg max-w-none text-gray-600">
+            <section className="mb-12">
+                <h2 className="text-3xl font-bold text-gray-900 mb-6">How to Convert PDF to Excel Online</h2>
+                <ul className="list-disc pl-6 space-y-3">
+                    <li>Upload your PDF file</li>
+                    <li>Choose Excel format (XLS or XLSX)</li>
+                    <li>Click on Convert PDF to Excel</li>
+                    <li>Download the converted Excel file instantly</li>
+                </ul>
+            </section>
+
+            <section className="mb-12">
+                <h2 className="text-3xl font-bold text-gray-900 mb-6">Why Use Our PDF to Excel Converter</h2>
+                <ul className="list-disc pl-6 space-y-3">
+                    <li>Convert PDF to Excel with accurate tables</li>
+                    <li>Fully editable Excel output</li>
+                    <li>No watermark added</li>
+                    <li>No registration or email required</li>
+                    <li>Works on all devices</li>
+                    <li>Fast and reliable conversion</li>
+                    <li>Secure and privacy-friendly</li>
+                </ul>
+            </section>
+
+            <section className="mb-12">
+                <h2 className="text-3xl font-bold text-gray-900 mb-6">Common Use Cases</h2>
+                <ul className="list-disc pl-6 space-y-3">
+                    <li>Converting financial reports</li>
+                    <li>Extracting tables from PDFs</li>
+                    <li>Editing scanned or digital PDFs</li>
+                    <li>Business and office data processing</li>
+                    <li>Academic and research documents</li>
+                </ul>
+            </section>
+
+            <section className="mb-12">
+                <h2 className="text-3xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
+                <div className="space-y-6">
+                    <div className="bg-gray-50 p-6 rounded-xl">
+                        <h3 className="text-xl font-bold text-gray-900 mb-2">How can I convert PDF to Excel online?</h3>
+                        <p>Simply upload your PDF file to our free converter, and we will extract the data and tables into an editable Excel spreadsheet for you.</p>
+                    </div>
+                    <div className="bg-gray-50 p-6 rounded-xl">
+                        <h3 className="text-xl font-bold text-gray-900 mb-2">Is this PDF to Excel converter free?</h3>
+                        <p>Yes, UsePDF provides this tool completely free of charge. You can convert your documents without any hidden fees.</p>
+                    </div>
+                    <div className="bg-gray-50 p-6 rounded-xl">
+                        <h3 className="text-xl font-bold text-gray-900 mb-2">Will my tables remain editable in Excel?</h3>
+                        <p>Yes, our tool is designed to recognize table structures and export them as editable rows and columns in the Excel file.</p>
+                    </div>
+                    <div className="bg-gray-50 p-6 rounded-xl">
+                        <h3 className="text-xl font-bold text-gray-900 mb-2">Are my PDF files safe and private?</h3>
+                        <p>Your privacy is important to us. All conversions happen securely, and your files are never stored on our servers.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section className="bg-green-50 p-8 rounded-2xl">
+                <p className="mb-4">
+                    Need more document solutions? UsePDF has you covered.
+                    Users can{' '}
+                    <Link href="/tools/pdf-to-word" className="text-green-700 font-semibold hover:underline">
+                        Convert PDF to Word
+                    </Link>{' '}
+                    for text editing, use{' '}
+                    <Link href="/tools/excel-to-pdf" className="text-green-700 font-semibold hover:underline">
+                        Excel to PDF
+                    </Link>{' '}
+                    to go back to PDF format, or try{' '}
+                    <Link href="/tools/merge-pdf" className="text-green-700 font-semibold hover:underline">
+                        Merge PDF
+                    </Link>{' '}
+                    to combine reports. You can convert PDFs to Word, compress large PDFs, or merge multiple files using other tools available on the website.
+                </p>
+            </section>
+        </div>
+    );
+
     return (
         <ToolPageLayout
-            title="PDF to Excel"
-            subtitle="Extract tables and data from PDF to an Excel compatible file."
+            title="Convert PDF to Excel Online – Free PDF to Excel Converter"
+            subtitle="Convert PDF files to editable Excel spreadsheets. Preserve tables, rows, and columns accurately. Free, secure, and easy to use."
             steps={steps}
-            ctaText="Convert to Excel"
-            onAction={handleConvert}
-            loading={loading}
-            disabled={!file}
-            showCta={!!file}
+            seoContent={seoContent}
         >
-            {!file ? (
-                <div
-                    className={`
-                        bg-white rounded-2xl sm:rounded-3xl shadow-xl border-2 border-dashed p-6 sm:p-12
-                        transition-all duration-300 cursor-pointer
-                        ${isDragging
-                            ? 'border-purple-500 bg-purple-50 scale-[1.02]'
-                            : 'border-orange-200 hover:border-purple-400 hover:shadow-2xl'
-                        }
-                    `}
-                    onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
-                    onDragLeave={(e) => { e.preventDefault(); setIsDragging(false); }}
-                    onDrop={handleDrop}
-                    onClick={() => document.getElementById('file-input')?.click()}
-                >
-                    <div className="flex justify-center mb-4 sm:mb-6">
-                        <div className={`p-4 sm:p-6 rounded-2xl sm:rounded-3xl transition-colors ${isDragging ? 'bg-purple-100' : 'bg-green-50'}`}>
-                            <Cloud className={`w-12 h-12 sm:w-16 sm:h-16 ${isDragging ? 'text-purple-500' : 'text-green-400'}`} strokeWidth={1.5} />
-                        </div>
-                    </div>
-
-                    <p className={`text-xl sm:text-2xl font-bold text-center mb-2 ${isDragging ? 'text-purple-700' : 'text-gray-800'}`}>
-                        Drag & Drop PDF Here
-                    </p>
-                    <p className="text-sm sm:text-base text-gray-500 text-center">or click to browse</p>
-
-                    <input
-                        id="file-input"
-                        type="file"
-                        accept=".pdf"
-                        onChange={(e) => e.target.files?.[0] && handleFileSelect(e.target.files[0])}
-                        className="hidden"
-                    />
-                </div>
-            ) : (
-                <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-gray-100 p-6 sm:p-8 max-w-2xl mx-auto">
-                    <div className="flex items-center justify-between mb-6 p-3 sm:p-4 bg-gray-50 rounded-xl">
-                        <div className="flex items-center space-x-3">
-                            <div className="p-2 bg-green-100 rounded-lg">
-                                <FileSpreadsheet className="text-green-500 w-5 h-5 sm:w-6 sm:h-6" />
-                            </div>
-                            <span className="font-medium text-gray-900 truncate max-w-[150px] sm:max-w-[200px] text-sm sm:text-base">{file.name}</span>
-                        </div>
-                        <button
-                            onClick={() => setFile(null)}
-                            className="text-xs sm:text-sm text-red-500 hover:text-red-700 font-medium"
-                        >
-                            Change
-                        </button>
-                    </div>
-
-                    <button
-                        onClick={handleConvert}
-                        disabled={loading}
-                        className={`w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-violet-500 to-purple-600 text-white font-bold py-3 sm:py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:scale-[1.02]'
-                            }`}
-                    >
-                        {loading ? <Loader2 className="animate-spin" size={20} /> : <Download size={20} />}
-                        <span className="text-sm sm:text-base">{loading ? 'Extracting Data...' : 'Convert to Excel'}</span>
-                    </button>
-
-                    <p className="text-xs text-center text-gray-500 mt-4">
-                        Best for simple tables. Complex layouts may need adjustment.
-                    </p>
-                </div>
-            )}
+            <PdfToExcelClient />
         </ToolPageLayout>
     );
-};
-
-export default PdfToExcelPage;
+}
