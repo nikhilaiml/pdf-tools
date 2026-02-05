@@ -76,11 +76,12 @@ export default function Features() {
                             className="text-slate-500 max-w-2xl mx-auto text-lg text-left"
                         >
                             <ul className="list-disc space-y-2 pl-5 inline-block text-left">
-                                <li><strong>100% Free PDF Tools:</strong> Enjoy full access to all features without any hidden costs or subscriptions.</li>
-                                <li><strong>Secure & Private:</strong> Your privacy is our priority; all files are automatically deleted from our servers after one hour.</li>
-                                <li><strong>Fast processing speed:</strong> Advanced algorithms ensure your documents are processed and ready in seconds.</li>
-                                <li><strong>No installation or signup required:</strong> Start working immediately without accounts or software downloads.</li>
-                                <li><strong>Works on all devices and browsers:</strong> Access our tools from Chrome, Safari, Edge, or Firefox on any device.</li>
+                                <li><strong>Free PDF tools online:</strong> Access all tools without any cost.</li>
+                                <li><strong>No watermark:</strong> Clean documents with no branding added.</li>
+                                <li><strong>No login required:</strong> Start using tools instantly without signup.</li>
+                                <li><strong>Fast and easy to use:</strong> Process files in seconds with a simple interface.</li>
+                                <li><strong>Works on all devices:</strong> Compatible with mobile, tablet, and desktop.</li>
+                                <li><strong>Secure & privacy-focused:</strong> Files are auto-deleted for your safety.</li>
                             </ul>
                         </motion.div>
                     </div>

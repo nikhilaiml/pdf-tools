@@ -6,20 +6,20 @@ import { Plus, Minus, HelpCircle } from 'lucide-react';
 
 const homeFaqs = [
     {
-        question: "Is UsePDF free to use?",
-        answer: "Yes, UsePDF is completely free to use. You can access all our tools for converting, merging, and compressing PDFs without any charges, subscriptions, or limits."
+        question: "Are these PDF tools free to use?",
+        answer: "Yes, our PDF tools are completely free to use. You can convert, merge, compress, and edit PDF files without any cost or hidden charges."
     },
     {
-        question: "Are my PDF files safe?",
-        answer: "Absolutely. We prioritize your privacy and security. All files transferred to our servers are encrypted, and they are automatically and permanently deleted after one hour to ensure your data remains private."
+        question: "Is my data safe on UsePDF?",
+        answer: "Yes, your data is secure. All files uploaded to UsePDF are processed securely and automatically deleted from our servers after a short period to ensure your privacy."
     },
     {
-        question: "Can I use UsePDF on mobile devices?",
-        answer: "Yes, our platform is fully responsive and optimized for mobile use. You can access all our tools seamlessly on your smartphone or tablet, whether you are using iOS or Android."
+        question: "Do I need to sign up?",
+        answer: "No, you do not need to sign up or create an account. You can start using our free PDF tools instantly without any registration."
     },
     {
-        question: "Do I need to install any software to use UsePDF?",
-        answer: "No, you do not need to install any software or plugins. UsePDF is entirely cloud-based, meaning all you need is a web browser and an internet connection to handle your PDF documents."
+        question: "Can I use these tools on mobile?",
+        answer: "Yes, UsePDF is fully optimized for mobile devices. You can easily access and use all our PDF tools on your smartphone or tablet seamlessly."
     }
 ];
 

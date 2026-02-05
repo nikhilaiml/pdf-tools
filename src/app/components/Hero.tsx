@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Search, ArrowRight, FileText, Image as ImageIcon, Layers, Scissors, Merge, Lock, RotateCw, Minimize2 } from 'lucide-react';
+import { Search, ArrowRight, FileText, Image as ImageIcon, Layers, Scissors, Merge, Lock } from 'lucide-react';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
@@ -150,7 +150,7 @@ export default function Hero({ onSearch, initialSearchValue = '' }: HeroProps) {
                             variants={itemVariants}
                             className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.1]"
                         >
-                            Online PDF Tools – Compress, Merge, Convert PDFs Free
+                            Free PDF Tools Online
                         </motion.h1>
 
                         {/* Subheading */}
@@ -158,7 +158,7 @@ export default function Hero({ onSearch, initialSearchValue = '' }: HeroProps) {
                             variants={itemVariants}
                             className="text-base sm:text-lg md:text-xl text-indigo-100/90 mb-10 max-w-3xl leading-relaxed"
                         >
-                            UsePDF is a completely free online PDF tools website designed to make document management simple and efficient. Compress, merge, convert, protect, and manage PDF files with no signup or software installation required. Experience fast, secure, and high-quality PDF processing that works seamlessly on mobile, tablet, and desktop.
+                            Users can use free PDF tools online. Convert, compress, and merge PDF files easily. No signup or watermark. Fast, secure, and browser-based tools.
                         </motion.p>
 
                         {/* Search Bar with Gold Gradient */}
