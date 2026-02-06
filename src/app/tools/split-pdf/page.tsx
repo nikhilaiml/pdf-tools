@@ -2,18 +2,18 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import SplitPdfClient from './SplitPdfClient';
-import { HelpCircle, Merge, Minimize2, Split, ArrowRight, Layers, Globe, Shield, Zap, Check, Smartphone, RotateCw } from 'lucide-react';
+import { HelpCircle, Merge, Minimize2, Split, ArrowRight, Layers, Globe, Shield, Zap, Check, Smartphone, RotateCw, Lock } from 'lucide-react';
 
 export const metadata: Metadata = {
-    title: 'Split PDF Online – Separate PDF Pages Free',
-    description: 'Split PDF files online. Separate specific pages or extract documents from your PDF easily. No signup, no watermark, and fast secure processing.',
-    keywords: ['split pdf', 'separate pdf pages', 'extract pdf pages', 'split pdf online', 'pdf splitter free'],
+    title: 'Split PDF File - Split PDF Online Free & Securely',
+    description: 'Split PDF file online for free. Separate PDF pages, extract specific documents, and organize your files without signup. Secure, fast, and works on all devices.',
+    keywords: ['split pdf file', 'split pdf online', 'online pdf splitter', 'separate pdf pages', 'split pdf documents', 'pdf page splitter'],
     alternates: {
         canonical: 'https://usepdf.in/tools/split-pdf',
     },
     openGraph: {
-        title: 'Split PDF Online – Separate PDF Pages Free',
-        description: 'Split PDF files online. Separate specific pages or extract documents from your PDF easily. No signup, no watermark, and fast secure processing.',
+        title: 'Split PDF File - Split PDF Online Free & Securely',
+        description: 'Split PDF file online for free. Separate PDF pages, extract specific documents, and organize your files without signup. Secure, fast, and works on all devices.',
         url: 'https://usepdf.in/tools/split-pdf',
         type: 'website',
     }
@@ -27,34 +27,50 @@ export default function SplitPdfPage() {
         "mainEntity": [
             {
                 "@type": "Question",
-                "name": "Is split PDF online free?",
+                "name": "How to split PDF file online?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes, our Split PDF tool is 100% free. You can split documents and extract pages as many times as you want without any cost."
+                    "text": "Simply upload your PDF file, select the pages or ranges you want to separate, and click the split button to process your document instantly."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Is it safe to split PDF files?",
+                "name": "Is it safe to split PDF online?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Absolutely. We use secure processing methods, and all your files are automatically deleted from our servers after one hour to protect your privacy."
+                    "text": "Yes, our tool is completely secure. Your files are processed safely and automatically deleted from our servers after one hour to ensure your privacy."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Can I split specific pages only?",
+                "name": "Can I split PDF pages on mobile?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes, you can extract specific pages by entering the page numbers or ranges (e.g., 1-5, 8, 10-12) you wish to separate from the original PDF."
+                    "text": "Absolutely. Our online PDF splitter works seamlessly on all devices, including mobile phones, tablets, and desktop computers."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Do I need to install any software?",
+                "name": "Is this PDF splitter free?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "No software installation is required. Our tool works entirely in your web browser on any device, including mobile and desktop."
+                    "text": "Yes, usepdf.in provides a 100% free PDF splitter with no hidden charges, no signup required, and no limits on daily usage."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Do split PDF files have watermark?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No. When you separate PDF pages using our tool, the output documents are clean and free from any watermarks or branding."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is installation required?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No installation is needed. You can split PDF documents directly in your browser without downloading any software or apps."
                 }
             }
         ]
@@ -69,11 +85,9 @@ export default function SplitPdfPage() {
 
             {/* H1 & Intro Section */}
             <section className="text-center max-w-4xl mx-auto">
-                <h1 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">Split PDF Online – Separate PDF Pages Free</h1>
+                <h1 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">Split PDF File</h1>
                 <p className="text-slate-600 text-lg leading-relaxed max-w-3xl mx-auto">
-                    Need to separate specific pages from a large PDF document? <strong>Split PDF files online</strong> instantly with UsePDF.
-                    Our free tool allows you to extract pages from your PDF easily.
-                    There is <strong>no signup, no installation</strong>, and the process is fast, secure, and 100% browser-based.
+                    <strong>Split PDF file online</strong> for free with our secure, easy-to-use tool. Whether you are on mobile or desktop, you can separate PDF pages without signup or software installation. Our platform ensures your documents remain private while providing a fast, browser-based solution to manage your PDF files efficiently.
                 </p>
             </section>
 
@@ -81,12 +95,12 @@ export default function SplitPdfPage() {
             <section>
                 <div className="grid md:grid-cols-3 gap-8">
                     {[
-                        { title: "Split PDF Online Free", desc: "Separate pages from your PDF files completely free of charge.", icon: Globe },
-                        { title: "Separate Multiple Pages", desc: "Extract single pages or specific page ranges easily.", icon: Layers },
-                        { title: "No Watermark", desc: "Download extracted pages with no branding or watermarks added.", icon: Shield },
-                        { title: "No Login Required", desc: "Start splitting PDFs instantly. No account needed.", icon: Zap },
-                        { title: "Works on Mobile & Desktop", desc: "Use our tool on any device, anywhere, anytime.", icon: Smartphone },
-                        { title: "Secure & Privacy Focused", desc: "Files are auto-deleted after one hour to ensure safety.", icon: Shield },
+                        { title: "No Watermark", desc: "Download your split PDF files with zero watermarks or branding added.", icon: Shield },
+                        { title: "Free PDF Splitter", desc: "Enjoy unlimited access to split PDF documents at no cost.", icon: Globe },
+                        { title: "Browser-Based Processing", desc: "No software download needed. Split files directly in your web browser.", icon: Zap },
+                        { title: "Secure & Privacy Focused", desc: "Files are encrypted and automatically deleted after processing.", icon: Lock },
+                        { title: "Works on Mobile & Desktop", desc: "Split PDFs from your iPhone, Android, Windows, or Mac device.", icon: Smartphone },
+                        { title: "Fast & Easy", desc: "Separate pages in seconds with our optimized cloud processing.", icon: Layers },
                     ].map((feature, idx) => (
                         <div key={idx} className="bg-slate-50 p-6 rounded-xl border border-slate-100 hover:shadow-md transition-shadow">
                             <feature.icon className="w-10 h-10 text-indigo-600 mb-4" />
@@ -102,10 +116,10 @@ export default function SplitPdfPage() {
                 <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">How to Split PDF Online</h2>
                 <div className="grid md:grid-cols-4 gap-6">
                     {[
-                        { step: "1", title: "Upload PDF", desc: "Upload your PDF file." },
-                        { step: "2", title: "Select Pages", desc: "Choose pages to split." },
-                        { step: "3", title: "Split PDF", desc: "Process the file online." },
-                        { step: "4", title: "Download", desc: "Download separated files." }
+                        { step: "1", title: "Upload PDF File to Split", desc: "Select your file from your device." },
+                        { step: "2", title: "Select Pages to Split PDF", desc: "Choose the specific pages or ranges." },
+                        { step: "3", title: "Split PDF File Securely", desc: "Click split to separate your documents." },
+                        { step: "4", title: "Download Split PDF Files", desc: "Save your new PDF files instantly." }
                     ].map((item, i) => (
                         <div key={i} className="flex flex-col items-center text-center bg-white p-6 rounded-xl shadow-sm border border-indigo-100 relative">
                             <span className="absolute -top-4 -left-4 w-10 h-10 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-xl shadow-lg">
@@ -118,40 +132,15 @@ export default function SplitPdfPage() {
                 </div>
             </section>
 
-            {/* Use Cases & Why Use */}
-            <section className="grid md:grid-cols-2 gap-12">
-                <div>
-                    <h2 className="text-3xl font-bold text-slate-900 mb-6">Why Use UsePDF to Split?</h2>
-                    <ul className="space-y-4">
-                        {[
-                            "Faster than other PDF splitter tools",
-                            "Simple and clean interface",
-                            "No quality loss in extracted pages",
-                            "100% browser-based processing"
-                        ].map((item, idx) => (
-                            <li key={idx} className="flex items-start gap-3">
-                                <Check className="w-6 h-6 text-green-500 flex-shrink-0" />
-                                <span className="text-slate-700 font-medium">{item}</span>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-                <div>
-                    <h2 className="text-3xl font-bold text-slate-900 mb-6">Use Cases</h2>
-                    <ul className="space-y-4">
-                        {[
-                            "Extract specific pages from a large report",
-                            "Split scanned PDF documents into separate files",
-                            "Separate large PDFs into smaller, manageable files",
-                            "Split PDF to meet email attachment size limits"
-                        ].map((item, idx) => (
-                            <li key={idx} className="flex items-start gap-3">
-                                <Check className="w-6 h-6 text-indigo-500 flex-shrink-0" />
-                                <span className="text-slate-700 font-medium">{item}</span>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+            {/* SEO Content Block */}
+            <section className="max-w-4xl mx-auto bg-white p-8 rounded-2xl border border-slate-100 shadow-sm">
+                <h2 className="text-3xl font-bold text-slate-900 mb-6">Split PDF File Online Securely</h2>
+                <p className="text-slate-600 leading-relaxed text-lg mb-4">
+                    Need to separate a large document? Our tool allows you to <strong>split PDF file online securely</strong> and efficiently. Easily extract specific pages, break down large PDF documents into smaller files, or organize PDF files for better management. We prioritize your privacy; all files are processed directly in your browser or on secure servers and deleted automatically.
+                </p>
+                <p className="text-slate-600 leading-relaxed text-lg">
+                    Experience lightning-fast processing speeds without the need for expensive software. Whether you need to isolate a single page or divide a report into chapters, our free PDF splitter makes the task clear and simple.
+                </p>
             </section>
 
             {/* FAQ Section */}
@@ -172,19 +161,22 @@ export default function SplitPdfPage() {
 
             {/* Internal Links */}
             <section className="border-t border-slate-200 pt-10 text-center">
-                <h3 className="text-xl font-bold text-slate-900 mb-6">Explore More Free PDF Tools</h3>
+                <h3 className="text-xl font-bold text-slate-900 mb-6">Related PDF Tools</h3>
                 <div className="flex flex-wrap justify-center gap-4">
                     <Link href="/tools/merge-pdf" className="px-5 py-2.5 bg-slate-50 text-slate-700 rounded-full hover:bg-indigo-50 hover:text-indigo-600 transition-colors font-medium">
-                        Merge PDF
+                        Merge PDF Online
                     </Link>
                     <Link href="/tools/compress-pdf" className="px-5 py-2.5 bg-slate-50 text-slate-700 rounded-full hover:bg-indigo-50 hover:text-indigo-600 transition-colors font-medium">
                         Compress PDF
                     </Link>
+                    <Link href="/tools/rearrange-pdf" className="px-5 py-2.5 bg-slate-50 text-slate-700 rounded-full hover:bg-indigo-50 hover:text-indigo-600 transition-colors font-medium">
+                        Organize PDF Pages
+                    </Link>
                     <Link href="/tools/rotate-pdf" className="px-5 py-2.5 bg-slate-50 text-slate-700 rounded-full hover:bg-indigo-50 hover:text-indigo-600 transition-colors font-medium">
                         Rotate PDF
                     </Link>
-                    <Link href="/" className="px-5 py-2.5 bg-slate-50 text-slate-700 rounded-full hover:bg-indigo-50 hover:text-indigo-600 transition-colors font-medium">
-                        Free PDF Tools Online
+                    <Link href="/tools/protect-pdf" className="px-5 py-2.5 bg-slate-50 text-slate-700 rounded-full hover:bg-indigo-50 hover:text-indigo-600 transition-colors font-medium">
+                        Protect PDF
                     </Link>
                 </div>
             </section>
