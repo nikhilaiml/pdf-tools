@@ -1,8 +1,8 @@
-/* eslint-disable react/no-unescaped-entities */
+
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JpgToPdfClient from './JpgToPdfClient';
-import { HelpCircle, CheckCircle, Smartphone, Zap, Shield, Globe, ArrowRight, Image as ImageIcon, Minimize2, Split, Lock, FileText, Layers } from 'lucide-react';
+import { HelpCircle, CheckCircle } from 'lucide-react';
 
 export const metadata: Metadata = {
     title: 'JPG to PDF Converter Online – Convert JPG Images to PDF Free',
@@ -27,6 +27,45 @@ export const metadata: Metadata = {
 };
 
 export default function JpgToPdfPage() {
+    const faqs = [
+        {
+            name: "How to convert JPG to PDF online?",
+            acceptedAnswer: {
+                text: "Simply upload your JPG images to our tool, arrange them in your desired order, and click 'Convert' to instantly generate your PDF file."
+            }
+        },
+        {
+            name: "Is this JPG to PDF converter free?",
+            acceptedAnswer: {
+                text: "Yes, our tool is completely free to use. You can convert limitless JPG images to PDF without any hidden fees or subscriptions."
+            }
+        },
+        {
+            name: "Is it safe to convert JPG images to PDF?",
+            acceptedAnswer: {
+                text: "Absolutely. We use secure encryption for file transfers, and all uploaded files are automatically deleted from our servers after conversion for your privacy."
+            }
+        },
+        {
+            name: "Can I convert multiple JPG files into one PDF?",
+            acceptedAnswer: {
+                text: "Yes, you can select and upload multiple JPG files at once and merge them into a single, organized PDF document."
+            }
+        },
+        {
+            name: "Does the converted PDF have a watermark?",
+            acceptedAnswer: {
+                text: "No, we do not add any watermarks to your converted documents. Your PDF will look professional and clean."
+            }
+        },
+        {
+            name: "Do I need to install any software?",
+            acceptedAnswer: {
+                text: "No installation is required. Our JPG to PDF converter works entirely in your web browser on desktop, mobile, or tablet."
+            }
+        }
+    ];
+
     // Schema Data
     const jsonLd = {
         "@context": "https://schema.org",
@@ -44,56 +83,14 @@ export default function JpgToPdfPage() {
             },
             {
                 "@type": "FAQPage",
-                "mainEntity": [
-                    {
-                        "@type": "Question",
-                        "name": "How to convert JPG to PDF online?",
-                        "acceptedAnswer": {
-                            "@type": "Answer",
-                            "text": "Simply upload your JPG images to our tool, arrange them in your desired order, and click 'Convert' to instantly generate your PDF file."
-                        }
-                    },
-                    {
-                        "@type": "Question",
-                        "name": "Is this JPG to PDF converter free?",
-                        "acceptedAnswer": {
-                            "@type": "Answer",
-                            "text": "Yes, our tool is completely free to use. You can convert limitless JPG images to PDF without any hidden fees or subscriptions."
-                        }
-                    },
-                    {
-                        "@type": "Question",
-                        "name": "Is it safe to convert JPG images to PDF?",
-                        "acceptedAnswer": {
-                            "@type": "Answer",
-                            "text": "Absolutely. We use secure encryption for file transfers, and all uploaded files are automatically deleted from our servers after conversion for your privacy."
-                        }
-                    },
-                    {
-                        "@type": "Question",
-                        "name": "Can I convert multiple JPG files into one PDF?",
-                        "acceptedAnswer": {
-                            "@type": "Answer",
-                            "text": "Yes, you can select and upload multiple JPG files at once and merge them into a single, organized PDF document."
-                        }
-                    },
-                    {
-                        "@type": "Question",
-                        "name": "Does the converted PDF have a watermark?",
-                        "acceptedAnswer": {
-                            "@type": "Answer",
-                            "text": "No, we do not add any watermarks to your converted documents. Your PDF will look professional and clean."
-                        }
-                    },
-                    {
-                        "@type": "Question",
-                        "name": "Do I need to install any software?",
-                        "acceptedAnswer": {
-                            "@type": "Answer",
-                            "text": "No installation is required. Our JPG to PDF converter works entirely in your web browser on desktop, mobile, or tablet."
-                        }
+                "mainEntity": faqs.map(faq => ({
+                    "@type": "Question",
+                    "name": faq.name,
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": faq.acceptedAnswer.text
                     }
-                ]
+                }))
             }
         ]
     };
@@ -172,7 +169,7 @@ export default function JpgToPdfPage() {
                     Frequently Asked Questions
                 </h2>
                 <div className="space-y-4">
-                    {jsonLd.mainEntity[0].mainEntity.map((faq, i) => (
+                    {faqs.map((faq, i) => (
                         <div key={i} className="bg-slate-50/50 rounded-xl p-6">
                             <h3 className="text-lg font-bold text-slate-900 mb-3">{faq.name}</h3>
                             <p className="text-slate-600 leading-relaxed">{faq.acceptedAnswer.text}</p>
