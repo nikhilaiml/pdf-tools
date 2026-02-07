@@ -3,26 +3,25 @@ import type { Metadata } from 'next';
 import PdfToWordClient from './PdfToWordClient';
 import Link from 'next/link';
 
+import { HelpCircle, CheckCircle } from 'lucide-react';
+
 export const metadata: Metadata = {
-    title: 'PDF to Word Converter Free – Convert PDF to Word Online',
-    description: 'Convert PDF to Word online for free. Editable Docx output, fast processing, and secure file handling. Best PDF to Word converter without losing formatting.',
+    title: 'PDF to Word Converter Online | Convert PDF to Docx Free',
+    description: 'Convert PDF to Word online for free. Transform PDF to editable Word document without watermark. Fast, accurate, and secure.',
     keywords: [
+        'pdf to word',
         'pdf to word converter',
         'convert pdf to word',
-        'pdf to word online',
-        'pdf to word free',
-        'word to pdf converter',
-        'editable pdf to word',
-        'online pdf converter',
-        'pdf to doc converter'
+        'pdf to word online free',
+        'pdf to word without watermark'
     ],
     alternates: {
-        canonical: 'https://www.usepdf.in/tools/pdf-to-word',
+        canonical: '/tools/pdf-to-word',
     },
     openGraph: {
-        title: 'PDF to Word Converter Free – Convert PDF to Word Online',
-        description: 'Convert PDF to Word online for free. Editable Docx output, fast processing, and secure file handling.',
-        url: 'https://www.usepdf.in/tools/pdf-to-word',
+        title: 'PDF to Word Converter Online | Convert PDF to Docx Free',
+        description: 'Convert PDF to Word online for free. Transform PDF to editable Word document without watermark. Fast, accurate, and secure.',
+        url: '/tools/pdf-to-word',
         type: 'website',
     }
 };
