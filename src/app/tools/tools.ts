@@ -44,7 +44,7 @@ export const tools: Tool[] = [
   },
   {
     title: 'Reorder Pages',
-    id: 'reorder-pages',
+    id: 'rearrange-pdf', // Fixed ID to match folder name 'rearrange-pdf'
     description: 'Change the order of pages in a PDF.',
     icon: 'reorder',
     category: 'basic',
