@@ -67,26 +67,26 @@ const MergePdfPage = ({ seoContent }: { seoContent?: React.ReactNode }) => {
     }
   };
 
-  const steps = [
-    {
-      title: "Upload Files",
-      description: "Select your PDF documents from your device."
-    },
-    {
-      title: "Reorder Pages",
-      description: "Drag and drop thumbnails to arrange the order."
-    },
-    {
-      title: "Merge PDF",
-      description: "Click to combine files into a single document."
-    }
-  ];
+
 
   return (
     <ToolPageLayout
       title="Merge PDF Online"
-      subtitle="Combine multiple PDF files into one document for free. Fast, secure, and easy."
-      steps={steps}
+      subtitle="Securely combine multiple PDF files into one document. Our merge PDF online tool is fast, free, and works on any device."
+      steps={[
+        {
+          title: "Upload Files",
+          description: "Upload your PDF files from your computer or mobile device."
+        },
+        {
+          title: "Reorder Pages",
+          description: "Drag and drop the thumbnails to arrange them in the correct order."
+        },
+        {
+          title: "Merge PDF",
+          description: "Click to merge your files and download the combined document."
+        }
+      ]}
       ctaText="Merge PDF"
       onAction={handleMerge}
       loading={loading}

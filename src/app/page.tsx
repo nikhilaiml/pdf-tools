@@ -3,6 +3,7 @@
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import ToolsGrid from './components/ToolsGrid';
+import HowItWorks from './components/HowItWorks';
 import Features from './components/Features';
 import HomeSEOText from './components/HomeSEOText';
 import FAQSection from './components/FAQSection';
@@ -43,6 +44,7 @@ function HomeContent() {
       <main className="relative">
         <Hero onSearch={handleSearch} initialSearchValue={searchQuery} />
         <ToolsGrid searchQuery={searchQuery} />
+        <HowItWorks />
         <Features />
         <HomeSEOText />
         <FAQSection />

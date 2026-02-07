@@ -150,23 +150,15 @@ export default function Hero({ onSearch, initialSearchValue = '' }: HeroProps) {
                             variants={itemVariants}
                             className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.1]"
                         >
-                            Online PDF Tools – Edit, Convert, Merge & Compress PDFs Free
+                            All-in-One Online PDF Tools
                         </motion.h1>
 
-                        {/* Subheading */}
                         {/* Subheading */}
                         <motion.p
                             variants={itemVariants}
                             className="text-[15px] sm:text-lg md:text-xl text-indigo-100/90 mb-8 md:mb-10 max-w-3xl leading-relaxed md:leading-relaxed"
                         >
-                            {/* Mobile Text */}
-                            <span className="md:hidden">
-                                Edit, convert, merge, and manage PDFs online — fast and secure.
-                            </span>
-                            {/* Desktop Text */}
-                            <span className="hidden md:block">
-                                The ultimate free online PDF tool suite. Merge, split, compress, and convert your files securely in seconds—no installation required.
-                            </span>
+                            Edit, convert, and manage PDF files for free. Fast, secure, and no installation required.
                         </motion.p>
 
                         {/* Search Bar with Gold Gradient */}
@@ -180,7 +172,7 @@ export default function Hero({ onSearch, initialSearchValue = '' }: HeroProps) {
                                 </div>
                                 <input
                                     type="text"
-                                    placeholder="Search for a PDF tool..."
+                                    placeholder="Choose a PDF Tool..."
                                     value={searchValue}
                                     onChange={handleSearchChange}
                                     className="w-full bg-transparent border-none outline-none text-slate-800 px-4 py-3 text-base placeholder:text-slate-400"
@@ -192,12 +184,12 @@ export default function Hero({ onSearch, initialSearchValue = '' }: HeroProps) {
                             </div>
                         </motion.div>
 
-                        {/* Search Bar Support Text */}
+                        {/* Trust Indicators */}
                         <motion.p
                             variants={itemVariants}
-                            className="hidden md:block text-sm text-indigo-100/80 mb-10 max-w-xl mx-auto leading-relaxed"
+                            className="hidden md:block text-sm text-indigo-100/80 mb-10 max-w-xl mx-auto leading-relaxed font-medium"
                         >
-                            Manage all PDF tasks in one place. Fast, secure, and suitable for everyone.
+                            Free • Secure • No Signup
                         </motion.p>
 
                         {/* Category Chips */}

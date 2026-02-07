@@ -73,23 +73,23 @@ const SplitPdfPage = ({ seoContent }: { seoContent?: React.ReactNode }) => {
 
   const steps = [
     {
-      title: "1. Upload File",
-      description: "Upload the PDF file you want to split by clicking or dragging it into the box."
+      title: "Upload File",
+      description: "Select your PDF file from your device."
     },
     {
-      title: "2. Choose Pages",
-      description: "Enter the specific page numbers or page range you want to extract from the document."
+      title: "Choose Pages",
+      description: "Enter the page numbers or range to extract."
     },
     {
-      title: "3. Split & Download",
-      description: "Click the Split button to process the file and download your new PDF document instantly."
+      title: "Split PDF",
+      description: "Click to split and download your new PDF."
     }
   ];
 
   return (
     <ToolPageLayout
-      title="Split PDF Online – Free & Secure PDF Splitter"
-      subtitle="Split PDF files into separate pages or parts easily. Our tool is free, secure, and works directly in your browser without any signup."
+      title="Split PDF Online"
+      subtitle="Extract pages from your PDF document for free. Fast, secure, and easy."
       steps={steps}
       ctaText="Split PDF"
       onAction={handleSplit}
@@ -120,9 +120,9 @@ const SplitPdfPage = ({ seoContent }: { seoContent?: React.ReactNode }) => {
           </div>
 
           <p className={`text-xl sm:text-2xl font-bold text-center mb-2 ${isDragging ? 'text-purple-700' : 'text-gray-800'}`}>
-            Drag & Drop PDF Here
+            Upload PDF File
           </p>
-          <p className="text-sm sm:text-base text-gray-500 text-center">or click to browse</p>
+          <p className="text-sm sm:text-base text-gray-500 text-center">or drag and drop</p>
 
           <input
             id="file-input"
@@ -186,7 +186,7 @@ const SplitPdfPage = ({ seoContent }: { seoContent?: React.ReactNode }) => {
           </button>
 
           <p className="text-xs text-center text-gray-500 mt-4">
-            The extracted pages will be saved as a new PDF file.
+            Files are secured and deleted after 1 hour.
           </p>
         </div>
       )}

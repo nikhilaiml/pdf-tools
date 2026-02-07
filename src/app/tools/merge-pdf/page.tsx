@@ -30,31 +30,31 @@ export default function MergePdfPage() {
         {
             name: "How do I merge PDF files?",
             acceptedAnswer: {
-                text: "Upload your PDFs, arrange them in your desired order, and click 'Merge PDF' to combine them."
+                text: "Upload your PDF files, drag and drop to reorder them, and click 'Merge PDF' to combine them into a single document."
             }
         },
         {
             name: "Is this PDF merger free?",
             acceptedAnswer: {
-                text: "Yes, you can merge multiple PDF files for free without any hidden costs or watermarks."
+                text: "Yes, our tool is 100% free. You can combine unlimited files without any hidden costs or subscriptions."
             }
         },
         {
-            name: "Is it safe to use?",
+            name: "Is it safe to merge PDF documents online?",
             acceptedAnswer: {
-                text: "Absolutely. We use secure processing and automatically delete your files after one hour."
+                text: "Absolutely. We use SSL encryption and automatically delete all uploaded files after one hour to ensure your privacy."
             }
         },
         {
-            name: "Can I use it on mobile?",
+            name: "Can I merge large PDF files?",
             acceptedAnswer: {
-                text: "Yes, our tool works perfectly on all mobile devices, tablets, and desktops."
+                text: "Yes, our optimizer allows you to process documents of various sizes efficiently."
             }
         },
         {
-            name: "Do I need to install software?",
+            name: "How do I merge PDF in order?",
             acceptedAnswer: {
-                text: "No, everything happens in your browser. No downloads or sign-ups are required."
+                text: "Simply drag and drop the thumbnails to rearrange them. This lets you merge pdf in order exactly as you need."
             }
         }
     ];
@@ -100,11 +100,11 @@ export default function MergePdfPage() {
                 <h2 className="text-2xl font-bold text-slate-900 mb-6">Key Benefits</h2>
                 <ul className="grid md:grid-cols-2 gap-4">
                     {[
-                        "100% free PDF merger",
-                        "Combine unlimited files",
-                        "Secure file processing",
+                        "Merge PDF files instantly",
+                        "100% free and secure",
                         "No watermarks added",
-                        "Works on all devices"
+                        "Works on mobile & desktop",
+                        "Delete files automatically"
                     ].map((benefit, i) => (
                         <li key={i} className="flex items-center gap-3">
                             <CheckCircle className="w-5 h-5 text-indigo-600 flex-shrink-0" />
@@ -118,10 +118,10 @@ export default function MergePdfPage() {
             <section className="max-w-4xl mx-auto">
                 <h2 className="text-2xl font-bold text-slate-900 mb-4">Fast & Secure PDF Merger</h2>
                 <p className="text-slate-600 leading-relaxed mb-6">
-                    <strong>Merge PDF online</strong> to keep your documents organized. Whether you need to combine invoices, reports, or study materials, our tool makes it simple to join multiple files into one.
+                    Easily <strong>merge pdf documents online</strong> with our intuitive tool. Whether you need to <strong>join pdf files</strong> for personal use or professional reports, our platform handles it all in seconds.
                 </p>
                 <p className="text-slate-600 leading-relaxed">
-                    Our <strong>free PDF merger</strong> prioritizes your privacy. All files are encrypted during the process and deleted permanently after one hour, so you can combine documents with total confidence.
+                    Our <strong>pdf file merger secure</strong> process ensures your data stays private. You can even <strong>merge large pdf files</strong> without compromising speed or quality.
                 </p>
             </section>
 
@@ -145,14 +145,14 @@ export default function MergePdfPage() {
             <section className="border-t border-slate-200 pt-8">
                 <h2 className="text-2xl font-bold text-slate-900 mb-6 text-center">More PDF Tools</h2>
                 <div className="flex flex-wrap justify-center gap-3">
+                    <Link href="/tools/split-pdf" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
+                        Split PDF
+                    </Link>
                     <Link href="/tools/compress-pdf" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
                         Compress PDF
                     </Link>
                     <Link href="/tools/pdf-to-word" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
                         PDF to Word
-                    </Link>
-                    <Link href="/tools/pdf-to-jpg" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
-                        PDF to JPG
                     </Link>
                 </div>
             </section>

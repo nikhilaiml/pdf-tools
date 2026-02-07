@@ -26,35 +26,36 @@ export const metadata: Metadata = {
 };
 
 export default function CompressPdfPage() {
+    // FAQs
     const faqs = [
         {
-            name: "How to compress PDF online?",
+            name: "How can I compress PDF online?",
             acceptedAnswer: {
-                text: "Upload your file, click compress, and download the smaller PDF instantly."
+                text: "To compress a PDF, upload your file to our tool. We will automatically reduce the file size. Then, just download your smaller, optimized PDF document."
             }
         },
         {
             name: "Is this PDF compressor free?",
             acceptedAnswer: {
-                text: "Yes, it is 100% free to compress PDF files securely with no limits."
+                text: "Yes, our PDF compressor is 100% free. You can compress as many files as you need without any hidden fees, subscriptions, or watermarks."
             }
         },
         {
-            name: "Does it reduce quality?",
+            name: "Will it reduce PDF quality?",
             acceptedAnswer: {
-                text: "Our tool optimizes file size while maintaining the best possible visual quality."
+                text: "Our tool ensures high quality PDF compression. It intelligently reduces file size by optimizing images and fonts while keeping the document readable and clear."
             }
         },
         {
-            name: "Is my data secure?",
+            name: "Is it safe to upload files?",
             acceptedAnswer: {
-                text: "Yes, all files are encrypted and automatically deleted after one hour."
+                text: "Absolutely. We use secure SSL encryption for all transfers. Your files are processed automatically and deleted permanently from our servers after one hour."
             }
         },
         {
-            name: "Can I use it on mobile?",
+            name: "Can I use this on mobile?",
             acceptedAnswer: {
-                text: "Yes, this tool works perfectly on all smartphones and tablets."
+                text: "Yes, this tool is mobile-friendly. You can compress PDF files easily on your iPhone, Android, tablet, or desktop computer directly in your browser."
             }
         }
     ];
@@ -100,11 +101,11 @@ export default function CompressPdfPage() {
                 <h2 className="text-2xl font-bold text-slate-900 mb-6">Key Benefits</h2>
                 <ul className="grid md:grid-cols-2 gap-4">
                     {[
-                        "Free online PDF compression",
-                        "Maintains document quality",
-                        "Secure and private",
-                        "No registration needed",
-                        "Fast processing speed"
+                        "Reduce file size significantly",
+                        "Maintain high visual quality",
+                        "Secure SSL encryption",
+                        "No software installation",
+                        "Works on all devices"
                     ].map((benefit, i) => (
                         <li key={i} className="flex items-center gap-3">
                             <CheckCircle className="w-5 h-5 text-indigo-600 flex-shrink-0" />
@@ -116,12 +117,11 @@ export default function CompressPdfPage() {
 
             {/* SEO Content Section */}
             <section className="max-w-4xl mx-auto">
-                <h2 className="text-2xl font-bold text-slate-900 mb-4">Best Free PDF Compressor</h2>
                 <p className="text-slate-600 leading-relaxed mb-6">
-                    Our <strong>compress PDF online</strong> tool makes it easy to <strong>reduce PDF size</strong> for email attachments or web uploads. We use advanced algorithms to ensure your files are optimized without sacrificing readability or image clarity.
+                    Need to <strong>reduce pdf file size</strong> for an application or email? Our tool helps you <strong>compress large pdf files</strong> quickly and efficiently. We use advanced compression techniques to minimize file size without compromising the integrity of your document.
                 </p>
                 <p className="text-slate-600 leading-relaxed">
-                    You can <strong>compress PDF online free</strong> with total peace of mind. Your documents are processed on secure servers and deleted automatically to protect your privacy. No software installation is required.
+                    Whether you need to <strong>optimize pdf for email</strong> or simply save storage space, our tool lets you <strong>shrink pdf size online</strong> instantly. We prioritize your privacy, allowing you to <strong>compress pdf securely</strong> with <strong>high quality pdf compression</strong> results every time.
                 </p>
             </section>
 
@@ -145,14 +145,14 @@ export default function CompressPdfPage() {
             <section className="border-t border-slate-200 pt-8">
                 <h2 className="text-2xl font-bold text-slate-900 mb-6 text-center">More PDF Tools</h2>
                 <div className="flex flex-wrap justify-center gap-3">
-                    <Link href="/tools/pdf-to-word" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
-                        PDF to Word
-                    </Link>
                     <Link href="/tools/merge-pdf" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
                         Merge PDF
                     </Link>
-                    <Link href="/tools/pdf-to-jpg" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
-                        PDF to JPG
+                    <Link href="/tools/split-pdf" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
+                        Split PDF
+                    </Link>
+                    <Link href="/tools/pdf-to-word" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
+                        PDF to Word
                     </Link>
                 </div>
             </section>

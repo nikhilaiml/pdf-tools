@@ -132,7 +132,7 @@ export default function ToolsGrid({ searchQuery = '' }: ToolsGridProps) {
                             Popular PDF Tools Online
                         </h2>
                         <p className="text-slate-600 text-lg leading-relaxed">
-                            UsePDF offers a complete collection of free online PDF tools. Covers merging, compressing, converting, editing, and securing PDFs with a focus on speed, privacy, and simplicity.
+                            Select a tool to start working with your PDF files.
                         </p>
                     </div>
 

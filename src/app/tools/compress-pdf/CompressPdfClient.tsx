@@ -64,21 +64,21 @@ const CompressPdfPage = ({ seoContent }: { seoContent?: React.ReactNode }) => {
       description: "Select your file from your device."
     },
     {
-      title: "Compress PDF",
-      description: "Our tool reduces your file size instantly."
+      title: "Compress",
+      description: "Our tool reduces the file size automatically."
     },
     {
-      title: "Download PDF",
-      description: "Save your smaller, optimized PDF file."
+      title: "Download",
+      description: "Save your optimized PDF instantly."
     }
   ];
 
   return (
     <ToolPageLayout
       title="Compress PDF Online"
-      subtitle="Reduce PDF file size online for free. Fast, secure, and easy to use."
+      subtitle="Reduce PDF file size without losing quality. Fast, secure, and free."
       steps={steps}
-      ctaText="Compress PDF"
+      ctaText="Compress PDF Now"
       onAction={handleCompress}
       loading={loading}
       disabled={!file}
@@ -147,8 +147,8 @@ const CompressPdfPage = ({ seoContent }: { seoContent?: React.ReactNode }) => {
             <span className="text-sm sm:text-base">{loading ? 'Compressing...' : 'Compress PDF Now'}</span>
           </button>
 
-          <p className="text-xs text-center text-gray-500 mt-4">
-            Files are secured and deleted after 1 hour.
+          <p className="text-xs text-center text-gray-500 mt-4 font-medium">
+            Free • Secure • No Signup
           </p>
         </div>
       )}

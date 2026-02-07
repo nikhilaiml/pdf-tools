@@ -6,20 +6,24 @@ import { Plus, Minus, HelpCircle } from 'lucide-react';
 
 const homeFaqs = [
     {
-        question: "Is UsePDF free?",
-        answer: "Yes, UsePDF is completely free to use. You can deal with PDF files like merging, converting, and compressing without any cost or subscription, making it the best choice for free PDF tools."
+        question: "Is UsePDF free to use?",
+        answer: "Yes, UsePDF is 100% free. You can compress, merge, and split PDF files without any cost, subscription, or hidden fees."
     },
     {
-        question: "Can I merge PDF files online?",
-        answer: "Absolutely. Our platform allows you to combine multiple PDF files into one document easily. Just upload your files to our PDF Joiner, arrange them, and merge them in seconds."
+        question: "Is it safe to upload my files?",
+        answer: "Absolutely. We use SSL encryption to transfer your documents, and all files are automatically deleted from our servers after one hour."
     },
     {
-        question: "Is it safe to upload PDFs?",
-        answer: "Security is our top priority. All files uploaded to our servers are processed securely using SSL encryption and are automatically deleted after a short period to protect your privacy."
+        question: "Can I use these tools on mobile?",
+        answer: "Yes, our platform is fully responsive and works perfectly on all mobile devices, tablets, and desktop computers."
     },
     {
-        question: "Do I need to install software?",
-        answer: "No, you do not need to install any software or plugins. All our tools, including the PDF Editor and Converter, work entirely within your web browser on any device (Windows, Mac, Mobile)."
+        question: "Do I need to create an account?",
+        answer: "No, you do not need to register or sign up. You can start using our online pdf tools immediately."
+    },
+    {
+        question: "How long are my files stored?",
+        answer: "Your privacy is our priority. We delete all uploaded and processed files permanently after one hour."
     }
 ];
 
