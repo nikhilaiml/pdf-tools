@@ -2,30 +2,26 @@
 import type { Metadata } from 'next';
 import PdfToWordClient from './PdfToWordClient';
 import Link from 'next/link';
-import { Check, Shield, Zap, Globe, Smartphone, FileText, HelpCircle, FileType } from 'lucide-react';
 
 export const metadata: Metadata = {
-    title: 'PDF to Word & Word to PDF Converter Online – Free & Editable',
-    description: 'Convert PDF files to editable Word documents or Word to PDF online for free. Accurate conversion with no software required. Fast, secure, and preserves formatting.',
+    title: 'PDF to Word Converter Free – Convert PDF to Word Online',
+    description: 'Convert PDF to Word online for free. Editable Docx output, fast processing, and secure file handling. Best PDF to Word converter without losing formatting.',
     keywords: [
-        'pdf to word',
-        'convert pdf to word',
         'pdf to word converter',
-        'word to pdf',
-        'word to pdf converter',
+        'convert pdf to word',
         'pdf to word online',
-        'free pdf to word',
-        'convert word to pdf online',
-        'doc to pdf',
-        'pdf to doc',
-        'editable pdf to word'
+        'pdf to word free',
+        'word to pdf converter',
+        'editable pdf to word',
+        'online pdf converter',
+        'pdf to doc converter'
     ],
     alternates: {
         canonical: 'https://www.usepdf.in/tools/pdf-to-word',
     },
     openGraph: {
-        title: 'PDF to Word Converter – Convert PDF to DOC/DOCX Free | UsePDF',
-        description: 'Convert PDF to Word documents online for free. Editable DOC/DOCX files with accurate formatting. No signup required.',
+        title: 'PDF to Word Converter Free – Convert PDF to Word Online',
+        description: 'Convert PDF to Word online for free. Editable Docx output, fast processing, and secure file handling.',
         url: 'https://www.usepdf.in/tools/pdf-to-word',
         type: 'website',
     }
@@ -38,181 +34,127 @@ export default function PdfToWordPage() {
         "mainEntity": [
             {
                 "@type": "Question",
-                "name": "How can I convert PDF to Word online?",
+                "name": "How to convert PDF to Word online?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Simply upload your PDF file to UsePDF, choose the conversion option, and download your editable Word document in seconds."
+                    "text": "Upload your PDF file to UsePDF's converter. The tool will automatically extracting text and formatting, then provide an editable Word (Docx) file for download."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Is the PDF to Word converter free?",
+                "name": "Is this PDF to Word converter free?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes, our tool is completely free to use. You can convert limitless PDF and Word files without any hidden costs."
+                    "text": "Yes, our PDF to Word tool is 100% free with no hidden charges or limits on the number of conversions."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Will the Word file be editable?",
+                "name": "Will my document formatting be preserved?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Absolutely. Our converter extracts text, tables, and images to create a fully editable Word format (Docx) that you can modify."
+                    "text": "Our advanced conversion engine works hard to maintain your original fonts, images, and layout, creating a Docx file that looks just like your PDF."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Can I convert Word to PDF online?",
+                "name": "Is it safe to convert files on UsePDF?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes, UsePDF also supports Word to PDF conversion. Upload your Doc or Docx file, and we will turn it into a high-quality PDF."
+                    "text": "Absolutely. We use SSL encryption for transfers and automatically delete all uploaded files from our servers after a short period to ensure your privacy."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Is it safe to upload my documents?",
+                "name": "Can I convert Word back to PDF?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Your security is our priority. Files are processed securely via SSL and are automatically deleted from our servers shortly after conversion."
+                    "text": "Yes! You can use our Word to PDF tool to convert your edited documents back into a professional PDF format."
                 }
             }
         ]
     };
 
-    const steps = [
-        {
-            title: "Upload your PDF or Word file",
-            description: "Select the document you want to convert from your device."
-        },
-        {
-            title: "Choose conversion type",
-            description: "The tool automatically detects the format and prepares for conversion (PDF to Word or Word to PDF)."
-        },
-        {
-            title: "Convert instantly",
-            description: "Click to start the process. Our engine works in seconds."
-        },
-        {
-            title: "Download the converted file",
-            description: "Save your new, high-quality document ready for use."
-        }
-    ];
-
     const seoContent = (
-        <div className="space-y-16">
+        <div className="space-y-12 md:space-y-16">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
 
-            {/* How To Convert */}
-            <section className="bg-indigo-50 rounded-2xl p-8 md:p-12">
-                <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">How to Convert PDF to Word or Word to PDF Online</h2>
-                <div className="grid md:grid-cols-4 gap-6">
-                    {steps.map((item, idx) => (
-                        <div key={idx} className="bg-white p-6 rounded-xl border border-indigo-100 relative">
-                            <span className="absolute -top-4 -left-4 w-10 h-10 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-lg">
-                                {idx + 1}
-                            </span>
-                            <h3 className="font-bold text-slate-900 mb-2 mt-2">{item.title}</h3>
-                            <p className="text-sm text-slate-600">{item.description}</p>
-                        </div>
-                    ))}
+            {/* How to Convert Section */}
+            <section className="bg-indigo-50 rounded-3xl p-8 md:p-12">
+                <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-8 text-center">How to Convert PDF to Word Online</h2>
+                <div className="grid md:grid-cols-3 gap-8">
+                    <div className="relative pl-8 md:pl-0">
+                        <div className="hidden md:block absolute -top-4 -left-4 text-6xl font-black text-indigo-100 -z-10">1</div>
+                        <div className="md:hidden absolute left-0 top-1 w-6 h-6 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-sm">1</div>
+                        <h3 className="font-bold text-slate-900 mb-2 text-lg">Upload PDF</h3>
+                        <p className="text-slate-600 leading-relaxed">Select your file from your device or drag and drop it into the upload box.</p>
+                    </div>
+                    <div className="relative pl-8 md:pl-0">
+                        <div className="hidden md:block absolute -top-4 -left-4 text-6xl font-black text-indigo-100 -z-10">2</div>
+                        <div className="md:hidden absolute left-0 top-1 w-6 h-6 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-sm">2</div>
+                        <h3 className="font-bold text-slate-900 mb-2 text-lg">Auto Conversion</h3>
+                        <p className="text-slate-600 leading-relaxed">Our tool extracts content and rebuilds it as an editable Word document.</p>
+                    </div>
+                    <div className="relative pl-8 md:pl-0">
+                        <div className="hidden md:block absolute -top-4 -left-4 text-6xl font-black text-indigo-100 -z-10">3</div>
+                        <div className="md:hidden absolute left-0 top-1 w-6 h-6 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-sm">3</div>
+                        <h3 className="font-bold text-slate-900 mb-2 text-lg">Download Docx</h3>
+                        <p className="text-slate-600 leading-relaxed">Save your new Word file instantly and start editing right away.</p>
+                    </div>
                 </div>
             </section>
 
-            {/* Features */}
+            {/* Why UsePDF & Features */}
             <section>
-                <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">Features of Our PDF and Word Converter</h2>
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {[
-                        { title: "Convert PDF to Word Free", desc: "Transform PDFs into Docx files at no cost.", icon: Globe },
-                        { title: "Word to PDF in Seconds", desc: "Quickly turn Word docs into professional PDFs.", icon: FileType },
-                        { title: "Editable Word Output", desc: "Get fully editable text and layouts.", icon: FileText },
-                        { title: "Preserves Formatting", desc: "Retains fonts, images, and alignment.", icon: Check },
-                        { title: "Fast & Secure", desc: "Encrypted processing for privacy and speed.", icon: Zap },
-                        { title: "No Watermark Added", desc: "Clean documents without branding.", icon: Shield },
-                        { title: "Mobile & Desktop", desc: "Convert on any device, anywhere.", icon: Smartphone },
-                        { title: "No Registration", desc: "Start converting instantly, no signup needed.", icon: HelpCircle },
-                    ].map((feature, idx) => (
-                        <div key={idx} className="bg-slate-50 p-6 rounded-xl border border-slate-100 hover:shadow-md transition-shadow">
-                            <feature.icon className="w-10 h-10 text-indigo-600 mb-4" />
-                            <h3 className="text-xl font-bold text-slate-900 mb-2">{feature.title}</h3>
-                            <p className="text-slate-600">{feature.desc}</p>
+                <div className="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 className="text-3xl font-bold text-slate-900 mb-6">Why Use UsePDF for PDF to Word Conversion?</h2>
+                        <p className="text-slate-600 leading-relaxed mb-6">
+                            Converting documents shouldn't be a hassle. With UsePDF, you get a <strong>powerful PDF to Word converter</strong> that creates high-quality, editable files in seconds. Whether you need to fix a typo in a contract or repurpose content from an old report, our tool retains formatting, tables, and images so you don't have to retype a single word.
+                        </p>
+                        <p className="text-slate-600 leading-relaxed">
+                            It's completely browser-based, meaning it works on Windows, Mac, Linux, and mobile devices without any software installation. Plus, it's <strong>free and secure</strong>.
+                        </p>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="bg-white p-5 rounded-xl border border-slate-100 shadow-sm">
+                            <h3 className="font-bold text-slate-900 mb-2">Editable Output</h3>
+                            <p className="text-sm text-slate-500">Get a fully editable .docx file, not just an image.</p>
                         </div>
-                    ))}
-                </div>
-            </section>
-
-            {/* Why Use & Quality */}
-            <section className="grid md:grid-cols-2 gap-12">
-                <div>
-                    <h2 className="text-3xl font-bold text-slate-900 mb-6">Why Use UsePDF to Convert PDF and Word Files</h2>
-                    <p className="text-slate-600 leading-relaxed mb-6">
-                        UsePDF has established itself as a reliable authority for digital document management. We ensure your file privacy and security with robust encryption standards. Our <strong>pdf to word online</strong> converter allows anyone to easily transform static regular files into dynamic, editable documents. Conversely, our <strong>word to pdf converter</strong> creates universally compatible PDF files for sharing. With a focus on speed, accuracy, and ease of use, UsePDF simplifies your workflow without requiring any software installation.
-                    </p>
-                    <ul className="space-y-3">
-                        {["Secure File Handling", "Accurate Formatting", "Instant Results"].map((item, idx) => (
-                            <li key={idx} className="flex items-center gap-2">
-                                <Check className="w-5 h-5 text-green-500" />
-                                <span className="text-slate-700 font-medium">{item}</span>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-                <div>
-                    <h2 className="text-3xl font-bold text-slate-900 mb-6">Convert PDF to Word Without Losing Formatting</h2>
-                    <p className="text-slate-600 leading-relaxed">
-                        One of the biggest challenges in conversion is maintaining the original look of the document. Our tool excels at this. When you convert, the <strong>text remains editable</strong>, while fonts, spacing, and layout are carefully preserved. This precision makes our tool ideal for updating resumes, editing business reports, or retrieving content from older documents without retyping everything from scratch.
-                    </p>
-                </div>
-            </section>
-
-            {/* FAQ */}
-            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm max-w-4xl mx-auto">
-                <h2 className="text-3xl font-bold text-slate-900 mb-8 flex items-center justify-center gap-3">
-                    <HelpCircle className="w-8 h-8 text-indigo-600" />
-                    Frequently Asked Questions
-                </h2>
-                <div className="grid md:grid-cols-2 gap-6">
-                    {jsonLd.mainEntity.map((faq, idx) => (
-                        <div key={idx} className="bg-slate-50/50 rounded-xl p-6">
-                            <h3 className="font-bold text-slate-900 mb-3">{faq.name}</h3>
-                            <p className="text-slate-600 leading-relaxed">{faq.acceptedAnswer.text}</p>
+                        <div className="bg-white p-5 rounded-xl border border-slate-100 shadow-sm">
+                            <h3 className="font-bold text-slate-900 mb-2">Preserves Layout</h3>
+                            <p className="text-sm text-slate-500">Maintains fonts, paragraphs, and tables as much as possible.</p>
                         </div>
-                    ))}
+                        <div className="bg-white p-5 rounded-xl border border-slate-100 shadow-sm">
+                            <h3 className="font-bold text-slate-900 mb-2">100% Free</h3>
+                            <p className="text-sm text-slate-500">No limits, no watermarks, no registration required.</p>
+                        </div>
+                        <div className="bg-white p-5 rounded-xl border border-slate-100 shadow-sm">
+                            <h3 className="font-bold text-slate-900 mb-2">Secure & Private</h3>
+                            <p className="text-sm text-slate-500">Files are encrypted and auto-deleted after processing.</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            {/* Internal Links */}
-            <section className="border-t border-slate-200 pt-10 text-center">
-                <h3 className="text-xl font-bold text-slate-900 mb-6">Explore More Free PDF Tools</h3>
-                <div className="flex flex-wrap justify-center gap-4">
-                    <Link href="/tools/pdf-to-jpg" className="px-5 py-2.5 bg-slate-50 text-slate-700 rounded-full hover:bg-indigo-50 hover:text-indigo-600 transition-colors font-medium">
-                        PDF to JPG
-                    </Link>
-                    <Link href="/tools/merge-pdf" className="px-5 py-2.5 bg-slate-50 text-slate-700 rounded-full hover:bg-indigo-50 hover:text-indigo-600 transition-colors font-medium">
-                        Merge PDF
-                    </Link>
-                    <Link href="/tools/compress-pdf" className="px-5 py-2.5 bg-slate-50 text-slate-700 rounded-full hover:bg-indigo-50 hover:text-indigo-600 transition-colors font-medium">
-                        Compress PDF
-                    </Link>
-                    <Link href="/" className="px-5 py-2.5 bg-slate-50 text-slate-700 rounded-full hover:bg-indigo-50 hover:text-indigo-600 transition-colors font-medium">
-                        All PDF Tools
-                    </Link>
+            {/* Internal Linking */}
+            <section className="border-t border-slate-200 pt-10">
+                <h3 className="text-xl font-bold text-slate-900 mb-6 text-center">More Useful PDF Tools</h3>
+                <div className="flex flex-wrap justify-center gap-3">
+                    <Link href="/tools/compress-pdf" className="px-4 py-2 bg-slate-50 text-slate-700 rounded-lg hover:bg-slate-100 transition-colors text-sm font-medium">Compress PDF</Link>
+                    <Link href="/tools/merge-pdf" className="px-4 py-2 bg-slate-50 text-slate-700 rounded-lg hover:bg-slate-100 transition-colors text-sm font-medium">Merge PDF</Link>
+                    <Link href="/tools/pdf-to-jpg" className="px-4 py-2 bg-slate-50 text-slate-700 rounded-lg hover:bg-slate-100 transition-colors text-sm font-medium">PDF to JPG</Link>
+                    <Link href="/tools/protect-pdf" className="px-4 py-2 bg-slate-50 text-slate-700 rounded-lg hover:bg-slate-100 transition-colors text-sm font-medium">Protect PDF</Link>
+                    <Link href="/" className="px-4 py-2 bg-slate-50 text-slate-700 rounded-lg hover:bg-slate-100 transition-colors text-sm font-medium">All Tools</Link>
                 </div>
             </section>
         </div>
     );
 
-    const introText = "Seamlessly convert your PDF files into editable Word documents or turn Word files into professional PDFs with UsePDF. Our robust online processor ensures that you get accurate results, retaining original formatting like fonts, paragraphs, and tables. Whether you are looking to convert pdf to word for editing a report or need a word to pdf converter to finalize a contract, our tool offers a free, fast, and secure solution. We operate entirely in the cloud, meaning you can access our services from any browser without installing software. Experience the convenience of high-quality document conversion that perfectly matches your search intent for accuracy and ease of use.";
-
     return (
-        <PdfToWordClient
-            seoContent={seoContent}
-            title="PDF to Word & Word to PDF Converter Online – Free & Editable"
-            subtitle={introText}
-            steps={steps}
-        />
+        <PdfToWordClient seoContent={seoContent} />
     );
 }
