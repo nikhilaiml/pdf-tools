@@ -73,14 +73,29 @@ export default function Features() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.1 }}
-                            className="text-slate-500 max-w-2xl mx-auto text-lg text-left"
+                            className="text-slate-500 max-w-3xl mx-auto text-lg text-center"
                         >
-                            <ul className="list-disc space-y-2 pl-5 inline-block text-left">
-                                <li><strong>Free to use:</strong> Enjoy 100% free access to all our PDF tools.</li>
-                                <li><strong>No registration required:</strong> Start converting and editing immediately without signing up.</li>
-                                <li><strong>Secure & privacy-friendly:</strong> Your files are processed securely and deleted automatically.</li>
-                                <li><strong>Works on all devices:</strong> Fully compatible with mobile, tablet, and desktop browsers.</li>
-                                <li><strong>Fast processing:</strong> Get your results in seconds with our optimized processing engine.</li>
+                            <p className="mb-8 leading-relaxed">
+                                Welcome to UsePDF, your ultimate solution for managing documents efficiently.
+                                We offer a comprehensive suite of completely free online PDF tools designed to help you merge, convert, edit, and compress files with ease.
+                            </p>
+                            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left max-w-2xl mx-auto">
+                                <li className="flex items-center gap-2">
+                                    <div className="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0"><Check className="w-4 h-4" /></div>
+                                    <span className="font-medium text-slate-700">100% Free Access</span>
+                                </li>
+                                <li className="flex items-center gap-2">
+                                    <div className="w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center flex-shrink-0"><Check className="w-4 h-4" /></div>
+                                    <span className="font-medium text-slate-700">No Registration Required</span>
+                                </li>
+                                <li className="flex items-center gap-2">
+                                    <div className="w-6 h-6 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center flex-shrink-0"><Check className="w-4 h-4" /></div>
+                                    <span className="font-medium text-slate-700">Secure & Privacy Friendly</span>
+                                </li>
+                                <li className="flex items-center gap-2">
+                                    <div className="w-6 h-6 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center flex-shrink-0"><Check className="w-4 h-4" /></div>
+                                    <span className="font-medium text-slate-700">Works on All Devices</span>
+                                </li>
                             </ul>
                         </motion.div>
                     </div>

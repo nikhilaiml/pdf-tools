@@ -52,7 +52,7 @@ export default function Hero({ onSearch, initialSearchValue = '' }: HeroProps) {
     ];
 
     return (
-        <section className="relative min-h-[85vh] flex items-center pt-20 overflow-hidden">
+        <section className="relative min-h-[85vh] flex items-center pt-12 md:pt-20 overflow-hidden">
             {/* Hero Gradient Background */}
             <div className="absolute inset-0 hero-gradient z-0"></div>
 
@@ -154,11 +154,19 @@ export default function Hero({ onSearch, initialSearchValue = '' }: HeroProps) {
                         </motion.h1>
 
                         {/* Subheading */}
+                        {/* Subheading */}
                         <motion.p
                             variants={itemVariants}
-                            className="text-base sm:text-lg md:text-xl text-indigo-100/90 mb-10 max-w-3xl leading-relaxed"
+                            className="text-[15px] sm:text-lg md:text-xl text-indigo-100/90 mb-8 md:mb-10 max-w-3xl leading-relaxed md:leading-relaxed"
                         >
-                            Welcome to UsePDF, your ultimate solution for managing PDF documents efficiently and securely. We offer a comprehensive suite of completely free online PDF tools designed to help you merge, convert, edit, and compress PDF files with incredible ease. Whether you need to combine multiple documents into one, convert a JPG image to PDF format, or reduce a file's size for effortless sharing, our platform handles it all instantly. Experience the power of professional-grade PDF editing without the need to install any software or create an account. Simply upload your files, and let our fast, secure, and user-friendly tools process them in seconds. Our browser-based solution ensures your documents remain private while delivering high-quality results on any device, anywhere.
+                            {/* Mobile Text */}
+                            <span className="md:hidden">
+                                Edit, convert, merge, and manage PDFs online — fast and secure.
+                            </span>
+                            {/* Desktop Text */}
+                            <span className="hidden md:block">
+                                The ultimate free online PDF tool suite. Merge, split, compress, and convert your files securely in seconds—no installation required.
+                            </span>
                         </motion.p>
 
                         {/* Search Bar with Gold Gradient */}
@@ -187,9 +195,9 @@ export default function Hero({ onSearch, initialSearchValue = '' }: HeroProps) {
                         {/* Search Bar Support Text */}
                         <motion.p
                             variants={itemVariants}
-                            className="text-sm text-indigo-100/80 mb-10 max-w-xl mx-auto leading-relaxed"
+                            className="hidden md:block text-sm text-indigo-100/80 mb-10 max-w-xl mx-auto leading-relaxed"
                         >
-                            Users can manage all PDF tasks in one place. Our tools are fast, secure, and easy to use. Suitable for students, professionals, and businesses.
+                            Manage all PDF tasks in one place. Fast, secure, and suitable for everyone.
                         </motion.p>
 
                         {/* Category Chips */}
