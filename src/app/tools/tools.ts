@@ -37,7 +37,7 @@ export const tools: Tool[] = [
   },
   {
     title: 'Delete Pages',
-    id: 'delete-pages',
+    id: 'delete-pdf-pages', // Fixed ID to match folder name 'delete-pdf-pages'
     description: 'Remove specific pages from a PDF.',
     icon: 'delete',
     category: 'basic',
