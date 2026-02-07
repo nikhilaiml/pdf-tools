@@ -92,25 +92,25 @@ const PdfToPptClient = ({ seoContent }: PdfToPptClientProps) => {
 
     const steps = [
         {
-            title: "Upload PDF File to Convert",
-            description: "Select or drag your PDF file to convert to PowerPoint."
+            title: "Upload PDF",
+            description: "Select your file from your device."
         },
         {
-            title: "Convert PDF to PPT Slides",
-            description: "Each PDF page becomes a high-quality slide image."
+            title: "Convert PDF",
+            description: "Our tool processes your file instantly."
         },
         {
-            title: "Download PowerPoint File",
-            description: "Get your PowerPoint presentation (.pptx) file."
+            title: "Download PPT",
+            description: "Save your new PowerPoint presentation."
         }
     ];
 
     return (
         <ToolPageLayout
-            title="PDF to PPT Converter Online – Convert PDF to PowerPoint Free"
-            subtitle="Convert PDF pages to PowerPoint slides securely."
+            title="PDF to PPT Converter"
+            subtitle="Convert PDF to PowerPoint presentation online for free. Fast, secure, and easy to use."
             steps={steps}
-            ctaText="Convert to PowerPoint"
+            ctaText="Convert to PPT"
             onAction={handleConvert}
             loading={loading}
             disabled={!file}
@@ -139,9 +139,9 @@ const PdfToPptClient = ({ seoContent }: PdfToPptClientProps) => {
                     </div>
 
                     <p className={`text-xl sm:text-2xl font-bold text-center mb-2 ${isDragging ? 'text-purple-700' : 'text-gray-800'}`}>
-                        Drag & Drop PDF Here
+                        Upload PDF File
                     </p>
-                    <p className="text-sm sm:text-base text-gray-500 text-center">or click to browse</p>
+                    <p className="text-sm sm:text-base text-gray-500 text-center">or drag and drop</p>
 
                     <input
                         id="file-input"
@@ -179,7 +179,7 @@ const PdfToPptClient = ({ seoContent }: PdfToPptClientProps) => {
                     </button>
 
                     <p className="text-xs text-center text-gray-500 mt-4">
-                        Converts each page to a high-quality slide image. Text will not be editable.
+                        Files are secured and deleted after 1 hour.
                     </p>
                 </div>
             )}

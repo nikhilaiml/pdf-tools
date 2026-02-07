@@ -5,22 +5,22 @@ import PdfToPptClient from './PdfToPptClient';
 import { HelpCircle, CheckCircle } from 'lucide-react';
 
 export const metadata: Metadata = {
-    title: 'PDF to PPT Converter Online – Convert PDF to PowerPoint Free',
-    description: 'Convert PDF to PPT online for free. Transform PDF pages into editable PowerPoint slides securely without signup or installation.',
+    title: 'PDF to PPT Converter | Convert PDF to PowerPoint Free',
+    description: 'Convert PDF to PPT online for free. Fast, secure, and easy to use PDF to PowerPoint converter. No watermark, no signup required.',
     keywords: [
         'pdf to ppt',
-        'pdf to powerpoint',
+        'pdf to ppt converter',
         'convert pdf to powerpoint',
-        'pdf to powerpoint presentation',
-        'convert pdf file to powerpoint'
+        'pdf to ppt online free',
+        'pdf to ppt without watermark'
     ],
     alternates: {
-        canonical: 'https://www.usepdf.in/tools/pdf-to-ppt',
+        canonical: '/tools/pdf-to-ppt',
     },
     openGraph: {
-        title: 'PDF to PPT Converter – Convert PDF to PowerPoint Free | UsePDF',
-        description: 'Convert PDF to PowerPoint presentations online. Turn your PDFs into editable PPT/PPTX slides for free.',
-        url: 'https://www.usepdf.in/tools/pdf-to-ppt',
+        title: 'PDF to PPT Converter | Convert PDF to PowerPoint Free',
+        description: 'Convert PDF to PPT online for free. Fast, secure, and easy to use PDF to PowerPoint converter. No watermark, no signup required.',
+        url: '/tools/pdf-to-ppt',
         type: 'website',
     }
 };
@@ -28,39 +28,33 @@ export const metadata: Metadata = {
 export default function PdfToPptPage() {
     const faqs = [
         {
-            name: "How to convert PDF to PPT online?",
+            name: "How to convert PDF to PPT?",
             acceptedAnswer: {
-                text: "Simply upload your PDF file to our tool, wait for the conversion to process, and download your PowerPoint presentation instantly."
+                text: "Upload your PDF file, wait for the conversion to process, and download your PowerPoint file instantly."
             }
         },
         {
             name: "Is this PDF to PPT converter free?",
             acceptedAnswer: {
-                text: "Yes, our converter is 100% free to use. You can convert limitless PDF files to PowerPoint without any hidden costs."
+                text: "Yes, it is completely free to use. There are no limits and no hidden costs."
             }
         },
         {
-            name: "Is it safe to convert PDF to PowerPoint?",
+            name: "Does it convert PDF to PPT without watermark?",
             acceptedAnswer: {
-                text: "Absolutely. Your files are processed securely and are automatically deleted from our servers after the conversion is complete to strictly protect your privacy."
+                text: "Yes, our tool converts your files without adding any watermarks to your presentation."
             }
         },
         {
-            name: "Will my PDF formatting be preserved?",
+            name: "Is my data safe?",
             acceptedAnswer: {
-                text: "Yes, our tool converts each PDF page into a high-quality PowerPoint slide, preserving the visual layout of your original document."
+                text: "Your files are processed securely and deleted from our servers automatically after one hour."
             }
         },
         {
-            name: "Can I convert PDF to PPT on mobile?",
+            name: "Can I use this on mobile?",
             acceptedAnswer: {
-                text: "Yes, UsePDF works fully on mobile browsers, allowing you to convert PDFs to PowerPoint presentations on your smartphone or tablet."
-            }
-        },
-        {
-            name: "Do I need to install any software?",
-            acceptedAnswer: {
-                text: "No installation is required. Our browser-based tool handles the conversion entirely online."
+                text: "Yes, this tool works perfectly on all mobile devices and tablets."
             }
         }
     ];
@@ -71,7 +65,7 @@ export default function PdfToPptPage() {
         "@graph": [
             {
                 "@type": "SoftwareApplication",
-                "name": "UsePDF PDF to PPT Converter",
+                "name": "PDF to PPT Converter",
                 "applicationCategory": "ProductivityApplication",
                 "operatingSystem": "Any",
                 "offers": {
@@ -95,106 +89,70 @@ export default function PdfToPptPage() {
     };
 
     const seoContent = (
-        <div className="space-y-16">
+        <div className="space-y-12">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
 
-            {/* Intro Section */}
-            <section className="text-center max-w-4xl mx-auto">
-                <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">PDF to PPT Converter Online – Convert PDF to PowerPoint Free</h1>
-                <p className="text-slate-600 text-lg leading-relaxed">
-                    <strong>Convert PDF to PPT online</strong> instantly with UsePDF. Our free, easy-to-use tool transforms your PDF documents into PowerPoint slides without any signup. Enjoy a secure, browser-based solution that works perfectly on both mobile and desktop devices, ensuring your privacy while you work.
-                </p>
-            </section>
-
-            {/* Features Section */}
+            {/* Key Benefits */}
             <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
-                <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">Why Use Our PDF to PowerPoint Converter?</h2>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <h2 className="text-2xl font-bold text-slate-900 mb-6">Key Benefits</h2>
+                <ul className="grid md:grid-cols-2 gap-4">
                     {[
-                        "Free PDF to PPT converter",
-                        "High-quality PowerPoint slides",
-                        "No watermark",
-                        "Browser-based processing",
-                        "Secure & privacy focused",
-                        "Works on mobile & desktop"
-                    ].map((feature, i) => (
-                        <div key={i} className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center flex-shrink-0">
-                                <CheckCircle className="w-5 h-5" />
-                            </div>
-                            <span className="text-slate-700 font-medium">{feature}</span>
-                        </div>
+                        "Free PDF to PPT conversion",
+                        "No watermark on slides",
+                        "High-quality output",
+                        "Secure and private",
+                        "Works on all devices"
+                    ].map((benefit, i) => (
+                        <li key={i} className="flex items-center gap-3">
+                            <CheckCircle className="w-5 h-5 text-indigo-600 flex-shrink-0" />
+                            <span className="text-slate-700">{benefit}</span>
+                        </li>
                     ))}
-                </div>
+                </ul>
             </section>
 
-            {/* How to Section */}
-            <section className="bg-slate-50 rounded-2xl p-8 md:p-12 border border-slate-100">
-                <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">How to Convert PDF to PPT</h2>
-                <div className="grid md:grid-cols-3 gap-6 text-center">
-                    {[
-                        { step: 1, title: "Upload PDF File to Convert", text: "Select your file from your device." },
-                        { step: 2, title: "Convert PDF to PPT Slides", text: "Our tool processes your pages into slides." },
-                        { step: 3, title: "Download PowerPoint File", text: "Save your new presentation file." }
-                    ].map((item, i) => (
-                        <div key={i} className="flex flex-col items-center">
-                            <div className="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center font-bold text-xl mb-4">{item.step}</div>
-                            <h3 className="font-bold text-slate-800 mb-1">{item.title}</h3>
-                            <p className="text-slate-600 text-sm">{item.text}</p>
-                        </div>
-                    ))}
-                </div>
-            </section>
-
-            {/* SEO Text Block */}
-            <section className="max-w-4xl mx-auto bg-white p-8 rounded-2xl border border-slate-100 shadow-sm">
-                <h2 className="text-3xl font-bold text-slate-900 mb-6">PDF to PPT Converter Online Securely</h2>
-                <p className="text-slate-600 leading-relaxed text-lg mb-4">
-                    Transforming your documents into presentation-ready formats is simple with our tool. <strong>PDF to PPT converter online securely</strong> processes your files, turning static PDF pages into PowerPoint slides that you can use for business meetings, school presentations, or personal projects.
+            {/* SEO Content Section */}
+            <section className="max-w-4xl mx-auto">
+                <h2 className="text-2xl font-bold text-slate-900 mb-4">Fast PDF to PowerPoint Converter</h2>
+                <p className="text-slate-600 leading-relaxed mb-6">
+                    Our <strong>PDF to PPT converter</strong> allows you to turn your PDF documents into editable PowerPoint presentations in seconds. Whether you are a student or a professional, this tool ensures your slides look great and retain the original layout.
                 </p>
-                <p className="text-slate-600 leading-relaxed text-lg">
-                    We ensure fast conversion speeds so you don't have to wait. Plus, your data privacy is our top priority; all uploaded files are automatically deleted after a short period, so you never have to worry about the safety of your sensitive information.
+                <p className="text-slate-600 leading-relaxed">
+                    We prioritize your privacy and convenience. You can <strong>convert PDF to PowerPoint</strong> securely without installing any software. All files are handled with strict security protocols and deleted after processing.
                 </p>
             </section>
 
             {/* FAQ Section */}
-            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm max-w-4xl mx-auto">
-                <h2 className="text-3xl font-bold text-slate-900 mb-8 flex items-center justify-center gap-3">
-                    <HelpCircle className="w-8 h-8 text-indigo-600" />
+            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
+                <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                    <HelpCircle className="w-6 h-6 text-indigo-600" />
                     Frequently Asked Questions
                 </h2>
                 <div className="space-y-4">
                     {faqs.map((faq, i) => (
-                        <div key={i} className="bg-slate-50/50 rounded-xl p-6">
-                            <h3 className="text-lg font-bold text-slate-900 mb-3">{faq.name}</h3>
-                            <p className="text-slate-600 leading-relaxed">{faq.acceptedAnswer.text}</p>
+                        <div key={i} className="bg-slate-50/50 rounded-xl p-4">
+                            <h3 className="font-semibold text-slate-900 mb-2">{faq.name}</h3>
+                            <p className="text-slate-600 text-sm">{faq.acceptedAnswer.text}</p>
                         </div>
                     ))}
                 </div>
             </section>
 
-            {/* Related Tools */}
-            <section className="border-t border-slate-200 pt-10 text-center">
-                <h2 className="text-3xl font-bold text-slate-900 mb-8">Related PDF Tools</h2>
-                <div className="flex flex-wrap justify-center gap-4">
-                    {/* Note: Assuming these paths exist based on standard naming conventions and previous context */}
-                    <Link href="/tools/ppt-to-pdf" className="px-5 py-2.5 bg-slate-50 text-slate-700 rounded-full hover:bg-indigo-50 hover:text-indigo-600 transition-colors font-medium">
-                        PPT to PDF
-                    </Link>
-                    <Link href="/tools/pdf-to-word" className="px-5 py-2.5 bg-slate-50 text-slate-700 rounded-full hover:bg-indigo-50 hover:text-indigo-600 transition-colors font-medium">
+            {/* Internal Links */}
+            <section className="border-t border-slate-200 pt-8">
+                <h2 className="text-2xl font-bold text-slate-900 mb-6 text-center">More PDF Tools</h2>
+                <div className="flex flex-wrap justify-center gap-3">
+                    <Link href="/tools/pdf-to-word" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
                         PDF to Word
                     </Link>
-                    <Link href="/tools/pdf-to-excel" className="px-5 py-2.5 bg-slate-50 text-slate-700 rounded-full hover:bg-indigo-50 hover:text-indigo-600 transition-colors font-medium">
+                    <Link href="/tools/pdf-to-excel" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
                         PDF to Excel
                     </Link>
-                    <Link href="/tools/compress-pdf" className="px-5 py-2.5 bg-slate-50 text-slate-700 rounded-full hover:bg-indigo-50 hover:text-indigo-600 transition-colors font-medium">
+                    <Link href="/tools/compress-pdf" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
                         Compress PDF
-                    </Link>
-                    <Link href="/tools/split-pdf" className="px-5 py-2.5 bg-slate-50 text-slate-700 rounded-full hover:bg-indigo-50 hover:text-indigo-600 transition-colors font-medium">
-                        Split PDF File
                     </Link>
                 </div>
             </section>
