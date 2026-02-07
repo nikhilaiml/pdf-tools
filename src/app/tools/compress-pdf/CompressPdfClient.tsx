@@ -60,23 +60,23 @@ const CompressPdfPage = ({ seoContent }: { seoContent?: React.ReactNode }) => {
 
   const steps = [
     {
-      title: "1. Upload PDF",
-      description: "Upload the PDF file you want to compress by clicking select or dragging it here."
+      title: "Upload PDF",
+      description: "Select your file from your device."
     },
     {
-      title: "2. Compress",
-      description: "Click the Compress button to automatically optimize your file and reduce its size."
+      title: "Compress PDF",
+      description: "Our tool reduces your file size instantly."
     },
     {
-      title: "3. Download",
-      description: "Save your optimized, smaller PDF file instantly without losing quality."
+      title: "Download PDF",
+      description: "Save your smaller, optimized PDF file."
     }
   ];
 
   return (
     <ToolPageLayout
-      title="Compress PDF Online – Reduce PDF Size Free"
-      subtitle="Compress PDF files online to reduce file size. Quality is preserved as much as possible. Tool is free, browser-based, and no signup required."
+      title="Compress PDF Online"
+      subtitle="Reduce PDF file size online for free. Fast, secure, and easy to use."
       steps={steps}
       ctaText="Compress PDF"
       onAction={handleCompress}
@@ -107,9 +107,9 @@ const CompressPdfPage = ({ seoContent }: { seoContent?: React.ReactNode }) => {
           </div>
 
           <p className={`text-xl sm:text-2xl font-bold text-center mb-2 ${isDragging ? 'text-purple-700' : 'text-gray-800'}`}>
-            Drag & Drop PDF Here
+            Upload PDF File
           </p>
-          <p className="text-sm sm:text-base text-gray-500 text-center">or click to browse</p>
+          <p className="text-sm sm:text-base text-gray-500 text-center">or drag and drop</p>
 
           <input
             id="file-input"
@@ -148,7 +148,7 @@ const CompressPdfPage = ({ seoContent }: { seoContent?: React.ReactNode }) => {
           </button>
 
           <p className="text-xs text-center text-gray-500 mt-4">
-            Removes redundant data and optimizes internal structure.
+            Files are secured and deleted after 1 hour.
           </p>
         </div>
       )}

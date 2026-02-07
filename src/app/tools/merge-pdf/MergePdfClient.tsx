@@ -69,25 +69,25 @@ const MergePdfPage = ({ seoContent }: { seoContent?: React.ReactNode }) => {
 
   const steps = [
     {
-      title: "1. Upload PDF Files",
-      description: "Click 'Select Files' or drag and drop one or more PDF files you want to merge."
+      title: "Upload Files",
+      description: "Select your PDF documents from your device."
     },
     {
-      title: "2. Arrange Order",
-      description: "Drag and drop the file thumbnails to arrange them in the desired order for your final document."
+      title: "Reorder Pages",
+      description: "Drag and drop thumbnails to arrange the order."
     },
     {
-      title: "3. Merge & Download",
-      description: "Click the 'Merge PDFs Now' button to combine them and download your single merged PDF file."
+      title: "Merge PDF",
+      description: "Click to combine files into a single document."
     }
   ];
 
   return (
     <ToolPageLayout
-      title="Merge PDF Online – Free & Secure PDF Merger"
-      subtitle="Combine multiple PDF files into one single document using our free online tool. No signup required, and your files are processed securely in your browser."
+      title="Merge PDF Online"
+      subtitle="Combine multiple PDF files into one document for free. Fast, secure, and easy."
       steps={steps}
-      ctaText="Merge PDFs"
+      ctaText="Merge PDF"
       onAction={handleMerge}
       loading={loading}
       disabled={files.length < 2}
@@ -116,9 +116,9 @@ const MergePdfPage = ({ seoContent }: { seoContent?: React.ReactNode }) => {
         </div>
 
         <p className={`text-xl sm:text-2xl font-bold text-center mb-2 ${isDragging ? 'text-purple-700' : 'text-gray-800'}`}>
-          {files.length > 0 ? 'Add More PDFs' : 'Drag & Drop PDFs Here'}
+          {files.length > 0 ? 'Add More PDFs' : 'Upload PDF Files'}
         </p>
-        <p className="text-sm sm:text-base text-gray-500 text-center">or click to browse</p>
+        <p className="text-sm sm:text-base text-gray-500 text-center">or drag and drop</p>
 
         <input
           type="file"
@@ -171,8 +171,12 @@ const MergePdfPage = ({ seoContent }: { seoContent?: React.ReactNode }) => {
               }`}
           >
             {loading ? <Loader2 className="animate-spin" size={20} /> : null}
-            <span className="text-sm sm:text-base">{loading ? 'Merging...' : 'Merge PDFs Now'}</span>
+            <span className="text-sm sm:text-base">{loading ? 'Merging...' : 'Merge PDF'}</span>
           </button>
+
+          <p className="text-xs text-center text-gray-500 mt-4">
+            Files are secured and deleted after 1 hour.
+          </p>
         </div>
       )}
     </ToolPageLayout>
