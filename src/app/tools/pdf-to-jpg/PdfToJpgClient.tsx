@@ -125,25 +125,25 @@ const PdfToJpgClient = (props: PdfToJpgClientProps) => {
 
     const steps = [
         {
-            title: "Step 1: Upload PDF",
-            description: "Select or drag and drop your PDF file that you want to convert to JPG images."
+            title: "Upload PDF",
+            description: "Select your file from your device."
         },
         {
-            title: "Step 2: Convert Pages",
-            description: "Each page of your PDF will be converted to a high-quality JPG image automatically."
+            title: "Convert",
+            description: "Our tool transforms pages to images."
         },
         {
-            title: "Step 3: Download",
-            description: "Download individual images or get all pages as a ZIP file. Quick and easy!"
+            title: "Download",
+            description: "Save your JPG images instantly."
         }
     ];
 
     return (
         <ToolPageLayout
             title={title || "PDF to JPG Converter"}
-            subtitle={subtitle || "Convert PDF pages to high-quality JPG images. Download single pages or all at once."}
-            steps={props.steps || steps}
-            ctaText="Download All (ZIP)"
+            subtitle={subtitle || "Convert PDF pages to high-quality JPG images online. Fast, secure, and free."}
+            steps={steps}
+            ctaText="Download All Images"
             onAction={handleDownloadAll}
             loading={false}
             disabled={images.length === 0}
@@ -248,6 +248,9 @@ const PdfToJpgClient = (props: PdfToJpgClientProps) => {
                                     </div>
                                 ))}
                             </div>
+                            <p className="text-xs text-center text-slate-500 mt-6 font-medium">
+                                Free • Secure • No Signup
+                            </p>
                         </div>
                     )}
                 </div>
