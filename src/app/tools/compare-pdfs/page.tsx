@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 
-const ComparePdfsClient = dynamic(() => import('./ComparePdfsClient'), { ssr: false });
+const ComparePdfsClient = dynamic(() => import('./ComparePdfsClient'));
 
 export const metadata: Metadata = {
     title: 'Compare PDFs Online – Find Differences in PDF Files | UsePDF',

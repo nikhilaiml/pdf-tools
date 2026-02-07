@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 
-const PdfToAudioClient = dynamic(() => import('./PdfToAudioClient'), { ssr: false });
+const PdfToAudioClient = dynamic(() => import('./PdfToAudioClient'));
 
 export const metadata: Metadata = {
     title: 'PDF to Audio – Convert PDF to Speech & Audio | UsePDF',
