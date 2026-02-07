@@ -7,7 +7,12 @@ export const metadata: Metadata = {
     title: 'Unlock PDF Online – Remove PDF Password Free',
     description: 'Unlock PDF files online for free. Remove password protection from PDFs securely and instantly. No signup, no installation, and 100% browser-based.',
     alternates: {
-        canonical: 'https://usepdf.in/tools/unlock-pdf',
+        canonical: 'https://www.usepdf.in/tools/unlock-pdf',
+    },
+    openGraph: {
+        title: 'Unlock PDF Online – Remove PDF Password Free | UsePDF',
+        description: 'Unlock PDF online for free. Remove passwords and security restrictions from PDF files instantly. No software installation needed.',
+        url: 'https://www.usepdf.in/tools/unlock-pdf',
     }
 };
 

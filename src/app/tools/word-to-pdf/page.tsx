@@ -6,12 +6,12 @@ export const metadata: Metadata = {
     title: 'Word to PDF Converter – Convert Docx to PDF Online',
     description: 'Convert Microsoft Word documents to PDF format online for free. Preserve formatting and ensure your document looks the same on any device.',
     alternates: {
-        canonical: 'https://usepdf.in/tools/word-to-pdf',
+        canonical: 'https://www.usepdf.in/tools/word-to-pdf',
     },
     openGraph: {
-        title: 'Word to PDF Converter – Convert Docx to PDF Online',
-        description: 'Convert Docx files to professional PDF documents with UsePDF. Fast, accurate, and free.',
-        url: 'https://usepdf.in/tools/word-to-pdf',
+        title: 'Word to PDF Converter – Convert DOC/DOCX to PDF Free | UsePDF',
+        description: 'Convert Microsoft Word documents to PDF online free. Supports DOC and DOCX. Best Word to PDF converter with high-quality output. No signup required.',
+        url: 'https://www.usepdf.in/tools/word-to-pdf',
     }
 };
 

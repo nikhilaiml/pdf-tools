@@ -21,12 +21,12 @@ export const metadata: Metadata = {
         'merge images into pdf'
     ],
     alternates: {
-        canonical: 'https://usepdf.in/tools/batch-images-to-pdf',
+        canonical: 'https://www.usepdf.in/tools/batch-images-to-pdf',
     },
     openGraph: {
-        title: 'Batch Images to PDF Online – Convert Multiple Images into One PDF Free',
-        description: 'Easily convert and combine multiple images into a single PDF document. Free, fast, and secure online tool.',
-        url: 'https://usepdf.in/tools/batch-images-to-pdf',
+        title: 'Batch Convert Images to PDF – Multiple Images | UsePDF',
+        description: 'Convert multiple images to PDF files in one go. Bulk processing for JPG, PNG, and other image formats.',
+        url: 'https://www.usepdf.in/tools/batch-images-to-pdf',
         type: 'website',
     }
 };

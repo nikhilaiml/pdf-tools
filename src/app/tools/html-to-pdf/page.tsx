@@ -6,12 +6,12 @@ export const metadata: Metadata = {
     title: 'HTML to PDF Converter – Convert Webpages or Code',
     description: 'Convert HTML code or Website URLs to PDF files online for free. Capture full webpages instantly with UsePDF.',
     alternates: {
-        canonical: 'https://usepdf.in/tools/html-to-pdf',
+        canonical: 'https://www.usepdf.in/tools/html-to-pdf',
     },
     openGraph: {
-        title: 'HTML to PDF Converter – Convert Webpages or Code',
-        description: 'Turn websites or HTML snippets into PDF documents. Accurate rendering and free download.',
-        url: 'https://usepdf.in/tools/html-to-pdf',
+        title: 'HTML to PDF Converter – Convert Webpages to PDF | UsePDF',
+        description: 'Convert HTML or website URLs to PDF online for free. Capture webpages exactly as they appear.',
+        url: 'https://www.usepdf.in/tools/html-to-pdf',
     }
 };
 

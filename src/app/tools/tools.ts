@@ -336,4 +336,11 @@ export const tools: Tool[] = [
     icon: 'share',
     category: 'utility',
   },
+  {
+    title: 'Sign PDF',
+    id: 'sign-pdf',
+    description: 'Sign PDF documents online.',
+    icon: 'draw',
+    category: 'edit',
+  },
 ];

@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://usepdf.in'),
+  metadataBase: new URL('https://www.usepdf.in'),
   title: {
     default: "Online PDF Tools – Edit, Convert, Merge & Compress PDFs Free",
     template: "%s | UsePDF",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://usepdf.in',
+    url: 'https://www.usepdf.in',
     title: 'Online PDF Tools – Compress, Merge, Convert PDFs Free',
     description: 'UsePDF is a free online PDF tools website to compress, merge, convert, protect and manage PDF files. No signup or software installation required.',
     siteName: 'UsePDF',
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     images: ['/og-image.jpg'],
   },
   alternates: {
-    canonical: 'https://usepdf.in',
+    canonical: 'https://www.usepdf.in',
   },
 };
 
@@ -81,7 +81,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebApplication",
               "name": "UsePDF",
-              "url": "https://usepdf.in",
+              "url": "https://www.usepdf.in",
               "applicationCategory": "UtilitiesApplication",
               "operatingSystem": "Any",
               "offers": {

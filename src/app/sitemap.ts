@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { tools } from './tools/tools'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://usepdf.in'
+    const baseUrl = 'https://www.usepdf.in'
 
     // Static routes
     const routes = [

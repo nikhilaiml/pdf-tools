@@ -1,8 +1,20 @@
-'use client';
-
-import { FileSpreadsheet, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { FileSpreadsheet, ArrowRight } from 'lucide-react';
+import type { Metadata } from 'next';
 import ToolPageLayout from '../../components/ToolPageLayout';
+
+export const metadata: Metadata = {
+    title: 'PDF Table Extractor – Extract Tables from PDF | UsePDF',
+    description: 'Extract tables from PDF documents to Excel or CSV. Free online PDF data extraction tool.',
+    alternates: {
+        canonical: 'https://www.usepdf.in/tools/pdf-table-extractor',
+    },
+    openGraph: {
+        title: 'PDF Table Extractor – Extract Tables from PDF | UsePDF',
+        description: 'Extract tables from PDF documents to Excel or CSV. Free online PDF data extraction tool.',
+        url: 'https://www.usepdf.in/tools/pdf-table-extractor',
+    }
+};
 
 export default function PdfTableExtractorPage() {
     const steps = [

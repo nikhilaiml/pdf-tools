@@ -9,12 +9,12 @@ export const metadata: Metadata = {
     description: 'Split PDF file online for free. Separate PDF pages, extract specific documents, and organize your files without signup. Secure, fast, and works on all devices.',
     keywords: ['split pdf file', 'split pdf online', 'online pdf splitter', 'separate pdf pages', 'split pdf documents', 'pdf page splitter'],
     alternates: {
-        canonical: 'https://usepdf.in/tools/split-pdf',
+        canonical: 'https://www.usepdf.in/tools/split-pdf',
     },
     openGraph: {
-        title: 'Split PDF File - Split PDF Online Free & Securely',
-        description: 'Split PDF file online for free. Separate PDF pages, extract specific documents, and organize your files without signup. Secure, fast, and works on all devices.',
-        url: 'https://usepdf.in/tools/split-pdf',
+        title: 'Split PDF Online – Extract Pages from PDF Free | UsePDF',
+        description: 'Split specific page ranges or extract every page into separate documents. Free, fast, and secure PDF splitter.',
+        url: 'https://www.usepdf.in/tools/split-pdf',
         type: 'website',
     }
 };

@@ -21,12 +21,12 @@ export const metadata: Metadata = {
         'protect pdf with watermark'
     ],
     alternates: {
-        canonical: 'https://usepdf.in/tools/watermark-pdf',
+        canonical: 'https://www.usepdf.in/tools/watermark-pdf',
     },
     openGraph: {
-        title: 'Add Watermark to PDF Online – Watermark PDF Free',
-        description: 'Secure your documents by adding watermarks to PDF files online. Free, fast, and no installation required.',
-        url: 'https://usepdf.in/tools/watermark-pdf',
+        title: 'Add Watermark to PDF – Protect Your Documents | UsePDF',
+        description: 'Add text or image watermarks to your PDF files online. Customize opacity, position, and rotation for free.',
+        url: 'https://www.usepdf.in/tools/watermark-pdf',
         type: 'website',
     }
 };

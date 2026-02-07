@@ -6,6 +6,14 @@ import SignPdfClient from './SignPdfClient';
 export const metadata: Metadata = {
     title: 'Sign PDF Online – Fill and Sign PDF Documents Free | UsePDF',
     description: 'Sign PDF documents online for free. Fill forms, add electronic signatures, and download securely. No signup or installation required.',
+    alternates: {
+        canonical: 'https://www.usepdf.in/tools/sign-pdf',
+    },
+    openGraph: {
+        title: 'Sign PDF Online – Fill and Sign PDF Documents Free | UsePDF',
+        description: 'Sign PDF documents online for free. Fill forms, add electronic signatures, and download securely. No signup or installation required.',
+        url: 'https://www.usepdf.in/tools/sign-pdf',
+    }
 };
 
 export default function SignPdfPage() {

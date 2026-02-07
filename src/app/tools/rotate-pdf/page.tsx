@@ -9,12 +9,12 @@ export const metadata: Metadata = {
     description: 'Rotate PDF pages online for free. Fix sideways or upside-down files easily. No signup, no watermark, and secure browser-based processing.',
     keywords: ['rotate pdf', 'rotate pdf online', 'rotate pdf pages', 'rotate pdf file', 'rotate pdf free', 'rotate pdf 90 degrees', 'turn pdf pages online'],
     alternates: {
-        canonical: 'https://usepdf.in/tools/rotate-pdf',
+        canonical: 'https://www.usepdf.in/tools/rotate-pdf',
     },
     openGraph: {
-        title: 'Rotate PDF Online – Rotate PDF Pages Free',
-        description: 'Rotate PDF pages online for free. Fix sideways or upside-down files easily. No signup, no watermark, and secure browser-based processing.',
-        url: 'https://usepdf.in/tools/rotate-pdf',
+        title: 'Rotate PDF Online – Rotate PDF Pages Free | UsePDF',
+        description: 'Rotate PDF pages permanently. Rotate individual pages or all pages left or right. Save your PDF with proper orientation.',
+        url: 'https://www.usepdf.in/tools/rotate-pdf',
         type: 'website',
     }
 };

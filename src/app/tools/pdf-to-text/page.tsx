@@ -1,5 +1,4 @@
-'use client';
-
+import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { Loader2 } from 'lucide-react';
 
@@ -12,6 +11,19 @@ const PdfToTextClient = dynamic(() => import('./PdfToTextClient'), {
         </div>
     ),
 });
+
+export const metadata: Metadata = {
+    title: 'PDF to Text Converter – Extract Text from PDF | UsePDF',
+    description: 'Extract text from PDF documents. Convert PDF to editable text file (TXT) online free. No styling lost.',
+    alternates: {
+        canonical: 'https://www.usepdf.in/tools/pdf-to-text',
+    },
+    openGraph: {
+        title: 'PDF to Text Converter – Extract Text from PDF | UsePDF',
+        description: 'Extract text from PDF documents. Convert PDF to editable text file (TXT) online free. No styling lost.',
+        url: 'https://www.usepdf.in/tools/pdf-to-text',
+    }
+};
 
 export default function Page() {
     return <PdfToTextClient />;

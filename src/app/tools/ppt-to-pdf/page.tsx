@@ -1,8 +1,20 @@
-'use client';
-
-import { ArrowRight, Image as ImageIcon, Monitor } from 'lucide-react';
 import Link from 'next/link';
+import { ArrowRight, Image as ImageIcon, Monitor } from 'lucide-react';
+import type { Metadata } from 'next';
 import ToolPageLayout from '../../components/ToolPageLayout';
+
+export const metadata: Metadata = {
+    title: 'PPT to PDF Converter – Convert PowerPoint to PDF | UsePDF',
+    description: 'Convert PowerPoint (PPT, PPTX) to PDF online. Save slides as PDF document. Free and fast conversion.',
+    alternates: {
+        canonical: 'https://www.usepdf.in/tools/ppt-to-pdf',
+    },
+    openGraph: {
+        title: 'PPT to PDF Converter – Convert PowerPoint to PDF | UsePDF',
+        description: 'Convert PowerPoint (PPT, PPTX) to PDF online. Save slides as PDF document. Free and fast conversion.',
+        url: 'https://www.usepdf.in/tools/ppt-to-pdf',
+    }
+};
 
 const PptToPdfPage = () => {
     const steps = [

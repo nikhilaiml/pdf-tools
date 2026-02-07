@@ -9,12 +9,12 @@ export const metadata: Metadata = {
     description: 'Rearrange and reorder PDF pages online for free. Drag and drop to sort, delete, or organize pages in your PDF instantly. No signup required.',
     keywords: ['rearrange pdf pages', 'reorder pages in pdf', 'arrange pdf pages', 'reorder pages of pdf', 'rearrange pdf', 'rearrange pdf pages online', 'move pdf pages', 'organize pdf pages'],
     alternates: {
-        canonical: 'https://usepdf.in/tools/rearrange-pdf',
+        canonical: 'https://www.usepdf.in/tools/rearrange-pdf',
     },
     openGraph: {
-        title: 'Rearrange PDF Pages Online – Reorder PDF pages Free',
-        description: 'Rearrange and reorder PDF pages online for free. Drag and drop to sort, delete, or organize pages in your PDF instantly. No signup required.',
-        url: 'https://usepdf.in/tools/rearrange-pdf',
+        title: 'Reorder PDF Pages – Move & Organize PDF Pages Free | UsePDF',
+        description: 'Rearrange PDF pages online. Drag and drop to reorder pages in your PDF file. Fast, free, and secure.',
+        url: 'https://www.usepdf.in/tools/rearrange-pdf',
         type: 'website',
     }
 };

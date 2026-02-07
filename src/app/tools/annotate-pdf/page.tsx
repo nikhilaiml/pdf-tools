@@ -23,12 +23,12 @@ export const metadata: Metadata = {
         'highlight pdf free'
     ],
     alternates: {
-        canonical: 'https://usepdf.in/tools/highlight-pdf',
+        canonical: 'https://www.usepdf.in/tools/highlight-pdf',
     },
     openGraph: {
-        title: 'Highlight PDF Online – Annotate PDF Free',
-        description: 'Easily highlight text and annotate PDF files online. Free, fast, and secure highlighting tool.',
-        url: 'https://usepdf.in/tools/highlight-pdf',
+        title: 'Annotate PDF Online – Highlight, Draw & Add Text | UsePDF',
+        description: 'Annotate PDF files online for free. Highlight text, draw, add shapes, and insert comments. No login required.',
+        url: 'https://www.usepdf.in/tools/highlight-pdf',
         type: 'website',
     }
 };

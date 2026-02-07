@@ -18,12 +18,12 @@ export const metadata: Metadata = {
         'free pdf tools'
     ],
     alternates: {
-        canonical: 'https://usepdf.in/tools/image-to-pdf',
+        canonical: 'https://www.usepdf.in/tools/image-to-pdf',
     },
     openGraph: {
-        title: 'Image to PDF Online – Convert JPG & PNG to PDF Free | UsePDF',
-        description: 'Convert image to PDF online free. Supports JPG, PNG and works on all devices. Fast, secure, and no installation required.',
-        url: 'https://usepdf.in/tools/image-to-pdf',
+        title: 'Image to PDF – Convert Multiple Images to PDF Free | UsePDF',
+        description: 'Convert Images to PDF online. Supports JPG, PNG, WebP, and more. Merge multiple images into a single PDF file securely and easily.',
+        url: 'https://www.usepdf.in/tools/image-to-pdf',
         type: 'website',
     }
 };

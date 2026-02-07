@@ -16,12 +16,12 @@ export const metadata: Metadata = {
         'jpg to pdf free'
     ],
     alternates: {
-        canonical: 'https://usepdf.in/tools/jpg-to-pdf',
+        canonical: 'https://www.usepdf.in/tools/jpg-to-pdf',
     },
     openGraph: {
         title: 'JPG to PDF Converter Online – Convert JPG Images to PDF Free',
         description: 'Convert JPG to PDF online for free. Transform your images into high-quality PDF documents securely without signup, watermark, or software installation.',
-        url: 'https://usepdf.in/tools/jpg-to-pdf',
+        url: 'https://www.usepdf.in/tools/jpg-to-pdf',
         type: 'website',
     }
 };

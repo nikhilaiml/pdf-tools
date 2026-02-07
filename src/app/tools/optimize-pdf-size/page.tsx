@@ -1,8 +1,20 @@
-'use client';
-
-import { Monitor, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { Monitor, ArrowRight } from 'lucide-react';
+import type { Metadata } from 'next';
 import ToolPageLayout from '../../components/ToolPageLayout';
+
+export const metadata: Metadata = {
+    title: 'Optimize PDF Size – Reduce PDF File Size Online | UsePDF',
+    description: 'Optimize and compress PDF file size without losing quality. Free online tool. Secure and fast compression.',
+    alternates: {
+        canonical: 'https://www.usepdf.in/tools/optimize-pdf-size',
+    },
+    openGraph: {
+        title: 'Optimize PDF Size – Reduce PDF File Size Online | UsePDF',
+        description: 'Optimize and compress PDF file size without losing quality. Free online tool. Secure and fast compression.',
+        url: 'https://www.usepdf.in/tools/optimize-pdf-size',
+    }
+};
 
 export default function OptimizePdfSizePage() {
     const steps = [

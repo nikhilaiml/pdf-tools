@@ -9,12 +9,12 @@ export const metadata: Metadata = {
   description: 'Delete pages from PDF files online. Remove unwanted pages easily with no signup and no installation. Fast, secure, and browser-based processing.',
   keywords: ['delete pdf pages online', 'remove pages from pdf online', 'delete pages from pdf', 'remove pdf pages online free', 'delete pdf pages free'],
   alternates: {
-    canonical: 'https://usepdf.in/tools/delete-pdf-pages',
+    canonical: 'https://www.usepdf.in/tools/delete-pdf-pages',
   },
   openGraph: {
     title: 'Delete PDF Pages Online – Remove Pages from PDF Free',
     description: 'Delete pages from PDF files online. Remove unwanted pages easily with no signup and no installation. Fast, secure, and browser-based processing.',
-    url: 'https://usepdf.in/tools/delete-pdf-pages',
+    url: 'https://www.usepdf.in/tools/delete-pdf-pages',
     type: 'website',
   }
 };

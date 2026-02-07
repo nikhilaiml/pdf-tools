@@ -18,12 +18,12 @@ export const metadata: Metadata = {
         'online pdf tools'
     ],
     alternates: {
-        canonical: 'https://usepdf.in/tools/compress-pdf',
+        canonical: 'https://www.usepdf.in/tools/compress-pdf',
     },
     openGraph: {
         title: 'Compress PDF Online – Reduce PDF File Size Free | UsePDF',
         description: 'Compress PDF online free. Reduce PDF file size without losing quality. Works on mobile & desktop. Fast, secure, and no installation required.',
-        url: 'https://usepdf.in/tools/compress-pdf',
+        url: 'https://www.usepdf.in/tools/compress-pdf',
         type: 'website',
     }
 };

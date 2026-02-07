@@ -21,12 +21,12 @@ export const metadata: Metadata = {
         'pdf ai chat'
     ],
     alternates: {
-        canonical: 'https://usepdf.in/tools/chat-with-pdf',
+        canonical: 'https://www.usepdf.in/tools/chat-with-pdf',
     },
     openGraph: {
-        title: 'Chat with PDF Online – Ask Questions from PDF Using AI',
-        description: 'Interact with your PDF documents using AI. Upload a file, ask questions, and get instant, accurate answers for free.',
-        url: 'https://usepdf.in/tools/chat-with-pdf',
+        title: 'Chat with PDF AI – Summarize & Ask Questions Free | UsePDF',
+        description: 'Chat with any PDF document using AI. Summarize, ask questions, and get answers from your PDF files instantly.',
+        url: 'https://www.usepdf.in/tools/chat-with-pdf',
         type: 'website',
     }
 };

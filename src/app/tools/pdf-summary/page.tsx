@@ -1,7 +1,19 @@
-'use client';
-
 import { FileText, Sparkles } from 'lucide-react';
+import type { Metadata } from 'next';
 import ToolPageLayout from '../../components/ToolPageLayout';
+
+export const metadata: Metadata = {
+    title: 'PDF Summary – AI Powered PDF Summarizer | UsePDF',
+    description: 'Summarize PDF documents instantly with AI. Get key points and insights from long PDFs. Coming soon!',
+    alternates: {
+        canonical: 'https://www.usepdf.in/tools/pdf-summary',
+    },
+    openGraph: {
+        title: 'PDF Summary – AI Powered PDF Summarizer | UsePDF',
+        description: 'Summarize PDF documents instantly with AI. Get key points and insights from long PDFs. Coming soon!',
+        url: 'https://www.usepdf.in/tools/pdf-summary',
+    }
+};
 
 export default function PdfSummaryPage() {
     const steps = [

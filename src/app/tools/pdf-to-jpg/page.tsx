@@ -26,12 +26,12 @@ export const metadata: Metadata = {
         'convert photo to pdf online'
     ],
     alternates: {
-        canonical: 'https://usepdf.in/tools/pdf-to-jpg',
+        canonical: 'https://www.usepdf.in/tools/pdf-to-jpg',
     },
     openGraph: {
         title: 'PDF to JPG & Image to PDF Converter Online – Free & Fast',
         description: 'Convert PDF to JPG online for free. Also support converting images and photos to PDF. No software required. Fast, secure, and high-quality conversion.',
-        url: 'https://usepdf.in/tools/pdf-to-jpg',
+        url: 'https://www.usepdf.in/tools/pdf-to-jpg',
         type: 'website',
     }
 };

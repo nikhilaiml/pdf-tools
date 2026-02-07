@@ -6,6 +6,14 @@ import ComparePdfClient from './ComparePdfClient';
 export const metadata: Metadata = {
     title: 'Compare PDF Online – Find Difference Between Two PDFs Free',
     description: 'Compare two PDF files online and instantly find differences. Free, secure, and easy-to-use PDF comparison tool.',
+    alternates: {
+        canonical: 'https://www.usepdf.in/tools/compare-pdf',
+    },
+    openGraph: {
+        title: 'Compare PDF Online – Find Difference Between Two PDFs Free | UsePDF',
+        description: 'Compare two PDF files online and instantly find differences. Free, secure, and easy-to-use PDF comparison tool.',
+        url: 'https://www.usepdf.in/tools/compare-pdf',
+    }
 };
 
 export default function ComparePdfPage() {

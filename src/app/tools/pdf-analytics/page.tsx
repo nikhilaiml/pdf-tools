@@ -1,8 +1,20 @@
-'use client';
-
-import { Info, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { Info, ArrowRight } from 'lucide-react';
+import type { Metadata } from 'next';
 import ToolPageLayout from '../../components/ToolPageLayout';
+
+export const metadata: Metadata = {
+    title: 'PDF Analytics – Analyze PDF Document Metadata | UsePDF',
+    description: 'Analyze PDF metadata and properties. View hidden details of your PDF files. Free online tool.',
+    alternates: {
+        canonical: 'https://www.usepdf.in/tools/pdf-analytics',
+    },
+    openGraph: {
+        title: 'PDF Analytics – Analyze PDF Document Metadata | UsePDF',
+        description: 'Analyze PDF metadata and properties. View hidden details of your PDF files. Free online tool.',
+        url: 'https://www.usepdf.in/tools/pdf-analytics',
+    }
+};
 
 export default function PdfAnalyticsPage() {
     const steps = [

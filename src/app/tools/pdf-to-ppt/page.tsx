@@ -15,12 +15,12 @@ export const metadata: Metadata = {
         'convert pdf file to powerpoint'
     ],
     alternates: {
-        canonical: 'https://usepdf.in/tools/pdf-to-ppt',
+        canonical: 'https://www.usepdf.in/tools/pdf-to-ppt',
     },
     openGraph: {
-        title: 'PDF to PPT Converter Online – Convert PDF to PowerPoint Free',
-        description: 'Convert PDF to PPT online for free. Transform PDF pages into editable PowerPoint slides securely without signup or installation.',
-        url: 'https://usepdf.in/tools/pdf-to-ppt',
+        title: 'PDF to PPT Converter – Convert PDF to PowerPoint Free | UsePDF',
+        description: 'Convert PDF to PowerPoint presentations online. Turn your PDFs into editable PPT/PPTX slides for free.',
+        url: 'https://www.usepdf.in/tools/pdf-to-ppt',
         type: 'website',
     }
 };

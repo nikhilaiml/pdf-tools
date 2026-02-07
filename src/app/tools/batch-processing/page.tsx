@@ -21,12 +21,12 @@ export const metadata: Metadata = {
         'process pdfs together'
     ],
     alternates: {
-        canonical: 'https://usepdf.in/tools/batch-pdf-processing',
+        canonical: 'https://www.usepdf.in/tools/batch-pdf-processing',
     },
     openGraph: {
         title: 'Batch PDF Processing Online – Process Multiple PDF Files at Once',
         description: 'Efficiently handle multiple PDF files with our free online batch processing tool. Compress, convert, and manage PDFs in bulk.',
-        url: 'https://usepdf.in/tools/batch-pdf-processing',
+        url: 'https://www.usepdf.in/tools/batch-pdf-processing',
         type: 'website',
     }
 };

@@ -6,6 +6,14 @@ import CropPdfClient from './CropPdfClient';
 export const metadata: Metadata = {
     title: 'Crop PDF Online – Trim PDF Margins Free | UsePDF',
     description: 'Crop PDF online to remove margins and unwanted areas. Free, fast, and secure PDF cropping tool. No installation required.',
+    alternates: {
+        canonical: 'https://www.usepdf.in/tools/crop-pdf',
+    },
+    openGraph: {
+        title: 'Crop PDF Online – Trim PDF Margins Free | UsePDF',
+        description: 'Crop PDF online to remove margins and unwanted areas. Free, fast, and secure PDF cropping tool. No installation required.',
+        url: 'https://www.usepdf.in/tools/crop-pdf',
+    }
 };
 
 export default function CropPdfPage() {

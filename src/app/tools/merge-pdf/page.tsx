@@ -17,12 +17,12 @@ export const metadata: Metadata = {
         'join pdf files'
     ],
     alternates: {
-        canonical: 'https://usepdf.in/tools/merge-pdf',
+        canonical: 'https://www.usepdf.in/tools/merge-pdf',
     },
     openGraph: {
         title: 'Merge PDF Online – Combine PDF Files Free | UsePDF',
         description: 'Merge PDF online free. Combine multiple PDF files into one document instantly. Fast, secure, and no installation required.',
-        url: 'https://usepdf.in/tools/merge-pdf',
+        url: 'https://www.usepdf.in/tools/merge-pdf',
         type: 'website',
     }
 };

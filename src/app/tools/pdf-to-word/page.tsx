@@ -21,12 +21,12 @@ export const metadata: Metadata = {
         'editable pdf to word'
     ],
     alternates: {
-        canonical: 'https://usepdf.in/tools/pdf-to-word',
+        canonical: 'https://www.usepdf.in/tools/pdf-to-word',
     },
     openGraph: {
-        title: 'PDF to Word & Word to PDF Converter Online – Free & Editable',
-        description: 'Convert PDF to Word or Word to PDF online for free. Accurate, editable, and fast.',
-        url: 'https://usepdf.in/tools/pdf-to-word',
+        title: 'PDF to Word Converter – Convert PDF to DOC/DOCX Free | UsePDF',
+        description: 'Convert PDF to Word documents online for free. Editable DOC/DOCX files with accurate formatting. No signup required.',
+        url: 'https://www.usepdf.in/tools/pdf-to-word',
         type: 'website',
     }
 };

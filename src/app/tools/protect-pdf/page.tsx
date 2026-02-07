@@ -9,12 +9,12 @@ export const metadata: Metadata = {
     description: 'Protect PDF files online for free. Encrypt your PDF with a password securely. Prevent unauthorized access with strong 256-bit encryption.',
     keywords: ['protect pdf', 'encrypt pdf', 'password protect pdf', 'secure pdf', 'lock pdf', 'pdf security'],
     alternates: {
-        canonical: 'https://usepdf.in/tools/protect-pdf',
+        canonical: 'https://www.usepdf.in/tools/protect-pdf',
     },
     openGraph: {
-        title: 'Protect PDF Online – Encrypt & Secure PDF Free | UsePDF',
-        description: 'Protect PDF files online for free. Encrypt your PDF with a password securely. Prevent unauthorized access with strong 256-bit encryption.',
-        url: 'https://usepdf.in/tools/protect-pdf',
+        title: 'Protect PDF Online – Encrypt PDF with Password | UsePDF',
+        description: 'Protect your PDF files with a password. Encrypt documents securely to prevent unauthorized access.',
+        url: 'https://www.usepdf.in/tools/protect-pdf',
         type: 'website',
     }
 };

@@ -1,8 +1,20 @@
-'use client';
-
-import { FileText, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { FileText, ArrowRight } from 'lucide-react';
+import type { Metadata } from 'next';
 import ToolPageLayout from '../../components/ToolPageLayout';
+
+export const metadata: Metadata = {
+    title: 'PDF Version Converter – Update & Standardize PDF Version | UsePDF',
+    description: 'Update PDF version compatibility online. Convert old PDFs to standard versions (1.7, 2.0). Free and automatic.',
+    alternates: {
+        canonical: 'https://www.usepdf.in/tools/pdf-version-converter',
+    },
+    openGraph: {
+        title: 'PDF Version Converter – Update & Standardize PDF Version | UsePDF',
+        description: 'Update PDF version compatibility online. Convert old PDFs to standard versions (1.7, 2.0). Free and automatic.',
+        url: 'https://www.usepdf.in/tools/pdf-version-converter',
+    }
+};
 
 export default function PdfVersionConverterPage() {
     const steps = [
