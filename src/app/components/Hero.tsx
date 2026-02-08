@@ -145,20 +145,22 @@ export default function Hero({ onSearch, initialSearchValue = '' }: HeroProps) {
                         animate="visible"
                         className="flex flex-col items-center"
                     >
-                        {/* Heading */}
+                        {/* SEO-Optimized H1 Heading */}
                         <motion.h1
                             variants={itemVariants}
                             className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.1]"
                         >
-                            All-in-One Online PDF Tools
+                            Free Online PDF Tools – Edit, Convert & Manage PDFs Easily
                         </motion.h1>
 
-                        {/* Subheading */}
+                        {/* SEO-Optimized Subheading */}
                         <motion.p
                             variants={itemVariants}
                             className="text-[15px] sm:text-lg md:text-xl text-indigo-100/90 mb-8 md:mb-10 max-w-3xl leading-relaxed md:leading-relaxed"
                         >
-                            Edit, convert, and manage PDF files for free. Fast, secure, and no installation required.
+                            Free online PDF tools to merge, split, compress, delete, reorder and convert PDF files.
+                            <br className="hidden sm:block" />
+                            No signup. No watermark. Secure & fast.
                         </motion.p>
 
                         {/* Search Bar with Gold Gradient */}
@@ -178,7 +180,7 @@ export default function Hero({ onSearch, initialSearchValue = '' }: HeroProps) {
                                     className="w-full bg-transparent border-none outline-none text-slate-800 px-4 py-3 text-base placeholder:text-slate-400"
                                 />
                                 <button className="search-gradient hover:opacity-90 text-white rounded-full px-6 py-3 font-medium transition-all hover:scale-105 shadow-lg flex items-center gap-2">
-                                    <span>Search</span>
+                                    <span>Select a PDF Tool</span>
                                     <ArrowRight className="w-4 h-4" />
                                 </button>
                             </div>
@@ -189,7 +191,7 @@ export default function Hero({ onSearch, initialSearchValue = '' }: HeroProps) {
                             variants={itemVariants}
                             className="hidden md:block text-sm text-indigo-100/80 mb-10 max-w-xl mx-auto leading-relaxed font-medium"
                         >
-                            Free • Secure • No Signup
+                            ✓ 100% Free &nbsp; ✓ No Signup Required &nbsp; ✓ Secure Processing
                         </motion.p>
 
                         {/* Category Chips */}

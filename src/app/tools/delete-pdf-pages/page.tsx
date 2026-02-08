@@ -1,191 +1,434 @@
 /* eslint-disable react/no-unescaped-entities */
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import DeletePdfClient from './DeletePdfClient';
-import { HelpCircle, Layers, Globe, Shield, Zap, Check, Smartphone, Trash2 } from 'lucide-react';
+import Link from 'next/link';
+import { HelpCircle, CheckCircle, Shield, Zap, Smartphone, Lock, Trash2, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Delete PDF Pages Online – Remove Pages from PDF Free',
-  description: 'Delete pages from PDF files online. Remove unwanted pages easily with no signup and no installation. Fast, secure, and browser-based processing.',
-  keywords: ['delete pdf pages online', 'remove pages from pdf online', 'delete pages from pdf', 'remove pdf pages online free', 'delete pdf pages free'],
+  title: 'Delete PDF Pages Online Free – Remove Unwanted Pages Easily',
+  description: 'Delete PDF pages online free. Remove unwanted pages from PDF files. No signup, no watermark. Fast, secure PDF page remover tool.',
+  keywords: [
+    'delete pdf pages online free',
+    'delete pages from pdf',
+    'remove pages from pdf',
+    'delete pdf pages online',
+    'remove pdf pages online',
+    'delete pdf no signup',
+    'delete pdf without watermark',
+    'remove unwanted pages from pdf',
+    'pdf page remover',
+    'cut pages from pdf',
+    'delete pages from large pdf',
+    'pdf editor delete pages'
+  ],
   alternates: {
     canonical: 'https://www.usepdf.in/tools/delete-pdf-pages',
   },
   openGraph: {
-    title: 'Delete PDF Pages Online – Remove Pages from PDF Free',
-    description: 'Delete pages from PDF files online. Remove unwanted pages easily with no signup and no installation. Fast, secure, and browser-based processing.',
+    title: 'Delete PDF Pages Online Free – Remove Unwanted Pages Easily',
+    description: 'Delete PDF pages online free. Remove unwanted pages instantly. No signup, no watermark. Fast & secure.',
     url: 'https://www.usepdf.in/tools/delete-pdf-pages',
     type: 'website',
+    siteName: 'UsePDF',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Delete PDF Pages Online Free – Remove Pages Instantly',
+    description: 'Delete PDF pages online free. No signup, no watermark. Secure PDF page remover tool.',
+  },
+  robots: {
+    index: true,
+    follow: true,
   }
 };
 
 export default function DeletePagesPage() {
-  // Schema Data
+  // FAQs
+  const faqs = [
+    {
+      name: "Is Delete PDF Pages online free?",
+      acceptedAnswer: {
+        text: "Yes, our delete PDF pages online free tool is 100% free forever. There are no hidden charges, subscriptions, or limits. Remove pages from unlimited PDF files without paying anything."
+      }
+    },
+    {
+      name: "Can I delete only one page from a PDF?",
+      acceptedAnswer: {
+        text: "Yes, you can delete a single page or multiple pages at once. Simply select the pages you want to remove and our pdf page remover will handle the rest instantly."
+      }
+    },
+    {
+      name: "Will deleting pages affect PDF quality?",
+      acceptedAnswer: {
+        text: "No, our tool maintains the original quality of remaining pages. We remove unwanted pages from pdf without any compression or quality loss. Your edited PDF looks exactly like the original."
+      }
+    },
+    {
+      name: "Is signup or registration required?",
+      acceptedAnswer: {
+        text: "No signup required. Simply upload your PDF, select pages to delete, and download instantly. We believe in delete pdf no signup approach for maximum convenience and privacy."
+      }
+    },
+    {
+      name: "Does this tool work on mobile devices?",
+      acceptedAnswer: {
+        text: "Absolutely! Our online PDF page remover works perfectly on Android phones, iPhones, tablets, and laptops. No app installation needed—works directly in your browser."
+      }
+    },
+    {
+      name: "Can I delete pages from large PDF files?",
+      acceptedAnswer: {
+        text: "Yes, our tool handles delete pages from large pdf efficiently. You can remove pages from documents with many pages. Processing may take a few extra seconds for very large files."
+      }
+    },
+    {
+      name: "Is my PDF data safe when deleting pages online?",
+      acceptedAnswer: {
+        text: "Your security is our priority. We use SSL encryption for all transfers. Files are processed securely and automatically deleted from our servers within one hour."
+      }
+    }
+  ];
+
+  // How-To Steps
+  const howToSteps = [
+    {
+      name: "Upload Your PDF File",
+      text: "Click the upload button or drag and drop your PDF document. Our pdf page remover accepts files of any size."
+    },
+    {
+      name: "Select Pages to Delete",
+      text: "Choose the specific pages you want to remove. You can select single pages, multiple pages, or page ranges to cut pages from pdf."
+    },
+    {
+      name: "Download Updated PDF",
+      text: "Click 'Delete Pages' and download your modified PDF. The result is delete pdf without watermark and ready for immediate use."
+    }
+  ];
+
+  // JSON-LD Schema - SoftwareApplication + HowTo + FAQPage
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
+    "@graph": [
       {
-        "@type": "Question",
-        "name": "Is delete PDF pages online free?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, our Delete PDF Pages tool is 100% free. You can remove pages from your documents without any cost or limitations."
+        "@type": "SoftwareApplication",
+        "name": "Delete PDF Pages Online Free",
+        "description": "Delete PDF pages online free. Remove unwanted pages from PDF files without watermark or signup.",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Any",
+        "url": "https://www.usepdf.in/tools/delete-pdf-pages",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
         }
       },
       {
-        "@type": "Question",
-        "name": "Is it safe to remove pages from a PDF?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Absolutely. All processing happens in your browser for maximum security. Your files are never stored on our servers and are deleted automatically."
-        }
+        "@type": "HowTo",
+        "name": "How to Delete PDF Pages Online Free",
+        "description": "Step-by-step guide to delete pages from pdf and remove unwanted pages without watermark or signup.",
+        "totalTime": "PT1M",
+        "step": howToSteps.map((step, index) => ({
+          "@type": "HowToStep",
+          "position": index + 1,
+          "name": step.name,
+          "text": step.text
+        }))
       },
       {
-        "@type": "Question",
-        "name": "Can I delete specific pages only?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, you can specify exactly which pages to remove by entering single page numbers (e.g., 5) or page ranges (e.g., 1-3)."
-        }
+        "@type": "FAQPage",
+        "mainEntity": faqs.map(faq => ({
+          "@type": "Question",
+          "name": faq.name,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.acceptedAnswer.text
+          }
+        }))
       },
       {
-        "@type": "Question",
-        "name": "Do I need to install any software?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No installation is required. UsePDF works entirely in your web browser, compatible with Windows, Mac, Linux, iOS, and Android."
-        }
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.usepdf.in"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Tools",
+            "item": "https://www.usepdf.in/tools"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Delete PDF Pages",
+            "item": "https://www.usepdf.in/tools/delete-pdf-pages"
+          }
+        ]
       }
     ]
   };
 
   const seoContent = (
-    <div className="space-y-16">
+    <div className="space-y-12">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* H1 & Intro Section */}
-      <section className="text-center max-w-4xl mx-auto">
-        <h1 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">Delete PDF Pages Online – Remove Pages from PDF Free</h1>
-        <p className="text-slate-600 text-lg leading-relaxed max-w-3xl mx-auto">
-          Users can <strong>delete pages from PDF files online</strong> instantly with UsePDF.
-          Remove unwanted pages easily with just a few clicks.
-          There is <strong>no signup or installation required</strong>.
-          Enjoy fast, secure, and 100% browser-based processing for all your documents.
+      {/* Introduction */}
+      <section className="max-w-4xl mx-auto text-center">
+        <p className="text-lg text-slate-700 leading-relaxed">
+          Need to <strong>delete PDF pages online free</strong>? Whether you're removing blank pages from assignments,
+          cleaning up reports, or preparing documents for form submissions—our <strong>pdf page remover</strong> makes
+          it effortless. No signup. No watermark. Just instant page removal.
+        </p>
+        <p className="text-sm text-slate-500 mt-3">
+          Trusted by students, professionals, and businesses worldwide.
+        </p>
+      </section>
+
+      {/* What is Delete PDF Tool */}
+      <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
+        <h2 className="text-2xl font-bold text-slate-900 mb-4">What is a Delete PDF Pages Tool?</h2>
+        <p className="text-slate-600 leading-relaxed mb-4">
+          A <strong>delete PDF pages tool</strong> allows you to permanently remove specific pages from your PDF documents.
+          Unlike splitting, which creates separate files, deleting removes pages completely from the original document.
+        </p>
+        <p className="text-slate-600 leading-relaxed mb-4">
+          This is incredibly useful when you have blank pages, confidential information, or irrelevant content that needs
+          to be removed. Our <strong>pdf editor delete pages</strong> feature handles this in seconds, directly in your browser.
+        </p>
+        <p className="text-slate-600 leading-relaxed">
+          Online page removal tools are preferred because they require no software installation, work on any device,
+          and provide instant results. Simply upload, select pages to remove, and download your clean PDF.
+        </p>
+      </section>
+
+      {/* Why Delete PDF Pages */}
+      <section className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-8">
+        <h2 className="text-2xl font-bold text-slate-900 mb-6">Why Do People Delete PDF Pages?</h2>
+        <ul className="grid md:grid-cols-2 gap-4">
+          {[
+            "Remove blank or extra pages from documents",
+            "Delete confidential or sensitive information",
+            "Prepare PDFs for form submission requirements",
+            "Reduce file size by removing unnecessary pages",
+            "Share only the required content with others",
+            "Clean up scanned documents before sharing"
+          ].map((reason, i) => (
+            <li key={i} className="flex items-start gap-3 bg-white p-4 rounded-xl">
+              <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+              <span className="text-slate-700">{reason}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* How to Delete - Steps */}
+      <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
+        <h2 className="text-2xl font-bold text-slate-900 mb-6">How to Delete PDF Pages Online Free</h2>
+        <p className="text-slate-600 mb-6">
+          Follow these simple steps to <strong>remove pages from pdf</strong> in seconds:
+        </p>
+        <div className="space-y-4">
+          {howToSteps.map((step, i) => (
+            <div key={i} className="flex items-start gap-4 p-4 bg-slate-50 rounded-xl">
+              <div className="w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">
+                {i + 1}
+              </div>
+              <div>
+                <h3 className="font-semibold text-slate-900 mb-1">{step.name}</h3>
+                <p className="text-slate-600 text-sm">{step.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <p className="text-sm text-slate-500 mt-4 text-center">
+          ✓ No signup required &nbsp; ✓ No watermark added &nbsp; ✓ 100% free
         </p>
       </section>
 
       {/* Features */}
-      <section>
-        <div className="grid md:grid-cols-3 gap-8">
+      <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
+        <h2 className="text-2xl font-bold text-slate-900 mb-6">Features of UsePDF Delete PDF Tool</h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[
-            { title: "Delete PDF Pages Online Free", desc: "Remove pages from your PDF documents completely free of charge.", icon: Globe },
-            { title: "Remove Specific Pages", desc: "Select and delete specific pages or ranges with precision.", icon: Layers },
-            { title: "No Watermark", desc: "Your modified PDF remains clean with no added watermarks.", icon: Shield },
-            { title: "No Login Required", desc: "Start removing pages instantly without creating an account.", icon: Zap },
-            { title: "Works on Mobile & Desktop", desc: "Compatible with all devices and browsers for on-the-go editing.", icon: Smartphone },
-            { title: "Secure & Privacy Focused", desc: "Files are processed locally and auto-deleted for your safety.", icon: Shield },
-          ].map((feature, idx) => (
-            <div key={idx} className="bg-slate-50 p-6 rounded-xl border border-slate-100 hover:shadow-md transition-shadow">
-              <feature.icon className="w-10 h-10 text-indigo-600 mb-4" />
-              <h3 className="text-xl font-bold text-slate-900 mb-2">{feature.title}</h3>
-              <p className="text-slate-600">{feature.desc}</p>
+            { icon: <Zap className="w-6 h-6 text-yellow-500" />, title: "100% Free Forever", desc: "No hidden costs or premium limits" },
+            { icon: <Trash2 className="w-6 h-6 text-red-500" />, title: "Delete Any Pages", desc: "Remove single or multiple pages" },
+            { icon: <CheckCircle className="w-6 h-6 text-green-500" />, title: "Original Quality", desc: "No quality loss in remaining pages" },
+            { icon: <Shield className="w-6 h-6 text-purple-500" />, title: "Secure & Private", desc: "Files auto-delete in 1 hour" },
+            { icon: <Smartphone className="w-6 h-6 text-orange-500" />, title: "Works Everywhere", desc: "Mobile, tablet, and desktop" },
+            { icon: <Lock className="w-6 h-6 text-blue-500" />, title: "No Watermark", desc: "Clean professional output" }
+          ].map((feature, i) => (
+            <div key={i} className="flex items-start gap-4 p-4 bg-slate-50 rounded-xl">
+              <div className="p-2 bg-white rounded-lg shadow-sm">{feature.icon}</div>
+              <div>
+                <h3 className="font-semibold text-slate-900">{feature.title}</h3>
+                <p className="text-slate-600 text-sm">{feature.desc}</p>
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* How to Delete PDF Pages */}
-      <section className="bg-indigo-50 rounded-2xl p-8 md:p-12">
-        <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">How to Delete PDF Pages</h2>
-        <div className="grid md:grid-cols-4 gap-6">
+      {/* Common Use Cases */}
+      <section className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl p-8">
+        <h2 className="text-2xl font-bold text-slate-900 mb-6">Common Use Cases for Deleting PDF Pages</h2>
+        <div className="grid md:grid-cols-2 gap-6">
           {[
-            { step: "1", title: "Upload PDF File", desc: "Select the PDF file you want to edit." },
-            { step: "2", title: "Select Pages", desc: "Enter page numbers to remove." },
-            { step: "3", title: "Delete PDF Pages", desc: "Process the file online instantly." },
-            { step: "4", title: "Download", desc: "Save your updated PDF file." }
-          ].map((item, i) => (
-            <div key={i} className="flex flex-col items-center text-center bg-white p-6 rounded-xl shadow-sm border border-indigo-100 relative">
-              <span className="absolute -top-4 -left-4 w-10 h-10 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-xl shadow-lg">
-                {item.step}
-              </span>
-              <h3 className="font-bold text-slate-900 mb-2 mt-2">{item.title}</h3>
-              <p className="text-slate-600 text-sm">{item.desc}</p>
+            { title: "Students & Assignments", desc: "Remove extra or blank pages from assignments before submitting to college portals or professors." },
+            { title: "Official & Government Forms", desc: "Prepare clean PDFs by removing unnecessary pages before uploading to official submission portals." },
+            { title: "Business Report Cleanup", desc: "Delete outdated or irrelevant pages from reports before sharing with clients or stakeholders." },
+            { title: "Printing Selected Content", desc: "Remove pages you don't need to print, saving paper and ensuring only relevant content is printed." },
+            { title: "Removing Confidential Pages", desc: "Delete sensitive or private pages before sharing documents externally for security purposes." }
+          ].map((useCase, i) => (
+            <div key={i} className="bg-white p-6 rounded-xl shadow-sm">
+              <h3 className="font-semibold text-slate-900 mb-2">{useCase.title}</h3>
+              <p className="text-slate-600 text-sm">{useCase.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Use Cases & Why Use */}
-      <section className="grid md:grid-cols-2 gap-12">
-        <div>
-          <h2 className="text-3xl font-bold text-slate-900 mb-6">Why Use UsePDF to Delete PDF Pages?</h2>
-          <ul className="space-y-4">
-            {[
-              "Faster than other online PDF page remover tools",
-              "Simple and clean interface for easy navigation",
-              "No quality loss in the remaining pages",
-              "100% browser-based processing for privacy"
-            ].map((item, idx) => (
-              <li key={idx} className="flex items-start gap-3">
-                <Check className="w-6 h-6 text-green-500 flex-shrink-0" />
-                <span className="text-slate-700 font-medium">{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h2 className="text-3xl font-bold text-slate-900 mb-6">Use Cases</h2>
-          <ul className="space-y-4">
-            {[
-              "Remove blank pages from PDF documents",
-              "Delete unwanted pages from scanned PDFs",
-              "Clean up PDF documents before presentation",
-              "Prepare PDFs for sharing or submission"
-            ].map((item, idx) => (
-              <li key={idx} className="flex items-start gap-3">
-                <Check className="w-6 h-6 text-indigo-500 flex-shrink-0" />
-                <span className="text-slate-700 font-medium">{item}</span>
-              </li>
-            ))}
-          </ul>
+      {/* Security Section */}
+      <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
+        <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+          <Shield className="w-6 h-6 text-green-600" />
+          Is It Safe to Delete PDF Pages Online?
+        </h2>
+        <p className="text-slate-600 leading-relaxed mb-4">
+          Absolutely! Your security is our top priority. We use <strong>SSL encryption</strong> for all file transfers,
+          ensuring your documents are protected during upload and download.
+        </p>
+        <p className="text-slate-600 leading-relaxed mb-4">
+          Our tool processes files securely, and all uploaded documents are stored only temporarily.
+          Files are <strong>automatically deleted within one hour</strong> after processing is complete.
+        </p>
+        <p className="text-slate-600 leading-relaxed">
+          We never access, share, or sell your documents. Your privacy is guaranteed with our privacy-first approach.
+        </p>
+      </section>
+
+      {/* Comparison Table */}
+      <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
+        <h2 className="text-2xl font-bold text-slate-900 mb-6">Edited PDF vs Original PDF – Quick Comparison</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="bg-slate-100">
+                <th className="p-4 font-semibold text-slate-900 border-b">Feature</th>
+                <th className="p-4 font-semibold text-slate-900 border-b">Original PDF</th>
+                <th className="p-4 font-semibold text-slate-900 border-b">Edited PDF (Pages Deleted)</th>
+              </tr>
+            </thead>
+            <tbody className="text-slate-600">
+              <tr className="border-b">
+                <td className="p-4 font-medium">File Size</td>
+                <td className="p-4">Larger (all pages)</td>
+                <td className="p-4">Smaller (fewer pages)</td>
+              </tr>
+              <tr className="border-b bg-slate-50">
+                <td className="p-4 font-medium">Page Relevance</td>
+                <td className="p-4">May include unwanted pages</td>
+                <td className="p-4">Only necessary content</td>
+              </tr>
+              <tr className="border-b">
+                <td className="p-4 font-medium">Sharing Convenience</td>
+                <td className="p-4">Larger file to share</td>
+                <td className="p-4">Clean, focused document</td>
+              </tr>
+              <tr className="border-b bg-slate-50">
+                <td className="p-4 font-medium">Professional Look</td>
+                <td className="p-4">May have blank/extra pages</td>
+                <td className="p-4">Polished and refined</td>
+              </tr>
+              <tr>
+                <td className="p-4 font-medium">Best Use Case</td>
+                <td className="p-4">Complete document storage</td>
+                <td className="p-4">Sharing, forms & printing</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm max-w-4xl mx-auto">
-        <h2 className="text-3xl font-bold text-slate-900 mb-8 flex items-center justify-center gap-3">
-          <HelpCircle className="w-8 h-8 text-indigo-600" />
+      <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
+        <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+          <HelpCircle className="w-6 h-6 text-indigo-600" />
           Frequently Asked Questions
         </h2>
-        <div className="grid md:grid-cols-2 gap-6">
-          {jsonLd.mainEntity.map((faq, i) => (
-            <div key={i} className="bg-slate-50/50 rounded-xl p-6">
-              <h3 className="text-lg font-bold text-slate-900 mb-3">{faq.name}</h3>
-              <p className="text-slate-600 leading-relaxed">{faq.acceptedAnswer.text}</p>
+        <div className="space-y-4">
+          {faqs.map((faq, i) => (
+            <div key={i} className="bg-slate-50/50 rounded-xl p-5 hover:bg-slate-50 transition-colors">
+              <h3 className="font-semibold text-slate-900 mb-2">{faq.name}</h3>
+              <p className="text-slate-600 text-sm leading-relaxed">{faq.acceptedAnswer.text}</p>
             </div>
           ))}
         </div>
       </section>
 
+      {/* Why UsePDF is Better */}
+      <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
+        <h2 className="text-2xl font-bold text-slate-900 mb-6">Why Choose UsePDF Delete PDF Tool?</h2>
+        <div className="grid md:grid-cols-2 gap-4">
+          {[
+            { title: "No Annoying Ads", desc: "Clean interface without distracting advertisements" },
+            { title: "No Forced Registration", desc: "Start deleting pages immediately without creating accounts" },
+            { title: "Precise Page Selection", desc: "Delete exactly the pages you want to remove" },
+            { title: "Works on Any Device", desc: "Seamless experience on phone, tablet, or computer" }
+          ].map((item, i) => (
+            <div key={i} className="flex items-start gap-3 p-4 bg-green-50 rounded-xl">
+              <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+              <div>
+                <h3 className="font-semibold text-slate-900">{item.title}</h3>
+                <p className="text-slate-600 text-sm">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Conclusion / CTA */}
+      <section className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-8 text-center text-white">
+        <h2 className="text-2xl font-bold mb-4">Ready to Delete PDF Pages?</h2>
+        <p className="text-indigo-100 mb-6 max-w-2xl mx-auto">
+          Join thousands of users worldwide who trust UsePDF for fast, free, and secure PDF editing.
+          Remove unwanted pages in seconds and share clean documents effortlessly.
+        </p>
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="inline-flex items-center gap-2 bg-white text-indigo-600 px-8 py-3 rounded-full font-semibold hover:bg-indigo-50 transition-colors shadow-lg"
+        >
+          Delete Pages Now – It's Free
+          <ArrowRight className="w-5 h-5" />
+        </button>
+      </section>
+
       {/* Internal Links */}
-      <section className="border-t border-slate-200 pt-10 text-center">
-        <h3 className="text-xl font-bold text-slate-900 mb-6">Explore More Free PDF Tools</h3>
-        <div className="flex flex-wrap justify-center gap-4">
-          <Link href="/tools/split-pdf" className="px-5 py-2.5 bg-slate-50 text-slate-700 rounded-full hover:bg-indigo-50 hover:text-indigo-600 transition-colors font-medium">
-            Split PDF
+      <section className="border-t border-slate-200 pt-8">
+        <h2 className="text-2xl font-bold text-slate-900 mb-6 text-center">Explore More PDF Tools</h2>
+        <div className="flex flex-wrap justify-center gap-3">
+          <Link href="/tools/split-pdf" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
+            Split PDF Pages Online
           </Link>
-          <Link href="/tools/merge-pdf" className="px-5 py-2.5 bg-slate-50 text-slate-700 rounded-full hover:bg-indigo-50 hover:text-indigo-600 transition-colors font-medium">
-            Merge PDF
+          <Link href="/tools/merge-pdf" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
+            Merge PDF Files Online
           </Link>
-          <Link href="/tools/compress-pdf" className="px-5 py-2.5 bg-slate-50 text-slate-700 rounded-full hover:bg-indigo-50 hover:text-indigo-600 transition-colors font-medium">
-            Compress PDF
+          <Link href="/tools/compress-pdf" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
+            Compress PDF Online Free
           </Link>
-          <Link href="/" className="px-5 py-2.5 bg-slate-50 text-slate-700 rounded-full hover:bg-indigo-50 hover:text-indigo-600 transition-colors font-medium">
-            Free PDF Tools Online
+          <Link href="/tools/rearrange-pdf" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
+            Rearrange PDF Pages
+          </Link>
+          <Link href="/tools/rotate-pdf" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
+            Rotate PDF Pages Online
+          </Link>
+          <Link href="/tools/pdf-to-jpg" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
+            Convert PDF to JPG Online
           </Link>
         </div>
       </section>

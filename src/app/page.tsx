@@ -23,6 +23,7 @@ function HomeContent() {
     if (currentSearch !== searchQuery) {
       setSearchQuery(currentSearch);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   const handleSearch = (query: string) => {

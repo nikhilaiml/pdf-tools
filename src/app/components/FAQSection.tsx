@@ -7,28 +7,28 @@ import { Plus, Minus, HelpCircle } from 'lucide-react';
 const homeFaqs = [
     {
         question: "Is UsePDF free to use?",
-        answer: "Yes, UsePDF is 100% free. You can compress, merge, and split PDF files without any cost, subscription, or hidden fees."
+        answer: "Yes, UsePDF is 100% free. Compress, merge, split, delete, and reorder PDF files without any cost, subscription, or hidden fees."
     },
     {
-        question: "Is it safe to upload my files?",
-        answer: "Absolutely. We use SSL encryption to transfer your documents, and all files are automatically deleted from our servers after one hour."
+        question: "Is signup or registration required?",
+        answer: "No, you do not need to register or sign up. You can start using our online PDF tools immediately without creating an account."
     },
     {
-        question: "Can I use these tools on mobile?",
+        question: "Are my files safe and secure?",
+        answer: "Absolutely. We use SSL encryption to transfer your documents, and all files are automatically deleted from our servers within one hour."
+    },
+    {
+        question: "Can I use these tools on mobile devices?",
         answer: "Yes, our platform is fully responsive and works perfectly on all mobile devices, tablets, and desktop computers."
     },
     {
-        question: "Do I need to create an account?",
-        answer: "No, you do not need to register or sign up. You can start using our online pdf tools immediately."
-    },
-    {
-        question: "How long are my files stored?",
-        answer: "Your privacy is our priority. We delete all uploaded and processed files permanently after one hour."
+        question: "Does UsePDF work worldwide?",
+        answer: "Yes, UsePDF works globally. Users from any country can access our free PDF tools with fast processing speeds."
     }
 ];
 
 export default function FAQSection() {
-    const [activeIndex, setActiveIndex] = useState<number | null>(0);
+    const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
     const toggleIndex = (index: number) => {
         setActiveIndex(activeIndex === index ? null : index);
@@ -71,7 +71,7 @@ export default function FAQSection() {
                         Frequently Asked Questions
                     </h2>
                     <p className="text-slate-600 max-w-2xl mx-auto">
-                        Everything you need to know about our PDF tools.
+                        Everything you need to know about our free PDF tools.
                     </p>
                 </div>
 
