@@ -377,13 +377,13 @@ export default function PdfToJpgPage() {
                     Join thousands of users worldwide who trust UsePDF for fast, free, and secure PDF conversions.
                     No signup. No watermark. Just instant results.
                 </p>
-                <button
-                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                <Link
+                    href="#"
                     className="inline-flex items-center gap-2 bg-white text-indigo-600 px-8 py-3 rounded-full font-semibold hover:bg-indigo-50 transition-colors shadow-lg"
                 >
                     Convert PDF to JPG Now
                     <ArrowRight className="w-5 h-5" />
-                </button>
+                </Link>
             </section>
 
             {/* Why UsePDF is Better - Competitor Section */}

@@ -9,6 +9,9 @@ export const metadata: Metadata = {
     description: 'Split PDF online free. Extract pages from PDF, separate by page range. No signup, no watermark. Fast, secure PDF page splitter tool.',
     keywords: [
         'split pdf online free',
+        'split pdf page free',
+        'PDF page splitter free',
+        'Pdf cutter',
         'split pdf pages online',
         'extract pages from pdf',
         'split pdf by page range',
@@ -401,13 +404,13 @@ export default function SplitPdfPage() {
                     Join thousands of users worldwide who trust UsePDF for fast, free, and secure PDF splitting.
                     Extract exactly the pages you need in seconds.
                 </p>
-                <button
-                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                <Link
+                    href="#"
                     className="inline-flex items-center gap-2 bg-white text-indigo-600 px-8 py-3 rounded-full font-semibold hover:bg-indigo-50 transition-colors shadow-lg"
                 >
                     Split PDF Now – It's Free
                     <ArrowRight className="w-5 h-5" />
-                </button>
+                </Link>
             </section>
 
             {/* Internal Links */}

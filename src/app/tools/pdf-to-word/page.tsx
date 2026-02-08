@@ -389,13 +389,13 @@ export default function PdfToWordPage() {
                     Fast, free, and secure PDF to Word conversion in seconds. Join thousands of users who trust
                     UsePDF for their document editing needs.
                 </p>
-                <button
-                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                <Link
+                    href="#"
                     className="inline-flex items-center gap-2 bg-white text-indigo-600 px-8 py-3 rounded-full font-semibold hover:bg-indigo-50 transition-colors shadow-lg"
                 >
                     Convert PDF to Word – It's Free
                     <ArrowRight className="w-5 h-5" />
-                </button>
+                </Link>
             </section>
 
             {/* Internal Links */}
