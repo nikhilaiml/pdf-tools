@@ -425,13 +425,7 @@ export default function PdfToWordPage() {
         </div>
     );
 
-    const introText = "Convert PDF to Word online free. Turn PDFs into editable Word (DOCX) files instantly. No signup, no watermark, and completely free.";
-
     return (
-        <PdfToWordClient
-            seoContent={seoContent}
-            title="PDF to Word Online Free – Convert PDF to Editable Word (DOCX)"
-            subtitle={introText}
-        />
+        <PdfToWordClient seoContent={seoContent} />
     );
 }
