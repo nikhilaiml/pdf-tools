@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: ['/api/', '/admin/'],
         },
-        sitemap: 'https://usepdf.in/sitemap.xml',
+        sitemap: 'https://www.usepdf.in/sitemap.xml',
     };
 }

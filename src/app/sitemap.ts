@@ -7,9 +7,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Static routes
     const routes = [
         '',
+        '/tools',
+        '/about',
+        '/blog',
         '/contact',
         '/legal',
         '/terms',
+        '/privacy',
+        '/security',
         '/gdpr',
         '/cookies',
     ].map((route) => ({

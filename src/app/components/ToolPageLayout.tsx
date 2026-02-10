@@ -75,7 +75,7 @@ const defaultFeatures: Feature[] = [
         icon: <FolderOpen className="w-6 h-6 text-blue-500" />,
         title: "Organize Documents",
         description: "Organize Documents. Use categories, groups, and labels to organize and access.",
-        href: "/tools/reorder-pages"
+        href: "/tools/rearrange-pdf"
     },
     {
         icon: <Share2 className="w-6 h-6 text-green-500" />,
