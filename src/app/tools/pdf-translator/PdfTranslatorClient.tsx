@@ -4,7 +4,11 @@ import { useState } from 'react';
 import { FileText, Loader2, Copy, ExternalLink, RefreshCw, Cloud, Languages } from 'lucide-react';
 import ToolPageLayout from '../../components/ToolPageLayout';
 
-export default function PdfTranslatorClient() {
+interface PdfTranslatorClientProps {
+    seoContent?: React.ReactNode;
+}
+
+export default function PdfTranslatorClient({ seoContent }: PdfTranslatorClientProps) {
     const [file, setFile] = useState<File | null>(null);
     const [extractedText, setExtractedText] = useState<string>('');
     const [isExtracting, setIsExtracting] = useState(false);
@@ -106,6 +110,7 @@ export default function PdfTranslatorClient() {
             subtitle="Extract text from your PDF to easily translate using Google Translate."
             steps={steps}
             showCta={false}
+            seoContent={seoContent}
         >
             {!file ? (
                 <div

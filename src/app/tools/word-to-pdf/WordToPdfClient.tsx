@@ -7,7 +7,11 @@ import jsPDF from 'jspdf';
 import { Loader2, FileText, Download, Cloud, FileUp } from 'lucide-react';
 import ToolPageLayout from '../../components/ToolPageLayout';
 
-const WordToPdfPage = () => {
+interface WordToPdfClientProps {
+    seoContent?: React.ReactNode;
+}
+
+const WordToPdfPage = ({ seoContent }: WordToPdfClientProps) => {
     const [file, setFile] = useState<File | null>(null);
     const [htmlContent, setHtmlContent] = useState('');
     const [loading, setLoading] = useState(false);
@@ -94,6 +98,7 @@ const WordToPdfPage = () => {
             loading={loading}
             disabled={!file || !htmlContent}
             showCta={!!file && !!htmlContent}
+            seoContent={seoContent}
         >
             {!file ? (
                 <div

@@ -7,7 +7,11 @@ import { Loader2, FileCode, Download, Eye, Globe, Code2 } from 'lucide-react';
 import ToolPageLayout from '../../components/ToolPageLayout';
 import { convertUrlToPdf } from '../../actions';
 
-const HtmlToPdfClient = () => {
+interface HtmlToPdfClientProps {
+    seoContent?: React.ReactNode;
+}
+
+const HtmlToPdfClient = ({ seoContent }: HtmlToPdfClientProps) => {
     const [activeTab, setActiveTab] = useState<'html' | 'url'>('html');
     const [htmlCode, setHtmlCode] = useState('<h1>Hello World</h1>\n<p>This is a sample HTML content.</p>');
     const [urlInput, setUrlInput] = useState('');
@@ -98,6 +102,7 @@ const HtmlToPdfClient = () => {
             loading={loading}
             disabled={activeTab === 'html' ? !htmlCode.trim() : !urlInput.trim()}
             showCta={false}
+            seoContent={seoContent}
         >
             {/* Tabs */}
             <div className="flex justify-center mb-8">
@@ -105,8 +110,8 @@ const HtmlToPdfClient = () => {
                     <button
                         onClick={() => setActiveTab('html')}
                         className={`flex items-center gap-2 px-6 py-3 rounded-lg font-bold transition-all ${activeTab === 'html'
-                                ? 'bg-purple-100 text-purple-600 shadow-sm'
-                                : 'text-gray-500 hover:bg-gray-50'
+                            ? 'bg-purple-100 text-purple-600 shadow-sm'
+                            : 'text-gray-500 hover:bg-gray-50'
                             }`}
                     >
                         <Code2 size={18} />
@@ -115,8 +120,8 @@ const HtmlToPdfClient = () => {
                     <button
                         onClick={() => setActiveTab('url')}
                         className={`flex items-center gap-2 px-6 py-3 rounded-lg font-bold transition-all ${activeTab === 'url'
-                                ? 'bg-purple-100 text-purple-600 shadow-sm'
-                                : 'text-gray-500 hover:bg-gray-50'
+                            ? 'bg-purple-100 text-purple-600 shadow-sm'
+                            : 'text-gray-500 hover:bg-gray-50'
                             }`}
                     >
                         <Globe size={18} />

@@ -4,7 +4,11 @@ import { useState } from 'react';
 import { Loader2, FileText, Copy, Download, Cloud } from 'lucide-react';
 import ToolPageLayout from '../../components/ToolPageLayout';
 
-const PdfToTextClient = () => {
+interface PdfToTextClientProps {
+    seoContent?: React.ReactNode;
+}
+
+const PdfToTextClient = ({ seoContent }: PdfToTextClientProps) => {
     const [file, setFile] = useState<File | null>(null);
     const [text, setText] = useState<string>('');
     const [loading, setLoading] = useState(false);
@@ -92,6 +96,7 @@ const PdfToTextClient = () => {
             subtitle="Extract raw text from PDF documents instantly. Best for documents with selectable text."
             steps={steps}
             showCta={false}
+            seoContent={seoContent}
         >
             {!file ? (
                 <div

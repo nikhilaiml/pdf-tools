@@ -7,7 +7,11 @@ import jsPDF from 'jspdf';
 import { Loader2, FileSpreadsheet, Download, Cloud } from 'lucide-react';
 import ToolPageLayout from '../../components/ToolPageLayout';
 
-const ExcelToPdfClient = () => {
+interface ExcelToPdfClientProps {
+    seoContent?: React.ReactNode;
+}
+
+const ExcelToPdfClient = ({ seoContent }: ExcelToPdfClientProps) => {
     const [file, setFile] = useState<File | null>(null);
     const [htmlContent, setHtmlContent] = useState('');
     const [loading, setLoading] = useState(false);
@@ -92,6 +96,7 @@ const ExcelToPdfClient = () => {
             loading={loading}
             disabled={!htmlContent}
             showCta={!!htmlContent}
+            seoContent={seoContent}
         >
             {!file ? (
                 <div

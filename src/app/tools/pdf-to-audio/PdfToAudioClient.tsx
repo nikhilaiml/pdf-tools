@@ -12,7 +12,11 @@ interface SpeechState {
     progress: number; // 0 to 100
 }
 
-const PdfToAudioClient = () => {
+interface PdfToAudioClientProps {
+    seoContent?: React.ReactNode;
+}
+
+const PdfToAudioClient = ({ seoContent }: PdfToAudioClientProps) => {
     const [file, setFile] = useState<File | null>(null);
     const [loading, setLoading] = useState(false);
     const [speechState, setSpeechState] = useState<SpeechState>({
@@ -153,6 +157,7 @@ const PdfToAudioClient = () => {
             subtitle="Convert your PDF documents into spoken audio instantly."
             steps={steps}
             showCta={false}
+            seoContent={seoContent}
         >
             {!file ? (
                 <div
