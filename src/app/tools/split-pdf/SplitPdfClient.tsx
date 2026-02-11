@@ -88,8 +88,8 @@ const SplitPdfPage = ({ seoContent }: { seoContent?: React.ReactNode }) => {
 
   return (
     <ToolPageLayout
-      title="Split PDF Online"
-      subtitle="Extract pages from your PDF document for free. Fast, secure, and easy."
+      title="Split PDF Online Free"
+      subtitle="Separate, extract or divide PDF pages instantly. No watermark. 100% secure and fast."
       steps={steps}
       ctaText="Split PDF"
       onAction={handleSplit}

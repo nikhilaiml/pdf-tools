@@ -148,7 +148,7 @@ export default function Hero({ onSearch, initialSearchValue = '' }: HeroProps) {
                         {/* SEO-Optimized H1 Heading */}
                         <motion.h1
                             variants={itemVariants}
-                            className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.1]"
+                            className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.15]"
                         >
                             Free Online PDF Tools – Edit, Convert & Manage PDFs Easily
                         </motion.h1>
@@ -179,8 +179,9 @@ export default function Hero({ onSearch, initialSearchValue = '' }: HeroProps) {
                                     onChange={handleSearchChange}
                                     className="w-full bg-transparent border-none outline-none text-slate-800 px-4 py-3 text-base placeholder:text-slate-400"
                                 />
-                                <button className="search-gradient hover:opacity-90 text-white rounded-full px-6 py-3 font-medium transition-all hover:scale-105 shadow-lg flex items-center gap-2">
-                                    <span>Select a PDF Tool</span>
+                                <button className="search-gradient hover:opacity-90 text-white rounded-full px-4 sm:px-6 py-3 font-medium transition-all hover:scale-105 shadow-lg flex items-center gap-2 flex-shrink-0">
+                                    <span className="hidden sm:inline">Select a PDF Tool</span>
+                                    <span className="sm:hidden text-sm">Go</span>
                                     <ArrowRight className="w-4 h-4" />
                                 </button>
                             </div>
