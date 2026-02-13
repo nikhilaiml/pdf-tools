@@ -2,11 +2,11 @@
 import type { Metadata } from 'next';
 import SplitPdfClient from './SplitPdfClient';
 import Link from 'next/link';
-import { HelpCircle, CheckCircle, Shield, Zap, Smartphone, Lock, Scissors, ArrowRight, FileText, Globe } from 'lucide-react';
+import { HelpCircle, CheckCircle, Shield, Zap, Smartphone, Lock, Scissors, ArrowRight, FileText, Globe, Layers, Eye, Download } from 'lucide-react';
 
 export const metadata: Metadata = {
-    title: 'Split PDF Online Free (No Watermark) – Fast & Secure PDF Splitter',
-    description: 'Split PDF online free without watermark. Separate or extract pages instantly. Secure, fast and works on all devices.',
+    title: 'Split PDF Online Free – Separate, Extract & Cut PDF Pages Instantly (No Signup) | UsePDF',
+    description: 'Split PDF online free. Separate, extract or cut PDF pages instantly with no signup and no watermark. Secure browser-based PDF splitter tool.',
     keywords: [
         'split pdf online free',
         'pdf splitter',
@@ -16,29 +16,30 @@ export const metadata: Metadata = {
         'extract pages from pdf',
         'online pdf splitter',
         'split pdf without watermark',
-        'split pdf without losing formatting',
+        'cut pdf pages online',
         'split pdf pages online',
-        'split pdf by page range',
+        'free pdf splitter',
         'split pdf no signup',
         'remove pages from pdf',
         'split large pdf file',
         'pdf cutter',
-        'divide pdf pages'
+        'divide pdf pages',
+        'split pdf without losing quality'
     ],
     alternates: {
         canonical: 'https://www.usepdf.in/tools/split-pdf',
     },
     openGraph: {
-        title: 'Split PDF Online Free (No Watermark) – Fast & Secure PDF Splitter',
-        description: 'Split PDF online free without watermark. Separate or extract pages instantly. Secure, fast and works on all devices.',
+        title: 'Split PDF Online Free – Separate, Extract & Cut PDF Pages Instantly',
+        description: 'Split PDF online free. Separate, extract or cut PDF pages instantly with no signup. Secure browser-based processing.',
         url: 'https://www.usepdf.in/tools/split-pdf',
         type: 'website',
         siteName: 'UsePDF',
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Split PDF Online Free (No Watermark) – Fast PDF Splitter',
-        description: 'Split PDF online free without watermark. Separate or extract pages instantly. Secure & fast.',
+        title: 'Split PDF Online Free – Separate & Extract Pages Instantly',
+        description: 'Split PDF online free. Separate, extract or cut PDF pages instantly with no signup.',
     },
     robots: {
         index: true,
@@ -47,74 +48,74 @@ export const metadata: Metadata = {
 };
 
 export default function SplitPdfPage() {
-    // FAQs – matching user's exact questions
+    // FAQs
     const faqs = [
         {
-            name: "How can I split a PDF online for free?",
+            name: "How do I split PDF online for free?",
             acceptedAnswer: {
-                text: "Simply upload your PDF file to our free online PDF splitter, enter the page range you want to extract, and click Split PDF. Your new file downloads instantly. No signup, no payment, and no watermark. It works on any device with a browser."
+                text: "To split PDF online for free, simply upload your PDF file to UsePDF's secure tool. Enter the page ranges you want to extract (e.g., 1-5 or 3,7,9). Click 'Split PDF' and download your new document instantly. No signup required."
             }
         },
         {
-            name: "Can I split a PDF without losing formatting?",
+            name: "What is the best PDF splitter online?",
             acceptedAnswer: {
-                text: "Yes. Our tool extracts pages directly from the original PDF without any re-encoding or compression. Text, images, fonts, and layout remain exactly as they are in the original document. You get a pixel-perfect copy of only the pages you selected."
+                text: "The best PDF splitter online should be free, fast, secure, and require no installation. UsePDF offers all these features with the added benefit of processing files directly in your browser for maximum privacy."
             }
         },
         {
-            name: "Is this PDF splitter safe?",
+            name: "Can I extract pages from a PDF file?",
             acceptedAnswer: {
-                text: "Absolutely. All file transfers use SSL encryption. Your PDF is processed securely and automatically deleted from our servers within one hour. We never access, read, or share your documents. Your privacy is our top priority."
+                text: "Yes, you can easily extract pages from a PDF file using our tool. Whether you need a single page or a specific range, just specify the page numbers and our tool will create a new PDF containing only those pages."
             }
         },
         {
-            name: "Can I split PDF on mobile?",
+            name: "Is it safe to split PDF online?",
             acceptedAnswer: {
-                text: "Yes! Our online PDF splitter works perfectly on Android phones, iPhones, iPads, and tablets. No app installation required. Just open the page in your mobile browser, upload your file, and split it instantly."
+                text: "Yes, it is completely safe. UsePDF uses secure browser-based processing (SSL), meaning your files are often processed locally on your device or deleted from our servers immediately after processing. We never store or share your documents."
             }
         },
         {
-            name: "How do I extract pages from a PDF?",
+            name: "How to separate PDF pages without software?",
             acceptedAnswer: {
-                text: "Upload your PDF, then enter the start and end page numbers for the range you want. For example, enter 3 to 5 to extract pages 3, 4, and 5. To extract a single page, enter the same number for both start and end. Click Split PDF and download your extracted pages."
+                text: "You don't need expensive software like Adobe Acrobat to separate PDF pages. UsePDF works in any modern web browser (Chrome, Firefox, Safari, Edge) on Windows, Mac, Linux, or mobile devices."
             }
         },
         {
-            name: "Does this tool add watermark?",
+            name: "Does splitting PDF reduce quality?",
             acceptedAnswer: {
-                text: "No. Our PDF splitter never adds any watermark, logo, or branding to your files. The output is clean and professional, exactly as the original document. Split PDF without watermark, always."
+                text: "No, splitting PDF helps you separate pages without losing quality. Our tool extracts the exact pages from your original document, preserving fonts, images, and formatting exactly as they appeared in the source file."
             }
         }
     ];
 
-    // How-To Steps – 4 steps per spec
+    // How-To Steps
     const howToSteps = [
         {
-            name: "Upload PDF",
-            text: "Click the upload button or drag and drop your PDF file. Our tool accepts all standard PDF documents of any size."
+            name: "Upload PDF File",
+            text: "Click 'Upload PDF' or drag and drop your file into the splitter tool. We support large files and all standard PDF types."
         },
         {
-            name: "Select Pages",
-            text: "Enter the start page and end page numbers to define which pages you want to extract from your PDF."
+            name: "Select Page Range",
+            text: "Enter the specific page numbers or ranges (e.g., 1-5) you want to extract/separate from the document."
         },
         {
-            name: "Click Split",
-            text: "Hit the Split PDF button. The tool processes your file instantly and prepares your new document in seconds."
+            name: "Click Split PDF",
+            text: "Press the 'Split PDF' button. Our engine will instantly process the file and separate the selected pages."
         },
         {
-            name: "Download File",
-            text: "Download your split PDF file. No watermark, no quality loss. Your file is ready to use immediately."
+            name: "Download New PDF",
+            text: "Download your newly created PDF file containing only the extracted pages. No watermark, no signup."
         }
     ];
 
-    // JSON-LD Schema – SoftwareApplication + HowTo + FAQPage + BreadcrumbList
+    // JSON-LD Schema
     const jsonLd = {
         "@context": "https://schema.org",
         "@graph": [
             {
                 "@type": "SoftwareApplication",
                 "name": "Split PDF Online Free",
-                "description": "Split PDF online free without watermark. Separate, extract or divide PDF pages instantly. 100% secure and fast PDF splitter tool.",
+                "description": "Split PDF online free. Separate, extract or cut PDF pages instantly with no signup and no watermark. Secure browser-based PDF splitter tool.",
                 "applicationCategory": "UtilityApplication",
                 "operatingSystem": "All",
                 "url": "https://www.usepdf.in/tools/split-pdf",
@@ -126,8 +127,8 @@ export default function SplitPdfPage() {
             },
             {
                 "@type": "HowTo",
-                "name": "How to Split a PDF File Online",
-                "description": "Step-by-step guide to split PDF pages online free without watermark or signup.",
+                "name": "How to Split PDF Pages Step-by-Step",
+                "description": "Step-by-step guide to split PDF online free and extract pages without quality loss.",
                 "totalTime": "PT1M",
                 "step": howToSteps.map((step, index) => ({
                     "@type": "HowToStep",
@@ -180,234 +181,174 @@ export default function SplitPdfPage() {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
 
-            {/* Section 1 – Intro (150 words) */}
+            {/* Introduction / H2: Split PDF Online Free */}
             <section className="max-w-4xl mx-auto text-center">
-                <p className="text-lg text-slate-700 leading-relaxed">
-                    Need to <strong>split PDF online free</strong>? Large PDF files can be frustrating. Maybe you only need a few pages
-                    from a long report. Maybe your document has unwanted pages that you want to remove before sharing. Or perhaps
-                    an online form only accepts single-page PDF uploads. Whatever the reason, our <strong>PDF splitter</strong> makes
-                    it effortless to separate, extract, or divide PDF pages in seconds.
-                </p>
-                <p className="text-slate-600 mt-4 leading-relaxed">
-                    No software to download. No account to create. No watermark on your files. Just upload, select your pages, and
-                    download. Our <strong>online PDF splitter</strong> works on any device—desktop, laptop, tablet, or phone. It's
-                    the fastest way to <strong>split PDF file</strong> documents when you need results right now.
-                </p>
-                <p className="text-sm text-slate-500 mt-3">
-                    Trusted by thousands of students, professionals, and businesses worldwide.
-                </p>
+                <h2 className="text-3xl font-bold mb-6 text-slate-900 dark:text-white">Split PDF Online Free</h2>
+                <div className="prose prose-lg dark:prose-invert max-w-none text-slate-600 dark:text-slate-300">
+                    <p>
+                        Managing large PDF documents can be a hassle, especially when you only need a specific section or a single page.
+                        UsePDF allows you to <strong>split PDF online free</strong> and separate pages instantly directly in your browser.
+                        Whether you are a student submitting an assignment, a lawyer handling contracts, or a business professional organizing
+                        reports, our <strong>pdf splitter</strong> is the perfect solution.
+                    </p>
+                    <p className="mt-4">
+                        Unlike traditional software that requires installation and expensive licenses, our <strong>free pdf splitter</strong> works completely in the cloud
+                        (or locally in your browser), ensuring privacy and speed. You can upload a file, select the pages you want to keep,
+                        and <strong>extract pages from pdf</strong> in seconds—all without creating an account or paying a dime.
+                    </p>
+                </div>
             </section>
 
-            {/* Section 2 – How to Split a PDF File Online */}
-            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
-                <h2 className="text-2xl font-bold text-slate-900 mb-4">How to Split a PDF File Online</h2>
-                <p className="text-slate-600 mb-6 leading-relaxed">
-                    Splitting a PDF has never been easier. Follow these four simple steps to <strong>split pdf pages online</strong> and
-                    get your extracted document ready in under a minute. No technical knowledge needed.
+            {/* H2: How to Split PDF Pages Step-by-Step */}
+            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm dark:bg-slate-800 dark:border-slate-700">
+                <h2 className="text-2xl font-bold text-slate-900 mb-6 dark:text-white">How to Split PDF Pages Step-by-Step</h2>
+                <p className="text-slate-600 mb-6 dark:text-gray-300">
+                    Our interface is designed for simplicity. Follow these easy steps to <strong>cut pdf pages online</strong>:
                 </p>
                 <div className="space-y-4">
                     {howToSteps.map((step, i) => (
-                        <div key={i} className="flex items-start gap-4 p-4 bg-slate-50 rounded-xl">
+                        <div key={i} className="flex items-start gap-4 p-4 bg-slate-50 rounded-xl dark:bg-slate-700/50">
                             <div className="w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">
                                 {i + 1}
                             </div>
                             <div>
-                                <h3 className="font-semibold text-slate-900 mb-1">Step {i + 1}: {step.name}</h3>
-                                <p className="text-slate-600 text-sm">{step.text}</p>
+                                <h3 className="font-semibold text-slate-900 mb-1 dark:text-white">{step.name}</h3>
+                                <p className="text-slate-600 text-sm dark:text-gray-300">{step.text}</p>
                             </div>
                         </div>
                     ))}
                 </div>
-                <p className="text-slate-600 mt-6 leading-relaxed">
-                    That's it. The entire process takes less than 60 seconds. Whether you want to <strong>extract pages from PDF</strong> or
-                    divide a large document into smaller parts, our tool handles it smoothly. You can repeat the process as many
-                    times as you need—there are no daily limits or file count restrictions.
-                </p>
-                <p className="text-sm text-slate-500 mt-4 text-center">
-                    ✓ No signup required &nbsp; ✓ No watermark added &nbsp; ✓ 100% free
-                </p>
+                <div className="mt-6 p-4 bg-blue-50 border border-blue-100 rounded-xl dark:bg-blue-900/20 dark:border-blue-800">
+                    <p className="text-sm text-blue-800 dark:text-blue-300 flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4" />
+                        <strong>Pro Tip:</strong> You can enter page ranges like "1-5" to keep the first five pages, or single numbers like "5" to extract just page 5.
+                    </p>
+                </div>
             </section>
 
-            {/* Section 3 – Features of Our PDF Splitter */}
-            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
-                <h2 className="text-2xl font-bold text-slate-900 mb-4">Features of Our PDF Splitter</h2>
-                <p className="text-slate-600 mb-6 leading-relaxed">
-                    Our <strong>free PDF splitter</strong> is built with simplicity and power in mind. Here's what makes it
-                    stand out from other tools available online.
-                </p>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {[
-                        { icon: <Scissors className="w-6 h-6 text-blue-500" />, title: "Split PDF Without Losing Quality", desc: "Pages are extracted directly from the original. No re-encoding, no compression, no quality loss." },
-                        { icon: <Lock className="w-6 h-6 text-red-500" />, title: "No Watermark Ever", desc: "Your output files are clean and professional. We never add any watermark or branding." },
-                        { icon: <Shield className="w-6 h-6 text-purple-500" />, title: "100% Secure Processing", desc: "SSL encryption for all transfers. Files auto-delete within 1 hour. Your data stays private." },
-                        { icon: <Smartphone className="w-6 h-6 text-orange-500" />, title: "Works on Mobile", desc: "Fully responsive design. Split PDFs on your phone, tablet, or any device with a browser." },
-                        { icon: <Zap className="w-6 h-6 text-yellow-500" />, title: "Free PDF Splitter", desc: "No hidden costs, no premium tiers, no limits. Split as many PDFs as you need, completely free." },
-                        { icon: <Globe className="w-6 h-6 text-green-500" />, title: "No Installation Required", desc: "Works entirely in your browser. No software downloads, no plugins, no Java required." }
-                    ].map((feature, i) => (
-                        <div key={i} className="flex items-start gap-4 p-4 bg-slate-50 rounded-xl">
-                            <div className="p-2 bg-white rounded-lg shadow-sm">{feature.icon}</div>
-                            <div>
-                                <h3 className="font-semibold text-slate-900">{feature.title}</h3>
-                                <p className="text-slate-600 text-sm">{feature.desc}</p>
+            {/* H2: Extract Pages from PDF File */}
+            <section className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-8 dark:from-slate-800 dark:to-slate-800 dark:border dark:border-slate-700">
+                <h2 className="text-2xl font-bold text-slate-900 mb-6 dark:text-white">Extract Pages from PDF File</h2>
+                <div className="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <p className="text-slate-600 mb-4 dark:text-gray-300">
+                            Often, you receive a large brochure, book, or report, but you only are interested in one or two specific chapters.
+                            UsePDF makes it incredibly easy to <strong>extract pages from pdf</strong> without affecting the original document.
+                        </p>
+                        <p className="text-slate-600 mb-4 dark:text-gray-300">
+                            When you use our tool to <strong>separate pdf pages</strong>, we create a brand new file containing only the pages you selected.
+                            The original file remains untouched on your device. This is ideal for sharing specific information without sending unnecessary data.
+                        </p>
+                        <ul className="space-y-2">
+                            {[
+                                "Extract single pages (e.g., page 5)",
+                                "Extract page ranges (e.g., pages 10-20)",
+                                "Extract multiple separate ranges",
+                                "Remove unwanted cover pages"
+                            ].map((item, i) => (
+                                <li key={i} className="flex items-center gap-2 text-slate-700 dark:text-gray-300 text-sm">
+                                    <CheckCircle className="w-4 h-4 text-green-500" />
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div className="bg-white p-6 rounded-xl shadow-sm dark:bg-slate-700">
+                        <div className="flex items-center justify-center h-48 bg-slate-100 rounded-lg border-2 border-dashed border-slate-300 dark:bg-slate-600 dark:border-slate-500">
+                            <div className="text-center">
+                                <Layers className="w-12 h-12 text-slate-400 mx-auto mb-2" />
+                                <span className="text-slate-500 text-sm font-medium">Visual Page Selection Engine</span>
                             </div>
                         </div>
-                    ))}
+                    </div>
                 </div>
             </section>
 
-            {/* Split PDF Without Losing Quality – Dedicated Section */}
-            <section className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-slate-900 mb-4">Split PDF Without Losing Quality</h2>
-                <p className="text-slate-600 leading-relaxed mb-4">
-                    One of the biggest concerns people have when using an <strong>online PDF splitter</strong> is whether
-                    their document quality will be preserved. With our tool, the answer is always yes.
+            {/* H2: Separate PDF Pages Without Losing Quality */}
+            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm dark:bg-slate-800 dark:border-slate-700">
+                <h2 className="text-2xl font-bold text-slate-900 mb-6 dark:text-white">Separate PDF Pages Without Losing Quality</h2>
+                <p className="text-slate-600 mb-6 dark:text-gray-300">
+                    Quality is our #1 priority. Users often worry that using an <strong>online pdf splitter</strong> might degrade the resolution of their document.
+                    With UsePDF, you can <strong>split pdf without losing quality</strong>.
                 </p>
-                <p className="text-slate-600 leading-relaxed mb-4">
-                    When you <strong>split PDF file</strong> documents using UsePDF, we extract the exact pages you selected
-                    without any form of re-compression or re-rendering. Text stays sharp. Images remain in their original
-                    resolution. Fonts, colors, and vector graphics are preserved exactly as they appear in the source PDF.
-                </p>
-                <p className="text-slate-600 leading-relaxed mb-4">
-                    This means you can confidently <strong>separate PDF pages</strong> for official submissions, academic
-                    assignments, legal documents, or professional reports. The output is identical to the original—just
-                    with fewer pages.
-                </p>
-                <p className="text-slate-600 leading-relaxed">
-                    Unlike some tools that convert and re-save your PDF (which can degrade quality), our approach ensures
-                    <strong> split PDF without losing formatting</strong> every single time. What you see in the original is
-                    exactly what you get in the split version.
-                </p>
-            </section>
-
-            {/* Section 4 – Use Cases */}
-            <section className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-slate-900 mb-6">Common Use Cases for Splitting PDFs</h2>
-                <p className="text-slate-600 mb-6 leading-relaxed">
-                    People use our <strong>pdf page splitter</strong> for a wide variety of tasks every day. Here are
-                    the most popular use cases.
-                </p>
-                <div className="grid md:grid-cols-2 gap-6">
-                    {[
-                        {
-                            title: "Extract a Single Page",
-                            desc: "Need just one page from a 50-page document? Enter the same start and end page number to extract exactly one page. Perfect for ID cards, certificates, and receipts."
-                        },
-                        {
-                            title: "Divide Large PDF Files",
-                            desc: "Large PDFs are hard to share via email. Split them into smaller, manageable files that fit within email attachment limits and are easier to handle."
-                        },
-                        {
-                            title: "Remove Unwanted Pages",
-                            desc: "Extract only the pages you need and leave behind blank pages, cover pages, or irrelevant sections that you don't want recipients to see."
-                        },
-                        {
-                            title: "Split Invoice Pages",
-                            desc: "Separate individual invoices from a bulk PDF. Accountants and bookkeepers use this feature daily to organize financial documents."
-                        },
-                        {
-                            title: "Academic Submissions",
-                            desc: "Students often need to submit specific pages from assignments, textbooks, or research papers. Extract only the required pages for submission portals."
-                        },
-                        {
-                            title: "Official Form Uploads",
-                            desc: "Government portals and online forms often require single-page PDF uploads. Split your multi-page document to meet these requirements."
-                        }
-                    ].map((useCase, i) => (
-                        <div key={i} className="bg-white p-6 rounded-xl shadow-sm">
-                            <h3 className="font-semibold text-slate-900 mb-2">{useCase.title}</h3>
-                            <p className="text-slate-600 text-sm leading-relaxed">{useCase.desc}</p>
+                <div className="grid md:grid-cols-3 gap-6">
+                    <div className="p-4 bg-slate-50 rounded-xl dark:bg-slate-700/50">
+                        <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mb-4 dark:bg-blue-900/30">
+                            <Eye className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                         </div>
-                    ))}
+                        <h3 className="font-semibold text-slate-900 mb-2 dark:text-white">Crisp Text & Fonts</h3>
+                        <p className="text-sm text-slate-600 dark:text-gray-400">We preserve vector text ensuring it remains sharp at any zoom level.</p>
+                    </div>
+                    <div className="p-4 bg-slate-50 rounded-xl dark:bg-slate-700/50">
+                        <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mb-4 dark:bg-purple-900/30">
+                            <FileText className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+                        </div>
+                        <h3 className="font-semibold text-slate-900 mb-2 dark:text-white">Original Images</h3>
+                        <p className="text-sm text-slate-600 dark:text-gray-400">High-resolution images are extracted without re-compression.</p>
+                    </div>
+                    <div className="p-4 bg-slate-50 rounded-xl dark:bg-slate-700/50">
+                        <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mb-4 dark:bg-green-900/30">
+                            <Download className="w-6 h-6 text-green-600 dark:text-green-400" />
+                        </div>
+                        <h3 className="font-semibold text-slate-900 mb-2 dark:text-white">Metadata Retention</h3>
+                        <p className="text-sm text-slate-600 dark:text-gray-400">Essential document properties and layouts are maintained.</p>
+                    </div>
                 </div>
             </section>
 
-            {/* Why Choose Our Free PDF Split Tool */}
-            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
-                <h2 className="text-2xl font-bold text-slate-900 mb-6">Why Choose Our Free PDF Split Tool</h2>
-                <p className="text-slate-600 mb-6 leading-relaxed">
-                    There are many PDF splitter tools available online. Here's why thousands of users choose UsePDF
-                    over the competition.
-                </p>
+            {/* H2: When Should You Use a PDF Splitter? */}
+            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm dark:bg-slate-800 dark:border-slate-700">
+                <h2 className="text-2xl font-bold text-slate-900 mb-6 dark:text-white">When Should You Use a PDF Splitter?</h2>
                 <div className="grid md:grid-cols-2 gap-4">
                     {[
-                        { title: "No Annoying Ads", desc: "Clean, distraction-free interface. Focus on your work without pop-ups or banner ads getting in the way." },
-                        { title: "No Forced Registration", desc: "Start splitting immediately. No email signups, no account creation, no unnecessary steps." },
-                        { title: "Lightning Fast Processing", desc: "Our optimized engine processes your PDF in seconds, not minutes. Upload, split, and download—all in under 60 seconds." },
-                        { title: "Works on Any Device", desc: "Seamless experience whether you're on a phone, tablet, laptop, or desktop computer. No app needed." },
-                        { title: "Unlimited Usage", desc: "No daily limits, no file count restrictions. Split as many PDF documents as you need, whenever you need." },
-                        { title: "Privacy First Approach", desc: "Your files are never stored permanently. Automatic deletion ensures your sensitive documents stay private." }
+                        { title: "Remove Unwanted Pages", desc: "Get rid of blank pages, cover sheets, or advertising pages from downloaded documents." },
+                        { title: "Share Selected Pages", desc: "Send only the relevant invoice or chapter to a client instead of the whole book." },
+                        { title: "Reduce File Size", desc: "Breaking a large PDF into smaller chunks makes it easier to email or upload." },
+                        { title: "Submit Partial Documents", desc: "Upload only the required forms to government or university portals." }
                     ].map((item, i) => (
-                        <div key={i} className="flex items-start gap-3 p-4 bg-green-50 rounded-xl">
-                            <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                        <div key={i} className="flex items-start gap-3 p-4 bg-orange-50 rounded-xl dark:bg-orange-900/20">
+                            <Scissors className="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" />
                             <div>
-                                <h3 className="font-semibold text-slate-900">{item.title}</h3>
-                                <p className="text-slate-600 text-sm">{item.desc}</p>
+                                <h3 className="font-semibold text-slate-900 dark:text-white">{item.title}</h3>
+                                <p className="text-slate-600 text-sm dark:text-gray-300">{item.desc}</p>
                             </div>
                         </div>
                     ))}
                 </div>
             </section>
 
-            {/* Security Section */}
-            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
-                <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-                    <Shield className="w-6 h-6 text-green-600" />
-                    Is It Safe to Split PDF Online?
-                </h2>
-                <p className="text-slate-600 leading-relaxed mb-4">
-                    Absolutely. Security is built into every step of our process. When you upload a file to our
-                    <strong> PDF splitter</strong>, it's transferred using <strong>SSL encryption</strong>—the same
-                    technology banks use to protect sensitive data.
-                </p>
-                <p className="text-slate-600 leading-relaxed mb-4">
-                    Our tool processes your PDF directly in the browser whenever possible, meaning your file may
-                    never even leave your device. For any server-side processing, files are stored temporarily
-                    and <strong>automatically deleted within one hour</strong>.
-                </p>
-                <p className="text-slate-600 leading-relaxed">
-                    We never access, read, share, or sell your documents. Your privacy is guaranteed. Whether you're
-                    splitting personal documents, business contracts, or confidential reports, you can trust UsePDF
-                    to handle your files responsibly.
-                </p>
-            </section>
-
-            {/* Comparison Table */}
-            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
-                <h2 className="text-2xl font-bold text-slate-900 mb-6">Split PDF vs Full PDF – Quick Comparison</h2>
+            {/* H2: UsePDF vs Other PDF Split Tools */}
+            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm dark:bg-slate-800 dark:border-slate-700">
+                <h2 className="text-2xl font-bold text-slate-900 mb-6 dark:text-white">UsePDF vs Other PDF Split Tools</h2>
                 <div className="overflow-x-auto">
                     <table className="w-full text-left border-collapse">
                         <thead>
-                            <tr className="bg-slate-100">
-                                <th className="p-4 font-semibold text-slate-900 border-b">Feature</th>
-                                <th className="p-4 font-semibold text-slate-900 border-b">Full PDF</th>
-                                <th className="p-4 font-semibold text-slate-900 border-b">Split PDF</th>
+                            <tr className="bg-slate-100 dark:bg-slate-700">
+                                <th className="p-4 font-semibold text-slate-900 border-b dark:text-white dark:border-slate-600">Feature</th>
+                                <th className="p-4 font-semibold text-slate-900 border-b dark:text-white dark:border-slate-600">UsePDF</th>
+                                <th className="p-4 font-semibold text-slate-900 border-b dark:text-white dark:border-slate-600">Other Tools</th>
                             </tr>
                         </thead>
-                        <tbody className="text-slate-600">
-                            <tr className="border-b">
-                                <td className="p-4 font-medium">File Size</td>
-                                <td className="p-4">Large (all pages included)</td>
-                                <td className="p-4">Smaller (only selected pages)</td>
+                        <tbody className="text-slate-600 dark:text-gray-300">
+                            <tr className="border-b dark:border-slate-600">
+                                <td className="p-4 font-medium text-slate-900 dark:text-white">Cost</td>
+                                <td className="p-4 text-green-600 font-bold">100% Free</td>
+                                <td className="p-4 text-red-500">Often Freemium</td>
                             </tr>
-                            <tr className="border-b bg-slate-50">
-                                <td className="p-4 font-medium">Page Flexibility</td>
-                                <td className="p-4">All pages included</td>
-                                <td className="p-4">Only the pages you need</td>
+                            <tr className="border-b bg-slate-50 dark:bg-slate-700/50 dark:border-slate-600">
+                                <td className="p-4 font-medium text-slate-900 dark:text-white">Signup Required</td>
+                                <td className="p-4 text-green-600 font-bold">No</td>
+                                <td className="p-4 text-red-500">Yes</td>
                             </tr>
-                            <tr className="border-b">
-                                <td className="p-4 font-medium">Email Sharing</td>
-                                <td className="p-4">May exceed attachment limits</td>
-                                <td className="p-4">Fits within email size limits</td>
+                            <tr className="border-b dark:border-slate-600">
+                                <td className="p-4 font-medium text-slate-900 dark:text-white">Watermark</td>
+                                <td className="p-4 text-green-600 font-bold">None</td>
+                                <td className="p-4 text-red-500">Often on Free Plan</td>
                             </tr>
-                            <tr className="border-b bg-slate-50">
-                                <td className="p-4 font-medium">Form Uploads</td>
-                                <td className="p-4">Often not accepted</td>
-                                <td className="p-4">Perfect for single-page uploads</td>
-                            </tr>
-                            <tr>
-                                <td className="p-4 font-medium">Best For</td>
-                                <td className="p-4">Complete document archival</td>
-                                <td className="p-4">Targeted sharing & submissions</td>
+                            <tr className="border-b bg-slate-50 dark:bg-slate-700/50 dark:border-slate-600">
+                                <td className="p-4 font-medium text-slate-900 dark:text-white">Security</td>
+                                <td className="p-4 text-green-600 font-bold">Browser Processing</td>
+                                <td className="p-4 text-red-500">Server Uploads</td>
                             </tr>
                         </tbody>
                     </table>
@@ -415,64 +356,63 @@ export default function SplitPdfPage() {
             </section>
 
             {/* FAQ Section */}
-            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
-                <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm dark:bg-slate-800 dark:border-slate-700">
+                <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2 dark:text-white">
                     <HelpCircle className="w-6 h-6 text-indigo-600" />
                     Frequently Asked Questions
                 </h2>
                 <div className="space-y-4">
                     {faqs.map((faq, i) => (
-                        <div key={i} className="bg-slate-50/50 rounded-xl p-5 hover:bg-slate-50 transition-colors">
-                            <h3 className="font-semibold text-slate-900 mb-2">{faq.name}</h3>
-                            <p className="text-slate-600 text-sm leading-relaxed">{faq.acceptedAnswer.text}</p>
+                        <div key={i} className="bg-slate-50/50 rounded-xl p-5 hover:bg-slate-50 transition-colors dark:bg-slate-700/50 dark:hover:bg-slate-700">
+                            <h3 className="font-semibold text-slate-900 mb-2 dark:text-white">{faq.name}</h3>
+                            <p className="text-slate-600 text-sm leading-relaxed dark:text-gray-300">{faq.acceptedAnswer.text}</p>
                         </div>
                     ))}
                 </div>
             </section>
 
+            {/* Trusted By / Conversion Block */}
+            <section className="bg-green-50 rounded-2xl p-6 text-center border border-green-100 dark:bg-green-900/20 dark:border-green-800">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                    <Shield className="w-5 h-5 text-green-600" />
+                    <span className="font-bold text-slate-900 dark:text-white">100% Secure</span>
+                </div>
+                <p className="text-sm text-slate-600 dark:text-gray-300">
+                    Files are processed directly in your browser. No sensitive data leaves your device.
+                </p>
+            </section>
+
             {/* Conclusion / CTA */}
             <section className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-8 text-center text-white">
-                <h2 className="text-2xl font-bold mb-4">Ready to Split Your PDF?</h2>
+                <h2 className="text-2xl font-bold mb-4">Start Splitting PDF Files Now</h2>
                 <p className="text-indigo-100 mb-6 max-w-2xl mx-auto">
-                    Join thousands of users worldwide who trust UsePDF for fast, free, and secure PDF splitting.
-                    Upload your file, select your pages, and download in seconds. No watermark. No signup. Just results.
+                    Ready to organize your documents? Use our <strong>pdf page splitter</strong> to clean up your files today.
+                    Free, secure, and instant.
                 </p>
                 <Link
                     href="#"
                     className="inline-flex items-center gap-2 bg-white text-indigo-600 px-8 py-3 rounded-full font-semibold hover:bg-indigo-50 transition-colors shadow-lg"
                 >
-                    Split PDF Now – It's Free
+                    Split PDF Online Free
                     <ArrowRight className="w-5 h-5" />
                 </Link>
             </section>
 
-            {/* Internal Links – Expanded */}
-            <section className="border-t border-slate-200 pt-8">
-                <h2 className="text-2xl font-bold text-slate-900 mb-6 text-center">Explore More PDF Tools</h2>
+            {/* Internal Links */}
+            <section className="border-t border-slate-200 pt-8 dark:border-slate-700">
+                <h2 className="text-2xl font-bold text-slate-900 mb-6 text-center dark:text-white">Explore More PDF Tools</h2>
                 <div className="flex flex-wrap justify-center gap-3">
-                    <Link href="/tools/merge-pdf" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
-                        Merge PDF Files Online
+                    <Link href="/tools/merge-pdf" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm dark:bg-slate-700 dark:text-indigo-400 dark:hover:bg-slate-600">
+                        Merge PDF Files
                     </Link>
-                    <Link href="/tools/compress-pdf" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
-                        Compress PDF Online Free
+                    <Link href="/tools/compress-pdf" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm dark:bg-slate-700 dark:text-indigo-400 dark:hover:bg-slate-600">
+                        Compress PDF Online
                     </Link>
-                    <Link href="/tools/rearrange-pdf" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
-                        Reorder PDF Pages
+                    <Link href="/tools/pdf-to-word" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm dark:bg-slate-700 dark:text-indigo-400 dark:hover:bg-slate-600">
+                        Convert PDF to Word
                     </Link>
-                    <Link href="/tools/pdf-to-word" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
-                        PDF to Word Converter
-                    </Link>
-                    <Link href="/tools/pdf-to-jpg" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
-                        Convert PDF to JPG Online
-                    </Link>
-                    <Link href="/tools/delete-pdf-pages" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
-                        Delete Pages from PDF
-                    </Link>
-                    <Link href="/tools/rotate-pdf" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
-                        Rotate PDF Pages Online
-                    </Link>
-                    <Link href="/tools/protect-pdf" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
-                        Protect PDF with Password
+                    <Link href="/tools/rotate-pdf" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm dark:bg-slate-700 dark:text-indigo-400 dark:hover:bg-slate-600">
+                        Rotate PDF Pages
                     </Link>
                 </div>
             </section>

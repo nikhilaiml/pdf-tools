@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { HelpCircle, CheckCircle, Shield, Zap, Smartphone, Lock, Minimize2, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
-    title: 'Compress PDF Online Free – Reduce PDF File Size Instantly',
+    title: 'Compress PDF Online Free – Reduce PDF File Size Without Losing Quality | UsePDF',
     description: 'Compress PDF online free. Reduce PDF file size for email, forms & sharing. No signup, no watermark. Fast, secure PDF compressor tool.',
     keywords: [
         'compress pdf online free',
@@ -25,16 +25,18 @@ export const metadata: Metadata = {
         canonical: 'https://www.usepdf.in/tools/compress-pdf',
     },
     openGraph: {
-        title: 'Compress PDF Online Free – Reduce PDF File Size Instantly',
+        title: 'Compress PDF Online Free – Reduce PDF File Size Without Losing Quality',
         description: 'Compress PDF online free. Reduce file size for email & forms. No signup, no watermark. Fast & secure.',
         url: 'https://www.usepdf.in/tools/compress-pdf',
         type: 'website',
         siteName: 'UsePDF',
+        images: ['/og-image.jpg'],
     },
     twitter: {
         card: 'summary_large_image',
         title: 'Compress PDF Online Free – Reduce File Size Instantly',
         description: 'Compress PDF online free. No signup, no watermark. Secure PDF compressor tool.',
+        images: ['/og-image.jpg'],
     },
     robots: {
         index: true,
@@ -179,256 +181,269 @@ export default function CompressPdfPage() {
             />
 
             {/* Introduction */}
-            <section className="max-w-4xl mx-auto text-center">
-                <p className="text-lg text-slate-700 leading-relaxed">
-                    Need to <strong>compress PDF online free</strong>? Whether you're sending email attachments,
-                    uploading documents to forms, or saving storage space—our <strong>pdf compressor tool</strong> makes
-                    it effortless. No signup. No watermark. Just instant file size reduction.
-                </p>
-                <p className="text-sm text-slate-500 mt-3">
-                    Trusted by students, professionals, and businesses worldwide.
-                </p>
-            </section>
-
-            {/* What is Compress PDF Tool */}
-            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
-                <h2 className="text-2xl font-bold text-slate-900 mb-4">What is a Compress PDF Tool?</h2>
-                <p className="text-slate-600 leading-relaxed mb-4">
-                    A <strong>compress PDF tool</strong> reduces the file size of your PDF documents while maintaining
-                    readable quality. Large PDFs can be difficult to email, upload, or share—compression solves this problem.
-                </p>
-                <p className="text-slate-600 leading-relaxed mb-4">
-                    Our <strong>pdf size reducer</strong> works by optimizing images, fonts, and document structure
-                    within your PDF. The result is a smaller file that's easier to handle and faster to transfer.
-                </p>
-                <p className="text-slate-600 leading-relaxed">
-                    Online compression tools are preferred because they require no software installation, work on any device,
-                    and provide instant results. Simply upload, compress, and download—all in your browser.
-                </p>
-            </section>
-
-            {/* Why Compress PDF */}
-            <section className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-slate-900 mb-6">Why Do People Compress PDF Files?</h2>
-                <ul className="grid md:grid-cols-2 gap-4">
-                    {[
-                        "Upload PDFs to websites with size limits",
-                        "Send PDFs via email without bouncing",
-                        "Save storage space on devices",
-                        "Faster uploads and downloads",
-                        "Share files easily on messaging platforms",
-                        "Meet form submission requirements"
-                    ].map((reason, i) => (
-                        <li key={i} className="flex items-start gap-3 bg-white p-4 rounded-xl">
-                            <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                            <span className="text-slate-700">{reason}</span>
+            <section className="mb-12">
+                <h2 className="text-3xl font-bold mb-6 text-slate-900 dark:text-white">Compress PDF Online Free Without Losing Quality</h2>
+                <div className="prose prose-lg dark:prose-invert max-w-none text-slate-600 dark:text-slate-300">
+                    <p>
+                        If your PDF file is too large to upload, email, or share, you can easily <strong>compress PDF online free</strong> using our secure browser-based tool.
+                        Large PDF files are common when documents contain high-resolution images, scanned pages, or embedded fonts.
+                        Our PDF compressor helps you <strong>reduce PDF file size online</strong> instantly while maintaining readability and quality.
+                    </p>
+                    <p>
+                        Unlike many online PDF tools, UsePDF allows you to compress PDF files:
+                    </p>
+                    <ul className="list-none pl-0 space-y-2 mt-4 grid sm:grid-cols-2 gap-4">
+                        <li className="flex items-center gap-3 bg-white p-3 rounded-lg border border-slate-200 dark:bg-slate-800 dark:border-slate-700">
+                            <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                            <span>Without signup</span>
                         </li>
-                    ))}
-                </ul>
+                        <li className="flex items-center gap-3 bg-white p-3 rounded-lg border border-slate-200 dark:bg-slate-800 dark:border-slate-700">
+                            <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                            <span>Without watermark</span>
+                        </li>
+                        <li className="flex items-center gap-3 bg-white p-3 rounded-lg border border-slate-200 dark:bg-slate-800 dark:border-slate-700">
+                            <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                            <span>Without uploading to external servers</span>
+                        </li>
+                        <li className="flex items-center gap-3 bg-white p-3 rounded-lg border border-slate-200 dark:bg-slate-800 dark:border-slate-700">
+                            <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                            <span>100% secure browser processing</span>
+                        </li>
+                    </ul>
+                    <p className="mt-4">
+                        Whether you need to send documents by email, upload to a website, or share on messaging apps, our <strong>PDF size reducer online</strong> makes the process simple and fast.
+                    </p>
+                </div>
             </section>
 
-            {/* How to Compress - Steps */}
-            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
-                <h2 className="text-2xl font-bold text-slate-900 mb-6">How to Compress PDF Online Free</h2>
-                <p className="text-slate-600 mb-6">
-                    Follow these simple steps to <strong>reduce pdf file size online</strong> in seconds:
-                </p>
+            {/* How to Reduce PDF File Size Online */}
+            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm dark:bg-slate-800 dark:border-slate-700">
+                <h2 className="text-2xl font-bold text-slate-900 mb-6 dark:text-white">How to Reduce PDF File Size Online</h2>
                 <div className="space-y-4">
-                    {howToSteps.map((step, i) => (
-                        <div key={i} className="flex items-start gap-4 p-4 bg-slate-50 rounded-xl">
-                            <div className="w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">
-                                {i + 1}
-                            </div>
-                            <div>
-                                <h3 className="font-semibold text-slate-900 mb-1">{step.name}</h3>
-                                <p className="text-slate-600 text-sm">{step.text}</p>
-                            </div>
+                    <div className="flex items-start gap-4 p-4 bg-slate-50 rounded-xl dark:bg-slate-700/50">
+                        <div className="w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">1</div>
+                        <div>
+                            <h3 className="font-semibold text-slate-900 mb-1 dark:text-white">Upload your PDF file</h3>
+                            <p className="text-slate-600 text-sm dark:text-gray-300">Select files from your computer or drag and drop into the box.</p>
                         </div>
-                    ))}
+                    </div>
+                    <div className="flex items-start gap-4 p-4 bg-slate-50 rounded-xl dark:bg-slate-700/50">
+                        <div className="w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">2</div>
+                        <div>
+                            <h3 className="font-semibold text-slate-900 mb-1 dark:text-white">Automatic Compression</h3>
+                            <p className="text-slate-600 text-sm dark:text-gray-300">Our tool automatically analyzes and compresses your PDF.</p>
+                        </div>
+                    </div>
+                    <div className="flex items-start gap-4 p-4 bg-slate-50 rounded-xl dark:bg-slate-700/50">
+                        <div className="w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">3</div>
+                        <div>
+                            <h3 className="font-semibold text-slate-900 mb-1 dark:text-white">Download the reduced-size file instantly</h3>
+                            <p className="text-slate-600 text-sm dark:text-gray-300">Save the optimized PDF to your device immediately.</p>
+                        </div>
+                    </div>
                 </div>
-                <p className="text-sm text-slate-500 mt-4 text-center">
-                    ✓ No signup required &nbsp; ✓ No watermark added &nbsp; ✓ 100% free
+                <p className="text-sm text-slate-500 mt-6 text-center dark:text-gray-400">
+                    The entire process happens securely in your browser, ensuring privacy and fast processing.
                 </p>
             </section>
 
-            {/* Features */}
-            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
-                <h2 className="text-2xl font-bold text-slate-900 mb-6">Features of UsePDF Compress PDF Tool</h2>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Why Compress a PDF File? */}
+            <section className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-8 dark:from-slate-800 dark:to-slate-800 dark:border dark:border-slate-700">
+                <h2 className="text-2xl font-bold text-slate-900 mb-6 dark:text-white">Why Compress a PDF File?</h2>
+                <p className="text-slate-600 mb-6 dark:text-gray-300">
+                    Many platforms have file size limits. Compressing PDFs helps in:
+                </p>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {[
-                        { icon: <Zap className="w-6 h-6 text-yellow-500" />, title: "100% Free Forever", desc: "No hidden costs or premium limits" },
-                        { icon: <Minimize2 className="w-6 h-6 text-blue-500" />, title: "Smart Compression", desc: "High reduction with minimal quality loss" },
-                        { icon: <CheckCircle className="w-6 h-6 text-green-500" />, title: "Large File Support", desc: "Compress PDFs of any size" },
-                        { icon: <Shield className="w-6 h-6 text-purple-500" />, title: "Secure & Private", desc: "Files auto-delete in 1 hour" },
-                        { icon: <Smartphone className="w-6 h-6 text-orange-500" />, title: "Works Everywhere", desc: "Mobile, tablet, and desktop" },
-                        { icon: <Lock className="w-6 h-6 text-red-500" />, title: "No Watermark", desc: "Clean professional output" }
-                    ].map((feature, i) => (
-                        <div key={i} className="flex items-start gap-4 p-4 bg-slate-50 rounded-xl">
-                            <div className="p-2 bg-white rounded-lg shadow-sm">{feature.icon}</div>
-                            <div>
-                                <h3 className="font-semibold text-slate-900">{feature.title}</h3>
-                                <p className="text-slate-600 text-sm">{feature.desc}</p>
-                            </div>
+                        "Sending email attachments under 25MB",
+                        "Uploading documents to government portals",
+                        "Submitting assignments online",
+                        "Sharing PDFs on WhatsApp or Telegram",
+                        "Saving storage space"
+                    ].map((item, i) => (
+                        <div key={i} className="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm dark:bg-slate-700">
+                            <CheckCircle className="w-5 h-5 text-indigo-500 flex-shrink-0" />
+                            <span className="text-slate-700 dark:text-gray-200">{item}</span>
                         </div>
                     ))}
                 </div>
+                <p className="text-slate-600 mt-6 dark:text-gray-300">
+                    If your PDF contains scanned images, compression can significantly reduce file size without affecting text clarity.
+                </p>
             </section>
 
-            {/* Common Use Cases */}
-            <section className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-slate-900 mb-6">Common Use Cases for Compressing PDFs</h2>
-                <div className="grid md:grid-cols-2 gap-6">
-                    {[
-                        { title: "Email Attachments", desc: "Most email providers have attachment size limits (10-25MB). Compress your PDFs to send them without issues." },
-                        { title: "Online Form Submissions", desc: "Many websites and portals have file size restrictions. Reduce your PDF to meet upload requirements easily." },
-                        { title: "Students Sharing Assignments", desc: "Compress large assignment PDFs before submitting through college portals or sharing with classmates." },
-                        { title: "Business Reports & Invoices", desc: "Reduce file sizes for faster sharing with clients and colleagues. Store more documents without filling up storage." },
-                        { title: "Faster Document Uploads", desc: "Compressed PDFs upload faster, saving time especially on slower internet connections." }
-                    ].map((useCase, i) => (
-                        <div key={i} className="bg-white p-6 rounded-xl shadow-sm">
-                            <h3 className="font-semibold text-slate-900 mb-2">{useCase.title}</h3>
-                            <p className="text-slate-600 text-sm">{useCase.desc}</p>
+            {/* Does Compressing PDF Reduce Quality? */}
+            <section className="prose prose-lg dark:prose-invert max-w-none">
+                <h2 className="text-2xl font-bold text-slate-900 mb-4 dark:text-white">Does Compressing PDF Reduce Quality?</h2>
+                <p className="text-slate-600 dark:text-gray-300">
+                    This is one of the most common questions. Modern PDF compression techniques optimize images and remove unnecessary metadata while preserving essential document clarity.
+                    Our tool balances quality and file size, ensuring your document remains readable and professional.
+                </p>
+                <p className="text-slate-600 dark:text-gray-300">
+                    If you need maximum quality retention, you can use moderate compression instead of aggressive reduction.
+                </p>
+            </section>
+
+            {/* Compress PDF Without Losing Quality */}
+            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm dark:bg-slate-800 dark:border-slate-700">
+                <h2 className="text-2xl font-bold text-slate-900 mb-6 dark:text-white">Compress PDF Without Losing Quality</h2>
+                <p className="text-slate-600 mb-6 dark:text-gray-300">
+                    Our PDF compressor is designed to:
+                </p>
+                <div className="grid sm:grid-cols-2 gap-6">
+                    <div className="flex items-start gap-4">
+                        <div className="p-2 bg-indigo-50 rounded-lg dark:bg-indigo-900/30">
+                            <Zap className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
                         </div>
-                    ))}
+                        <div>
+                            <h3 className="font-semibold text-slate-900 dark:text-white">Optimize embedded images</h3>
+                            <p className="text-sm text-slate-600 dark:text-gray-400">Smart resizing and re-encoding.</p>
+                        </div>
+                    </div>
+                    <div className="flex items-start gap-4">
+                        <div className="p-2 bg-red-50 rounded-lg dark:bg-red-900/30">
+                            <Minimize2 className="w-6 h-6 text-red-600 dark:text-red-400" />
+                        </div>
+                        <div>
+                            <h3 className="font-semibold text-slate-900 dark:text-white">Remove redundant data</h3>
+                            <p className="text-sm text-slate-600 dark:text-gray-400">Cleans up unused objects.</p>
+                        </div>
+                    </div>
+                    <div className="flex items-start gap-4">
+                        <div className="p-2 bg-green-50 rounded-lg dark:bg-green-900/30">
+                            <CheckCircle className="w-6 h-6 text-green-600 dark:text-green-400" />
+                        </div>
+                        <div>
+                            <h3 className="font-semibold text-slate-900 dark:text-white">Maintain text sharpness</h3>
+                            <p className="text-sm text-slate-600 dark:text-gray-400">Fonts remain crisp and clear.</p>
+                        </div>
+                    </div>
+                    <div className="flex items-start gap-4">
+                        <div className="p-2 bg-blue-50 rounded-lg dark:bg-blue-900/30">
+                            <Shield className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                        </div>
+                        <div>
+                            <h3 className="font-semibold text-slate-900 dark:text-white">Preserve document structure</h3>
+                            <p className="text-sm text-slate-600 dark:text-gray-400">Layouts stay intact.</p>
+                        </div>
+                    </div>
                 </div>
+                <p className="mt-6 text-slate-600 dark:text-gray-300">
+                    This makes it ideal for students, professionals, and businesses who need smaller files without compromising usability.
+                </p>
             </section>
 
-            {/* Security Section */}
-            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
-                <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-                    <Shield className="w-6 h-6 text-green-600" />
-                    Is It Safe to Compress PDF Online?
-                </h2>
-                <p className="text-slate-600 leading-relaxed mb-4">
-                    Absolutely! Your security is our top priority. We use <strong>SSL encryption</strong> for all file transfers,
-                    ensuring your documents are protected during upload and download.
-                </p>
-                <p className="text-slate-600 leading-relaxed mb-4">
-                    Our tool processes files securely, and all uploaded documents are stored only temporarily.
-                    Files are <strong>automatically deleted within one hour</strong> after processing is complete.
-                </p>
-                <p className="text-slate-600 leading-relaxed">
-                    We never access, share, or sell your documents. Your privacy is guaranteed with our privacy-first approach.
+            {/* When Should You Use a PDF Size Reducer? */}
+            <section className="bg-slate-50 rounded-2xl p-8 dark:bg-slate-800/50">
+                <h2 className="text-2xl font-bold text-slate-900 mb-6 dark:text-white">When Should You Use a PDF Size Reducer?</h2>
+                <p className="text-slate-600 mb-4 dark:text-gray-300">You should reduce PDF size when:</p>
+                <ul className="list-disc pl-6 space-y-2 text-slate-600 mb-6 dark:text-gray-300">
+                    <li>Your file exceeds upload limits</li>
+                    <li>Your PDF is slow to load</li>
+                    <li>Email attachment is rejected</li>
+                    <li>Government or university portals have strict limits</li>
+                </ul>
+                <p className="font-medium text-indigo-600 dark:text-indigo-400">
+                    Our free PDF compressor online helps you instantly solve these problems.
                 </p>
             </section>
 
-            {/* Comparison Table */}
-            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
-                <h2 className="text-2xl font-bold text-slate-900 mb-6">Compressed PDF vs Original PDF – Quick Comparison</h2>
-                <div className="overflow-x-auto">
-                    <table className="w-full text-left border-collapse">
-                        <thead>
-                            <tr className="bg-slate-100">
-                                <th className="p-4 font-semibold text-slate-900 border-b">Feature</th>
-                                <th className="p-4 font-semibold text-slate-900 border-b">Original PDF</th>
-                                <th className="p-4 font-semibold text-slate-900 border-b">Compressed PDF</th>
-                            </tr>
-                        </thead>
-                        <tbody className="text-slate-600">
-                            <tr className="border-b">
-                                <td className="p-4 font-medium">File Size</td>
-                                <td className="p-4">Large (can be 10MB+)</td>
-                                <td className="p-4">Reduced (typically 50-80% smaller)</td>
-                            </tr>
-                            <tr className="border-b bg-slate-50">
-                                <td className="p-4 font-medium">Upload Speed</td>
-                                <td className="p-4">Slower uploads</td>
-                                <td className="p-4">Much faster uploads</td>
-                            </tr>
-                            <tr className="border-b">
-                                <td className="p-4 font-medium">Sharing Convenience</td>
-                                <td className="p-4">May exceed email limits</td>
-                                <td className="p-4">Easy to share anywhere</td>
-                            </tr>
-                            <tr className="border-b bg-slate-50">
-                                <td className="p-4 font-medium">Visual Quality</td>
-                                <td className="p-4">Maximum quality</td>
-                                <td className="p-4">Optimized (minimal visible difference)</td>
-                            </tr>
-                            <tr>
-                                <td className="p-4 font-medium">Best Use Case</td>
-                                <td className="p-4">Print & archival</td>
-                                <td className="p-4">Email, forms & sharing</td>
-                            </tr>
-                        </tbody>
-                    </table>
+            {/* UsePDF vs Other PDF Compressors */}
+            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm dark:bg-slate-800 dark:border-slate-700">
+                <h2 className="text-2xl font-bold text-slate-900 mb-6 dark:text-white">UsePDF vs Other PDF Compressors</h2>
+                <div className="grid md:grid-cols-2 gap-8">
+                    <div className="bg-red-50 p-6 rounded-xl dark:bg-red-900/10">
+                        <h3 className="font-bold text-red-700 mb-4 dark:text-red-400">Other PDF Tools</h3>
+                        <ul className="space-y-3">
+                            <li className="flex items-center gap-2 text-red-700 dark:text-red-300">
+                                <span className="text-lg">✖</span> Signup required
+                            </li>
+                            <li className="flex items-center gap-2 text-red-700 dark:text-red-300">
+                                <span className="text-lg">✖</span> Watermark on free version
+                            </li>
+                            <li className="flex items-center gap-2 text-red-700 dark:text-red-300">
+                                <span className="text-lg">✖</span> Uploading files to servers
+                            </li>
+                            <li className="flex items-center gap-2 text-red-700 dark:text-red-300">
+                                <span className="text-lg">✖</span> Limited free usage
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="bg-green-50 p-6 rounded-xl dark:bg-green-900/10">
+                        <h3 className="font-bold text-green-700 mb-4 dark:text-green-400">UsePDF</h3>
+                        <ul className="space-y-3">
+                            <li className="flex items-center gap-2 text-green-700 dark:text-green-300">
+                                <CheckCircle className="w-5 h-5" /> No signup
+                            </li>
+                            <li className="flex items-center gap-2 text-green-700 dark:text-green-300">
+                                <CheckCircle className="w-5 h-5" /> No watermark
+                            </li>
+                            <li className="flex items-center gap-2 text-green-700 dark:text-green-300">
+                                <CheckCircle className="w-5 h-5" /> Secure in-browser compression
+                            </li>
+                            <li className="flex items-center gap-2 text-green-700 dark:text-green-300">
+                                <CheckCircle className="w-5 h-5" /> Completely free usage
+                            </li>
+                        </ul>
+                    </div>
                 </div>
+                <p className="mt-6 text-slate-600 text-center dark:text-gray-300">
+                    This makes it a reliable and privacy-friendly alternative to other PDF compression tools.
+                </p>
             </section>
 
             {/* FAQ Section */}
-            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
-                <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm dark:bg-slate-800 dark:border-slate-700">
+                <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2 dark:text-white">
                     <HelpCircle className="w-6 h-6 text-indigo-600" />
                     Frequently Asked Questions
                 </h2>
-                <div className="space-y-4">
-                    {faqs.map((faq, i) => (
-                        <div key={i} className="bg-slate-50/50 rounded-xl p-5 hover:bg-slate-50 transition-colors">
-                            <h3 className="font-semibold text-slate-900 mb-2">{faq.name}</h3>
-                            <p className="text-slate-600 text-sm leading-relaxed">{faq.acceptedAnswer.text}</p>
-                        </div>
-                    ))}
+                <div className="space-y-6">
+                    <div>
+                        <h3 className="font-semibold text-slate-900 mb-2 dark:text-white">Q1: How do I compress PDF online for free?</h3>
+                        <p className="text-slate-600 text-sm leading-relaxed dark:text-gray-300">
+                            Upload your file, click compress, and download the reduced file instantly using our free online PDF compressor.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 className="font-semibold text-slate-900 mb-2 dark:text-white">Q2: Can I reduce PDF file size without losing quality?</h3>
+                        <p className="text-slate-600 text-sm leading-relaxed dark:text-gray-300">
+                            Yes. Our tool optimizes images and removes unnecessary data while maintaining document clarity.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 className="font-semibold text-slate-900 mb-2 dark:text-white">Q3: What is the best PDF size reducer online?</h3>
+                        <p className="text-slate-600 text-sm leading-relaxed dark:text-gray-300">
+                            The best PDF compressor should be free, secure, and watermark-free. UsePDF offers all these features.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 className="font-semibold text-slate-900 mb-2 dark:text-white">Q4: Is it safe to compress PDF online?</h3>
+                        <p className="text-slate-600 text-sm leading-relaxed dark:text-gray-300">
+                            Yes. Files are processed directly in your browser and are not uploaded to external servers.
+                        </p>
+                    </div>
                 </div>
-            </section>
-
-            {/* Why UsePDF is Better */}
-            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
-                <h2 className="text-2xl font-bold text-slate-900 mb-6">Why Choose UsePDF Compress PDF Tool?</h2>
-                <div className="grid md:grid-cols-2 gap-4">
-                    {[
-                        { title: "No Annoying Ads", desc: "Clean interface without distracting advertisements" },
-                        { title: "No Forced Registration", desc: "Start compressing immediately without creating accounts" },
-                        { title: "Maximum Compression", desc: "Optimized algorithms for best size reduction" },
-                        { title: "Works on Any Device", desc: "Seamless experience on phone, tablet, or computer" }
-                    ].map((item, i) => (
-                        <div key={i} className="flex items-start gap-3 p-4 bg-green-50 rounded-xl">
-                            <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                            <div>
-                                <h3 className="font-semibold text-slate-900">{item.title}</h3>
-                                <p className="text-slate-600 text-sm">{item.desc}</p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </section>
-
-            {/* Conclusion / CTA */}
-            <section className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-8 text-center text-white">
-                <h2 className="text-2xl font-bold mb-4">Ready to Compress Your PDF?</h2>
-                <p className="text-indigo-100 mb-6 max-w-2xl mx-auto">
-                    Join thousands of users worldwide who trust UsePDF for fast, free, and secure PDF compression.
-                    Reduce your file size in seconds and share documents effortlessly.
-                </p>
-                <Link
-                    href="#"
-                    className="inline-flex items-center gap-2 bg-white text-indigo-600 px-8 py-3 rounded-full font-semibold hover:bg-indigo-50 transition-colors shadow-lg"
-                >
-                    Compress PDF Now – It's Free
-                    <ArrowRight className="w-5 h-5" />
-                </Link>
             </section>
 
             {/* Internal Links */}
-            <section className="border-t border-slate-200 pt-8">
-                <h2 className="text-2xl font-bold text-slate-900 mb-6 text-center">Explore More PDF Tools</h2>
+            <section className="border-t border-slate-200 pt-8 dark:border-slate-700">
+                <h2 className="text-2xl font-bold text-slate-900 mb-6 text-center dark:text-white">Explore More PDF Tools</h2>
+                <p className="text-center text-slate-600 mb-6 dark:text-gray-300">
+                    You can also use our <Link href="/tools/merge-pdf" className="text-indigo-600 hover:underline dark:text-indigo-400">Merge PDF</Link> tool to combine documents before compression.
+                </p>
                 <div className="flex flex-wrap justify-center gap-3">
-                    <Link href="/tools/merge-pdf" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
-                        Merge PDF Files Online
+                    <Link href="/tools/merge-pdf" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm dark:bg-slate-700 dark:text-indigo-400 dark:hover:bg-slate-600">
+                        Merge PDF
                     </Link>
-                    <Link href="/tools/split-pdf" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
-                        Split PDF Pages Online
+                    <Link href="/tools/split-pdf" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm dark:bg-slate-700 dark:text-indigo-400 dark:hover:bg-slate-600">
+                        Split PDF
                     </Link>
-                    <Link href="/tools/pdf-to-jpg" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
-                        Convert PDF to JPG Online
+                    <Link href="/tools/pdf-to-word" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm dark:bg-slate-700 dark:text-indigo-400 dark:hover:bg-slate-600">
+                        PDF to Word
                     </Link>
-                    <Link href="/tools/pdf-to-word" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
-                        Convert PDF to Word Online
-                    </Link>
-                    <Link href="/tools/jpg-to-pdf" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
-                        Convert JPG to PDF Online
-                    </Link>
-                    <Link href="/tools/rotate-pdf" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
-                        Rotate PDF Pages Online
+                    <Link href="/tools/rotate-pdf" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm dark:bg-slate-700 dark:text-indigo-400 dark:hover:bg-slate-600">
+                        Rotate PDF
                     </Link>
                 </div>
             </section>

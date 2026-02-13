@@ -76,7 +76,7 @@ const CompressPdfPage = ({ seoContent }: { seoContent?: React.ReactNode }) => {
   return (
     <ToolPageLayout
       title="Compress PDF Online"
-      subtitle="Reduce PDF file size without losing quality. Fast, secure, and free."
+      subtitle="Compress PDF online free and reduce PDF file size instantly without losing quality. No signup, no watermark, secure browser processing."
       steps={steps}
       ctaText="Compress PDF Now"
       onAction={handleCompress}
