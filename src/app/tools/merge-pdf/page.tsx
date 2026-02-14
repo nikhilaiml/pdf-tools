@@ -413,7 +413,7 @@ export default function MergePdfPage() {
                 <h2 className="text-2xl font-bold text-slate-900 mb-6 text-center">Explore More PDF Tools</h2>
                 <div className="flex flex-wrap justify-center gap-3">
                     <Link href="/tools/split-pdf" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
-                        Split PDF Pages Online
+                        Separate PDF Pages
                     </Link>
                     <Link href="/tools/compress-pdf" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
                         Compress PDF Online Free

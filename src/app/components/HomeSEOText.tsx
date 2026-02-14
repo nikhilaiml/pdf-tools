@@ -34,7 +34,7 @@ export default function HomeSEOText() {
                             <p className="text-slate-500 text-xs mt-1">Combine files into one</p>
                         </Link>
                         <Link href="/tools/split-pdf" className="block bg-slate-50 p-4 rounded-xl border border-slate-100 hover:border-indigo-200 hover:shadow-md transition-all text-center group">
-                            <h3 className="text-sm font-bold text-slate-800 group-hover:text-indigo-600">Split PDF</h3>
+                            <h3 className="text-sm font-bold text-slate-800 group-hover:text-indigo-600">Split PDF Online</h3>
                             <p className="text-slate-500 text-xs mt-1">Extract pages from PDF</p>
                         </Link>
                         <Link href="/tools/compress-pdf" className="block bg-slate-50 p-4 rounded-xl border border-slate-100 hover:border-indigo-200 hover:shadow-md transition-all text-center group">

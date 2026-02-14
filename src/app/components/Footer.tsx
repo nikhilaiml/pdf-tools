@@ -33,6 +33,16 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Popular Tools */}
+          <div>
+            <h4 className="text-slate-800 font-semibold mb-4 text-sm">Popular Tools</h4>
+            <ul className="space-y-3">
+              <li><Link href="/tools/split-pdf" className="text-slate-500 hover:text-indigo-600 transition-colors text-sm">Split PDF Online</Link></li>
+              <li><Link href="/tools/compress-pdf" className="text-slate-500 hover:text-indigo-600 transition-colors text-sm">Compress PDF</Link></li>
+              <li><Link href="/tools/merge-pdf" className="text-slate-500 hover:text-indigo-600 transition-colors text-sm">Merge PDF</Link></li>
+            </ul>
+          </div>
+
           {/* Links Column 2 */}
           <div>
             <h4 className="text-slate-800 font-semibold mb-4 text-sm">Terms of use</h4>

@@ -415,7 +415,7 @@ export default function PdfToWordPage() {
                         PDF to JPG Converter
                     </Link>
                     <Link href="/tools/split-pdf" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
-                        Split PDF Online Free
+                        PDF Page Splitter
                     </Link>
                     <Link href="/tools/pdf-to-excel" className="px-5 py-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors font-medium text-sm">
                         PDF to Excel Converter

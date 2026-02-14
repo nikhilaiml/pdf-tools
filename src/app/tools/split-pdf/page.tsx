@@ -186,24 +186,22 @@ export default function SplitPdfPage() {
                 <h2 className="text-3xl font-bold mb-6 text-slate-900 dark:text-white">Split PDF Online Free</h2>
                 <div className="prose prose-lg dark:prose-invert max-w-none text-slate-600 dark:text-slate-300">
                     <p>
-                        Managing large PDF documents can be a hassle, especially when you only need a specific section or a single page.
-                        UsePDF allows you to <strong>split PDF online free</strong> and separate pages instantly directly in your browser.
-                        Whether you are a student submitting an assignment, a lawyer handling contracts, or a business professional organizing
-                        reports, our <strong>pdf splitter</strong> is the perfect solution.
+                        If you need to <strong>split PDF</strong> quickly, our free Split PDF tool lets you extract pages instantly.
+                        UsePDF allows you to separate documents directly in your browser without any software installation.
+                        Whether you are a student, lawyer, or business professional, our <strong>pdf splitter</strong> makes it easy to organize your files.
                     </p>
                     <p className="mt-4">
-                        Unlike traditional software that requires installation and expensive licenses, our <strong>free pdf splitter</strong> works completely in the cloud
-                        (or locally in your browser), ensuring privacy and speed. You can upload a file, select the pages you want to keep,
-                        and <strong>extract pages from pdf</strong> in seconds—all without creating an account or paying a dime.
+                        Unlike traditional software, our <strong>free pdf splitter</strong> works completely in the cloud.
+                        You can upload a file, select page ranges, and <strong>extract pages from pdf</strong> in seconds—no signup required.
                     </p>
                 </div>
             </section>
 
             {/* H2: How to Split PDF Pages Step-by-Step */}
             <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm dark:bg-slate-800 dark:border-slate-700">
-                <h2 className="text-2xl font-bold text-slate-900 mb-6 dark:text-white">How to Split PDF Pages Step-by-Step</h2>
+                <h2 className="text-2xl font-bold text-slate-900 mb-6 dark:text-white">How to Split PDF Pages Only</h2>
                 <p className="text-slate-600 mb-6 dark:text-gray-300">
-                    Our interface is designed for simplicity. Follow these easy steps to <strong>cut pdf pages online</strong>:
+                    Follow these simple steps to <strong>cut pdf pages online</strong>:
                 </p>
                 <div className="space-y-4">
                     {howToSteps.map((step, i) => (
@@ -221,7 +219,7 @@ export default function SplitPdfPage() {
                 <div className="mt-6 p-4 bg-blue-50 border border-blue-100 rounded-xl dark:bg-blue-900/20 dark:border-blue-800">
                     <p className="text-sm text-blue-800 dark:text-blue-300 flex items-center gap-2">
                         <CheckCircle className="w-4 h-4" />
-                        <strong>Pro Tip:</strong> You can enter page ranges like "1-5" to keep the first five pages, or single numbers like "5" to extract just page 5.
+                        <strong>Pro Tip:</strong> Enter "1-5" to keep the first five pages, or "5" to extract just page 5.
                     </p>
                 </div>
             </section>
@@ -232,12 +230,12 @@ export default function SplitPdfPage() {
                 <div className="grid md:grid-cols-2 gap-8 items-center">
                     <div>
                         <p className="text-slate-600 mb-4 dark:text-gray-300">
-                            Often, you receive a large brochure, book, or report, but you only are interested in one or two specific chapters.
-                            UsePDF makes it incredibly easy to <strong>extract pages from pdf</strong> without affecting the original document.
+                            Need specific chapters from a large book or report?
+                            UsePDF makes it easy to <strong>extract pages from pdf</strong> without affecting the original document.
                         </p>
                         <p className="text-slate-600 mb-4 dark:text-gray-300">
-                            When you use our tool to <strong>separate pdf pages</strong>, we create a brand new file containing only the pages you selected.
-                            The original file remains untouched on your device. This is ideal for sharing specific information without sending unnecessary data.
+                            When you <strong>separate pdf pages</strong>, we create a new file with only your selected pages.
+                            Ideal for sharing specific information efficiently.
                         </p>
                         <ul className="space-y-2">
                             {[
@@ -268,8 +266,7 @@ export default function SplitPdfPage() {
             <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm dark:bg-slate-800 dark:border-slate-700">
                 <h2 className="text-2xl font-bold text-slate-900 mb-6 dark:text-white">Separate PDF Pages Without Losing Quality</h2>
                 <p className="text-slate-600 mb-6 dark:text-gray-300">
-                    Quality is our #1 priority. Users often worry that using an <strong>online pdf splitter</strong> might degrade the resolution of their document.
-                    With UsePDF, you can <strong>split pdf without losing quality</strong>.
+                    With UsePDF, you can <strong>split pdf without losing quality</strong>. We preserve your document's resolution and formatting.
                 </p>
                 <div className="grid md:grid-cols-3 gap-6">
                     <div className="p-4 bg-slate-50 rounded-xl dark:bg-slate-700/50">
@@ -277,21 +274,21 @@ export default function SplitPdfPage() {
                             <Eye className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                         </div>
                         <h3 className="font-semibold text-slate-900 mb-2 dark:text-white">Crisp Text & Fonts</h3>
-                        <p className="text-sm text-slate-600 dark:text-gray-400">We preserve vector text ensuring it remains sharp at any zoom level.</p>
+                        <p className="text-sm text-slate-600 dark:text-gray-400">Vector text remains sharp at any zoom level.</p>
                     </div>
                     <div className="p-4 bg-slate-50 rounded-xl dark:bg-slate-700/50">
                         <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mb-4 dark:bg-purple-900/30">
                             <FileText className="w-6 h-6 text-purple-600 dark:text-purple-400" />
                         </div>
                         <h3 className="font-semibold text-slate-900 mb-2 dark:text-white">Original Images</h3>
-                        <p className="text-sm text-slate-600 dark:text-gray-400">High-resolution images are extracted without re-compression.</p>
+                        <p className="text-sm text-slate-600 dark:text-gray-400">High-res images extracted without re-compression.</p>
                     </div>
                     <div className="p-4 bg-slate-50 rounded-xl dark:bg-slate-700/50">
                         <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mb-4 dark:bg-green-900/30">
                             <Download className="w-6 h-6 text-green-600 dark:text-green-400" />
                         </div>
                         <h3 className="font-semibold text-slate-900 mb-2 dark:text-white">Metadata Retention</h3>
-                        <p className="text-sm text-slate-600 dark:text-gray-400">Essential document properties and layouts are maintained.</p>
+                        <p className="text-sm text-slate-600 dark:text-gray-400">Properties and layouts are maintained.</p>
                     </div>
                 </div>
             </section>
@@ -301,10 +298,10 @@ export default function SplitPdfPage() {
                 <h2 className="text-2xl font-bold text-slate-900 mb-6 dark:text-white">When Should You Use a PDF Splitter?</h2>
                 <div className="grid md:grid-cols-2 gap-4">
                     {[
-                        { title: "Remove Unwanted Pages", desc: "Get rid of blank pages, cover sheets, or advertising pages from downloaded documents." },
-                        { title: "Share Selected Pages", desc: "Send only the relevant invoice or chapter to a client instead of the whole book." },
-                        { title: "Reduce File Size", desc: "Breaking a large PDF into smaller chunks makes it easier to email or upload." },
-                        { title: "Submit Partial Documents", desc: "Upload only the required forms to government or university portals." }
+                        { title: "Remove Unwanted Pages", desc: "Remove blank pages or cover sheets." },
+                        { title: "Share Selected Pages", desc: "Send only relevant chapters or invoices." },
+                        { title: "Reduce File Size", desc: "Break large PDFs into smaller chunks." },
+                        { title: "Submit Partial Documents", desc: "Upload only required forms." }
                     ].map((item, i) => (
                         <div key={i} className="flex items-start gap-3 p-4 bg-orange-50 rounded-xl dark:bg-orange-900/20">
                             <Scissors className="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" />
@@ -314,44 +311,6 @@ export default function SplitPdfPage() {
                             </div>
                         </div>
                     ))}
-                </div>
-            </section>
-
-            {/* H2: UsePDF vs Other PDF Split Tools */}
-            <section className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm dark:bg-slate-800 dark:border-slate-700">
-                <h2 className="text-2xl font-bold text-slate-900 mb-6 dark:text-white">UsePDF vs Other PDF Split Tools</h2>
-                <div className="overflow-x-auto">
-                    <table className="w-full text-left border-collapse">
-                        <thead>
-                            <tr className="bg-slate-100 dark:bg-slate-700">
-                                <th className="p-4 font-semibold text-slate-900 border-b dark:text-white dark:border-slate-600">Feature</th>
-                                <th className="p-4 font-semibold text-slate-900 border-b dark:text-white dark:border-slate-600">UsePDF</th>
-                                <th className="p-4 font-semibold text-slate-900 border-b dark:text-white dark:border-slate-600">Other Tools</th>
-                            </tr>
-                        </thead>
-                        <tbody className="text-slate-600 dark:text-gray-300">
-                            <tr className="border-b dark:border-slate-600">
-                                <td className="p-4 font-medium text-slate-900 dark:text-white">Cost</td>
-                                <td className="p-4 text-green-600 font-bold">100% Free</td>
-                                <td className="p-4 text-red-500">Often Freemium</td>
-                            </tr>
-                            <tr className="border-b bg-slate-50 dark:bg-slate-700/50 dark:border-slate-600">
-                                <td className="p-4 font-medium text-slate-900 dark:text-white">Signup Required</td>
-                                <td className="p-4 text-green-600 font-bold">No</td>
-                                <td className="p-4 text-red-500">Yes</td>
-                            </tr>
-                            <tr className="border-b dark:border-slate-600">
-                                <td className="p-4 font-medium text-slate-900 dark:text-white">Watermark</td>
-                                <td className="p-4 text-green-600 font-bold">None</td>
-                                <td className="p-4 text-red-500">Often on Free Plan</td>
-                            </tr>
-                            <tr className="border-b bg-slate-50 dark:bg-slate-700/50 dark:border-slate-600">
-                                <td className="p-4 font-medium text-slate-900 dark:text-white">Security</td>
-                                <td className="p-4 text-green-600 font-bold">Browser Processing</td>
-                                <td className="p-4 text-red-500">Server Uploads</td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
             </section>
 
