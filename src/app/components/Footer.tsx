@@ -52,7 +52,7 @@ export default function Footer() {
               <li><Link href="/about" className="text-gray-500 hover:text-indigo-600 transition-colors text-sm block">About UsePDF</Link></li>
               <li><Link href="/contact" className="text-gray-500 hover:text-indigo-600 transition-colors text-sm block">Contact Us</Link></li>
               <li><Link href="/blog" className="text-gray-500 hover:text-indigo-600 transition-colors text-sm block">Blog</Link></li>
-              <li><Link href="/sitemap.xml" className="text-gray-500 hover:text-indigo-600 transition-colors text-sm block">Sitemap</Link></li>
+
             </ul>
           </div>
 
