@@ -1,7 +1,16 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Search, ArrowRight, FileText, Image as ImageIcon, Layers, Scissors, Merge, Lock } from 'lucide-react';
+import {
+    PiMagnifyingGlass as Search,
+    PiArrowRight as ArrowRight,
+    PiFilePdfDuotone as FileText,
+    PiImageDuotone as ImageIcon,
+    PiStackDuotone as Layers,
+    PiScissorsDuotone as Scissors,
+    PiArrowsMergeDuotone as Merge,
+    PiLockKeyDuotone as Lock
+} from 'react-icons/pi';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 

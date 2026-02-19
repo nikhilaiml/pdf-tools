@@ -1,0 +1,25 @@
+# Image Requirements for SEO
+
+## Required Images:
+
+1. **og-image.jpg** (1200x630px)
+   - Open Graph image for social media sharing
+   - Should contain: UsePDF logo + "Free PDF Tools" text
+   - Format: JPG, optimized for web
+
+2. **logo.png** (512x512px)
+   - Main logo for schema markup
+   - Transparent background
+   - Format: PNG
+
+3. **favicon.ico** (Already exists - verify it's correct)
+
+## How to create:
+- Use Canva, Figma, or any design tool
+- Keep file sizes small (og-image < 300KB, logo < 100KB)
+- Use your brand colors
+- Ensure text is readable
+
+## After creating, place files in /public/ folder:
+- /public/og-image.jpg
+- /public/logo.png

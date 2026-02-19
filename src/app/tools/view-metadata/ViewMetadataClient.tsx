@@ -76,9 +76,64 @@ const ViewMetadataClient = () => {
         }
     ];
 
+    const seoContent = (
+        <>
+            <section className="mt-12 prose max-w-none">
+                <h2>What Is PDF Metadata?</h2>
+                <p>
+                    PDF metadata contains hidden information inside a PDF document such as
+                    title, author, subject, keywords, creator software, creation date,
+                    modification date and page count.
+                </p>
+
+                <h2>How to Inspect PDF Metadata Online?</h2>
+                <ol>
+                    <li>Upload your PDF file.</li>
+                    <li>Click &quot;View Metadata&quot;.</li>
+                    <li>See complete PDF document properties instantly.</li>
+                </ol>
+
+                <h2>Why Use Our PDF Inspector Tool?</h2>
+                <ul>
+                    <li>100% Free</li>
+                    <li>No file upload to server</li>
+                    <li>Secure browser-based processing</li>
+                    <li>Instant results</li>
+                </ul>
+            </section>
+
+            <script type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "FAQPage",
+                        "mainEntity": [
+                            {
+                                "@type": "Question",
+                                "name": "How can I inspect PDF metadata online?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Upload your PDF and click view metadata to see document properties instantly."
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": "Is PDF metadata visible to others?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Yes, metadata can contain hidden information such as author name and creation date."
+                                }
+                            }
+                        ]
+                    })
+                }}
+            />
+        </>
+    );
+
     return (
         <ToolPageLayout
-            title="View PDF Metadata"
+            title="Inspect PDF Online – View PDF Metadata & Document Properties Free"
             subtitle="Inspect the hidden details of your PDF files."
             steps={steps}
             ctaText="View Metadata"
@@ -86,7 +141,11 @@ const ViewMetadataClient = () => {
             loading={loading}
             disabled={!file || !!metadata}
             showCta={!!file && !metadata}
+            seoContent={seoContent}
         >
+            <h1 className="text-3xl font-bold mb-4">
+                Inspect PDF Online – View Complete PDF Metadata Instantly
+            </h1>
             {!file ? (
                 <div
                     className={`

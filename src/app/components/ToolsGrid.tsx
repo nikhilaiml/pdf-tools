@@ -3,13 +3,9 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { tools } from '../tools/tools';
-import {
-    Merge, Split, Minimize2, RotateCw, Trash2, ListOrdered, Image, FileText,
-    Table, Presentation, FileCode, CheckSquare, Layers, Lock, Unlock, Eye,
-    Wrench, Activity, Search, Scan, Crop, Shield, Languages, Share2, Music, Crown,
-    FileImage, FileSpreadsheet, FileType, Stamp, Hash, ArrowRight
-} from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import React, { useState } from 'react';
+import ToolIcon from './ToolIcon';
 
 // Color mapping for tool icons
 const getToolColor = (category: string, id: string) => {
@@ -48,49 +44,7 @@ const getToolColor = (category: string, id: string) => {
     }
 };
 
-// Icon mapping function
-const getIcon = (id: string) => {
-    switch (id) {
-        case 'merge-pdf': return Merge;
-        case 'split-pdf': return Split;
-        case 'compress-pdf': return Minimize2;
-        case 'rotate-pdf': return RotateCw;
-        case 'delete-pages': return Trash2;
-        case 'reorder-pages': return ListOrdered;
-        case 'pdf-to-jpg': return FileImage;
-        case 'jpg-to-pdf': return Image;
-        case 'pdf-to-word':
-        case 'word-to-pdf': return FileText;
-        case 'pdf-to-excel':
-        case 'excel-to-pdf': return Table;
-        case 'pdf-to-ppt':
-        case 'ppt-to-pdf': return Presentation;
-        case 'pdf-to-text': return FileType;
-        case 'html-to-pdf': return FileCode;
-        case 'add-watermark': return Stamp;
-        case 'add-page-numbers': return Hash;
-        case 'crop-pdf': return Crop;
-        case 'resize-pages': return Scan;
-        case 'flatten-pdf': return Layers;
-        case 'protect-pdf': return Lock;
-        case 'unlock-pdf': return Unlock;
-        case 'restrict-printing-copying': return Shield;
-        case 'view-metadata': return Eye;
-        case 'remove-metadata': return Trash2;
-        case 'repair-corrupted-pdf': return Wrench;
-        case 'optimize-pdf-size': return Minimize2;
-        case 'pdf-analytics': return Activity;
-        case 'pdf-table-extractor': return Table;
-        case 'scan-to-pdf': return Scan;
-        case 'screenshot-to-pdf': return Image;
-        case 'pdf-to-audio': return Music;
-        case 'pdf-translator': return Languages;
-        case 'share-pdf': return Share2;
-        case 'chat-with-pdf': return Crown;
-        case 'pdf-summary': return FileText;
-        default: return FileText;
-    }
-};
+
 
 interface ToolsGridProps {
     searchQuery?: string;
@@ -153,60 +107,77 @@ export default function ToolsGrid({ searchQuery = '' }: ToolsGridProps) {
                     </div>
                 </div>
 
-                {/* Tools Grid - 6 columns on large screens */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 sm:gap-4">
-                    {filteredTools.map((tool, index) => {
-                        const Icon = getIcon(tool.id);
-                        const colors = getToolColor(tool.category, tool.id);
-                        return (
-                            <Link href={`/tools/${tool.id}`} key={tool.id}>
-                                <motion.div
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: index * 0.02 }}
-                                    className={`tool-card bg-white border border-slate-100 p-3 sm:p-4 rounded-xl h-full flex flex-col group cursor-pointer ${colors.hover}`}
-                                >
-                                    {/* Icon */}
-                                    <div className={`w-12 h-12 rounded-xl ${colors.bg} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300`}>
-                                        <Icon className={`w-6 h-6 ${colors.icon}`} />
-                                    </div>
+                {/* Flex Container for Grid and Sidebar */}
+                <div className="flex flex-col xl:flex-row gap-8 items-start relative">
 
-                                    {/* Title */}
-                                    <h3 className="text-sm font-semibold text-slate-800 mb-1 group-hover:text-indigo-600 transition-colors line-clamp-2">
-                                        {tool.title}
-                                    </h3>
+                    {/* Tools Grid - Main Content */}
+                    <div className="flex-1 w-full">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
+                            {filteredTools.map((tool, index) => {
+                                const colors = getToolColor(tool.category, tool.id);
+                                return (
+                                    <Link href={`/tools/${tool.id}`} key={tool.id}>
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ delay: index * 0.02 }}
+                                            className={`tool-card bg-white border border-slate-100 p-3 sm:p-4 rounded-xl h-full flex flex-col group cursor-pointer ${colors.hover}`}
+                                        >
+                                            {/* Icon */}
+                                            <div className={`w-12 h-12 rounded-xl ${colors.bg} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300`}>
+                                                <ToolIcon iconName={tool.id} className={`w-6 h-6 ${colors.icon}`} />
+                                            </div>
 
-                                    {/* Description */}
-                                    <p className="text-xs text-slate-500 leading-relaxed line-clamp-2">
-                                        {tool.description}
+                                            {/* Title */}
+                                            <h3 className="text-sm font-semibold text-slate-800 mb-1 group-hover:text-indigo-600 transition-colors line-clamp-2">
+                                                {tool.title}
+                                            </h3>
+
+                                            {/* Description */}
+                                            <p className="text-xs text-slate-500 leading-relaxed line-clamp-2">
+                                                {tool.description}
+                                            </p>
+                                        </motion.div>
+                                    </Link>
+                                );
+                            })}
+                        </div>
+                    </div>
+
+                    {/* Quick Actions Sidebar - Sticky on Desktop */}
+                    <div className="hidden xl:block w-64 sticky top-24 shrink-0">
+                        <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-5">
+                            <h4 className="text-sm font-semibold text-slate-800 mb-4 flex items-center gap-2">
+                                <span className="w-2 h-2 bg-indigo-500 rounded-full"></span>
+                                Quick Actions
+                            </h4>
+                            <div className="space-y-3">
+                                {[
+                                    { name: 'Compress PDF', href: '/tools/compress-pdf', color: 'text-green-500' },
+                                    { name: 'Merge PDF', href: '/tools/merge-pdf', color: 'text-red-500' },
+                                    { name: 'PDF to Word', href: '/tools/pdf-to-word', color: 'text-blue-500' },
+                                    { name: 'PDF to PPT', href: '/tools/pdf-to-ppt', color: 'text-orange-500' },
+                                    { name: 'Split PDF', href: '/tools/split-pdf', color: 'text-orange-500' },
+                                    { name: 'Unlock PDF', href: '/tools/unlock-pdf', color: 'text-teal-500' },
+                                ].map((action, i) => (
+                                    <Link key={i} href={action.href}>
+                                        <div className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group cursor-pointer border border-transparent hover:border-slate-100">
+                                            <ToolIcon iconName={action.href.split('/').pop() || ''} className={`w-5 h-5 ${action.color}`} />
+                                            <span className="text-sm font-medium text-slate-600 group-hover:text-slate-900">{action.name}</span>
+                                        </div>
+                                    </Link>
+                                ))}
+                            </div>
+
+                            {/* Pro Tip/Ad Placeholder */}
+                            <div className="mt-6 pt-6 border-t border-slate-100">
+                                <div className="bg-indigo-50 rounded-xl p-4">
+                                    <p className="text-xs font-semibold text-indigo-700 mb-1">Did you know?</p>
+                                    <p className="text-xs text-indigo-600/80 leading-relaxed">
+                                        You can rearrange pages before merging them for free.
                                     </p>
-                                </motion.div>
-                            </Link>
-                        );
-                    })}
-                </div>
-
-                {/* Quick Actions Sidebar - Desktop Only */}
-                <div className="hidden xl:block fixed right-6 top-1/2 -translate-y-1/2 z-30">
-                    <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-4 w-48">
-                        <h4 className="text-sm font-semibold text-slate-800 mb-4 flex items-center gap-2">
-                            <span className="w-2 h-2 bg-indigo-500 rounded-full"></span>
-                            Quick Actions
-                        </h4>
-                        <div className="space-y-2">
-                            {[
-                                { name: 'Compress', icon: Minimize2, href: '/tools/compress-pdf', color: 'text-green-500' },
-                                { name: 'Merge', icon: Merge, href: '/tools/merge-pdf', color: 'text-red-500' },
-                                { name: 'Convert to Word', icon: FileText, href: '/tools/pdf-to-word', color: 'text-blue-500' },
-                                { name: 'PowerPoint', icon: Presentation, href: '/tools/pdf-to-ppt', color: 'text-orange-500' },
-                            ].map((action, i) => (
-                                <Link key={i} href={action.href}>
-                                    <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 transition-colors group cursor-pointer">
-                                        <action.icon className={`w-4 h-4 ${action.color}`} />
-                                        <span className="text-sm text-slate-600 group-hover:text-slate-900">{action.name}</span>
-                                    </div>
-                                </Link>
-                            ))}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

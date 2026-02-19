@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, FileText, ChevronDown } from 'lucide-react';
+import { PiList, PiX, PiCaretDown } from 'react-icons/pi';
 import Logo from './Logo';
 
 const Navbar = () => {
@@ -54,9 +54,9 @@ const Navbar = () => {
         { name: 'Protect PDF', href: '/tools/protect-pdf' },
         { name: 'Unlock PDF', href: '/tools/unlock-pdf' },
         { name: 'Add Watermark', href: '/tools/add-watermark' },
-        { name: 'Delete Pages', href: '/tools/delete-pages' },
+        { name: 'Delete Pages', href: '/tools/delete-pdf-pages' },
         { name: 'Crop PDF', href: '/tools/crop-pdf' },
-        { name: 'Reorder Pages', href: '/tools/reorder-pages' },
+        { name: 'Reorder Pages', href: '/tools/rearrange-pdf' },
     ];
 
     return (
@@ -106,7 +106,7 @@ const Navbar = () => {
                                 className={`flex items-center gap-1 text-sm font-semibold transition-colors uppercase tracking-wide ${scrolled ? 'text-slate-700 hover:text-indigo-600' : 'text-white/90 hover:text-white'}`}
                             >
                                 Convert PDF
-                                <ChevronDown className={`w-4 h-4 transition-transform ${convertDropdown ? 'rotate-180' : ''}`} />
+                                <PiCaretDown className={`w-4 h-4 transition-transform ${convertDropdown ? 'rotate-180' : ''}`} />
                             </button>
                             <AnimatePresence>
                                 {convertDropdown && (
@@ -138,7 +138,7 @@ const Navbar = () => {
                                 className={`flex items-center gap-1 text-sm font-semibold transition-colors uppercase tracking-wide ${scrolled ? 'text-slate-700 hover:text-indigo-600' : 'text-white/90 hover:text-white'}`}
                             >
                                 All PDF Tools
-                                <ChevronDown className={`w-4 h-4 transition-transform ${allToolsDropdown ? 'rotate-180' : ''}`} />
+                                <PiCaretDown className={`w-4 h-4 transition-transform ${allToolsDropdown ? 'rotate-180' : ''}`} />
                             </button>
                             <AnimatePresence>
                                 {allToolsDropdown && (
@@ -180,7 +180,7 @@ const Navbar = () => {
                         className={`md:hidden transition-colors duration-300 ${scrolled ? 'text-slate-600 hover:text-slate-900' : 'text-white hover:text-white/80'}`}
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                     >
-                        {mobileMenuOpen ? <X /> : <Menu />}
+                        {mobileMenuOpen ? <PiX className="w-6 h-6" /> : <PiList className="w-6 h-6" />}
                     </button>
                 </div>
             </div>

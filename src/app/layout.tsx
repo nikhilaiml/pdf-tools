@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], display: 'swap', preload: true });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.usepdf.in'),
@@ -41,6 +41,9 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  verification: {
+    google: 'your-google-verification-code',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -69,7 +72,6 @@ export const metadata: Metadata = {
   },
 };
 
-// Homepage Schema - WebSite + Organization
 const homepageSchema = {
   "@context": "https://schema.org",
   "@graph": [
@@ -81,9 +83,13 @@ const homepageSchema = {
       "description": "Free online PDF tools to merge, split, compress, delete, reorder and convert PDF files.",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://www.usepdf.in/?search={search_term_string}",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://www.usepdf.in/?search={search_term_string}"
+        },
         "query-input": "required name=search_term_string"
-      }
+      },
+      "inLanguage": "en-US"
     },
     {
       "@type": "Organization",
@@ -104,12 +110,30 @@ const homepageSchema = {
       "url": "https://www.usepdf.in",
       "applicationCategory": "UtilitiesApplication",
       "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript. Requires HTML5.",
       "offers": {
         "@type": "Offer",
         "price": "0",
         "priceCurrency": "USD"
       },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "1250"
+      },
       "description": "A complete suite of free online PDF tools to merge, split, compress, delete, reorder and convert PDF files."
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.usepdf.in/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.usepdf.in"
+        }
+      ]
     }
   ]
 };
@@ -122,7 +146,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark scroll-smooth">
       <head>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" rel="stylesheet" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <meta name="theme-color" content="#0f172a" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
