@@ -49,6 +49,8 @@ interface ToolPageLayoutProps {
     showCta?: boolean;
     children: React.ReactNode;
     seoContent?: React.ReactNode;
+    hideDefaultFeatures?: boolean;
+    hideTestimonials?: boolean;
 }
 
 // Floating icons for decoration
@@ -129,7 +131,9 @@ const ToolPageLayout: React.FC<ToolPageLayoutProps> = ({
     disabled = false,
     showCta = true,
     children,
-    seoContent
+    seoContent,
+    hideDefaultFeatures = false,
+    hideTestimonials = false
 }) => {
     const router = useRouter();
     const [searchQuery, setSearchQuery] = useState('');
@@ -253,76 +257,80 @@ const ToolPageLayout: React.FC<ToolPageLayoutProps> = ({
             </div>
 
             {/* Trusted By Section */}
-            <div className="py-12 sm:py-16 bg-white px-4">
-                <div className="max-w-5xl mx-auto">
-                    <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-900 mb-2 sm:mb-3">
-                        PDF Tools at a Glance
-                    </h2>
-                    <p className="text-sm sm:text-base text-gray-500 text-center mb-8 sm:mb-12">
-                        Everything you need to work with PDF documents efficiently.
-                    </p>
+            {!hideDefaultFeatures && (
+                <div className="py-12 sm:py-16 bg-white px-4">
+                    <div className="max-w-5xl mx-auto">
+                        <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-900 mb-2 sm:mb-3">
+                            PDF Tools at a Glance
+                        </h2>
+                        <p className="text-sm sm:text-base text-gray-500 text-center mb-8 sm:mb-12">
+                            Everything you need to work with PDF documents efficiently.
+                        </p>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-                        {defaultFeatures.map((feature, index) => (
-                            <Link href={feature.href} key={index} className="block group">
-                                <div className="bg-gray-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center hover:bg-gray-100 transition-colors h-full">
-                                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-xl flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-sm group-hover:scale-110 transition-transform">
-                                        {feature.icon}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+                            {defaultFeatures.map((feature, index) => (
+                                <Link href={feature.href} key={index} className="block group">
+                                    <div className="bg-gray-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center hover:bg-gray-100 transition-colors h-full">
+                                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-xl flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-sm group-hover:scale-110 transition-transform">
+                                            {feature.icon}
+                                        </div>
+                                        <h3 className="font-semibold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">{feature.title}</h3>
+                                        <p className="text-xs text-gray-500 leading-relaxed line-clamp-3 mb-2">{feature.description}</p>
+                                        <div className="inline-flex items-center text-xs text-purple-600 hover:text-purple-700 mt-auto font-medium">
+                                            Learn More <ArrowRight className="w-3 h-3 ml-1" />
+                                        </div>
                                     </div>
-                                    <h3 className="font-semibold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">{feature.title}</h3>
-                                    <p className="text-xs text-gray-500 leading-relaxed line-clamp-3 mb-2">{feature.description}</p>
-                                    <div className="inline-flex items-center text-xs text-purple-600 hover:text-purple-700 mt-auto font-medium">
-                                        Learn More <ArrowRight className="w-3 h-3 ml-1" />
-                                    </div>
-                                </div>
-                            </Link>
-                        ))}
+                                </Link>
+                            ))}
+                        </div>
                     </div>
                 </div>
-            </div>
+            )}
 
             {/* Testimonials Section */}
-            <div className="py-12 sm:py-16 bg-gray-50 overflow-hidden">
-                <div className="max-w-7xl mx-auto px-4 relative">
-                    <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-900 mb-8 sm:mb-12">
-                        Trusted by Happy Users
-                    </h2>
+            {!hideTestimonials && (
+                <div className="py-12 sm:py-16 bg-gray-50 overflow-hidden">
+                    <div className="max-w-7xl mx-auto px-4 relative">
+                        <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-900 mb-8 sm:mb-12">
+                            Trusted by Happy Users
+                        </h2>
 
-                    {/* Gradient Masks */}
-                    <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none"></div>
-                    <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none"></div>
+                        {/* Gradient Masks */}
+                        <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none"></div>
+                        <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none"></div>
 
-                    {/* Infinite Scroll Track */}
-                    {/* Tripled data for seamless loop */}
-                    <div className="flex gap-6 animate-scroll hover:pause w-max">
-                        {[...defaultTestimonials, ...defaultTestimonials, ...defaultTestimonials, ...defaultTestimonials].map((testimonial, index) => (
-                            <div
-                                key={index}
-                                className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-100 flex-shrink-0 w-[280px] sm:w-[350px] transition-transform hover:scale-[1.02]"
-                            >
-                                <div className="flex items-center gap-3 mb-3 sm:mb-4">
-                                    <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-base ${index % 3 === 0 ? 'bg-gradient-to-br from-pink-400 to-rose-500' :
-                                        index % 3 === 1 ? 'bg-gradient-to-br from-blue-400 to-indigo-500' :
-                                            'bg-gradient-to-br from-green-400 to-emerald-500'
-                                        }`}>
-                                        {testimonial.name.charAt(0)}
+                        {/* Infinite Scroll Track */}
+                        {/* Tripled data for seamless loop */}
+                        <div className="flex gap-6 animate-scroll hover:pause w-max">
+                            {[...defaultTestimonials, ...defaultTestimonials, ...defaultTestimonials, ...defaultTestimonials].map((testimonial, index) => (
+                                <div
+                                    key={index}
+                                    className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-100 flex-shrink-0 w-[280px] sm:w-[350px] transition-transform hover:scale-[1.02]"
+                                >
+                                    <div className="flex items-center gap-3 mb-3 sm:mb-4">
+                                        <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-base ${index % 3 === 0 ? 'bg-gradient-to-br from-pink-400 to-rose-500' :
+                                            index % 3 === 1 ? 'bg-gradient-to-br from-blue-400 to-indigo-500' :
+                                                'bg-gradient-to-br from-green-400 to-emerald-500'
+                                            }`}>
+                                            {testimonial.name.charAt(0)}
+                                        </div>
+                                        <div>
+                                            <h4 className="font-semibold text-gray-900 text-sm sm:text-base">{testimonial.name}</h4>
+                                            <p className="text-xs sm:text-sm text-gray-500">{testimonial.role}</p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <h4 className="font-semibold text-gray-900 text-sm sm:text-base">{testimonial.name}</h4>
-                                        <p className="text-xs sm:text-sm text-gray-500">{testimonial.role}</p>
+                                    <p className="text-xs sm:text-sm text-gray-600 italic mb-3 sm:mb-4 leading-relaxed line-clamp-4">"{testimonial.quote}"</p>
+                                    <div className="flex gap-0.5 sm:gap-1">
+                                        {[...Array(testimonial.rating)].map((_, i) => (
+                                            <Star key={i} className="w-3 h-3 sm:w-4 sm:h-4 fill-yellow-400 text-yellow-400" />
+                                        ))}
                                     </div>
                                 </div>
-                                <p className="text-xs sm:text-sm text-gray-600 italic mb-3 sm:mb-4 leading-relaxed line-clamp-4">"{testimonial.quote}"</p>
-                                <div className="flex gap-0.5 sm:gap-1">
-                                    {[...Array(testimonial.rating)].map((_, i) => (
-                                        <Star key={i} className="w-3 h-3 sm:w-4 sm:h-4 fill-yellow-400 text-yellow-400" />
-                                    ))}
-                                </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
                 </div>
-            </div>
+            )}
 
             {/* SEO Content Section */}
             {seoContent && (
