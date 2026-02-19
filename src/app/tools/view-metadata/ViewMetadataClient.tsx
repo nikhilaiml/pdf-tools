@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { PDFDocument } from 'pdf-lib';
 import { Loader2, Info, FileText, Cloud, Shield, Zap, Globe, Lock, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import ToolPageLayout from '../../components/ToolPageLayout';
@@ -38,6 +37,9 @@ const ViewMetadataClient = () => {
 
         setLoading(true);
         try {
+            // Lazy load pdf-lib to improve initial page load performance
+            const { PDFDocument } = await import('pdf-lib');
+
             const bytes = await file.arrayBuffer();
             const pdf = await PDFDocument.load(bytes);
 
@@ -80,34 +82,71 @@ const ViewMetadataClient = () => {
     const seoContent = (
         <>
             <section className="mt-16 prose prose-slate max-w-none">
+                <p className="text-sm text-slate-500 mb-4 font-medium">Last updated: March 2026</p>
+
                 <h2 className="text-3xl font-bold text-slate-900 mb-6">What Is PDF Metadata?</h2>
                 <p className="text-lg text-slate-700 leading-relaxed mb-8">
-                    PDF metadata contains hidden information inside a PDF document that isn't always visible in the content itself. This data, often referred to as "data about data," provides crucial context about the file. Common metadata fields include the document <strong>title</strong>, <strong>author</strong>, <strong>subject</strong>, <strong>keywords</strong>, producer software (creator), <strong>creation date</strong>, <strong>modification date</strong>, and total <strong>page count</strong>.
+                    PDF metadata contains hidden information inside a PDF document that isn&apos;t always visible in the content itself. This data, often referred to as &quot;data about data,&quot; provides crucial context about the file. Common metadata fields include the document <strong>title</strong>, <strong>author</strong>, <strong>subject</strong>, <strong>keywords</strong>, producer software (creator), <strong>creation date</strong>, <strong>modification date</strong>, and total <strong>page count</strong>. You can use our <strong className="text-indigo-600">pdf metadata viewer free</strong> tool to check these details instantly.
                 </p>
 
                 <h2 className="text-3xl font-bold text-slate-900 mb-6">Why Inspect PDF Metadata?</h2>
                 <div className="grid md:grid-cols-2 gap-8 mb-12">
                     <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
                         <h3 className="text-xl font-bold text-slate-800 mb-3">Privacy & Security</h3>
-                        <p className="text-slate-600">Before sharing sensitive documents, checking metadata ensures you aren't accidentally revealing hidden author names or editing history.</p>
+                        <p className="text-slate-600">Before sharing sensitive documents, checking metadata ensures you aren&apos;t accidentally revealing hidden author names or editing history. If you find sensitive data, you might want to <Link href="/tools/pdf-to-word" className="text-indigo-600 hover:underline">convert PDF to Word</Link> to edit it out or create a fresh copy.</p>
                     </div>
                     <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
                         <h3 className="text-xl font-bold text-slate-800 mb-3">Verification</h3>
-                        <p className="text-slate-600">Verify the authenticity of a document by checking its creation date and the software used to generate it.</p>
+                        <p className="text-slate-600">Verify the authenticity of a document by checking its creation date and the software used to generate it. This allows you to <strong className="text-slate-800">check PDF properties online</strong> without needing Adobe Acrobat.</p>
                     </div>
                 </div>
 
+                <h2 className="text-3xl font-bold text-slate-900 mb-6">Inspect PDF Online vs. Desktop Software</h2>
+                <div className="overflow-x-auto mb-12">
+                    <table className="w-full text-left border-collapse bg-white rounded-xl shadow-sm border border-slate-200">
+                        <thead>
+                            <tr className="bg-slate-50 border-b border-slate-200">
+                                <th className="p-4 font-bold text-slate-900">Feature</th>
+                                <th className="p-4 font-bold text-indigo-600">UsePDF Online Inspector</th>
+                                <th className="p-4 font-bold text-slate-500">Desktop Software (Adobe)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr className="border-b border-slate-100">
+                                <td className="p-4 font-medium text-slate-700">Cost</td>
+                                <td className="p-4 text-green-600 font-bold">100% Free</td>
+                                <td className="p-4 text-slate-600">Expensive Subscription</td>
+                            </tr>
+                            <tr className="border-b border-slate-100">
+                                <td className="p-4 font-medium text-slate-700">Installation</td>
+                                <td className="p-4 text-green-600 font-bold">No Download Required</td>
+                                <td className="p-4 text-slate-600">Heavy Installation</td>
+                            </tr>
+                            <tr className="border-b border-slate-100">
+                                <td className="p-4 font-medium text-slate-700">Privacy</td>
+                                <td className="p-4 text-green-600 font-bold">Local Browser Processing</td>
+                                <td className="p-4 text-slate-600">Local Only</td>
+                            </tr>
+                            <tr>
+                                <td className="p-4 font-medium text-slate-700">Speed</td>
+                                <td className="p-4 text-green-600 font-bold">Instant</td>
+                                <td className="p-4 text-slate-600">Slow Startup</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
                 <h2 className="text-3xl font-bold text-slate-900 mb-6">How to Inspect PDF Online?</h2>
-                <p className="text-lg text-slate-700 mb-6">Using our free online tool, you can inspect PDF metadata in three simple steps:</p>
+                <p className="text-lg text-slate-700 mb-6">Using our free tool to <strong className="text-indigo-600">view document metadata</strong> is simple:</p>
                 <ol className="list-decimal pl-6 space-y-4 text-slate-700 mb-12">
                     <li className="pl-2"><span className="font-semibold">Upload your PDF file</span> by dragging it into the box or selecting it from your computer.</li>
-                    <li className="pl-2">Click the <span className="font-semibold">"Inspect PDF Metadata Now"</span> button to start the analysis.</li>
-                    <li className="pl-2">Instantly view all available document properties, including author, title, and dates.</li>
+                    <li className="pl-2">Click the <span className="font-semibold">&quot;Inspect PDF Metadata Now&quot;</span> button to start the analysis.</li>
+                    <li className="pl-2">Instantly <strong className="text-indigo-600">see PDF author details</strong>, title, and dates. If the file is too large, you can first <Link href="/tools/compress-pdf" className="text-indigo-600 hover:underline">compress PDF</Link> before inspecting.</li>
                 </ol>
 
                 <h2 className="text-3xl font-bold text-slate-900 mb-6">Is This PDF Metadata Viewer Secure?</h2>
                 <p className="text-lg text-slate-700 leading-relaxed mb-8">
-                    Yes, absolutely. Our <strong>inspect PDF online</strong> tool processes your files entirely within your web browser. This means your documents are <strong>never uploaded to a server</strong>. The extraction happens locally on your device, ensuring maximum privacy and security for your sensitive data. You can even use this tool offline once the page is loaded!
+                    Yes, absolutely. Our tool processes your files entirely within your web browser. This means your documents are <strong>never uploaded to a server</strong>. The extraction happens locally on your device, ensuring maximum privacy.
                 </p>
             </section>
 
@@ -115,26 +154,26 @@ const ViewMetadataClient = () => {
             <section className="py-12 border-t border-slate-100">
                 <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">Why Use Our PDF Inspector?</h2>
                 <div className="grid md:grid-cols-3 gap-8">
-                    <div className="text-center p-6">
-                        <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <div className="text-center p-6 bg-blue-50/50 rounded-2xl hover:bg-blue-50 transition-colors">
+                        <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
                             <Zap className="w-8 h-8" />
                         </div>
                         <h3 className="text-xl font-bold text-slate-900 mb-2">Instant Results</h3>
-                        <p className="text-slate-600">View metadata instantly without installing any software.</p>
+                        <p className="text-slate-600">View metadata instantly. No waiting for uploads.</p>
                     </div>
-                    <div className="text-center p-6">
-                        <div className="w-16 h-16 bg-green-50 text-green-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <div className="text-center p-6 bg-green-50/50 rounded-2xl hover:bg-green-50 transition-colors">
+                        <div className="w-16 h-16 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
                             <Lock className="w-8 h-8" />
                         </div>
                         <h3 className="text-xl font-bold text-slate-900 mb-2">Secure & Private</h3>
-                        <p className="text-slate-600">Files are processed locally. No uploads, no storing.</p>
+                        <p className="text-slate-600">Files processed locally. 100% Client-side.</p>
                     </div>
-                    <div className="text-center p-6">
-                        <div className="w-16 h-16 bg-purple-50 text-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <div className="text-center p-6 bg-purple-50/50 rounded-2xl hover:bg-purple-50 transition-colors">
+                        <div className="w-16 h-16 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
                             <Globe className="w-8 h-8" />
                         </div>
                         <h3 className="text-xl font-bold text-slate-900 mb-2">100% Free</h3>
-                        <p className="text-slate-600">Free to use on any device, anywhere, anytime.</p>
+                        <p className="text-slate-600">No hidden fees, no credit card required.</p>
                     </div>
                 </div>
             </section>
@@ -161,10 +200,33 @@ const ViewMetadataClient = () => {
                             a: "No. Your file is processed locally in your browser using JavaScript. It is never uploaded to our servers, maintaining 100% privacy."
                         }
                     ].map((faq, i) => (
-                        <div key={i} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-                            <h3 className="text-lg font-bold text-slate-900 mb-2">{faq.q}</h3>
-                            <p className="text-slate-600">{faq.a}</p>
+                        <div key={i} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                            <h3 className="text-lg font-bold text-slate-900 mb-2 flex items-start gap-2">
+                                <span className="text-indigo-500 mt-1">Q.</span> {faq.q}
+                            </h3>
+                            <p className="text-slate-600 pl-6">{faq.a}</p>
                         </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* Related Articles Section - Placeholders for Future content */}
+            <section className="py-12 border-t border-slate-100">
+                <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">Related Guides</h2>
+                <div className="grid md:grid-cols-3 gap-6">
+                    {[
+                        { title: "What is PDF Metadata?", href: "/blog/what-is-pdf-metadata" },
+                        { title: "How to Remove Metadata from PDF", href: "/blog/remove-pdf-metadata" },
+                        { title: "Is PDF Metadata Safe?", href: "/blog/is-pdf-metadata-safe" }
+                    ].map((article, i) => (
+                        <Link key={i} href={article.href} className="block group">
+                            <div className="bg-white rounded-xl border border-slate-200 p-6 hover:shadow-md transition-shadow h-full">
+                                <h3 className="font-bold text-lg text-slate-900 group-hover:text-indigo-600 mb-2">{article.title}</h3>
+                                <div className="flex items-center text-sm text-indigo-500 font-medium">
+                                    Read Guide <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                                </div>
+                            </div>
+                        </Link>
                     ))}
                 </div>
             </section>
@@ -191,44 +253,78 @@ const ViewMetadataClient = () => {
 
             <script type="application/ld+json"
                 dangerouslySetInnerHTML={{
-                    __html: JSON.stringify({
-                        "@context": "https://schema.org",
-                        "@type": "FAQPage",
-                        "mainEntity": [
-                            {
-                                "@type": "Question",
-                                "name": "How can I inspect PDF metadata online?",
-                                "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "Simply upload your PDF to our free tool and click 'Inspect PDF Metadata Now'. The tool will extract and display all hidden properties instantly in your browser."
-                                }
-                            },
-                            {
-                                "@type": "Question",
-                                "name": "Can I see who created a PDF file?",
-                                "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "Yes, if the 'Author' or 'Creator' metadata fields are set in the document, our tool will display this information."
-                                }
-                            },
-                            {
-                                "@type": "Question",
-                                "name": "Is PDF metadata private?",
-                                "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "Metadata is hidden from the main content view but is accessible to anyone with a viewer. Inspecting it ensures you don't accidentally share private details."
-                                }
-                            },
-                            {
-                                "@type": "Question",
-                                "name": "Does this tool upload my file?",
-                                "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "No. Your file is processed locally in your browser using JavaScript. It is never uploaded to our servers, maintaining 100% privacy."
-                                }
+                    __html: JSON.stringify([
+                        {
+                            "@context": "https://schema.org",
+                            "@type": "SoftwareApplication",
+                            "name": "Inspect PDF Online Tool",
+                            "applicationCategory": "BusinessApplication",
+                            "operatingSystem": "All",
+                            "offers": {
+                                "@type": "Offer",
+                                "price": "0",
+                                "priceCurrency": "USD"
                             }
-                        ]
-                    })
+                        },
+                        {
+                            "@context": "https://schema.org",
+                            "@type": "BreadcrumbList",
+                            "itemListElement": [{
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "https://www.usepdf.in"
+                            }, {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Tools",
+                                "item": "https://www.usepdf.in/#tools"
+                            }, {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": "View Metadata",
+                                "item": "https://www.usepdf.in/tools/view-metadata"
+                            }]
+                        },
+                        {
+                            "@context": "https://schema.org",
+                            "@type": "FAQPage",
+                            "mainEntity": [
+                                {
+                                    "@type": "Question",
+                                    "name": "How can I inspect PDF metadata online?",
+                                    "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": "Simply upload your PDF to our free tool and click 'Inspect PDF Metadata Now'. The tool will extract and display all hidden properties instantly in your browser."
+                                    }
+                                },
+                                {
+                                    "@type": "Question",
+                                    "name": "Can I see who created a PDF file?",
+                                    "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": "Yes, if the 'Author' or 'Creator' metadata fields are set in the document, our tool will display this information."
+                                    }
+                                },
+                                {
+                                    "@type": "Question",
+                                    "name": "Is PDF metadata private?",
+                                    "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": "Metadata is hidden from the main content view but is accessible to anyone with a viewer. Inspecting it ensures you don't accidentally share private details."
+                                    }
+                                },
+                                {
+                                    "@type": "Question",
+                                    "name": "Does this tool upload my file?",
+                                    "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": "No. Your file is processed locally in your browser using JavaScript. It is never uploaded to our servers, maintaining 100% privacy."
+                                    }
+                                }
+                            ]
+                        }
+                    ])
                 }}
             />
         </>
@@ -248,9 +344,6 @@ const ViewMetadataClient = () => {
             hideDefaultFeatures={true}
             hideTestimonials={true}
         >
-            <h1 className="text-3xl font-bold mb-4">
-                Inspect PDF Online – View Complete PDF Metadata Instantly
-            </h1>
             {!file ? (
                 <div
                     className={`

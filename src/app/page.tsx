@@ -53,6 +53,23 @@ function HomeContent() {
       </main>
 
       <Footer />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "UsePDF",
+            "url": "https://www.usepdf.in",
+            "logo": "https://www.usepdf.in/logo.png",
+            "sameAs": [
+              "https://twitter.com/usepdf",
+              "https://facebook.com/usepdf"
+            ]
+          }),
+        }}
+      />
     </div>
   );
 }
