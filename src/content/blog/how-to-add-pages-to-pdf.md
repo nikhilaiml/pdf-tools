@@ -2,6 +2,8 @@
 title: "How to Add Pages to a PDF for Free"
 description: "A complete step-by-step guide on how to add pages to a PDF file online for free. Learn how to insert blank pages, merge multiple documents, and organize your files without losing quality."
 date: "2026-02-21"
+readTime: "6 min read"
+image: "https://images.unsplash.com/photo-1618044733300-9472054094ee?q=80&w=1200&auto=format&fit=crop"
 tags: ["organize pdf", "merge pdf", "how-to"]
 howTo:
   name: "How to Add Pages to a PDF"

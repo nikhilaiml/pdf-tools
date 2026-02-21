@@ -10,6 +10,8 @@ export type BlogPost = {
     date: string;
     description: string;
     content: string;
+    image?: string;
+    readTime?: string;
     // SEO Schemas
     faq?: { question: string; answer: string }[];
     howTo?: {
@@ -42,6 +44,8 @@ export function getPostBySlug(slug: string): BlogPost | null {
             title: data.title || '',
             date: data.date || '',
             description: data.description || '',
+            image: data.image || '/og-image.jpg',
+            readTime: data.readTime || '5 min read',
             faq: data.faq || null,
             howTo: data.howTo || null,
             content,

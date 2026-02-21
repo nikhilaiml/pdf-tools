@@ -114,11 +114,14 @@ export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] 
                                 className="group bg-white rounded-3xl shadow-sm hover:shadow-xl border border-slate-100 overflow-hidden transition-all duration-300 hover:-translate-y-1 flex flex-col h-full"
                             >
                                 <Link href={`/blog/${post.slug}`} className="flex flex-col h-full">
-                                    <div className="h-48 bg-gradient-to-br from-indigo-50 to-purple-50 flex items-center justify-center relative overflow-hidden">
-                                        <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))]"></div>
-                                        <div className="w-16 h-16 bg-white rounded-2xl shadow-md flex items-center justify-center text-indigo-600 group-hover:scale-110 transition-transform duration-500 z-10">
-                                            <FileText className="w-8 h-8" />
-                                        </div>
+                                    {/* Article Image Image */}
+                                    <div className="h-48 relative overflow-hidden bg-slate-100">
+                                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                                        <img
+                                            src={post.image || '/og-image.jpg'}
+                                            alt={post.title}
+                                            className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
+                                        />
                                     </div>
 
                                     <div className="p-8 flex flex-col flex-grow">
@@ -126,6 +129,11 @@ export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] 
                                             <div className="flex items-center gap-1">
                                                 <Calendar className="w-3 h-3" />
                                                 {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+                                            </div>
+                                            <span>•</span>
+                                            <div className="flex items-center gap-1">
+                                                <Clock className="w-3 h-3" />
+                                                {post.readTime || '5 min read'}
                                             </div>
                                         </div>
 

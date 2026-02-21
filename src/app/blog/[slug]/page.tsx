@@ -99,16 +99,28 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
 
             <main className="flex-grow pt-32 pb-24">
                 <article className="max-w-4xl mx-auto px-6">
-                    <header className="mb-12 text-center">
+                    <header className="mb-10 text-center">
                         <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-6 leading-tight">
                             {post.title}
                         </h1>
-                        <div className="flex items-center justify-center text-slate-500 gap-4 mb-8">
+                        <div className="flex items-center justify-center text-slate-500 gap-4 mb-8 font-medium">
                             <time dateTime={post.date}>
                                 {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
                             </time>
                             <span>•</span>
+                            <span>{post.readTime || '5 min read'}</span>
+                            <span>•</span>
                             <span>By UsePDF Team</span>
+                        </div>
+
+                        {/* Hero Image */}
+                        <div className="relative w-full h-[300px] md:h-[450px] rounded-3xl overflow-hidden shadow-xl mb-12 border border-slate-100">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                                src={post.image || '/og-image.jpg'}
+                                alt={post.title}
+                                className="object-cover w-full h-full"
+                            />
                         </div>
                     </header>
 
