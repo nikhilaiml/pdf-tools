@@ -3,7 +3,7 @@ title: "How to Compress a PDF Without Losing Quality"
 description: "Need to email a large file? Learn how to use a free PDF size reducer to compress your documents by up to 80% without blurring images or text."
 date: "2026-02-18"
 readTime: "6 min read"
-image: "https://images.unsplash.com/photo-1558486518-ff35cedfbb54?q=80&w=1200&auto=format&fit=crop"
+image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=1200&auto=format&fit=crop"
 tags: ["compress pdf", "pdf size reducer", "optimization"]
 howTo:
   name: "How to Reduce PDF File Size Online"

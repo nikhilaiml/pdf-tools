@@ -3,7 +3,7 @@ title: "How to Reorder PDF Pages Online for Free"
 description: "Learn how to organize, move, and rearrange PDF pages quickly and securely in your browser. Master PDF organization with this easy visual guide."
 date: "2026-02-19"
 readTime: "8 min read"
-image: "https://images.unsplash.com/photo-1586282391129-76a6ae2374d6?q=80&w=1200&auto=format&fit=crop"
+image: "https://images.unsplash.com/photo-1544396821-4dd40b938ad3?q=80&w=1200&auto=format&fit=crop"
 tags: ["organize pdf", "reorder pdf", "move pages"]
 howTo:
   name: "How to Reorder or Move Pages in a PDF"
