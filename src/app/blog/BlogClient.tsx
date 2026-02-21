@@ -196,24 +196,24 @@ export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] 
                             animate={{ y: 0, opacity: 1 }}
                             exit={{ y: "100%", opacity: 0 }}
                             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                            className="bg-white w-full max-w-4xl max-h-[90vh] rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col pt-2"
+                            className="bg-white w-full max-w-4xl max-h-[90vh] rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col pt-0 sm:pt-2"
                             onClick={(e) => e.stopPropagation()}
                         >
                             {/* Modal Header */}
-                            <div className="flex justify-between items-center px-6 py-4 border-b border-slate-100 sticky top-0 bg-white/95 backdrop-blur z-10">
-                                <h3 className="font-bold text-slate-800 line-clamp-1 pr-4">{selectedPost.title}</h3>
+                            <div className="flex justify-between items-center px-4 sm:px-6 py-3 sm:py-4 border-b border-slate-100 sticky top-0 bg-white/95 backdrop-blur z-20">
+                                <h3 className="font-bold text-slate-800 line-clamp-1 pr-4 text-sm sm:text-base">{selectedPost.title}</h3>
                                 <button
                                     onClick={() => setSelectedPost(null)}
                                     className="p-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full transition-colors flex-shrink-0"
                                 >
-                                    <X className="w-5 h-5" />
+                                    <X className="w-4 h-4 sm:w-5 sm:h-5" />
                                 </button>
                             </div>
 
                             {/* Modal Content */}
-                            <div className="overflow-y-auto p-6 md:p-10">
+                            <div className="overflow-y-auto p-4 sm:p-6 md:p-10">
                                 {/* Hero Image inside Modal */}
-                                <div className="relative w-full h-[250px] md:h-[400px] rounded-2xl overflow-hidden shadow-lg mb-10 border border-slate-100">
+                                <div className="relative w-full h-[180px] sm:h-[250px] md:h-[400px] rounded-2xl overflow-hidden shadow-lg mb-6 sm:mb-10 border border-slate-100">
                                     {/* eslint-disable-next-line @next/next/no-img-element */}
                                     <img
                                         src={selectedPost.image || '/og-image.jpg'}
@@ -222,37 +222,37 @@ export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] 
                                     />
                                 </div>
 
-                                <header className="mb-10 text-center">
-                                    <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-6 leading-tight">
+                                <header className="mb-8 sm:mb-10 text-center">
+                                    <h1 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-slate-900 mb-4 sm:mb-6 leading-tight">
                                         {selectedPost.title}
                                     </h1>
-                                    <div className="flex items-center justify-center text-slate-500 gap-4 mb-8 font-medium">
+                                    <div className="flex flex-wrap items-center justify-center text-slate-500 gap-2 sm:gap-4 mb-6 sm:mb-8 font-medium text-xs sm:text-sm">
                                         <time dateTime={selectedPost.date}>
-                                            {new Date(selectedPost.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                                            {new Date(selectedPost.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
                                         </time>
-                                        <span>•</span>
+                                        <span className="hidden sm:inline">•</span>
                                         <span>{selectedPost.readTime || '5 min read'}</span>
-                                        <span>•</span>
-                                        <span>By UsePDF Team</span>
+                                        <span className="hidden sm:inline">•</span>
+                                        <span>UsePDF Team</span>
                                     </div>
                                 </header>
 
-                                <div className="prose prose-lg md:prose-xl prose-slate mx-auto max-w-none prose-headings:font-bold prose-a:text-blue-600 hover:prose-a:text-blue-500 prose-img:rounded-2xl prose-img:shadow-md">
+                                <div className="prose prose-base sm:prose-lg md:prose-xl prose-slate mx-auto max-w-none prose-headings:font-bold prose-headings:text-slate-800 prose-a:text-blue-600 hover:prose-a:text-blue-500 prose-img:rounded-2xl prose-img:shadow-md px-1 sm:px-0">
                                     <ReactMarkdown remarkPlugins={[remarkGfm]}>
                                         {selectedPost.content}
                                     </ReactMarkdown>
                                 </div>
 
                                 {/* CTA inside Modal */}
-                                <div className="mt-16 pt-8 border-t border-slate-200">
-                                    <div className="bg-indigo-50 rounded-2xl p-8 text-center">
-                                        <h3 className="text-2xl font-bold text-slate-900 mb-4">Ready to try it yourself?</h3>
-                                        <p className="text-slate-600 mb-6">Use our free, secure, and private PDF tools directly in your browser.</p>
-                                        <div className="flex flex-wrap justify-center gap-4">
-                                            <Link href="/tools/merge-pdf" onClick={() => setSelectedPost(null)} className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-sm transition-colors cursor-pointer">
+                                <div className="mt-12 sm:mt-16 pt-8 border-t border-slate-200">
+                                    <div className="bg-indigo-50 rounded-2xl p-6 sm:p-8 text-center">
+                                        <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-3 sm:mb-4">Ready to try it yourself?</h3>
+                                        <p className="text-slate-600 mb-6 text-sm sm:text-base">Use our free, secure, and private PDF tools directly in your browser.</p>
+                                        <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+                                            <Link href="/tools/merge-pdf" onClick={() => setSelectedPost(null)} className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-sm transition-colors cursor-pointer text-sm sm:text-base w-full sm:w-auto">
                                                 Merge PDF
                                             </Link>
-                                            <Link href="/tools/split-pdf" onClick={() => setSelectedPost(null)} className="px-6 py-3 bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 font-semibold rounded-lg shadow-sm transition-colors cursor-pointer">
+                                            <Link href="/tools/split-pdf" onClick={() => setSelectedPost(null)} className="px-6 py-3 bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 font-semibold rounded-lg shadow-sm transition-colors cursor-pointer text-sm sm:text-base w-full sm:w-auto">
                                                 Split PDF
                                             </Link>
                                         </div>
