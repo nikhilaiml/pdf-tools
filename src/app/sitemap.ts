@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { tools } from './tools/tools'
+import { getAllPosts } from '@/lib/blog'
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://www.usepdf.in'
@@ -31,5 +32,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.9,
     }))
 
-    return [...routes, ...toolRoutes]
+    const blogRoutes = getAllPosts().map((post) => ({
+        url: `${baseUrl}/blog/${post.slug}`,
+        lastModified: new Date(post.date),
+        changeFrequency: 'monthly' as const,
+        priority: 0.8,
+    }))
+
+    return [...routes, ...toolRoutes, ...blogRoutes]
 }
