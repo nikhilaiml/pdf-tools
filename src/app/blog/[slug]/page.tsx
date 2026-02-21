@@ -43,7 +43,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
     }
 
     // Article Schema
-    const articleSchema = {
+    const articleSchema: Record<string, any> = {
         "@context": "https://schema.org",
         "@type": "Article",
         "headline": post.title,
@@ -56,7 +56,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
     };
 
     // Build combined schema array
-    const schemas = [articleSchema];
+    const schemas: Record<string, any>[] = [articleSchema];
 
     if (post.faq && post.faq.length > 0) {
         schemas.push({
