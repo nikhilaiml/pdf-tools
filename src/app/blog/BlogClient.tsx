@@ -1,12 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { BlogPost } from '@/lib/blog';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { FileText, Search, Clock, Calendar, ArrowRight, BookOpen, Star, Zap } from 'lucide-react';
-import { useState } from 'react';
+import { FileText, Search, Clock, Calendar, ArrowRight, BookOpen, Star, Zap, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 // Floating Icon Component for Hero
 const FloatingIcon = ({ icon: Icon, className, style }: { icon: any, className?: string, style?: any }) => (
@@ -17,6 +19,19 @@ const FloatingIcon = ({ icon: Icon, className, style }: { icon: any, className?:
 
 export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] }) {
     const [searchQuery, setSearchQuery] = useState('');
+    const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
+
+    // Lock body scroll when modal is open
+    useEffect(() => {
+        if (selectedPost) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [selectedPost]);
 
     const filteredPosts = initialPosts.filter(post =>
         post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -113,7 +128,7 @@ export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] 
                                 transition={{ delay: index * 0.1 }}
                                 className="group bg-white rounded-3xl shadow-sm hover:shadow-xl border border-slate-100 overflow-hidden transition-all duration-300 hover:-translate-y-1 flex flex-col h-full"
                             >
-                                <Link href={`/blog/${post.slug}`} className="flex flex-col h-full">
+                                <div onClick={() => setSelectedPost(post)} className="flex flex-col h-full cursor-pointer">
                                     {/* Article Image Image */}
                                     <div className="h-48 relative overflow-hidden bg-slate-100">
                                         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -151,7 +166,7 @@ export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] 
                                             </span>
                                         </div>
                                     </div>
-                                </Link>
+                                </div>
                             </motion.article>
                         ))}
                     </div>
@@ -165,6 +180,89 @@ export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] 
                     </div>
                 )}
             </main>
+
+            {/* Article Modal */}
+            <AnimatePresence>
+                {selectedPost && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[100] flex justify-center items-end sm:items-center bg-slate-900/60 backdrop-blur-sm p-4 sm:p-6"
+                        onClick={() => setSelectedPost(null)}
+                    >
+                        <motion.div
+                            initial={{ y: "100%", opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            exit={{ y: "100%", opacity: 0 }}
+                            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                            className="bg-white w-full max-w-4xl max-h-[90vh] rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col pt-2"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            {/* Modal Header */}
+                            <div className="flex justify-between items-center px-6 py-4 border-b border-slate-100 sticky top-0 bg-white/95 backdrop-blur z-10">
+                                <h3 className="font-bold text-slate-800 line-clamp-1 pr-4">{selectedPost.title}</h3>
+                                <button
+                                    onClick={() => setSelectedPost(null)}
+                                    className="p-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full transition-colors flex-shrink-0"
+                                >
+                                    <X className="w-5 h-5" />
+                                </button>
+                            </div>
+
+                            {/* Modal Content */}
+                            <div className="overflow-y-auto p-6 md:p-10">
+                                {/* Hero Image inside Modal */}
+                                <div className="relative w-full h-[250px] md:h-[400px] rounded-2xl overflow-hidden shadow-lg mb-10 border border-slate-100">
+                                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                                    <img
+                                        src={selectedPost.image || '/og-image.jpg'}
+                                        alt={selectedPost.title}
+                                        className="object-cover w-full h-full"
+                                    />
+                                </div>
+
+                                <header className="mb-10 text-center">
+                                    <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-6 leading-tight">
+                                        {selectedPost.title}
+                                    </h1>
+                                    <div className="flex items-center justify-center text-slate-500 gap-4 mb-8 font-medium">
+                                        <time dateTime={selectedPost.date}>
+                                            {new Date(selectedPost.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                                        </time>
+                                        <span>•</span>
+                                        <span>{selectedPost.readTime || '5 min read'}</span>
+                                        <span>•</span>
+                                        <span>By UsePDF Team</span>
+                                    </div>
+                                </header>
+
+                                <div className="prose prose-lg md:prose-xl prose-slate mx-auto max-w-none prose-headings:font-bold prose-a:text-blue-600 hover:prose-a:text-blue-500 prose-img:rounded-2xl prose-img:shadow-md">
+                                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                        {selectedPost.content}
+                                    </ReactMarkdown>
+                                </div>
+
+                                {/* CTA inside Modal */}
+                                <div className="mt-16 pt-8 border-t border-slate-200">
+                                    <div className="bg-indigo-50 rounded-2xl p-8 text-center">
+                                        <h3 className="text-2xl font-bold text-slate-900 mb-4">Ready to try it yourself?</h3>
+                                        <p className="text-slate-600 mb-6">Use our free, secure, and private PDF tools directly in your browser.</p>
+                                        <div className="flex flex-wrap justify-center gap-4">
+                                            <Link href="/tools/merge-pdf" onClick={() => setSelectedPost(null)} className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-sm transition-colors cursor-pointer">
+                                                Merge PDF
+                                            </Link>
+                                            <Link href="/tools/split-pdf" onClick={() => setSelectedPost(null)} className="px-6 py-3 bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 font-semibold rounded-lg shadow-sm transition-colors cursor-pointer">
+                                                Split PDF
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             <style jsx global>{`
                 @keyframes float {
