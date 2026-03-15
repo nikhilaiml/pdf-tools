@@ -1,4 +1,4 @@
-/* eslint-disable react/no-unescaped-entities */
+ 
 import type { Metadata } from 'next';
 import CompressPdfClient from './CompressPdfClient';
 import Link from 'next/link';

@@ -49,7 +49,7 @@ Output: Fully functional static frontend
 
 ### Phase 2 – Core Working Tools (MVP)
 * Merge PDF
-* Split PDF (by range & single pages)
+* Split PDF (by range & single pages) - [x] SEO Content Updated!
 * Compress PDF
 * JPG to PDF
 * PDF to JPG

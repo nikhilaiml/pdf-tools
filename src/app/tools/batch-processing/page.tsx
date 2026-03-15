@@ -1,4 +1,4 @@
-/* eslint-disable react/no-unescaped-entities */
+ 
 import type { Metadata } from 'next';
 import BatchProcessor from './BatchProcessor';
 import ToolPageLayout from '../../components/ToolPageLayout';
