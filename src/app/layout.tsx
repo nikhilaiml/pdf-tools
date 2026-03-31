@@ -8,10 +8,10 @@ const inter = Inter({ subsets: ["latin"], display: 'swap', preload: true });
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.usepdf.in'),
   title: {
-    default: "Free Online PDF Tools – Edit, Convert, Merge & Compress PDFs",
-    template: "%s | UsePDF",
+    default: "Free PDF Tools Online – Compress, Merge, Split & Convert | UsePDF.in",
+    template: "%s | UsePDF.in",
   },
-  description: "Free online PDF tools to merge, split, compress, delete, reorder and convert PDF files. No signup required. No watermark. Secure, fast, and works on all devices.",
+  description: "100% free online PDF tools. Compress PDF, merge PDF files, split PDF, convert PDF to JPG and more. No signup required. No watermark. Works on mobile. Trusted by users in India.",
   keywords: [
     "free pdf tools online",
     "online pdf editor",
@@ -46,29 +46,34 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    locale: 'en_US',
+    locale: 'en_IN',
     url: 'https://www.usepdf.in',
-    title: 'Free Online PDF Tools – Merge, Split, Compress & Convert PDFs',
-    description: 'UsePDF is a free online PDF tools platform. Merge, split, compress, delete and reorder PDF files. No signup or watermark. Secure & fast.',
-    siteName: 'UsePDF',
+    title: 'Free Online PDF Tools – Compress, Merge, Split & Convert | UsePDF.in',
+    description: 'UsePDF is a 100% free online PDF tools platform. Compress, merge, split, convert PDF files. No signup, no watermark. Trusted by users across India.',
+    siteName: 'UsePDF.in',
     images: [
       {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'UsePDF - Free Online PDF Tools',
+        alt: 'UsePDF.in – Free Online PDF Tools for India',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Free Online PDF Tools – Merge, Split, Compress PDFs',
-    description: 'UsePDF is a free online PDF tools platform. Merge, split, compress PDF files without signup. Secure & fast.',
-    creator: '@UsePDF',
+    title: 'Free Online PDF Tools – Compress, Merge, Split & Convert | UsePDF.in',
+    description: '100% free PDF tools – compress, merge, split, convert PDFs online. No signup, no watermark. Fast & secure. Trusted in India.',
+    creator: '@usepdfin',
     images: ['/og-image.jpg'],
   },
   alternates: {
     canonical: 'https://www.usepdf.in',
+    languages: {
+      'en-IN': 'https://www.usepdf.in',
+      'en': 'https://www.usepdf.in',
+      'x-default': 'https://www.usepdf.in',
+    },
   },
 };
 
@@ -94,7 +99,7 @@ const homepageSchema = {
     {
       "@type": "Organization",
       "@id": "https://www.usepdf.in/#organization",
-      "name": "UsePDF",
+      "name": "UsePDF.in",
       "url": "https://www.usepdf.in",
       "logo": {
         "@type": "ImageObject",
@@ -102,11 +107,19 @@ const homepageSchema = {
         "width": 512,
         "height": 512
       },
-      "sameAs": []
+      "description": "Free online PDF tools for everyone. Compress, merge, split, and convert PDFs without signup.",
+      "foundingLocation": {
+        "@type": "Country",
+        "name": "India"
+      },
+      "sameAs": [
+        "https://twitter.com/usepdfin",
+        "https://www.linkedin.com/company/usepdfin"
+      ]
     },
     {
       "@type": "WebApplication",
-      "name": "UsePDF - Free Online PDF Tools",
+      "name": "UsePDF.in - Free Online PDF Tools",
       "url": "https://www.usepdf.in",
       "applicationCategory": "UtilitiesApplication",
       "operatingSystem": "Any",
@@ -114,14 +127,21 @@ const homepageSchema = {
       "offers": {
         "@type": "Offer",
         "price": "0",
-        "priceCurrency": "USD"
+        "priceCurrency": "INR"
       },
+      "featureList": [
+        "No signup required",
+        "No watermark",
+        "Free to use",
+        "Works on mobile",
+        "Secure file processing"
+      ],
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "4.8",
         "ratingCount": "1250"
       },
-      "description": "A complete suite of free online PDF tools to merge, split, compress, delete, reorder and convert PDF files."
+      "description": "A complete suite of free online PDF tools to compress, merge, split, convert and edit PDF files. Trusted by users in India."
     },
     {
       "@type": "BreadcrumbList",

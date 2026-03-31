@@ -2,7 +2,7 @@
 title: "How to Protect a PDF with a Password Online for Free"
 description: "A complete step-by-step guide to encrypting and adding a password to your PDF files securely online without downloading any software."
 date: "2026-03-01"
-image: "/og-image.jpg"
+image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=1200&auto=format&fit=crop"
 readTime: "4 min read"
 faq:
   - question: "Is my PDF file safe when adding a password online?"

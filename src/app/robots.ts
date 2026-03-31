@@ -6,12 +6,12 @@ export default function robots(): MetadataRoute.Robots {
             {
                 userAgent: '*',
                 allow: '/',
-                disallow: ['/api/', '/admin/', '/_next/'],
+                disallow: ['/api/', '/admin/', '/_next/', '/temp/', '/uploads/'],
             },
             {
                 userAgent: 'Googlebot',
                 allow: '/',
-                disallow: ['/api/', '/admin/'],
+                disallow: ['/api/', '/admin/', '/temp/', '/uploads/'],
             },
         ],
         sitemap: 'https://www.usepdf.in/sitemap.xml',

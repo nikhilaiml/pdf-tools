@@ -159,7 +159,7 @@ export default function Hero({ onSearch, initialSearchValue = '' }: HeroProps) {
                             variants={itemVariants}
                             className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.15]"
                         >
-                            Free Online PDF Tools – Edit, Convert & Manage PDFs Easily
+                            Free Online PDF Tools – Compress, Merge, Split & Convert
                         </motion.h1>
 
                         {/* SEO-Optimized Subheading */}
@@ -167,9 +167,9 @@ export default function Hero({ onSearch, initialSearchValue = '' }: HeroProps) {
                             variants={itemVariants}
                             className="text-[15px] sm:text-lg md:text-xl text-indigo-100/90 mb-8 md:mb-10 max-w-3xl leading-relaxed md:leading-relaxed"
                         >
-                            Free online PDF tools to merge, split, compress, delete, reorder and convert PDF files.
+                            The easiest way to work with PDFs online. Compress PDF, merge PDF files, split PDF, convert PDF to JPG and more.
                             <br className="hidden sm:block" />
-                            No signup. No watermark. Secure & fast.
+                            No signup required. No watermark. 100% free. Trusted by users across India.
                         </motion.p>
 
                         {/* Search Bar with Gold Gradient */}
@@ -201,7 +201,7 @@ export default function Hero({ onSearch, initialSearchValue = '' }: HeroProps) {
                             variants={itemVariants}
                             className="hidden md:block text-sm text-indigo-100/80 mb-10 max-w-xl mx-auto leading-relaxed font-medium"
                         >
-                            ✓ 100% Free &nbsp; ✓ No Signup Required &nbsp; ✓ Secure Processing
+                            ✓ 100% Free &nbsp; ✓ No Signup Required &nbsp; ✓ No Watermark &nbsp; ✓ Works on Mobile &nbsp; ✓ Files Auto-Deleted
                         </motion.p>
 
                         {/* Category Chips */}

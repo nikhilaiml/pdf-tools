@@ -5,6 +5,8 @@ import Hero from './components/Hero';
 import ToolsGrid from './components/ToolsGrid';
 import HowItWorks from './components/HowItWorks';
 import Features from './components/Features';
+import StatsBar from './components/StatsBar';
+import IndiaSection from './components/IndiaSection';
 import HomeSEOText from './components/HomeSEOText';
 import FAQSection from './components/FAQSection';
 import Footer from './components/Footer';
@@ -44,9 +46,11 @@ function HomeContent() {
 
       <main className="relative">
         <Hero onSearch={handleSearch} initialSearchValue={searchQuery} />
+        <StatsBar />
         <ToolsGrid searchQuery={searchQuery} />
         <HowItWorks />
         <Features />
+        <IndiaSection />
         <HomeSEOText />
         <FAQSection />
         {/* <PremiumSection /> Removed to focus on 100% Free messaging */}
